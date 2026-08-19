@@ -83,7 +83,7 @@ try {
     
     // Jalankan sync
     try {
-        $syncService->sync();
+        $syncService->sync(true);
     } catch (\Exception $ex) {
         echo "SYNC ERROR: " . $ex->getMessage() . "\n";
     }

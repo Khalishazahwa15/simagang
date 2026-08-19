@@ -4,6 +4,8 @@ namespace App\Services;
 use App\Core\Database;
 use App\Core\Logger;
 
+
+
 class SyncStatusService {
     private $db;
     private $statusService;
@@ -18,7 +20,18 @@ class SyncStatusService {
      * Karena tidak ada cron job, fungsi ini akan dipanggil secara "lazy" 
      * setiap kali aplikasi diakses, yaitu saat App melakukan boot.
      */
-    public function sync() {
+    // Jeda minimum antar pemindaian. Tanggal berubah sekali sehari, jadi
+    // memindai lebih sering dari ini tidak menghasilkan apa pun.
+    const JEDA_MENIT = 10;
+
+    /**
+     * @param bool $paksa Lewati jeda; dipakai pengujian dan pemanggilan manual.
+     */
+    public function sync($paksa = false) {
+        if (!$paksa && !$this->waktunyaMemindai()) {
+            return;
+        }
+
         // Prevent double sync or infinite loop issues by making it fast and simple
         $today = date('Y-m-d');
 
@@ -65,5 +78,25 @@ class SyncStatusService {
                 Logger::error('SYNC (selesai)', $e->getMessage());
             }
         }
+    }
+
+    /**
+     * Penanda berbasis berkas, bukan tabel, supaya pemeriksaan jeda ini
+     * sendiri tidak menambah kueri ke basis data.
+     */
+    private function waktunyaMemindai() {
+        $berkas = ROOT_PATH . '/storage/sinkron-terakhir';
+
+        if (is_file($berkas) && (time() - (int)@filemtime($berkas)) < self::JEDA_MENIT * 60) {
+            return false;
+        }
+
+        $folder = dirname($berkas);
+        if (!is_dir($folder)) {
+            mkdir($folder, 0777, true);
+        }
+        @touch($berkas);
+
+        return true;
     }
 }

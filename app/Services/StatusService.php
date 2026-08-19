@@ -240,7 +240,9 @@ class StatusService {
      * pengembangan agar tidak membanjiri kotak masuk.
      */
     private function emailPerubahanStatus($pengajuan, $status, $pesan) {
-        if (strtolower((string)\App\Core\Env::get('MAIL_NOTIFIKASI', 'true')) === 'false') {
+        // Env::get mengubah 'false' menjadi boolean false, jadi nilainya
+        // dilewatkan filter_var alih-alih dibandingkan sebagai teks.
+        if (!filter_var(\App\Core\Env::get('MAIL_NOTIFIKASI', true), FILTER_VALIDATE_BOOLEAN)) {
             return;
         }
 

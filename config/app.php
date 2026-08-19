@@ -11,6 +11,24 @@ define('BASE_URL', $baseUrl);
 define('APP_NAME', 'SIMAGANG Bappeda Provinsi Lampung');
 define('UPLOAD_DIR', ROOT_PATH . '/storage/uploads');
 
+// Header keamanan. Dikirim untuk seluruh permintaan web, bukan hanya halaman
+// tertentu, sehingga tidak ada halaman yang terlewat.
+if (PHP_SAPI !== 'cli' && !headers_sent()) {
+    header('X-Content-Type-Options: nosniff');
+    header('X-Frame-Options: SAMEORIGIN');
+    header('Referrer-Policy: strict-origin-when-cross-origin');
+    header('Permissions-Policy: geolocation=(), microphone=(), camera=()');
+    // Seluruh gaya dan skrip berasal dari domain sendiri, kecuali gaya sebaris
+    // yang masih banyak dipakai tampilan.
+    header("Content-Security-Policy: default-src 'self'; "
+        . "style-src 'self' 'unsafe-inline'; "
+        . "script-src 'self' 'unsafe-inline'; "
+        . "img-src 'self' data:; "
+        . "form-action 'self'; "
+        . "frame-ancestors 'self'; "
+        . "base-uri 'self'");
+}
+
 // Environment & Error Handling
 define('APP_ENV', \App\Core\Env::get('APP_ENV', 'production'));
 

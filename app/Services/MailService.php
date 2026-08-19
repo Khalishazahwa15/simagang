@@ -27,6 +27,7 @@ class MailService {
             $mail->Host = $host;
             $mail->Port = (int)Env::get('SMTP_PORT', 587);
             $mail->CharSet = 'UTF-8';
+            $mail->Timeout = 10;
 
             $pengguna = Env::get('SMTP_USER', '');
             if (trim($pengguna) !== '') {

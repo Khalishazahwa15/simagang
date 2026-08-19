@@ -3,6 +3,7 @@
 !.env.example
 
 # Berkas runtime
+storage/sinkron-terakhir
 logs/
 *.log
 *-debug.log*

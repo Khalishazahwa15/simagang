@@ -8,6 +8,14 @@ class Session {
             ini_set('session.cookie_httponly', 1);
             ini_set('session.use_only_cookies', 1);
             ini_set('session.cookie_samesite', 'Strict');
+
+            // Saat dilayani lewat HTTPS, cookie sesi tidak boleh ikut terkirim
+            // pada koneksi biasa. Di lingkungan lokal yang masih HTTP, penanda
+            // ini dibiarkan mati agar sesi tetap berjalan.
+            $lewatHttps = (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off')
+                || (($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https')
+                || (($_SERVER['SERVER_PORT'] ?? '') == 443);
+            ini_set('session.cookie_secure', $lewatHttps ? 1 : 0);
             session_start();
         }
     }

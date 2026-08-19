@@ -220,6 +220,51 @@ periksa($kolom === 'YES', 'changed_by boleh kosong untuk tindakan sistem');
 
 $db->exec("DELETE FROM pengajuan");
 
+// --- Temuan keamanan yang ditutup pada audit ketiga ---
+
+// S-5: pemalsuan metode akan melewati verifikasi CSRF, karena token hanya
+// diperiksa pada permintaan POST.
+$isiApp = file_get_contents(__DIR__ . '/../app/Core/App.php');
+periksa(strpos($isiApp, "\$_POST['_method']") === false,
+    'S-5 Metode permintaan tidak dapat dipalsukan lewat _method');
+
+// S-6: pesan galat koneksi memuat host, nama basis data, dan nama pengguna.
+$isiDb = file_get_contents(__DIR__ . '/../app/Core/Database.php');
+periksa(strpos($isiDb, 'die("Database Connection failed: " . $e->getMessage())') === false,
+    'S-6 Detail koneksi tidak dibocorkan ke pengguna');
+
+// Header keamanan dikirim untuk seluruh permintaan web
+$isiConfig = file_get_contents(__DIR__ . '/../config/app.php');
+$headerWajib = ['X-Content-Type-Options', 'X-Frame-Options', 'Referrer-Policy', 'Content-Security-Policy'];
+$kurang = [];
+foreach ($headerWajib as $h) {
+    if (strpos($isiConfig, $h) === false) {
+        $kurang[] = $h;
+    }
+}
+periksa(empty($kurang), 'Header keamanan terpasang' . ($kurang ? ' (kurang: ' . implode(', ', $kurang) . ')' : ''));
+
+// Pembatasan laju reset kata sandi tidak boleh ikut mengunci login
+$throttle->clear('reset:uji@test.local');
+$throttle->clear('uji@test.local');
+for ($i = 0; $i < LoginThrottleService::MAX_ATTEMPTS; $i++) {
+    $throttle->recordFailure('reset:uji@test.local');
+}
+periksa($throttle->lockedForMinutes('reset:uji@test.local') > 0, 'Permintaan reset kata sandi dibatasi');
+periksa($throttle->lockedForMinutes('uji@test.local') === 0, 'Batas reset tidak ikut mengunci login');
+$throttle->clear('reset:uji@test.local');
+
+// Sinkronisasi tanggal tidak lagi memindai pada setiap permintaan
+$penanda = ROOT_PATH . '/storage/sinkron-terakhir';
+@unlink($penanda);
+$sync = new \App\Services\SyncStatusService();
+$sync->sync();
+periksa(is_file($penanda), 'Pemindaian pertama menandai waktunya');
+$waktu = filemtime($penanda);
+$sync->sync();
+periksa(filemtime($penanda) === $waktu, 'Pemindaian berikutnya dilewati selama masih dalam jeda');
+@unlink($penanda);
+
 echo "====================================\n";
 echo "JALUR RUSAK: {$lulus} lulus, {$gagal} gagal.\n";
 

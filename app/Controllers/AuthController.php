@@ -112,6 +112,17 @@ class AuthController extends Controller {
     public function forgotPassword() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $email = $_POST['email'] ?? '';
+
+            // Kunci dibedakan dari percobaan login supaya keduanya tidak
+            // saling mengunci.
+            $kunciLaju = 'reset:' . $email;
+            $terkunci = $this->throttleService->lockedForMinutes($kunciLaju);
+            if ($terkunci > 0) {
+                Session::setFlash('error', "Terlalu banyak permintaan reset kata sandi. Coba lagi dalam {$terkunci} menit.");
+                return $this->redirect('forgot-password');
+            }
+            $this->throttleService->recordFailure($kunciLaju);
+
             $db = \App\Core\Database::getInstance()->getConnection();
             
             $stmt = $db->prepare("SELECT id, nama FROM users WHERE email = ?");

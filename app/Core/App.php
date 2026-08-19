@@ -18,8 +18,10 @@ class App {
         }
 
         $uri = $_SERVER['REQUEST_URI'] ?? '/';
-        // Handle method spoofing if needed
-        $method = $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
+        // Metode diambil apa adanya dari permintaan. Pemalsuan lewat _method
+        // sengaja tidak didukung: token CSRF hanya diperiksa pada POST,
+        // sehingga POST yang menyamar jadi GET akan lolos pemeriksaan.
+        $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
         
         // Remove base url path from uri to get relative route
         $baseUrlPath = parse_url(BASE_URL, PHP_URL_PATH);

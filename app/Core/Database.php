@@ -19,7 +19,15 @@ class Database {
         try {
             $this->pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
         } catch (PDOException $e) {
-            die("Database Connection failed: " . $e->getMessage());
+            // Pesan aslinya memuat host, nama basis data, dan nama pengguna.
+            Logger::error('KONEKSI DATABASE', $e->getMessage());
+
+            http_response_code(503);
+            if (PHP_SAPI === 'cli') {
+                fwrite(STDERR, "Koneksi basis data gagal. Rincian ada di storage/logs/error.log\n");
+                exit(1);
+            }
+            exit('Layanan sedang tidak dapat diakses. Silakan coba beberapa saat lagi.');
         }
     }
 
