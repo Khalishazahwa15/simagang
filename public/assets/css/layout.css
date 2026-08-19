@@ -175,6 +175,8 @@
     background: rgba(255, 254, 250, 0.82);
     border-bottom: 1px solid var(--border-light);
     backdrop-filter: blur(12px);
+    position: relative;
+    z-index: 50;
 }
 
 .admin-header-title {
