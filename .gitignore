@@ -1,18 +1,13 @@
-node_modules/
-dist/
-build/
-.cache/
+# Konfigurasi lokal
 .env*
 !.env.example
-.vite/
-vite.config.*.timestamp-*
-*.tsbuildinfo
-*-debug.log*
+
+# Berkas runtime
 logs/
 *.log
-.claude-replay.*
+*-debug.log*
 .tmp-*
 
-# Uploads
+# Unggahan
 storage/uploads/*
 !storage/uploads/.gitkeep

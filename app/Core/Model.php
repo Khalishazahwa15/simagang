@@ -43,9 +43,4 @@ abstract class Model {
         $stmt->execute([$id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-
-    public function findAll() {
-        $stmt = $this->db->query("SELECT * FROM {$this->table}");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
 }

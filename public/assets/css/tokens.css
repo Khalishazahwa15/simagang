@@ -227,8 +227,6 @@ textarea {
     font: inherit;
 }
 
-.font-mono { font-family: var(--font-mono); }
-.text-accent { color: var(--accent); }
 .text-primary { color: var(--primary); }
 .text-muted { color: var(--text-muted); }
 .text-secondary { color: var(--text-secondary); }
@@ -238,10 +236,7 @@ textarea {
 ::-webkit-scrollbar-thumb { background: #d2c8d9; border-radius: 999px; border: 2px solid transparent; background-clip: content-box; }
 ::-webkit-scrollbar-thumb:hover { background: #b9aec6; border: 2px solid transparent; background-clip: content-box; }
 
-.accent-rule { border: none; border-top: 1px solid var(--accent); }
-.accent-rule-2 { border: none; border-top: 2px solid var(--accent); }
 .gold-rule { border: none; border-top: 1px solid var(--accent); }
-.gold-rule-2 { border: none; border-top: 2px solid var(--accent); }
 
 :focus-visible {
     outline: 2px solid var(--accent);

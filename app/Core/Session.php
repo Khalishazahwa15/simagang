@@ -50,12 +50,6 @@ class Session {
         return $message;
     }
 
-    public static function remove($key) {
-        if (isset($_SESSION[$key])) {
-            unset($_SESSION[$key]);
-        }
-    }
-
     public static function destroy() {
         session_unset();
         session_destroy();

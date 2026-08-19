@@ -224,10 +224,28 @@
         margin: 0;
     }
 
+    .benefit-row {
+        display: grid;
+        grid-template-columns: 80px minmax(0, 1fr) minmax(0, 1fr);
+        gap: 0 48px;
+        align-items: start;
+    }
+
+    .footer-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 48px;
+    }
+
     @media (max-width: 900px) {
         .hero-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
         .doc-panel { display: none; }
         .trust-grid, .alur-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 767.98px) {
+        .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+        .benefit-row { grid-template-columns: minmax(0, 1fr); gap: 12px; }
     }
 </style>
 
@@ -416,7 +434,7 @@
                 ['num' => '03', 'title' => 'Dokumen Terarsip', 'body' => 'Dokumen pengajuan tersimpan secara digital dan dapat ditelusuri kapan saja oleh mahasiswa maupun administrator.'],
             ];
             foreach ($benefits as $b): ?>
-            <div style="display: grid; grid-template-columns: 80px 1fr 1fr; gap: 0 48px; padding: 40px 0; border-bottom: 1px solid var(--border); align-items: start;">
+            <div class="benefit-row" style="padding: 40px 0; border-bottom: 1px solid var(--border);">
                 <div style="font-family: var(--font-mono); font-size: 36px; font-weight: 600; color: var(--accent); line-height: 1; padding-top: 4px;"><?= $b['num'] ?></div>
                 <div><h3 style="font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--text-primary); line-height: 1.2; letter-spacing: -0.01em; margin: 0;"><?= $b['title'] ?></h3></div>
                 <div><p style="font-family: var(--font-body); font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin: 0;"><?= $b['body'] ?></p></div>
@@ -488,7 +506,7 @@
 <!-- Footer -->
 <footer class="footer-section">
     <div style="max-width: 1240px; margin: 0 auto;">
-        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px;">
+        <div class="footer-grid" style="margin-bottom: 40px;">
             <div>
                 <div style="font-family: var(--font-body); font-weight: 800; font-size: 16px; color: var(--bg-main); margin-bottom: 4px;">SIMAGANG</div>
                 <div style="font-family: var(--font-body); font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">Sistem Informasi Pengelolaan Magang Mahasiswa</div>
