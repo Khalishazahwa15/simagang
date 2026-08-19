@@ -6,6 +6,12 @@ use App\Models\Divisi;
 use App\Core\Session;
 
 class PengajuanService {
+    // Batas periode magang. Nilainya sengaja longgar; tujuannya menolak isian
+    // yang mustahil, bukan mengatur kebijakan Bappeda.
+    const DURASI_MIN_HARI = 7;
+    const DURASI_MAKS_HARI = 366;
+    const MULAI_MAKS_HARI_KE_DEPAN = 366;
+
     private $pengajuanModel;
     private $divisiModel;
     private $dokumenService;
@@ -20,6 +26,64 @@ class PengajuanService {
         $this->auditService = new AuditService();
     }
 
+    /**
+     * Periode aktual ditetapkan Sekretariat dan boleh dimulai hari ini atau
+     * di masa lalu (misalnya berkas diproses terlambat), tetapi urutannya
+     * tetap harus benar.
+     */
+    private function periksaPeriodeAktual($tanggalMulai, $tanggalSelesai) {
+        $mulai = \DateTime::createFromFormat('Y-m-d', (string)$tanggalMulai);
+        $selesai = \DateTime::createFromFormat('Y-m-d', (string)$tanggalSelesai);
+
+        if (!$mulai || !$selesai) {
+            throw new \Exception("Tanggal mulai dan tanggal selesai aktual harus berupa tanggal yang sah.");
+        }
+
+        if ($selesai <= $mulai) {
+            throw new \Exception("Tanggal selesai aktual harus setelah tanggal mulai aktual.");
+        }
+
+        if ((int)$mulai->diff($selesai)->days > self::DURASI_MAKS_HARI) {
+            throw new \Exception("Periode magang maksimal satu tahun.");
+        }
+    }
+
+    /**
+     * Pastikan periode yang diminta masuk akal sebelum apa pun disimpan.
+     */
+    private function periksaPeriode($tanggalMulai, $tanggalSelesai) {
+        $mulai = \DateTime::createFromFormat('Y-m-d', (string)$tanggalMulai);
+        $selesai = \DateTime::createFromFormat('Y-m-d', (string)$tanggalSelesai);
+
+        if (!$mulai || $mulai->format('Y-m-d') !== $tanggalMulai
+            || !$selesai || $selesai->format('Y-m-d') !== $tanggalSelesai) {
+            throw new \Exception("Tanggal mulai dan tanggal selesai harus berupa tanggal yang sah.");
+        }
+
+        $hariIni = new \DateTime('today');
+
+        if ($mulai < $hariIni) {
+            throw new \Exception("Tanggal mulai tidak boleh berada di masa lalu.");
+        }
+
+        if ($selesai <= $mulai) {
+            throw new \Exception("Tanggal selesai harus setelah tanggal mulai.");
+        }
+
+        $durasi = (int)$hariIni->diff($mulai)->days;
+        if ($mulai > $hariIni && $durasi > self::MULAI_MAKS_HARI_KE_DEPAN) {
+            throw new \Exception("Tanggal mulai terlalu jauh ke depan. Maksimal satu tahun dari hari ini.");
+        }
+
+        $panjang = (int)$mulai->diff($selesai)->days;
+        if ($panjang < self::DURASI_MIN_HARI) {
+            throw new \Exception("Periode magang minimal " . self::DURASI_MIN_HARI . " hari.");
+        }
+        if ($panjang > self::DURASI_MAKS_HARI) {
+            throw new \Exception("Periode magang maksimal satu tahun.");
+        }
+    }
+
     public function createPengajuan($userId, $divisiPreferensi, $tanggalMulai, $tanggalSelesai, $files) {
         // Profil adalah prasyarat formulir, jadi diperiksa lebih dulu daripada
         // isi formulirnya sendiri.
@@ -27,6 +91,8 @@ class PengajuanService {
         if (!empty($profilKurang)) {
             throw new \Exception("Lengkapi profil Anda lebih dulu. Belum terisi: " . implode(', ', $profilKurang) . ".");
         }
+
+        $this->periksaPeriode($tanggalMulai, $tanggalSelesai);
 
         // Validate required files
         $requiredFiles = ['surat_lamaran', 'cv', 'transkrip'];
@@ -109,6 +175,8 @@ class PengajuanService {
         if ($pengajuan['status'] !== 'dalam_verifikasi') {
             throw new \Exception("Keputusan hanya dapat ditetapkan saat berkas sedang dalam verifikasi. Status saat ini: '{$pengajuan['status']}'.");
         }
+
+        $this->periksaPeriodeAktual($tanggalMulaiAktual, $tanggalSelesaiAktual);
 
         // Penempatan mengikuti preferensi mahasiswa. Nilai dari formulir sengaja
         // diabaikan supaya penempatan tidak bisa diubah diam-diam lewat POST;

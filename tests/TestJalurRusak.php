@@ -265,6 +265,42 @@ $sync->sync();
 periksa(filemtime($penanda) === $waktu, 'Pemindaian berikutnya dilewati selama masih dalam jeda');
 @unlink($penanda);
 
+// --- Periode magang yang mustahil harus ditolak ---
+$db->exec("DELETE FROM pengajuan");
+$berkasPalsu = [
+    'surat_lamaran' => ['error' => UPLOAD_ERR_OK, 'tmp_name' => '', 'name' => 'a.pdf', 'size' => 1],
+    'cv' => ['error' => UPLOAD_ERR_OK, 'tmp_name' => '', 'name' => 'b.pdf', 'size' => 1],
+    'transkrip' => ['error' => UPLOAD_ERR_OK, 'tmp_name' => '', 'name' => 'c.pdf', 'size' => 1],
+];
+
+// Tanggal dibuat relatif terhadap hari ini supaya berkas ini tidak
+// kedaluwarsa seiring waktu.
+$plus = function ($hari) {
+    return (new DateTime('today'))->modify("+{$hari} days")->format('Y-m-d');
+};
+
+$kasus = [
+    [$plus(90), $plus(30), 'setelah tanggal mulai', 'Tanggal selesai sebelum tanggal mulai ditolak'],
+    ['2020-01-01', '2020-03-01', 'masa lalu', 'Periode di masa lalu ditolak'],
+    [$plus(30), $plus(30 + 400), 'maksimal satu tahun', 'Periode lebih dari setahun ditolak'],
+    [$plus(30), $plus(33), 'minimal', 'Periode terlalu pendek ditolak'],
+    ['bukan-tanggal', $plus(30), 'tanggal yang sah', 'Isian bukan tanggal ditolak'],
+    [$plus(500), $plus(560), 'terlalu jauh ke depan', 'Tanggal mulai lebih dari setahun lagi ditolak'],
+];
+
+foreach ($kasus as $k) {
+    list($mulai, $selesai, $petunjuk, $nama) = $k;
+    $ditolak = false;
+    try {
+        $pengajuanService->createPengajuan(3, 1, $mulai, $selesai, $berkasPalsu);
+    } catch (\Exception $e) {
+        $ditolak = strpos($e->getMessage(), $petunjuk) !== false;
+    }
+    periksa($ditolak, $nama);
+}
+
+$db->exec("DELETE FROM pengajuan");
+
 echo "====================================\n";
 echo "JALUR RUSAK: {$lulus} lulus, {$gagal} gagal.\n";
 
