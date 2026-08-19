@@ -1,3 +1,17 @@
+<?php
+// Dideklarasikan di luar seluruh percabangan: kedua tabel di halaman ini
+// memakainya, termasuk saat mahasiswa belum mengunggah satu dokumen pun.
+$dokumen = $dokumen ?? [];
+
+$docTypes = [
+    'surat_lamaran' => 'Surat Lamaran / Surat Pengantar',
+    'cv' => 'Curriculum Vitae',
+    'transkrip' => 'Transkrip Nilai',
+    'laporan' => 'Laporan Akhir'
+];
+
+$officialDocs = ['surat_balasan', 'surat_penerimaan_final', 'surat_tugas', 'surat_keterangan', 'dokumen_akhir_magang', 'laporan_akhir'];
+?>
 <!-- Note: Topbar already contains Title and Subtitle -->
 
 <div style="display: flex; flex-direction: column; gap: 32px; max-width: 1028px;">
@@ -23,15 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php 
-                        $docTypes = [
-                            'surat_lamaran' => 'Surat Lamaran / Surat Pengantar',
-                            'cv' => 'Curriculum Vitae',
-                            'transkrip' => 'Transkrip Nilai',
-                            'laporan' => 'Laporan Akhir'
-                        ];
-                        
-                        $officialDocs = ['surat_balasan', 'surat_penerimaan_final', 'surat_tugas', 'surat_keterangan', 'dokumen_akhir_magang', 'laporan_penilaian'];
+                        <?php
                         foreach ($dokumen as $dok): 
                             // Skip official documents in this table
                             if (in_array($dok['jenis_dokumen'], $officialDocs)) continue;

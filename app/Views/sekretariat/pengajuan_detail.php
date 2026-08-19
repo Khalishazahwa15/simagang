@@ -230,7 +230,36 @@ foreach ($divisi as $d) {
         </div>
         <?php endif; ?>
 
-        <?php if (!in_array($pengajuan['status'], ['diterima', 'ditolak', 'sedang_magang', 'selesai'])): ?>
+        <?php if ($pengajuan['status'] === 'menunggu_konfirmasi_tawaran'): ?>
+        <div class="card fade-up interactive-card" style="margin: 0 0 24px 0;">
+            <div class="card-header">
+                <h3 class="card-title">Menunggu Jawaban Mahasiswa</h3>
+            </div>
+            <div class="card-body">
+                <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+                    Divisi <strong><?= htmlspecialchars($pengajuan['nama_divisi_tawaran'] ?: 'alternatif') ?></strong>
+                    sudah ditawarkan kepada mahasiswa. Keputusan tidak dapat diubah sampai yang bersangkutan
+                    menerima atau menolak tawaran tersebut.
+                </p>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if ($pengajuan['status'] === 'revisi'): ?>
+        <div class="card fade-up interactive-card" style="margin: 0 0 24px 0;">
+            <div class="card-header">
+                <h3 class="card-title">Menunggu Perbaikan Berkas</h3>
+            </div>
+            <div class="card-body">
+                <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+                    Pengajuan sudah dikembalikan kepada mahasiswa untuk diperbaiki. Panel keputusan akan
+                    muncul kembali setelah berkas yang diperbaiki diajukan ulang dan diperiksa.
+                </p>
+            </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if ($pengajuan['status'] === 'dalam_verifikasi'): ?>
         <div class="card fade-up interactive-card fade-up interactive-card" style="margin: 0;">
             <div class="card-header" style="background: rgba(217,165,29,0.05);">
                 <h3 class="card-title">Tindakan Verifikasi & Keputusan</h3>
@@ -255,13 +284,12 @@ foreach ($divisi as $d) {
 
                     <div id="diterimaFields" style="display: none; padding-top: 10px; border-top: 1px dashed var(--border); margin-top: 10px;">
                         <div class="form-group">
-                            <label for="app-views-sekretariat-pengajuan-detail-divisi_id_final" class="form-label required">Bidang/Divisi Final</label>
-                            <select id="app-views-sekretariat-pengajuan-detail-divisi_id_final" name="divisi_id_final" class="form-control" style="background: var(--bg-soft);">
-                                <option value="">-- Pilih Divisi Penempatan --</option>
-                                <?php foreach($divisi as $d): ?>
-                                    <option value="<?= $d['id'] ?>" <?= ($divisiTerpilih == $d['id']) ? 'selected' : '' ?>><?= htmlspecialchars($d['nama_divisi']) ?> (Sisa Kuota: <?= max(0, $d['kapasitas'] - ($d['terisi'] ?? 0)) ?>)</option>
-                                <?php endforeach; ?>
-                            </select>
+                            <label class="form-label">Bidang/Divisi Final</label>
+                            <div class="form-control" style="background: var(--bg-soft); display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+                                <span><?= htmlspecialchars($pengajuan['nama_divisi'] ?: 'Belum ada preferensi') ?></span>
+                                <span style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary);">Terkunci</span>
+                            </div>
+                            <div class="form-help">Mengikuti preferensi yang dipilih mahasiswa saat mendaftar. Untuk menempatkan di divisi lain, pilih keputusan <strong>Tawarkan Divisi Alternatif</strong> agar mahasiswa dapat menyetujuinya lebih dulu.</div>
                         </div>
                         <div class="form-group">
                             <label for="app-views-sekretariat-pengajuan-detail-pembina_lapangan" class="form-label">Pembina Lapangan (Opsional)</label>
@@ -290,6 +318,7 @@ foreach ($divisi as $d) {
                             <select id="app-views-sekretariat-pengajuan-detail-divisi_id_tawaran" name="divisi_id_tawaran" class="form-control" style="background: var(--bg-soft);">
                                 <option value="">-- Pilih Divisi Alternatif --</option>
                                 <?php foreach($divisi as $d): ?>
+                                    <?php if ($d['id'] == $pengajuan['divisi_id_preferensi']) continue; ?>
                                     <option value="<?= $d['id'] ?>"><?= htmlspecialchars($d['nama_divisi']) ?> (Sisa Kuota: <?= max(0, $d['kapasitas'] - ($d['terisi'] ?? 0)) ?>)</option>
                                 <?php endforeach; ?>
                             </select>

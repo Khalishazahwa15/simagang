@@ -133,6 +133,54 @@ $netral = function ($nilai) {
 periksa($netral('=cmd|calc') === "'=cmd|calc", 'S-8 Sel berawalan = dinetralkan');
 periksa($netral('Najwa') === 'Najwa', 'S-8 Nama biasa tidak ikut diubah');
 
+// --- Penguncian alur keputusan Sekretariat ---
+$db->exec("DELETE FROM pengajuan");
+$db->exec("INSERT INTO pengajuan (nomor_pengajuan, user_id, divisi_id_preferensi, tanggal_mulai_rencana, tanggal_selesai_rencana, status)
+           VALUES ('UJI-ALUR-1', 3, 1, '2026-09-01', '2026-11-30', 'diajukan')");
+$idUji = (int)$db->lastInsertId();
+
+// Sekretariat bertindak sebagai pengambil keputusan
+$_SESSION['user_id'] = 2;
+$_SESSION['user_role'] = 'sekretariat';
+
+$ditolak = false;
+try {
+    $pengajuanService->menetapkanDiterima($idUji, 1, null, '2026-09-01', '2026-11-30', '');
+} catch (\Exception $e) {
+    $ditolak = strpos($e->getMessage(), 'dalam verifikasi') !== false;
+}
+periksa($ditolak, 'Keputusan ditolak selama berkas belum diperiksa');
+
+$statusService->updateStatus($idUji, 'diajukan', 'dalam_verifikasi', 'Uji.');
+
+$ditolak = false;
+try {
+    $pengajuanService->menawarkanDivisi($idUji, 1, 2);
+} catch (\Exception $e) {
+    $ditolak = strpos($e->getMessage(), 'berbeda dari preferensi') !== false;
+}
+periksa($ditolak, 'Tawaran ke divisi preferensi sendiri ditolak');
+
+// Divisi penempatan mengunci ke preferensi walau formulir mengirim divisi lain
+$pengajuanService->menetapkanDiterima($idUji, 3, null, '2026-09-01', '2026-11-30', '');
+$final = $db->query("SELECT divisi_id_final FROM pengajuan WHERE id = {$idUji}")->fetchColumn();
+periksa((int)$final === 1, 'Penempatan mengikuti preferensi, bukan nilai kiriman formulir');
+
+$ditolak = false;
+try {
+    $pengajuanService->menetapkanDitolak($idUji, 'Berubah pikiran', '');
+} catch (\Exception $e) {
+    $ditolak = strpos($e->getMessage(), 'dalam verifikasi') !== false;
+}
+periksa($ditolak, 'Keputusan tidak dapat diubah setelah ditetapkan');
+
+// Data pendaftar ikut terbawa untuk halaman detail Sekretariat
+$detail = (new \App\Models\Pengajuan())->findDetailById($idUji);
+periksa(!empty($detail['mahasiswa_nama']) && !empty($detail['nim']) && !empty($detail['universitas']),
+    'Detail pengajuan membawa identitas pendaftar');
+
+$db->exec("DELETE FROM pengajuan");
+
 echo "====================================\n";
 echo "JALUR RUSAK: {$lulus} lulus, {$gagal} gagal.\n";
 

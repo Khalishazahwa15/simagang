@@ -97,6 +97,18 @@ class PengajuanService {
             throw new \Exception("Pengajuan tidak ditemukan.");
         }
 
+        if ($pengajuan['status'] !== 'dalam_verifikasi') {
+            throw new \Exception("Keputusan hanya dapat ditetapkan saat berkas sedang dalam verifikasi. Status saat ini: '{$pengajuan['status']}'.");
+        }
+
+        // Penempatan mengikuti preferensi mahasiswa. Nilai dari formulir sengaja
+        // diabaikan supaya penempatan tidak bisa diubah diam-diam lewat POST;
+        // untuk divisi lain, alurnya wajib lewat tawaran yang disetujui mahasiswa.
+        $divisiIdFinal = $pengajuan['divisi_id_preferensi'];
+        if (!$divisiIdFinal) {
+            throw new \Exception("Pengajuan ini tidak memiliki divisi preferensi, sehingga tidak dapat langsung diterima.");
+        }
+
         $this->pengajuanModel->beginTransaction();
         try {
             // Update fields manually
@@ -125,6 +137,10 @@ class PengajuanService {
         $pengajuan = $this->pengajuanModel->findById($pengajuanId);
         if (!$pengajuan) {
             throw new \Exception("Pengajuan tidak ditemukan.");
+        }
+
+        if ($pengajuan['status'] !== 'dalam_verifikasi') {
+            throw new \Exception("Keputusan hanya dapat ditetapkan saat berkas sedang dalam verifikasi. Status saat ini: '{$pengajuan['status']}'.");
         }
 
         $this->pengajuanModel->beginTransaction();
@@ -160,6 +176,10 @@ class PengajuanService {
         $divisi = $this->divisiModel->findById($divisiTawaranId);
         if (!$divisi || $divisi['status'] !== 'aktif') {
             throw new \Exception("Divisi tawaran tidak valid atau tidak aktif.");
+        }
+
+        if ($divisiTawaranId == $pengajuan['divisi_id_preferensi']) {
+            throw new \Exception("Divisi tawaran harus berbeda dari preferensi mahasiswa. Bila memang divisi tersebut yang dituju, gunakan keputusan Terima.");
         }
 
         $this->pengajuanModel->beginTransaction();

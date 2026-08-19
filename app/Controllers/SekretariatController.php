@@ -204,7 +204,7 @@ class SekretariatController extends Controller {
             return $this->redirect('sekretariat/pengajuan');
         }
 
-        $pengajuan = $this->pengajuanModel->findById($id);
+        $pengajuan = $this->pengajuanModel->findDetailById($id);
         if (!$pengajuan) {
             return $this->redirect('sekretariat/pengajuan');
         }
