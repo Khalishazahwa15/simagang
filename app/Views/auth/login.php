@@ -38,17 +38,16 @@
                 <p style="font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); margin: 0;">Silakan masukkan email dan kata sandi Anda.</p>
             </div>
             
-            <?php if(isset($_SESSION['error'])): ?>
+            <?php if ($flash = \App\Core\Session::getFlash('error')): ?>
                 <div class="alert alert-danger">
                     <div class="alert-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
                     </div>
                     <div>
                         <div class="alert-title">Gagal Masuk</div>
-                        <p class="alert-body"><?= $_SESSION['error'] ?></p>
+                        <p class="alert-body"><?= htmlspecialchars($flash) ?></p>
                     </div>
                 </div>
-                <?php unset($_SESSION['error']); ?>
             <?php endif; ?>
 
             <form action="<?= BASE_URL ?>/login" method="POST" autocomplete="off">

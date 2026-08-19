@@ -179,6 +179,22 @@
 
     <!-- Right: Action Form -->
     <div>
+        <?php if ($pengajuan['status'] === 'diajukan'): ?>
+        <div class="card fade-up interactive-card" style="margin: 0 0 24px 0;">
+            <div class="card-header" style="background: rgba(217,165,29,0.05);">
+                <h3 class="card-title">Mulai Verifikasi</h3>
+            </div>
+            <div class="card-body">
+                <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-top: 0; margin-bottom: 16px;">Berkas ini belum ditandai sedang diperiksa. Membuka halaman tidak mengubah statusnya. Tekan tombol di bawah untuk memindahkan status ke <strong>Dalam Verifikasi</strong>.</p>
+                <form action="<?= BASE_URL ?>/sekretariat/pengajuan/detail/<?= $pengajuan['id'] ?>" method="POST">
+                    <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?? '' ?>">
+                    <input type="hidden" name="action" value="mulai_verifikasi">
+                    <button type="submit" class="btn btn-primary">Mulai Verifikasi</button>
+                </form>
+            </div>
+        </div>
+        <?php endif; ?>
+
         <?php if (!in_array($pengajuan['status'], ['diterima', 'ditolak', 'sedang_magang', 'selesai'])): ?>
         <div class="card fade-up interactive-card fade-up interactive-card" style="margin: 0;">
             <div class="card-header" style="background: rgba(217,165,29,0.05);">

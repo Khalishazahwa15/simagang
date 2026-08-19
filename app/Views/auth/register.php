@@ -38,6 +38,18 @@
                 <p style="font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); margin: 0;">Isi formulir di bawah ini untuk mendaftar sebagai mahasiswa magang.</p>
             </div>
 
+            <?php if ($flash = \App\Core\Session::getFlash('error')): ?>
+                <div class="alert alert-danger">
+                    <div class="alert-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+                    </div>
+                    <div>
+                        <div class="alert-title">Gagal Mendaftar</div>
+                        <p class="alert-body"><?= htmlspecialchars($flash) ?></p>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <form action="<?= BASE_URL ?>/register" method="POST">
                 <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?>">
                 
@@ -55,7 +67,7 @@
                     <div class="form-group">
                         <label class="form-label required">Kata Sandi</label>
                         <div style="position: relative;">
-                            <input type="password" id="reg-password" name="password" class="form-control" placeholder="Minimal 8 karakter" required style="padding-right: 40px;">
+                            <input type="password" id="reg-password" name="password" class="form-control" placeholder="Minimal 8 karakter" required minlength="8" style="padding-right: 40px;">
                             <button type="button" onclick="togglePassword('reg-password', this)" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; padding: 0; cursor: pointer; color: var(--text-secondary); display: flex; align-items: center; justify-content: center;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                             </button>
@@ -64,7 +76,7 @@
                     <div class="form-group">
                         <label class="form-label required">Konfirmasi Sandi</label>
                         <div style="position: relative;">
-                            <input type="password" id="reg-password-conf" name="password_confirm" class="form-control" placeholder="Ketik ulang" required style="padding-right: 40px;">
+                            <input type="password" id="reg-password-conf" name="password_confirm" class="form-control" placeholder="Ketik ulang" required minlength="8" style="padding-right: 40px;">
                             <button type="button" onclick="togglePassword('reg-password-conf', this)" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; padding: 0; cursor: pointer; color: var(--text-secondary); display: flex; align-items: center; justify-content: center;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                             </button>

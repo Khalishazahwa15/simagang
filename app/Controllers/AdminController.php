@@ -234,7 +234,7 @@ class AdminController extends Controller {
 
                 \App\Core\Session::setFlash('success', 'Divisi berhasil ditambahkan.');
             } catch (\Exception $e) {
-                \App\Core\Session::setFlash('error', $e->getMessage());
+                \App\Core\Session::setFlash('error', \App\Core\ErrorHandler::userMessage($e));
             }
             return $this->redirect('admin/bidang');
         }
@@ -267,7 +267,7 @@ class AdminController extends Controller {
 
                 \App\Core\Session::setFlash('success', 'Divisi berhasil diperbarui.');
             } catch (\Exception $e) {
-                \App\Core\Session::setFlash('error', $e->getMessage());
+                \App\Core\Session::setFlash('error', \App\Core\ErrorHandler::userMessage($e));
             }
             return $this->redirect('admin/bidang');
         }
@@ -291,7 +291,7 @@ class AdminController extends Controller {
                     \App\Core\Session::setFlash('success', 'Status divisi berhasil diubah.');
                 }
             } catch (\Exception $e) {
-                \App\Core\Session::setFlash('error', $e->getMessage());
+                \App\Core\Session::setFlash('error', \App\Core\ErrorHandler::userMessage($e));
             }
             return $this->redirect('admin/bidang');
         }
@@ -331,7 +331,7 @@ class AdminController extends Controller {
 
                 \App\Core\Session::setFlash('success', 'Pengguna internal berhasil ditambahkan.');
             } catch (\Exception $e) {
-                \App\Core\Session::setFlash('error', $e->getMessage());
+                \App\Core\Session::setFlash('error', \App\Core\ErrorHandler::userMessage($e));
             }
             return $this->redirect('admin/users');
         }
@@ -380,7 +380,7 @@ class AdminController extends Controller {
 
                 \App\Core\Session::setFlash('success', 'Pengguna berhasil diperbarui.');
             } catch (\Exception $e) {
-                \App\Core\Session::setFlash('error', $e->getMessage());
+                \App\Core\Session::setFlash('error', \App\Core\ErrorHandler::userMessage($e));
             }
             return $this->redirect('admin/users');
         }
@@ -409,7 +409,7 @@ class AdminController extends Controller {
                     \App\Core\Session::setFlash('success', 'Status pengguna berhasil diubah.');
                 }
             } catch (\Exception $e) {
-                \App\Core\Session::setFlash('error', $e->getMessage());
+                \App\Core\Session::setFlash('error', \App\Core\ErrorHandler::userMessage($e));
             }
             return $this->redirect('admin/users');
         }

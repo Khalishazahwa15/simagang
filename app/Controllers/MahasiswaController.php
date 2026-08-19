@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\Auth;
 use App\Core\Session;
+use App\Core\ErrorHandler;
 use App\Services\PengajuanService;
 use App\Models\Divisi;
 
@@ -104,7 +105,7 @@ class MahasiswaController extends Controller {
                 Session::setFlash('success', 'Pengajuan berhasil dikirim.');
                 return $this->redirect('mahasiswa/status');
             } catch (\Exception $e) {
-                Session::setFlash('error', $e->getMessage());
+                Session::setFlash('error', ErrorHandler::userMessage($e));
                 return $this->redirect('mahasiswa/pengajuan');
             }
         }
@@ -197,7 +198,7 @@ class MahasiswaController extends Controller {
             readfile($file['path']);
             exit;
         } catch (\Exception $e) {
-            Session::setFlash('error', $e->getMessage());
+            Session::setFlash('error', ErrorHandler::userMessage($e));
             return $this->redirect('mahasiswa/dokumen');
         }
     }
@@ -220,7 +221,7 @@ class MahasiswaController extends Controller {
             readfile($file['path']);
             exit;
         } catch (\Exception $e) {
-            Session::setFlash('error', $e->getMessage());
+            Session::setFlash('error', ErrorHandler::userMessage($e));
             return $this->redirect('mahasiswa/dokumen');
         }
     }
@@ -281,7 +282,7 @@ class MahasiswaController extends Controller {
                 if (isset($db) && $db->inTransaction()) {
                     $db->rollBack();
                 }
-                Session::setFlash('error', $e->getMessage());
+                Session::setFlash('error', ErrorHandler::userMessage($e));
             }
             return $this->redirect('mahasiswa/profil');
         }
@@ -317,7 +318,7 @@ class MahasiswaController extends Controller {
 
                 Session::setFlash('success', 'Kata sandi berhasil diperbarui.');
             } catch (\Exception $e) {
-                Session::setFlash('error', $e->getMessage());
+                Session::setFlash('error', ErrorHandler::userMessage($e));
             }
             return $this->redirect('mahasiswa/profil');
         }
@@ -349,7 +350,7 @@ class MahasiswaController extends Controller {
 
                 Session::setFlash('success', 'Dokumen revisi berhasil diunggah.');
             } catch (\Exception $e) {
-                Session::setFlash('error', $e->getMessage());
+                Session::setFlash('error', ErrorHandler::userMessage($e));
             }
             return $this->redirect('mahasiswa/status');
         }
@@ -378,7 +379,7 @@ class MahasiswaController extends Controller {
 
                 Session::setFlash('success', 'Laporan akhir berhasil diunggah.');
             } catch (\Exception $e) {
-                Session::setFlash('error', $e->getMessage());
+                Session::setFlash('error', ErrorHandler::userMessage($e));
             }
             return $this->redirect('mahasiswa/status');
         }
@@ -430,7 +431,7 @@ class MahasiswaController extends Controller {
                 Session::setFlash('success', 'Permintaan pengunduran diri berhasil diajukan dan sedang menunggu verifikasi Sekretariat.');
                 return $this->redirect('mahasiswa/dashboard');
             } catch (\Exception $e) {
-                Session::setFlash('error', $e->getMessage());
+                Session::setFlash('error', ErrorHandler::userMessage($e));
                 return $this->redirect('mahasiswa/pengunduran-diri');
             }
         }
@@ -457,7 +458,7 @@ class MahasiswaController extends Controller {
                     Session::setFlash('success', 'Tawaran telah ditolak. Pengajuan dibatalkan.');
                 }
             } catch (\Exception $e) {
-                Session::setFlash('error', $e->getMessage());
+                Session::setFlash('error', ErrorHandler::userMessage($e));
             }
             return $this->redirect('mahasiswa/status');
         }

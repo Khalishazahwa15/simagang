@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\Auth;
 use App\Core\Session;
+use App\Core\ErrorHandler;
 use App\Services\PengajuanService;
 use App\Services\StatusService;
 use App\Services\DokumenService;
@@ -182,13 +183,19 @@ class SekretariatController extends Controller {
                     $peng = $this->pengajuanModel->findById($id);
                     $this->statusService->updateStatus($id, $peng['status'], 'revisi', $catatan);
                     Session::setFlash('success', 'Pengajuan dikembalikan untuk direvisi.');
+                } elseif ($action === 'mulai_verifikasi') {
+                    $peng = $this->pengajuanModel->findById($id);
+                    if ($peng && $peng['status'] === 'diajukan') {
+                        $this->statusService->updateStatus($id, 'diajukan', 'dalam_verifikasi', 'Berkas sedang diperiksa oleh tim.');
+                        Session::setFlash('success', 'Pengajuan ditandai sedang diverifikasi.');
+                    }
                 } elseif ($action === 'tawarkan') {
                     $divisiTawaranId = $_POST['divisi_id_tawaran'] ?? null;
                     $this->pengajuanService->menawarkanDivisi($id, $divisiTawaranId, Session::get('user_id'));
                     Session::setFlash('success', 'Tawaran divisi alternatif berhasil dikirim ke mahasiswa.');
                 }
             } catch (\Exception $e) {
-                Session::setFlash('error', $e->getMessage());
+                Session::setFlash('error', ErrorHandler::userMessage($e));
             }
             return $this->redirect('sekretariat/pengajuan/detail/' . $id);
         }
@@ -200,12 +207,6 @@ class SekretariatController extends Controller {
         $pengajuan = $this->pengajuanModel->findById($id);
         if (!$pengajuan) {
             return $this->redirect('sekretariat/pengajuan');
-        }
-
-        // Auto-transition to dalam_verifikasi when opened by admin/sekretariat
-        if ($pengajuan['status'] === 'diajukan' && $_SERVER['REQUEST_METHOD'] === 'GET') {
-            $this->statusService->updateStatus($id, 'diajukan', 'dalam_verifikasi', 'Berkas sedang diperiksa oleh tim.');
-            $pengajuan['status'] = 'dalam_verifikasi';
         }
 
         $divisi = $this->divisiModel->getAktif();
@@ -463,7 +464,7 @@ class SekretariatController extends Controller {
             readfile($file['path']);
             exit;
         } catch (\Exception $e) {
-            Session::setFlash('error', $e->getMessage());
+            Session::setFlash('error', ErrorHandler::userMessage($e));
             return $this->redirect('sekretariat/pengajuan');
         }
     }
@@ -484,7 +485,7 @@ class SekretariatController extends Controller {
             readfile($file['path']);
             exit;
         } catch (\Exception $e) {
-            Session::setFlash('error', $e->getMessage());
+            Session::setFlash('error', ErrorHandler::userMessage($e));
             return $this->redirect('sekretariat/pengajuan');
         }
     }
@@ -505,7 +506,7 @@ class SekretariatController extends Controller {
                 $this->dokumenService->uploadDokumen($id, $pengajuan['nomor_pengajuan'], $jenisDokumen, $_FILES['file_dokumen']);
                 Session::setFlash('success', 'Dokumen final berhasil diunggah.');
             } catch (\Exception $e) {
-                Session::setFlash('error', $e->getMessage());
+                Session::setFlash('error', ErrorHandler::userMessage($e));
             }
             return $this->redirect('sekretariat/pengajuan/detail/' . $id);
         }
@@ -517,7 +518,7 @@ class SekretariatController extends Controller {
                 $this->statusService->updateStatus($id, 'diterima', 'sedang_magang', 'Peserta telah memulai masa magang.');
                 Session::setFlash('success', 'Status pengajuan diubah menjadi sedang magang.');
             } catch (\Exception $e) {
-                Session::setFlash('error', $e->getMessage());
+                Session::setFlash('error', ErrorHandler::userMessage($e));
             }
             return $this->redirect('sekretariat/pengajuan/detail/' . $id);
         }
@@ -529,7 +530,7 @@ class SekretariatController extends Controller {
                 $this->statusService->updateStatus($id, 'sedang_magang', 'selesai', 'Peserta telah menyelesaikan masa magang.');
                 Session::setFlash('success', 'Status pengajuan diubah menjadi selesai.');
             } catch (\Exception $e) {
-                Session::setFlash('error', $e->getMessage());
+                Session::setFlash('error', ErrorHandler::userMessage($e));
             }
             return $this->redirect('sekretariat/pengajuan/detail/' . $id);
         }
@@ -542,7 +543,7 @@ class SekretariatController extends Controller {
                 $this->statusService->updateStatus($id, $pengajuan['status'], 'mengundurkan_diri', 'Permintaan pengunduran diri telah disetujui Sekretariat.');
                 Session::setFlash('success', 'Status pengajuan diubah menjadi mengundurkan diri.');
             } catch (\Exception $e) {
-                Session::setFlash('error', $e->getMessage());
+                Session::setFlash('error', ErrorHandler::userMessage($e));
             }
             return $this->redirect('sekretariat/pengajuan/detail/' . $id);
         }
@@ -561,7 +562,7 @@ class SekretariatController extends Controller {
                 $this->pengajuanService->menawarkanDivisi($pengajuanId, $divisiTawaranId, Session::get('user_id'));
                 Session::setFlash('success', 'Tawaran divisi berhasil dikirim ke mahasiswa.');
             } catch (\Exception $e) {
-                Session::setFlash('error', $e->getMessage());
+                Session::setFlash('error', ErrorHandler::userMessage($e));
             }
             return $this->redirect('sekretariat/pengajuan/detail/' . ($pengajuanId ?? ''));
         }
@@ -580,7 +581,7 @@ class SekretariatController extends Controller {
                 $this->pengajuanService->finalisasiTawaran($pengajuanId, Session::get('user_id'));
                 Session::setFlash('success', 'Finalisasi penempatan berhasil. Status pengajuan menjadi diterima.');
             } catch (\Exception $e) {
-                Session::setFlash('error', $e->getMessage());
+                Session::setFlash('error', ErrorHandler::userMessage($e));
             }
             return $this->redirect('sekretariat/pengajuan/detail/' . ($pengajuanId ?? ''));
         }

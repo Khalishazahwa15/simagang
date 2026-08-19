@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Core\Database;
+use App\Core\Logger;
 
 class SyncStatusService {
     private $db;
@@ -41,7 +42,7 @@ class SyncStatusService {
                 $this->statusService->updateStatus($pengajuanId, 'diterima', 'sedang_magang', 'Sistem: Sinkronisasi otomatis tanggal mulai magang.');
             } catch (\Exception $e) {
                 // Ignore single failure to allow others to process
-                echo "SYNC ERROR (sedang_magang): " . $e->getMessage() . "\n";
+                Logger::error('SYNC (sedang_magang)', $e->getMessage());
             }
         }
 
@@ -61,6 +62,7 @@ class SyncStatusService {
                 $this->statusService->updateStatus($pengajuanId, 'sedang_magang', 'selesai', 'Sistem: Sinkronisasi otomatis tanggal selesai magang.');
             } catch (\Exception $e) {
                 // Ignore single failure
+                Logger::error('SYNC (selesai)', $e->getMessage());
             }
         }
     }

@@ -31,6 +31,25 @@ class Session {
         }
     }
 
+    public static function getFlash($type) {
+        $message = $_SESSION[$type] ?? null;
+        unset($_SESSION[$type]);
+
+        if (!empty($_SESSION['flash_messages'])) {
+            foreach ($_SESSION['flash_messages'] as $index => $flash) {
+                if ($flash['type'] === $type) {
+                    if ($message === null) {
+                        $message = $flash['message'];
+                    }
+                    unset($_SESSION['flash_messages'][$index]);
+                }
+            }
+            $_SESSION['flash_messages'] = array_values($_SESSION['flash_messages']);
+        }
+
+        return $message;
+    }
+
     public static function remove($key) {
         if (isset($_SESSION[$key])) {
             unset($_SESSION[$key]);

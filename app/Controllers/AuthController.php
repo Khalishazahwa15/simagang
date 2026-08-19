@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\Auth;
 use App\Core\Session;
+use App\Core\ErrorHandler;
 use App\Services\AuthService;
 
 class AuthController extends Controller {
@@ -27,13 +28,16 @@ class AuthController extends Controller {
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
             
-            if ($this->authService->login($email, $password)) {
-                $role = \App\Core\Auth::role();
-                return $this->redirect($role . '/dashboard');
-            } else {
+            try {
+                if ($this->authService->login($email, $password)) {
+                    $role = \App\Core\Auth::role();
+                    return $this->redirect($role . '/dashboard');
+                }
                 Session::setFlash('error', 'Email atau password salah.');
-                return $this->redirect('login');
+            } catch (\Exception $e) {
+                Session::setFlash('error', ErrorHandler::userMessage($e));
             }
+            return $this->redirect('login');
         }
 
         ob_start();
@@ -60,6 +64,7 @@ class AuthController extends Controller {
             $nama = $_POST['nama'] ?? '';
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
+            $passwordConfirm = $_POST['password_confirm'] ?? '';
             $nim = $_POST['nim'] ?? '';
             $universitas = $_POST['universitas'] ?? '';
             $programStudi = $_POST['program_studi'] ?? '';
@@ -67,12 +72,17 @@ class AuthController extends Controller {
             $nomorHp = $_POST['nomor_hp'] ?? '';
             $alamat = $_POST['alamat'] ?? '';
 
+            if ($password !== $passwordConfirm) {
+                Session::setFlash('error', 'Konfirmasi kata sandi tidak cocok.');
+                return $this->redirect('register');
+            }
+
             try {
                 $this->authService->registerMahasiswa($nama, $email, $password, $nim, $universitas, $programStudi, $semester, $nomorHp, $alamat);
                 Session::setFlash('success', 'Registrasi berhasil. Silakan login.');
                 return $this->redirect('login');
             } catch (\Exception $e) {
-                Session::setFlash('error', $e->getMessage());
+                Session::setFlash('error', ErrorHandler::userMessage($e));
                 return $this->redirect('register');
             }
         }
@@ -159,6 +169,11 @@ class AuthController extends Controller {
                 return $this->redirect('reset-password?token=' . $token);
             }
             
+            if (strlen($password) < AuthService::MIN_PASSWORD_LENGTH) {
+                Session::setFlash('error', 'Kata sandi minimal ' . AuthService::MIN_PASSWORD_LENGTH . ' karakter.');
+                return $this->redirect('reset-password?token=' . $token);
+            }
+
             if ($password !== $confirmPassword) {
                 Session::setFlash('error', 'Konfirmasi password tidak cocok.');
                 return $this->redirect('reset-password?token=' . $token);

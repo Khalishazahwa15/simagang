@@ -6,6 +6,8 @@ use App\Models\MahasiswaProfile;
 use App\Core\Session;
 
 class AuthService {
+    const MIN_PASSWORD_LENGTH = 8;
+
     private $userModel;
     private $profileModel;
 
@@ -16,16 +18,24 @@ class AuthService {
 
     public function login($email, $password) {
         $user = $this->userModel->findByEmail($email);
-        
-        if ($user && password_verify($password, $user['password'])) {
-            \App\Core\Auth::login($user);
-            return true;
+
+        if (!$user || !password_verify($password, $user['password'])) {
+            return false;
         }
-        
-        return false;
+
+        if (($user['status'] ?? 'aktif') !== 'aktif') {
+            throw new \Exception("Akun Anda dinonaktifkan. Silakan hubungi Administrator.");
+        }
+
+        \App\Core\Auth::login($user);
+        return true;
     }
 
     public function registerMahasiswa($nama, $email, $password, $nim, $universitas, $programStudi, $semester, $nomorHp, $alamat) {
+        if (strlen($password) < self::MIN_PASSWORD_LENGTH) {
+            throw new \Exception("Kata sandi minimal " . self::MIN_PASSWORD_LENGTH . " karakter.");
+        }
+
         // Validate email uniqueness
         if ($this->userModel->findByEmail($email)) {
             throw new \Exception("Email sudah terdaftar.");

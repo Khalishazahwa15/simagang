@@ -68,12 +68,7 @@ class StatusService {
                 }
             } catch (\Exception $notifEx) {
                 // Log failure but do not rollback the status transition
-                $logDir = ROOT_PATH . '/storage/logs';
-                if (!is_dir($logDir)) {
-                    mkdir($logDir, 0777, true);
-                }
-                $errorMessage = "[" . date('Y-m-d H:i:s') . "] NOTIFIKASI GAGAL: " . $notifEx->getMessage() . "\n";
-                file_put_contents($logDir . '/error.log', $errorMessage, FILE_APPEND);
+                \App\Core\Logger::error('NOTIFIKASI GAGAL', $notifEx->getMessage());
             }
             
             return true;
