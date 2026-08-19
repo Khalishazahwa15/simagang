@@ -9,8 +9,8 @@
 
 <!-- Filters -->
 <form method="GET" action="<?= BASE_URL ?>/sekretariat/dokumen">
-    <div class="d-flex" style="gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
-        <div style="position: relative; flex: 1 1 240px;">
+    <div class="d-flex align-center" style="margin-bottom: 20px; flex-wrap: wrap; gap: 12px; width: 100%;">
+        <div style="position: relative; flex: 1; min-width: 240px;">
             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
             <input type="text" name="q" value="<?= htmlspecialchars($q ?? '') ?>" placeholder="Cari nama mahasiswa atau nomor pengajuan..." style="width: 100%; padding: 9px 14px 9px 36px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none;">
         </div>
@@ -51,10 +51,14 @@
                         </td>
                         <td style="padding: 13px 16px; font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary); white-space: nowrap;"><?= date('d M Y', strtotime($d['created_at'])) ?></td>
                         <td style="padding: 13px 16px;">
-                            <a href="<?= BASE_URL ?>/sekretariat/dokumen/download/<?= $d['id'] ?>" style="display: inline-flex; align-items: center; gap: 5px; padding: 6px 14px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--text-primary); text-decoration: none; white-space: nowrap;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-                                Unduh
-                            </a>
+                            <div style="display: flex; gap: 8px;">
+                                <a href="<?= BASE_URL ?>/sekretariat/dokumen/view/<?= $d['id'] ?>" target="_blank" style="display: flex; align-items: center; justify-content: center; padding: 6px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--primary); text-decoration: none;" title="Lihat Dokumen">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                </a>
+                                <a href="<?= BASE_URL ?>/sekretariat/dokumen/download/<?= $d['id'] ?>" style="display: flex; align-items: center; justify-content: center; padding: 6px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--text-secondary); text-decoration: none;" title="Unduh Dokumen">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                </a>
+                            </div>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -63,4 +67,35 @@
         </table>
     </div>
 </div>
+
+<!-- Pagination -->
+<?php if (isset($totalPages) && $totalPages > 1): ?>
+<div class="d-flex align-center justify-between mt-4">
+    <span class="text-muted" style="font-size: 12.5px;">
+        Halaman <?= $page ?> dari <?= $totalPages ?> (Total: <?= $totalRows ?> dokumen)
+    </span>
+    <div class="d-flex gap-2">
+        <?php 
+            $queryParams = $_GET;
+            
+            $queryParams['page'] = $page - 1;
+            $prevUrl = '?' . http_build_query($queryParams);
+            
+            $queryParams['page'] = $page + 1;
+            $nextUrl = '?' . http_build_query($queryParams);
+        ?>
+        <?php if ($page > 1): ?>
+            <a href="<?= $prevUrl ?>" class="btn btn-outline btn-sm" style="padding: 6px 12px; border-radius: 6px; text-decoration: none;">Sebelumnya</a>
+        <?php else: ?>
+            <button class="btn btn-outline btn-sm" disabled style="padding: 6px 12px; border-radius: 6px; opacity: 0.5; cursor: not-allowed;">Sebelumnya</button>
+        <?php endif; ?>
+        
+        <?php if ($page < $totalPages): ?>
+            <a href="<?= $nextUrl ?>" class="btn btn-outline btn-sm" style="padding: 6px 12px; border-radius: 6px; text-decoration: none;">Selanjutnya</a>
+        <?php else: ?>
+            <button class="btn btn-outline btn-sm" disabled style="padding: 6px 12px; border-radius: 6px; opacity: 0.5; cursor: not-allowed;">Selanjutnya</button>
+        <?php endif; ?>
+    </div>
+</div>
+<?php endif; ?>
 

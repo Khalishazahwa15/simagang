@@ -111,29 +111,98 @@ class AdminController extends Controller {
     }
 
     public function users() {
-        $users = $this->userModel->findAll();
+        $db = \App\Core\Database::getInstance()->getConnection();
+        $q = $_GET['q'] ?? '';
+        $role = $_GET['role'] ?? '';
+        $status = $_GET['status'] ?? '';
+        
+        $page = max(1, (int)($_GET['page'] ?? 1));
+        $limit = 20;
+        $offset = ($page - 1) * $limit;
+
+        $conditions = "WHERE 1=1";
+        $params = [];
+        
+        if (!empty($q)) {
+            $conditions .= " AND (nama LIKE ? OR email LIKE ? OR id LIKE ?)";
+            $params[] = "%$q%";
+            $params[] = "%$q%";
+            $params[] = "%$q%";
+        }
+        if (!empty($role)) {
+            $conditions .= " AND role = ?";
+            $params[] = $role;
+        }
+        if (!empty($status)) {
+            $conditions .= " AND status = ?";
+            $params[] = $status;
+        }
+        
+        // Count total rows
+        $countSql = "SELECT COUNT(*) as total FROM users $conditions";
+        $stmtCount = $db->prepare($countSql);
+        $stmtCount->execute($params);
+        $totalRows = $stmtCount->fetch()['total'];
+        $totalPages = ceil($totalRows / $limit);
+        
+        // Handle out of bounds page safely
+        if ($page > $totalPages && $totalPages > 0) {
+            $page = $totalPages;
+            $offset = ($page - 1) * $limit;
+        }
+
+        $sql = "SELECT * FROM users $conditions ORDER BY created_at DESC LIMIT $limit OFFSET $offset";
+        $stmt = $db->prepare($sql);
+        $stmt->execute($params);
+        $users = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
         $this->renderView('admin/users', [
             'title' => 'Kelola Pengguna',
             'subtitle' => 'Manajemen akses sistem.',
             'currentPage' => 'users',
-            'users' => $users
+            'users' => $users,
+            'page' => $page,
+            'totalPages' => $totalPages,
+            'totalRows' => $totalRows
         ]);
     }
 
     public function bidang() {
         $db = \App\Core\Database::getInstance()->getConnection();
+        
+        $page = max(1, (int)($_GET['page'] ?? 1));
+        $limit = 20;
+        $offset = ($page - 1) * $limit;
+
+        // Count total rows
+        $countSql = "SELECT COUNT(*) as total FROM divisi";
+        $stmtCount = $db->prepare($countSql);
+        $stmtCount->execute();
+        $totalRows = $stmtCount->fetch()['total'];
+        $totalPages = ceil($totalRows / $limit);
+        
+        // Handle out of bounds page safely
+        if ($page > $totalPages && $totalPages > 0) {
+            $page = $totalPages;
+            $offset = ($page - 1) * $limit;
+        }
+
         $divisi = $db->query("
             SELECT d.*, 
             (SELECT COUNT(*) FROM pengajuan p WHERE p.divisi_id_final = d.id AND p.status IN ('diterima', 'sedang_magang')) as terisi 
             FROM divisi d 
             ORDER BY d.nama_divisi ASC
+            LIMIT $limit OFFSET $offset
         ")->fetchAll();
 
         $this->renderView('admin/bidang', [
             'title' => 'Kelola Divisi / Bidang',
             'subtitle' => 'Master data divisi magang dan status kebutuhan masing-masing.',
             'currentPage' => 'bidang',
-            'divisi' => $divisi
+            'divisi' => $divisi,
+            'page' => $page,
+            'totalPages' => $totalPages,
+            'totalRows' => $totalRows
         ]);
     }
 
@@ -349,21 +418,54 @@ class AdminController extends Controller {
         $db = \App\Core\Database::getInstance()->getConnection();
         
         $action = $_GET['action'] ?? '';
+        $q = $_GET['q'] ?? '';
         
+        $page = max(1, (int)($_GET['page'] ?? 1));
+        $limit = 20;
+        $offset = ($page - 1) * $limit;
+
+        $conditions = "WHERE 1=1";
+        $params = [];
+        
+        if (!empty($action)) {
+            $conditions .= " AND a.action = ?";
+            $params[] = $action;
+        }
+
+        if (!empty($q)) {
+            $conditions .= " AND (u.nama LIKE ? OR a.action LIKE ? OR a.entity LIKE ? OR a.details LIKE ?)";
+            $params[] = "%$q%";
+            $params[] = "%$q%";
+            $params[] = "%$q%";
+            $params[] = "%$q%";
+        }
+        
+        // Count total rows
+        $countSql = "
+            SELECT COUNT(*) as total 
+            FROM audit_logs a
+            LEFT JOIN users u ON a.user_id = u.id
+            $conditions
+        ";
+        $stmtCount = $db->prepare($countSql);
+        $stmtCount->execute($params);
+        $totalRows = $stmtCount->fetch()['total'];
+        $totalPages = ceil($totalRows / $limit);
+        
+        // Handle out of bounds page safely
+        if ($page > $totalPages && $totalPages > 0) {
+            $page = $totalPages;
+            $offset = ($page - 1) * $limit;
+        }
+
         $sql = "
             SELECT a.*, u.nama as user_name 
             FROM audit_logs a
             LEFT JOIN users u ON a.user_id = u.id
-            WHERE 1=1
+            $conditions
+            ORDER BY a.created_at DESC
+            LIMIT $limit OFFSET $offset
         ";
-        $params = [];
-        
-        if (!empty($action)) {
-            $sql .= " AND a.action = ?";
-            $params[] = $action;
-        }
-        
-        $sql .= " ORDER BY a.created_at DESC";
         
         $stmt = $db->prepare($sql);
         $stmt->execute($params);
@@ -374,7 +476,10 @@ class AdminController extends Controller {
             'subtitle' => 'Jejak aktivitas penting dalam sistem.',
             'currentPage' => 'audit_log',
             'logs' => $logs,
-            'actionFilter' => $action
+            'actionFilter' => $action,
+            'page' => $page,
+            'totalPages' => $totalPages,
+            'totalRows' => $totalRows
         ]);
     }
 }

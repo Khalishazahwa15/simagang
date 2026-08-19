@@ -285,9 +285,10 @@ $divisiList = $divisiData ?? [];
                                                 <div style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary);"><?= htmlspecialchars($div['deskripsi'] ?? 'Tidak ada deskripsi') ?></div>
                                             </div>
                                         </div>
+                                        <?php $sisa = max(0, $div['kapasitas'] - ($div['terisi'] ?? 0)); ?>
                                         <div style="flex-shrink: 0; text-align: right;">
-                                            <span style="display: inline-block; background: <?= $div['kapasitas'] > 0 ? 'var(--accent-soft)' : '#FEF2F2' ?>; color: <?= $div['kapasitas'] > 0 ? 'var(--primary-dark)' : '#9B2C2C' ?>; padding: 4px 12px; border-radius: 6px; font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.04em;">
-                                                <?= $div['kapasitas'] > 0 ? "SISA KUOTA: {$div['kapasitas']}" : "KUOTA PENUH" ?>
+                                            <span style="display: inline-block; background: <?= $sisa > 0 ? 'var(--accent-soft)' : '#FEF2F2' ?>; color: <?= $sisa > 0 ? 'var(--primary-dark)' : '#9B2C2C' ?>; padding: 4px 12px; border-radius: 6px; font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.04em;">
+                                                <?= $sisa > 0 ? "SISA KUOTA: {$sisa}" : "KUOTA PENUH" ?>
                                             </span>
                                         </div>
                                     </div>

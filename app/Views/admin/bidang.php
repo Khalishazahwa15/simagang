@@ -96,6 +96,37 @@
         </table>
     </div>
 
+    <!-- Pagination -->
+    <?php if (isset($totalPages) && $totalPages > 1): ?>
+    <div class="d-flex align-center justify-between mt-4 mb-4">
+        <span class="text-muted" style="font-size: 12.5px;">
+            Halaman <?= $page ?> dari <?= $totalPages ?> (Total: <?= $totalRows ?> divisi)
+        </span>
+        <div class="d-flex gap-2">
+            <?php 
+                $queryParams = $_GET;
+                
+                $queryParams['page'] = $page - 1;
+                $prevUrl = '?' . http_build_query($queryParams);
+                
+                $queryParams['page'] = $page + 1;
+                $nextUrl = '?' . http_build_query($queryParams);
+            ?>
+            <?php if ($page > 1): ?>
+                <a href="<?= $prevUrl ?>" class="btn btn-outline btn-sm" style="padding: 6px 12px; border-radius: 6px; text-decoration: none;">Sebelumnya</a>
+            <?php else: ?>
+                <button class="btn btn-outline btn-sm" disabled style="padding: 6px 12px; border-radius: 6px; opacity: 0.5; cursor: not-allowed;">Sebelumnya</button>
+            <?php endif; ?>
+            
+            <?php if ($page < $totalPages): ?>
+                <a href="<?= $nextUrl ?>" class="btn btn-outline btn-sm" style="padding: 6px 12px; border-radius: 6px; text-decoration: none;">Selanjutnya</a>
+            <?php else: ?>
+                <button class="btn btn-outline btn-sm" disabled style="padding: 6px 12px; border-radius: 6px; opacity: 0.5; cursor: not-allowed;">Selanjutnya</button>
+            <?php endif; ?>
+        </div>
+    </div>
+    <?php endif; ?>
+
     <!-- Info Box -->
     <div style="background: #E7F2EF; border: 0.666667px solid var(--primary-light); border-radius: 8px; padding: 12px 16px;">
         <div style="font-weight: 400; font-size: 12.5px; line-height: 20px; color: var(--primary);">

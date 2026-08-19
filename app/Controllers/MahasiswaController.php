@@ -68,7 +68,14 @@ class MahasiswaController extends Controller {
     }
 
     public function pengajuan() {
-        // Cek apakah mahasiswa sudah punya pengajuan aktif (opsional, tapi disarankan)
+        $pengajuanList = $this->pengajuanService->getPengajuanMahasiswa(Session::get('user_id'));
+        $aktif = $pengajuanList[0] ?? null;
+
+        if ($aktif && !in_array($aktif['status'], ['ditolak', 'selesai'])) {
+            Session::setFlash('warning', 'Anda sudah memiliki pengajuan magang yang sedang diproses. Anda tidak dapat membuat pengajuan baru saat ini.');
+            return $this->redirect('mahasiswa/dashboard');
+        }
+
         $divisi = $this->divisiModel->getAktif();
         
         $this->renderView('mahasiswa/pengajuan', [
@@ -119,6 +126,11 @@ class MahasiswaController extends Controller {
             } elseif ($aktif['divisi_id_preferensi']) {
                 $divisi = $this->divisiModel->findById($aktif['divisi_id_preferensi']);
                 $aktif['nama_divisi_preferensi'] = $divisi['nama_divisi'] ?? null;
+            }
+            
+            if ($aktif['divisi_id_tawaran']) {
+                $divisiTawaran = $this->divisiModel->findById($aktif['divisi_id_tawaran']);
+                $aktif['nama_divisi_tawaran'] = $divisiTawaran['nama_divisi'] ?? null;
             }
         }
 
@@ -177,6 +189,29 @@ class MahasiswaController extends Controller {
             header('Content-Description: File Transfer');
             header('Content-Type: application/pdf');
             header('Content-Disposition: attachment; filename="' . basename($file['original_filename']) . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($file['path']));
+            
+            readfile($file['path']);
+            exit;
+        } catch (\Exception $e) {
+            Session::setFlash('error', $e->getMessage());
+            return $this->redirect('mahasiswa/dokumen');
+        }
+    }
+
+    public function viewDokumen($dokumenId) {
+        try {
+            $dokumenService = new \App\Services\DokumenService();
+            $file = $dokumenService->downloadDokumen($dokumenId);
+            
+            // Clear buffer
+            if (ob_get_length()) ob_clean();
+            
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: inline; filename="' . basename($file['original_filename']) . '"');
             header('Expires: 0');
             header('Cache-Control: must-revalidate');
             header('Pragma: public');
@@ -313,6 +348,35 @@ class MahasiswaController extends Controller {
                 $statusService->updateStatus($pengajuanId, 'revisi', 'dalam_verifikasi', 'Mahasiswa telah mengunggah revisi dokumen: ' . $jenisDokumen);
 
                 Session::setFlash('success', 'Dokumen revisi berhasil diunggah.');
+            } catch (\Exception $e) {
+                Session::setFlash('error', $e->getMessage());
+            }
+            return $this->redirect('mahasiswa/status');
+        }
+        return $this->redirect('mahasiswa/status');
+    }
+
+    public function uploadLaporan() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            try {
+                $pengajuanId = $_POST['pengajuan_id'] ?? null;
+
+                if (!$pengajuanId || empty($_FILES['file_dokumen'])) {
+                    throw new \Exception("Parameter tidak lengkap.");
+                }
+
+                $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Session::get('user_id'))[0] ?? null;
+                if (!$pengajuan || $pengajuan['id'] != $pengajuanId || $pengajuan['status'] !== 'sedang_magang') {
+                    throw new \Exception("Akses Ditolak. Anda hanya dapat mengunggah laporan akhir saat status sedang magang.");
+                }
+
+                $dokumenService = new \App\Services\DokumenService();
+                $dokumenService->uploadDokumen($pengajuanId, $pengajuan['nomor_pengajuan'], 'laporan', $_FILES['file_dokumen']);
+
+                $statusHistory = new \App\Models\StatusHistory();
+                $statusHistory->create($pengajuanId, 'sedang_magang', 'sedang_magang', Session::get('user_id'), 'Mahasiswa telah mengunggah Laporan Akhir Magang.');
+
+                Session::setFlash('success', 'Laporan akhir berhasil diunggah.');
             } catch (\Exception $e) {
                 Session::setFlash('error', $e->getMessage());
             }

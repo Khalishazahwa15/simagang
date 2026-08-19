@@ -87,19 +87,77 @@ class SekretariatController extends Controller {
 
     public function pengajuan() {
         $db = \App\Core\Database::getInstance()->getConnection();
-        $pengajuan = $db->query("
+        
+        $q = $_GET['q'] ?? '';
+        $status = $_GET['status'] ?? '';
+        $divisi = $_GET['divisi'] ?? '';
+
+        $page = max(1, (int)($_GET['page'] ?? 1));
+        $limit = 20;
+        $offset = ($page - 1) * $limit;
+
+        $conditions = "WHERE 1=1";
+        $params = [];
+
+        if (!empty($q)) {
+            $conditions .= " AND (u.nama LIKE ? OR p.nomor_pengajuan LIKE ?)";
+            $params[] = "%$q%";
+            $params[] = "%$q%";
+        }
+        if (!empty($status)) {
+            $conditions .= " AND p.status = ?";
+            $params[] = $status;
+        }
+        if (!empty($divisi)) {
+            $conditions .= " AND p.divisi_id_preferensi = ?";
+            $params[] = $divisi;
+        }
+
+        // Count total rows
+        $countSql = "
+            SELECT COUNT(*) as total 
+            FROM pengajuan p 
+            JOIN users u ON p.user_id = u.id 
+            LEFT JOIN mahasiswa_profiles mp ON u.id = mp.user_id
+            LEFT JOIN divisi d ON p.divisi_id_preferensi = d.id
+            $conditions
+        ";
+        $stmtCount = $db->prepare($countSql);
+        $stmtCount->execute($params);
+        $totalRows = $stmtCount->fetch()['total'];
+        $totalPages = ceil($totalRows / $limit);
+        
+        // Handle out of bounds page safely
+        if ($page > $totalPages && $totalPages > 0) {
+            $page = $totalPages;
+            $offset = ($page - 1) * $limit;
+        }
+
+        $sql = "
             SELECT p.*, u.nama, mp.nim, mp.universitas, mp.program_studi, d.nama_divisi as nama_divisi_preferensi 
             FROM pengajuan p 
             JOIN users u ON p.user_id = u.id 
             LEFT JOIN mahasiswa_profiles mp ON u.id = mp.user_id
             LEFT JOIN divisi d ON p.divisi_id_preferensi = d.id
+            $conditions
             ORDER BY p.created_at DESC
-        ")->fetchAll(\PDO::FETCH_ASSOC);
+            LIMIT $limit OFFSET $offset
+        ";
+        $stmt = $db->prepare($sql);
+        $stmt->execute($params);
+        $pengajuan = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $divisiList = $db->query("SELECT id, nama_divisi FROM divisi ORDER BY nama_divisi ASC")->fetchAll();
+
         $this->renderView('sekretariat/pengajuan', [
             'title' => 'Kelola Pengajuan',
             'subtitle' => 'Daftar permohonan magang.',
             'currentPage' => 'pengajuan',
-            'pengajuan' => $pengajuan
+            'pengajuan' => $pengajuan,
+            'divisiList' => $divisiList,
+            'page' => $page,
+            'totalPages' => $totalPages,
+            'totalRows' => $totalRows
         ]);
     }
 
@@ -124,6 +182,10 @@ class SekretariatController extends Controller {
                     $peng = $this->pengajuanModel->findById($id);
                     $this->statusService->updateStatus($id, $peng['status'], 'revisi', $catatan);
                     Session::setFlash('success', 'Pengajuan dikembalikan untuk direvisi.');
+                } elseif ($action === 'tawarkan') {
+                    $divisiTawaranId = $_POST['divisi_id_tawaran'] ?? null;
+                    $this->pengajuanService->menawarkanDivisi($id, $divisiTawaranId, Session::get('user_id'));
+                    Session::setFlash('success', 'Tawaran divisi alternatif berhasil dikirim ke mahasiswa.');
                 }
             } catch (\Exception $e) {
                 Session::setFlash('error', $e->getMessage());
@@ -138,6 +200,12 @@ class SekretariatController extends Controller {
         $pengajuan = $this->pengajuanModel->findById($id);
         if (!$pengajuan) {
             return $this->redirect('sekretariat/pengajuan');
+        }
+
+        // Auto-transition to dalam_verifikasi when opened by admin/sekretariat
+        if ($pengajuan['status'] === 'diajukan' && $_SERVER['REQUEST_METHOD'] === 'GET') {
+            $this->statusService->updateStatus($id, 'diajukan', 'dalam_verifikasi', 'Berkas sedang diperiksa oleh tim.');
+            $pengajuan['status'] = 'dalam_verifikasi';
         }
 
         $divisi = $this->divisiModel->getAktif();
@@ -156,33 +224,77 @@ class SekretariatController extends Controller {
     public function peserta() {
         $db = \App\Core\Database::getInstance()->getConnection();
         $q = $_GET['q'] ?? '';
+        $status = $_GET['status'] ?? '';
+        $divisi = $_GET['divisi'] ?? '';
+
+        $page = max(1, (int)($_GET['page'] ?? 1));
+        $limit = 20;
+        $offset = ($page - 1) * $limit;
+
+        $conditions = "WHERE p.status IN ('diterima', 'sedang_magang', 'selesai')";
+        $params = [];
         
+        if (!empty($q)) {
+            $conditions .= " AND (u.nama LIKE ? OR mp.universitas LIKE ? OR d.nama_divisi LIKE ?)";
+            $qLike = "%$q%";
+            $params = array_merge($params, [$qLike, $qLike, $qLike]);
+        }
+        if (!empty($status)) {
+            $conditions .= " AND p.status = ?";
+            $params[] = $status;
+        }
+        if (!empty($divisi)) {
+            $conditions .= " AND p.divisi_id_final = ?";
+            $params[] = $divisi;
+        }
+
+        // Count total rows
+        $countSql = "
+            SELECT COUNT(*) as total 
+            FROM pengajuan p 
+            JOIN users u ON p.user_id = u.id 
+            LEFT JOIN mahasiswa_profiles mp ON u.id = mp.user_id
+            LEFT JOIN divisi d ON p.divisi_id_final = d.id
+            $conditions
+        ";
+        $stmtCount = $db->prepare($countSql);
+        $stmtCount->execute($params);
+        $totalRows = $stmtCount->fetch()['total'];
+        $totalPages = ceil($totalRows / $limit);
+        
+        // Handle out of bounds page safely
+        if ($page > $totalPages && $totalPages > 0) {
+            $page = $totalPages;
+            $offset = ($page - 1) * $limit;
+        }
+
         $sql = "
             SELECT p.*, u.nama, u.email, mp.universitas, mp.program_studi, d.nama_divisi as divisi_nama 
             FROM pengajuan p 
             JOIN users u ON p.user_id = u.id 
             LEFT JOIN mahasiswa_profiles mp ON u.id = mp.user_id
             LEFT JOIN divisi d ON p.divisi_id_final = d.id
-            WHERE p.status IN ('diterima', 'sedang_magang')
+            $conditions
+            ORDER BY p.updated_at DESC
+            LIMIT $limit OFFSET $offset
         ";
-        $params = [];
-        if (!empty($q)) {
-            $sql .= " AND (u.nama LIKE ? OR mp.universitas LIKE ? OR d.nama_divisi LIKE ?)";
-            $qLike = "%$q%";
-            $params = [$qLike, $qLike, $qLike];
-        }
-        $sql .= " ORDER BY p.updated_at DESC";
         
         $stmt = $db->prepare($sql);
         $stmt->execute($params);
         $peserta = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $divisiList = $db->query("SELECT id, nama_divisi FROM divisi ORDER BY nama_divisi ASC")->fetchAll();
 
         $this->renderView('sekretariat/peserta', [
             'title' => 'Daftar Peserta',
             'subtitle' => 'Kelola mahasiswa magang aktif.',
             'currentPage' => 'peserta',
             'peserta' => $peserta,
-            'q' => $q
+            'q' => $q,
+            'divisiList' => $divisiList,
+            'page' => $page,
+            'totalPages' => $totalPages,
+            'totalRows' => $totalRows
         ]);
     }
 
@@ -190,20 +302,46 @@ class SekretariatController extends Controller {
         $db = \App\Core\Database::getInstance()->getConnection();
         $q = $_GET['q'] ?? '';
 
+        $page = max(1, (int)($_GET['page'] ?? 1));
+        $limit = 20;
+        $offset = ($page - 1) * $limit;
+
+        $conditions = "WHERE d.jenis_dokumen = 'laporan' AND d.is_current = 1";
+        $params = [];
+        if (!empty($q)) {
+            $conditions .= " AND (u.nama LIKE ? OR p.nomor_pengajuan LIKE ?)";
+            $qLike = "%$q%";
+            $params = [$qLike, $qLike];
+        }
+
+        // Count total rows
+        $countSql = "
+            SELECT COUNT(*) as total 
+            FROM dokumen d
+            JOIN pengajuan p ON d.pengajuan_id = p.id
+            JOIN users u ON p.user_id = u.id
+            $conditions
+        ";
+        $stmtCount = $db->prepare($countSql);
+        $stmtCount->execute($params);
+        $totalRows = $stmtCount->fetch()['total'];
+        $totalPages = ceil($totalRows / $limit);
+        
+        // Handle out of bounds page safely
+        if ($page > $totalPages && $totalPages > 0) {
+            $page = $totalPages;
+            $offset = ($page - 1) * $limit;
+        }
+
         $sql = "
             SELECT d.*, p.nomor_pengajuan, u.nama as mahasiswa_nama
             FROM dokumen d
             JOIN pengajuan p ON d.pengajuan_id = p.id
             JOIN users u ON p.user_id = u.id
-            WHERE d.jenis_dokumen = 'dokumen_akhir_magang' AND d.is_current = 1
+            $conditions
+            ORDER BY d.created_at DESC
+            LIMIT $limit OFFSET $offset
         ";
-        $params = [];
-        if (!empty($q)) {
-            $sql .= " AND (u.nama LIKE ? OR p.nomor_pengajuan LIKE ?)";
-            $qLike = "%$q%";
-            $params = [$qLike, $qLike];
-        }
-        $sql .= " ORDER BY d.created_at DESC";
 
         $stmt = $db->prepare($sql);
         $stmt->execute($params);
@@ -214,7 +352,10 @@ class SekretariatController extends Controller {
             'subtitle' => 'Laporan akhir mahasiswa magang.',
             'currentPage' => 'dokumen',
             'dokumenList' => $dokumenList,
-            'q' => $q
+            'q' => $q,
+            'page' => $page,
+            'totalPages' => $totalPages,
+            'totalRows' => $totalRows
         ]);
     }
 
@@ -249,6 +390,19 @@ class SekretariatController extends Controller {
     public function exportLaporan() {
         $db = \App\Core\Database::getInstance()->getConnection();
         
+        $filter = $_GET['filter'] ?? 'semua';
+        $whereClause = "";
+        
+        if ($filter === 'aktif') {
+            $whereClause = "WHERE p.status = 'sedang_magang'";
+        } elseif ($filter === 'selesai') {
+            $whereClause = "WHERE p.status = 'selesai'";
+        } elseif ($filter === 'ditolak') {
+            $whereClause = "WHERE p.status IN ('ditolak', 'mengundurkan_diri')";
+        } elseif ($filter === 'baru') {
+            $whereClause = "WHERE p.status IN ('diajukan', 'dalam_verifikasi', 'revisi', 'cek_divisi', 'diterima')";
+        }
+        
         $pengajuanRaw = $db->query("
             SELECT p.nomor_pengajuan, u.nama, u.email, mp.universitas, mp.program_studi,
                    p.status, p.tanggal_mulai_rencana, p.tanggal_selesai_rencana,
@@ -258,10 +412,11 @@ class SekretariatController extends Controller {
             LEFT JOIN mahasiswa_profiles mp ON u.id = mp.user_id
             LEFT JOIN divisi dp ON p.divisi_id_preferensi = dp.id
             LEFT JOIN divisi df ON p.divisi_id_final = df.id
+            $whereClause
             ORDER BY p.created_at DESC
         ")->fetchAll(\PDO::FETCH_ASSOC);
 
-        $filename = "laporan_magang_bappeda_" . date('Ymd_His') . ".csv";
+        $filename = "laporan_magang_" . $filter . "_" . date('Ymd_His') . ".csv";
 
         header('Content-Type: text/csv; charset=utf-8');
         header('Content-Disposition: attachment; filename="' . $filename . '"');
@@ -300,6 +455,27 @@ class SekretariatController extends Controller {
             header('Content-Description: File Transfer');
             header('Content-Type: application/pdf');
             header('Content-Disposition: attachment; filename="' . basename($file['original_filename']) . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($file['path']));
+            
+            readfile($file['path']);
+            exit;
+        } catch (\Exception $e) {
+            Session::setFlash('error', $e->getMessage());
+            return $this->redirect('sekretariat/pengajuan');
+        }
+    }
+
+    public function viewDokumen($dokumenId) {
+        try {
+            $file = $this->dokumenService->downloadDokumen($dokumenId);
+            
+            if (ob_get_length()) ob_clean();
+            
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: inline; filename="' . basename($file['original_filename']) . '"');
             header('Expires: 0');
             header('Cache-Control: must-revalidate');
             header('Pragma: public');

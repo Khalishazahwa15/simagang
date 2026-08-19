@@ -107,58 +107,64 @@ $dokDesc = 'Berkas terunggah';
 <!-- Main 2-Column Grid -->
 <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px; align-items: start;">
     <!-- Left: Detail Ringkasan -->
-    <div class="card fade-up interactive-card fade-up interactive-card" style="margin-bottom: 0;">
-        <div class="card-header" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); padding: 16px 24px;">
+    <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; display: flex; flex-direction: column; height: 100%;">
+        <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">
             <div>
                 <div style="font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px;">Informasi Magang</div>
                 <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">Detail penempatan dan periode</div>
             </div>
-            <a href="<?= BASE_URL ?>/mahasiswa/pengajuan" style="font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--primary); text-decoration: none;">Kelola</a>
+            <a href="<?= BASE_URL ?>/mahasiswa/pengajuan" style="font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--primary); text-decoration: none;">Kelola &rarr;</a>
         </div>
-        <div class="card-body" style="padding: 0;">
+        <div style="padding: 0; flex-grow: 1; display: flex; flex-direction: column; overflow: hidden; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
             <?php if (!$pengajuan): ?>
                 <div style="padding: 48px 24px; text-align: center;">
                     <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Anda belum memiliki pengajuan magang aktif.</p>
                     <a href="<?= BASE_URL ?>/mahasiswa/pengajuan" class="btn btn-primary" style="padding: 8px 16px;">Mulai Pengajuan Baru</a>
                 </div>
             <?php else: ?>
-                <div style="padding: 24px; border-bottom: 1px solid var(--border);">
+                <div style="padding: 16px 20px; border-bottom: 1px solid var(--border);">
                     <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">PERIODE PELAKSANAAN</div>
                     <div style="font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text-primary);">
                         <?= date('d M Y', strtotime($pengajuan['tanggal_mulai_rencana'])) ?> &mdash; <?= date('d M Y', strtotime($pengajuan['tanggal_selesai_rencana'])) ?>
                     </div>
                 </div>
                 
-                <div style="padding: 24px; border-bottom: 1px solid var(--border);">
+                <div style="padding: 16px 20px; border-bottom: 1px solid var(--border);">
                     <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">PEMBINA LAPANGAN</div>
                     <div style="font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text-primary);">
                         <?= htmlspecialchars($pengajuan['pembina_lapangan'] ?? 'Belum ditentukan') ?>
                     </div>
                 </div>
 
-                <div style="padding: 24px; display: flex; align-items: center; justify-content: space-between;">
+                <div style="padding: 16px 20px; border-bottom: 1px solid var(--border);">
+                    <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">DIVISI PENEMPATAN</div>
+                    <div style="font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text-primary);">
+                        <?= htmlspecialchars($pengajuan['nama_divisi_final'] ?? $pengajuan['nama_divisi_preferensi'] ?? 'Belum ditentukan') ?>
+                    </div>
+                </div>
+
+                <div style="padding: 16px 20px; display: flex; align-items: center; justify-content: space-between;">
                     <div>
                         <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">NOMOR PENGAJUAN</div>
                         <div style="font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--text-primary);">
                             PGJ-<?= str_pad($pengajuan['id'], 4, '0', STR_PAD_LEFT) ?>
                         </div>
                     </div>
-                    <a href="<?= BASE_URL ?>/mahasiswa/status" class="btn btn-outline" style="padding: 6px 16px; font-size: 12px;">Cek Progres</a>
                 </div>
             <?php endif; ?>
         </div>
     </div>
 
     <!-- Right: Aktivitas Terbaru -->
-    <div class="card fade-up interactive-card fade-up interactive-card" style="margin-bottom: 0;">
-        <div class="card-header" style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); padding: 16px 24px;">
+    <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; display: flex; flex-direction: column; height: 100%;">
+        <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">
             <div>
                 <div style="font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px;">Aktivitas Terbaru</div>
                 <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">Riwayat progres Anda</div>
             </div>
-            <a href="<?= BASE_URL ?>/mahasiswa/status" style="font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--primary); text-decoration: none;">Lihat Semua</a>
+            <a href="<?= BASE_URL ?>/mahasiswa/status" style="font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--primary); text-decoration: none;">Lihat Semua &rarr;</a>
         </div>
-        <div class="card-body" style="padding: 0;">
+        <div style="padding: 0; flex-grow: 1; display: flex; flex-direction: column; overflow: hidden; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
             <?php if (empty($riwayat)): ?>
                 <div style="padding: 32px 24px; text-align: center;">
                     <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); margin: 0;">Belum ada aktivitas tercatat.</p>
@@ -169,7 +175,7 @@ $dokDesc = 'Berkas terunggah';
                 $recentHistory = array_slice(array_reverse($riwayat), 0, 3);
                 foreach ($recentHistory as $index => $item): 
                 ?>
-                <div style="padding: 16px 24px; display: flex; gap: 16px; align-items: flex-start; <?= $index < count($recentHistory) - 1 ? 'border-bottom: 1px solid var(--border);' : '' ?>">
+                <div style="padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start; <?= $index < count($recentHistory) - 1 ? 'border-bottom: 1px solid var(--border);' : '' ?>">
                     <div style="margin-top: 2px; width: 12px; height: 12px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--bg-soft-dark); border: 1.25px solid <?= $index === 0 ? 'var(--primary)' : 'var(--text-secondary)' ?>;">
                     </div>
                     

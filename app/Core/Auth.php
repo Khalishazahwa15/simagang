@@ -33,6 +33,13 @@ class Auth {
         return Session::get('user_id');
     }
 
+    public static function requireLogin() {
+        if (!self::check()) {
+            header('Location: ' . BASE_URL . '/login');
+            exit();
+        }
+    }
+
     public static function requireRole($role) {
         if (!self::check()) {
             header('Location: ' . BASE_URL . '/login');

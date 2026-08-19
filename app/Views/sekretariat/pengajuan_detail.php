@@ -73,10 +73,25 @@
 
                 <div class="text-overline">Dokumen Pengajuan Mahasiswa</div>
                 <div class="d-flex flex-column gap-2 mt-2">
-                    <?php if (empty($dokumen)): ?>
-                        <div class="text-muted" style="font-size: 13.5px;">Belum ada dokumen yang diunggah.</div>
+                    <?php
+                    $dokMahasiswa = [];
+                    $dokBappeda = [];
+                    $bappedaTypes = ['surat_balasan', 'sertifikat'];
+                    if (!empty($dokumen)) {
+                        foreach ($dokumen as $doc) {
+                            if (in_array($doc['jenis_dokumen'], $bappedaTypes)) {
+                                $dokBappeda[] = $doc;
+                            } else {
+                                $dokMahasiswa[] = $doc;
+                            }
+                        }
+                    }
+                    ?>
+                    
+                    <?php if (empty($dokMahasiswa)): ?>
+                        <div class="text-muted" style="font-size: 13.5px;">Belum ada dokumen mahasiswa yang diunggah.</div>
                     <?php else: ?>
-                        <?php foreach ($dokumen as $doc): ?>
+                        <?php foreach ($dokMahasiswa as $doc): ?>
                         <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border);">
                             <div class="d-flex align-center gap-3">
                                 <div style="width: 32px; height: 32px; background: var(--bg-green-soft); border-radius: 6px; display: flex; align-items: center; justify-content: center;">
@@ -87,10 +102,45 @@
                                     <div style="font-family: var(--font-body); font-size: 11.5px; color: var(--text-secondary);">PDF &middot; Diunggah</div>
                                 </div>
                             </div>
-                            <a href="<?= BASE_URL ?>/sekretariat/dokumen/download/<?= htmlspecialchars($doc['id']) ?>" target="_blank" style="display: flex; align-items: center; gap: 6px; padding: 6px 14px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; font-family: var(--font-body); font-size: 12.5px; font-weight: 600; color: var(--color-muted); text-decoration: none;">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
-                                Lihat
-                            </a>
+                            <div style="display: flex; gap: 8px;">
+                                <a href="<?= BASE_URL ?>/sekretariat/dokumen/view/<?= htmlspecialchars($doc['id']) ?>" target="_blank" style="display: flex; align-items: center; justify-content: center; padding: 6px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--primary); text-decoration: none;" title="Lihat Dokumen">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                </a>
+                                <a href="<?= BASE_URL ?>/sekretariat/dokumen/download/<?= htmlspecialchars($doc['id']) ?>" style="display: flex; align-items: center; justify-content: center; padding: 6px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--text-secondary); text-decoration: none;" title="Unduh Dokumen">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+            
+            <div class="card-body" style="border-top: 1px solid var(--border); padding-top: 24px; margin-top: 8px;">
+                <div class="text-overline">DOKUMEN RESMI BAPPEDA</div>
+                <div class="d-flex flex-column gap-2 mt-2">
+                    <?php if (empty($dokBappeda)): ?>
+                        <div class="text-muted" style="font-size: 13.5px;">Belum ada dokumen resmi dari Bappeda.</div>
+                    <?php else: ?>
+                        <?php foreach ($dokBappeda as $doc): ?>
+                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border);">
+                            <div class="d-flex align-center gap-3">
+                                <div style="width: 32px; height: 32px; background: var(--bg-green-soft); border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                </div>
+                                <div>
+                                    <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars(str_replace('_', ' ', ucwords($doc['jenis_dokumen'], '_'))) ?></div>
+                                    <div style="font-family: var(--font-body); font-size: 11.5px; color: var(--text-secondary);">PDF &middot; Terbit</div>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 8px;">
+                                <a href="<?= BASE_URL ?>/sekretariat/dokumen/view/<?= htmlspecialchars($doc['id']) ?>" target="_blank" style="display: flex; align-items: center; justify-content: center; padding: 6px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--primary); text-decoration: none;" title="Lihat Dokumen">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                </a>
+                                <a href="<?= BASE_URL ?>/sekretariat/dokumen/download/<?= htmlspecialchars($doc['id']) ?>" style="display: flex; align-items: center; justify-content: center; padding: 6px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--text-secondary); text-decoration: none;" title="Unduh Dokumen">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                </a>
+                            </div>
                         </div>
                         <?php endforeach; ?>
                     <?php endif; ?>
@@ -146,6 +196,7 @@
                         <select name="action" class="form-control" required id="verifikasiStatus" onchange="toggleFormFields()" style="background: var(--bg-soft);">
                             <option value="">-- Pilih Keputusan --</option>
                             <option value="diterima">Terima & Tetapkan Penempatan</option>
+                            <option value="tawarkan">Tawarkan Divisi Alternatif</option>
                             <option value="revisi">Kembalikan untuk Revisi</option>
                             <option value="ditolak">Tolak Pengajuan</option>
                         </select>
@@ -157,7 +208,7 @@
                             <select name="divisi_id_final" class="form-control" style="background: var(--bg-soft);">
                                 <option value="">-- Pilih Divisi Penempatan --</option>
                                 <?php foreach($divisi as $d): ?>
-                                    <option value="<?= $d['id'] ?>" <?= (($pengajuan['divisi_id'] ?? $pengajuan['divisi_id_preferensi'] ?? '') == $d['id']) ? 'selected' : '' ?>><?= htmlspecialchars($d['nama_divisi']) ?></option>
+                                    <option value="<?= $d['id'] ?>" <?= (($pengajuan['divisi_id'] ?? $pengajuan['divisi_id_preferensi'] ?? '') == $d['id']) ? 'selected' : '' ?>><?= htmlspecialchars($d['nama_divisi']) ?> (Sisa Kuota: <?= max(0, $d['kapasitas'] - ($d['terisi'] ?? 0)) ?>)</option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -182,6 +233,18 @@
                         </div>
                     </div>
 
+                    <div id="tawarkanFields" style="display: none; padding-top: 10px; border-top: 1px dashed var(--border); margin-top: 10px;">
+                        <div class="form-group">
+                            <label class="form-label required">Tawarkan ke Divisi Lain</label>
+                            <select name="divisi_id_tawaran" class="form-control" style="background: var(--bg-soft);">
+                                <option value="">-- Pilih Divisi Alternatif --</option>
+                                <?php foreach($divisi as $d): ?>
+                                    <option value="<?= $d['id'] ?>"><?= htmlspecialchars($d['nama_divisi']) ?> (Sisa Kuota: <?= max(0, $d['kapasitas'] - ($d['terisi'] ?? 0)) ?>)</option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="form-group mt-3">
                         <label class="form-label">Catatan Tambahan (Opsional)</label>
                         <textarea name="catatan" class="form-control" placeholder="Beri catatan untuk mahasiswa terkait..." rows="3" style="background: var(--bg-soft);"></textarea>
@@ -202,6 +265,7 @@
                 var val = document.getElementById('verifikasiStatus').value;
                 document.getElementById('diterimaFields').style.display = (val === 'diterima') ? 'block' : 'none';
                 document.getElementById('alasanFields').style.display = (val === 'ditolak') ? 'block' : 'none';
+                document.getElementById('tawarkanFields').style.display = (val === 'tawarkan') ? 'block' : 'none';
                 
                 // toggle required attrs
                 var diterimaInputs = document.getElementById('diterimaFields').querySelectorAll('input, select');
@@ -214,6 +278,11 @@
                 var ditolakInputs = document.getElementById('alasanFields').querySelectorAll('textarea');
                 ditolakInputs.forEach(function(input) {
                     input.required = (val === 'ditolak');
+                });
+                
+                var tawarkanInputs = document.getElementById('tawarkanFields').querySelectorAll('select');
+                tawarkanInputs.forEach(function(input) {
+                    input.required = (val === 'tawarkan');
                 });
             }
         </script>

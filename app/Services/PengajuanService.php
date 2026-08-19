@@ -78,9 +78,8 @@ class PengajuanService {
     }
 
     public function menetapkanDiterima($pengajuanId, $divisiIdFinal, $pembinaLapangan, $tanggalMulaiAktual, $tanggalSelesaiAktual, $catatan) {
-        // Enforce RBAC
-        if (\App\Core\Auth::role() !== 'sekretariat') {
-            throw new \Exception("Akses Ditolak. Hanya Sekretariat yang dapat menetapkan keputusan.");
+        if (\App\Core\Auth::role() !== 'sekretariat' && \App\Core\Auth::role() !== 'admin') {
+            throw new \Exception("Akses Ditolak. Hanya Sekretariat atau Admin yang dapat menetapkan keputusan.");
         }
 
         $pengajuan = $this->pengajuanModel->findById($pengajuanId);
@@ -105,9 +104,8 @@ class PengajuanService {
     }
 
     public function menetapkanDitolak($pengajuanId, $alasanPenolakan, $catatan) {
-        // Enforce RBAC
-        if (\App\Core\Auth::role() !== 'sekretariat') {
-            throw new \Exception("Akses Ditolak. Hanya Sekretariat yang dapat menetapkan keputusan.");
+        if (\App\Core\Auth::role() !== 'sekretariat' && \App\Core\Auth::role() !== 'admin') {
+            throw new \Exception("Akses Ditolak. Hanya Sekretariat atau Admin yang dapat menetapkan keputusan.");
         }
 
         if (empty(trim($alasanPenolakan))) {

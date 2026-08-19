@@ -11,19 +11,26 @@
     </div>
 </div>
 
-<!-- Filters -->
-<div class="d-flex" style="gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
-    <div style="position: relative; flex: 1 1 240px; max-width: 400px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input type="text" placeholder="Cari nama, email, atau NPM..." style="width: 100%; padding: 9px 14px 9px 36px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none;">
+<form method="GET" action="<?= BASE_URL ?>/admin/users">
+    <div class="d-flex align-center" style="margin-bottom: 20px; flex-wrap: wrap; gap: 12px; width: 100%;">
+        <div style="position: relative; flex: 1; min-width: 240px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" name="q" placeholder="Cari nama, email, atau NPM..." value="<?= htmlspecialchars($_GET['q'] ?? '') ?>" style="width: 100%; padding: 9px 14px 9px 36px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none;">
+        </div>
+        <select name="role" style="width: auto; min-width: 160px; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none; cursor: pointer;">
+            <option value="">Semua Peran</option>
+            <option value="admin" <?= ($_GET['role'] ?? '') == 'admin' ? 'selected' : '' ?>>Administrator</option>
+            <option value="sekretariat" <?= ($_GET['role'] ?? '') == 'sekretariat' ? 'selected' : '' ?>>Sekretariat</option>
+            <option value="mahasiswa" <?= ($_GET['role'] ?? '') == 'mahasiswa' ? 'selected' : '' ?>>Mahasiswa</option>
+        </select>
+        <select name="status" style="width: auto; min-width: 160px; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary); outline: none; cursor: pointer;">
+            <option value="">Semua Status</option>
+            <option value="aktif" <?= ($_GET['status'] ?? '') == 'aktif' ? 'selected' : '' ?>>Aktif</option>
+            <option value="nonaktif" <?= ($_GET['status'] ?? '') == 'nonaktif' ? 'selected' : '' ?>>Nonaktif</option>
+        </select>
+        <button type="submit" class="btn btn-primary" style="padding: 9px 16px;">Cari</button>
     </div>
-    <select style="padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none; cursor: pointer; width: 180px;">
-        <option value="">Semua Peran</option>
-        <option value="admin">Administrator</option>
-        <option value="sekretariat">Sekretariat</option>
-        <option value="mahasiswa">Mahasiswa</option>
-    </select>
-</div>
+</form>
 
 <!-- Main Table -->
 <div style="background: var(--bg-main); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 24px;">
@@ -111,6 +118,37 @@
         </table>
     </div>
 </div>
+
+<!-- Pagination -->
+<?php if (isset($totalPages) && $totalPages > 1): ?>
+<div class="d-flex align-center justify-between mt-4">
+    <span class="text-muted" style="font-size: 12.5px;">
+        Halaman <?= $page ?> dari <?= $totalPages ?> (Total: <?= $totalRows ?> pengguna)
+    </span>
+    <div class="d-flex gap-2">
+        <?php 
+            $queryParams = $_GET;
+            
+            $queryParams['page'] = $page - 1;
+            $prevUrl = '?' . http_build_query($queryParams);
+            
+            $queryParams['page'] = $page + 1;
+            $nextUrl = '?' . http_build_query($queryParams);
+        ?>
+        <?php if ($page > 1): ?>
+            <a href="<?= $prevUrl ?>" class="btn btn-outline btn-sm" style="padding: 6px 12px; border-radius: 6px; text-decoration: none;">Sebelumnya</a>
+        <?php else: ?>
+            <button class="btn btn-outline btn-sm" disabled style="padding: 6px 12px; border-radius: 6px; opacity: 0.5; cursor: not-allowed;">Sebelumnya</button>
+        <?php endif; ?>
+        
+        <?php if ($page < $totalPages): ?>
+            <a href="<?= $nextUrl ?>" class="btn btn-outline btn-sm" style="padding: 6px 12px; border-radius: 6px; text-decoration: none;">Selanjutnya</a>
+        <?php else: ?>
+            <button class="btn btn-outline btn-sm" disabled style="padding: 6px 12px; border-radius: 6px; opacity: 0.5; cursor: not-allowed;">Selanjutnya</button>
+        <?php endif; ?>
+    </div>
+</div>
+<?php endif; ?>
 
 <!-- Modal Tambah Pengguna -->
 <div id="modalTambahUser" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">

@@ -25,6 +25,8 @@ function getStepProgress($status) {
         case 'diajukan': return 0;
         case 'dalam_verifikasi': 
         case 'revisi': return 1;
+        case 'menunggu_konfirmasi_tawaran':
+        case 'menunggu_finalisasi_sekretariat': return 2;
         case 'diterima': 
         case 'ditolak': return 3;
         case 'sedang_magang': return 4;
@@ -186,6 +188,63 @@ $stepNames = [
                 <button type="submit" class="btn btn-primary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                     Kirim Revisi
+                </button>
+            </form>
+        </div>
+    </div>
+    <?php endif; ?>
+
+    <?php if ($pengajuan['status'] === 'menunggu_konfirmasi_tawaran'): ?>
+    <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; margin-top: 8px;">
+        <div style="padding: 16px 24px; border-bottom: 1px solid var(--border); background: rgba(37, 99, 235, 0.05);">
+            <div style="font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--primary);">Tawaran Divisi Alternatif</div>
+        </div>
+        <div style="padding: 24px;">
+            <p style="font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
+                Sekretariat Bappeda menawarkan Anda untuk ditempatkan pada divisi alternatif: 
+                <strong style="color: var(--text-primary);"><?= htmlspecialchars($pengajuan['nama_divisi_tawaran'] ?? 'Divisi Lain') ?></strong>. 
+                Apakah Anda menerima tawaran ini?
+            </p>
+            
+            <form action="<?= BASE_URL ?>/mahasiswa/pengajuan/respon-tawaran" method="POST" style="display: flex; gap: 16px;">
+                <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?? '' ?>">
+                <input type="hidden" name="pengajuan_id" value="<?= htmlspecialchars($pengajuan['id']) ?>">
+                
+                <button type="submit" name="action" value="terima" class="btn btn-primary" style="padding: 10px 24px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    Terima Tawaran
+                </button>
+                <button type="submit" name="action" value="tolak" class="btn btn-outline" style="padding: 10px 24px; color: #991B1B; border-color: #FCA5A5; background: #FEF2F2;" onclick="return confirm('PENTING: Jika Anda menolak tawaran ini, maka seluruh proses pengajuan Anda akan DIBATALKAN. Anda harus mengajukan ulang dari awal jika ingin mendaftar lagi.\n\nApakah Anda yakin ingin menolak?');">
+                    Tolak Tawaran
+                </button>
+            </form>
+        </div>
+    </div>
+    <?php endif; ?>
+    
+    <?php if ($pengajuan['status'] === 'sedang_magang'): ?>
+    <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; margin-top: 8px;">
+        <div style="padding: 16px 24px; border-bottom: 1px solid var(--border); background: rgba(37, 99, 235, 0.05);">
+            <div style="font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--primary);">Unggah Laporan Akhir Magang</div>
+        </div>
+        <div style="padding: 24px;">
+            <p style="font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
+                Untuk menyelesaikan program magang Anda dan mendapatkan sertifikat, silakan unggah Laporan Akhir yang telah disetujui.
+            </p>
+            
+            <form action="<?= BASE_URL ?>/mahasiswa/pengajuan/upload-laporan" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?? '' ?>">
+                <input type="hidden" name="pengajuan_id" value="<?= htmlspecialchars($pengajuan['id']) ?>">
+                
+                <div class="form-group mb-4">
+                    <label class="form-label required">File Laporan Akhir (PDF)</label>
+                    <input type="file" name="file_dokumen" class="form-control" accept=".pdf" required style="background: var(--bg-main);">
+                    <div class="form-help mt-1">Maksimal ukuran file: 2 MB. Dokumen akan diverifikasi oleh Sekretariat.</div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    Unggah Laporan
                 </button>
             </form>
         </div>

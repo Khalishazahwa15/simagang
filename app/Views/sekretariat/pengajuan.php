@@ -1,46 +1,45 @@
 <div class="mb-6">
     <div class="d-flex align-center justify-between">
         <div>
-            <h1 class="card-title" style="font-family: var(--font-display); font-size: 28px; font-weight: 400; text-transform: none; letter-spacing: -0.01em; margin: 0 0 4px 0;">Daftar Pengajuan</h1>
-            <p class="text-muted" style="font-family: var(--font-body); font-size: 13.5px; margin: 0;">47 total &middot; 4 ditampilkan</p>
+            <h1 class="card-title" style="font-family: var(--font-display); font-size: 28px; font-weight: 400; text-transform: none; letter-spacing: -0.01em; margin: 0 0 4px 0;">Kelola Pengajuan</h1>
+            <p class="text-muted" style="font-family: var(--font-body); font-size: 13.5px; margin: 0;"><?= isset($totalRows) ? $totalRows : '0' ?> total pengajuan ditemukan</p>
         </div>
     </div>
 </div>
 
-<!-- Filters -->
-<div class="d-flex" style="gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
-    <div style="position: relative; flex: 1 1 240px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input type="text" placeholder="Cari nama / nomor pengajuan..." style="width: 100%; padding: 9px 14px 9px 36px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none;">
+<form method="GET" action="<?= BASE_URL ?>/sekretariat/pengajuan">
+    <div class="d-flex align-center" style="margin-bottom: 20px; flex-wrap: wrap; gap: 12px; width: 100%;">
+        <div style="position: relative; flex: 1; min-width: 240px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" name="q" placeholder="Cari nama / nomor pengajuan..." value="<?= htmlspecialchars($_GET['q'] ?? '') ?>" style="width: 100%; padding: 9px 14px 9px 36px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none;">
+        </div>
+        
+        <select name="divisi" style="width: 160px; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary); outline: none; cursor: pointer;">
+            <option value="">Semua Divisi</option>
+            <?php foreach ($divisiList as $d): ?>
+                <option value="<?= $d['id'] ?>" <?= ($_GET['divisi'] ?? '') == $d['id'] ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($d['nama_divisi']) ?>
+                </option>
+            <?php endforeach; ?>
+        </select>
+        
+        <select name="status" style="width: 160px; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none; cursor: pointer;">
+            <option value="">Semua Status</option>
+            <option value="diajukan" <?= ($_GET['status'] ?? '') == 'diajukan' ? 'selected' : '' ?>>Diajukan</option>
+            <option value="dalam_verifikasi" <?= ($_GET['status'] ?? '') == 'dalam_verifikasi' ? 'selected' : '' ?>>Dalam Verifikasi</option>
+            <option value="revisi" <?= ($_GET['status'] ?? '') == 'revisi' ? 'selected' : '' ?>>Revisi</option>
+            <option value="menunggu_konfirmasi_tawaran" <?= ($_GET['status'] ?? '') == 'menunggu_konfirmasi_tawaran' ? 'selected' : '' ?>>Menunggu Konfirmasi</option>
+            <option value="menunggu_finalisasi_sekretariat" <?= ($_GET['status'] ?? '') == 'menunggu_finalisasi_sekretariat' ? 'selected' : '' ?>>Menunggu Finalisasi</option>
+            <option value="diterima" <?= ($_GET['status'] ?? '') == 'diterima' ? 'selected' : '' ?>>Diterima</option>
+            <option value="ditolak" <?= ($_GET['status'] ?? '') == 'ditolak' ? 'selected' : '' ?>>Ditolak</option>
+            <option value="sedang_magang" <?= ($_GET['status'] ?? '') == 'sedang_magang' ? 'selected' : '' ?>>Sedang Magang</option>
+            <option value="mengundurkan_diri" <?= ($_GET['status'] ?? '') == 'mengundurkan_diri' ? 'selected' : '' ?>>Mengundurkan Diri</option>
+            <option value="selesai" <?= ($_GET['status'] ?? '') == 'selesai' ? 'selected' : '' ?>>Selesai</option>
+        </select>
+        
+        <button type="submit" class="btn btn-primary" style="padding: 9px 16px;">Cari</button>
     </div>
-    
-    <select style="padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none; cursor: pointer;">
-        <option value="">Semua Status</option>
-        <option value="diajukan">Diajukan</option>
-        <option value="diperiksa">Diperiksa</option>
-        <option value="perlu_revisi">Perlu Revisi</option>
-        <option value="cek_divisi">Cek Kebutuhan Divisi</option>
-        <option value="diterima">Diterima</option>
-        <option value="ditolak">Ditolak</option>
-        <option value="sedang_magang">Sedang Magang</option>
-        <option value="mengundurkan_diri">Mengundurkan Diri</option>
-        <option value="selesai">Selesai</option>
-    </select>
-    
-    <select style="padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary); outline: none; cursor: pointer;">
-        <option value="">Semua Divisi</option>
-        <option value="perencanaan">Perencanaan & Evaluasi</option>
-        <option value="penelitian">Penelitian & Pengembangan</option>
-        <option value="infrastruktur">Infrastruktur & Tata Ruang</option>
-        <option value="ti">Teknologi Informasi</option>
-        <option value="keuangan">Keuangan & Administrasi</option>
-    </select>
-    
-    <button style="padding: 9px 16px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary); display: flex; align-items: center; gap: 6px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-        Ekspor
-    </button>
-</div>
+</form>
 
 <!-- Main Table -->
 <div style="background: var(--bg-main); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 24px;">
@@ -90,13 +89,35 @@
     </div>
 </div>
 
-<!-- Pagination (Optional) -->
-<div class="d-flex align-center justify-between">
-    <span class="text-muted" style="font-size: 12.5px;">Menampilkan 1-4 dari 47 pengajuan</span>
+<!-- Pagination -->
+<?php if (isset($totalPages) && $totalPages > 1): ?>
+<div class="d-flex align-center justify-between mt-4">
+    <span class="text-muted" style="font-size: 12.5px;">
+        Halaman <?= $page ?> dari <?= $totalPages ?> (Total: <?= $totalRows ?> pengajuan)
+    </span>
     <div class="d-flex gap-2">
-        <button class="btn btn-outline btn-sm" disabled style="padding: 6px 12px; border-radius: 6px;">Sebelumnya</button>
-        <button class="btn btn-outline btn-sm" style="padding: 6px 12px; border-radius: 6px;">Selanjutnya</button>
+        <?php 
+            $queryParams = $_GET;
+            
+            $queryParams['page'] = $page - 1;
+            $prevUrl = '?' . http_build_query($queryParams);
+            
+            $queryParams['page'] = $page + 1;
+            $nextUrl = '?' . http_build_query($queryParams);
+        ?>
+        <?php if ($page > 1): ?>
+            <a href="<?= $prevUrl ?>" class="btn btn-outline btn-sm" style="padding: 6px 12px; border-radius: 6px; text-decoration: none;">Sebelumnya</a>
+        <?php else: ?>
+            <button class="btn btn-outline btn-sm" disabled style="padding: 6px 12px; border-radius: 6px; opacity: 0.5; cursor: not-allowed;">Sebelumnya</button>
+        <?php endif; ?>
+        
+        <?php if ($page < $totalPages): ?>
+            <a href="<?= $nextUrl ?>" class="btn btn-outline btn-sm" style="padding: 6px 12px; border-radius: 6px; text-decoration: none;">Selanjutnya</a>
+        <?php else: ?>
+            <button class="btn btn-outline btn-sm" disabled style="padding: 6px 12px; border-radius: 6px; opacity: 0.5; cursor: not-allowed;">Selanjutnya</button>
+        <?php endif; ?>
     </div>
 </div>
+<?php endif; ?>
 
 
