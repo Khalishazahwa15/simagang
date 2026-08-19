@@ -13,10 +13,10 @@ class StatusService {
 
     // PRD v4.1 State Machine
     private $allowedTransitions = [
-        'draft' => ['diajukan', 'dibatalkan', 'dibatalkan_oleh_mahasiswa'], 
-        'diajukan' => ['dalam_verifikasi', 'revisi', 'diterima', 'ditolak', 'dibatalkan', 'dibatalkan_oleh_mahasiswa'],
+        'draft' => ['diajukan', 'dibatalkan_oleh_mahasiswa'],
+        'diajukan' => ['dalam_verifikasi', 'revisi', 'diterima', 'ditolak', 'dibatalkan_oleh_mahasiswa'],
         'dalam_verifikasi' => ['revisi', 'diterima', 'ditolak', 'menunggu_konfirmasi_tawaran'],
-        'revisi' => ['diajukan', 'dibatalkan', 'dibatalkan_oleh_mahasiswa'],
+        'revisi' => ['diajukan', 'dibatalkan_oleh_mahasiswa'],
         'menunggu_konfirmasi_tawaran' => ['menunggu_finalisasi_sekretariat', 'dibatalkan_oleh_mahasiswa'],
         'menunggu_finalisasi_sekretariat' => ['diterima', 'ditolak'],
         'diterima' => ['sedang_magang', 'mengundurkan_diri'],
@@ -24,7 +24,6 @@ class StatusService {
         'ditolak' => [],
         'selesai' => [],
         'mengundurkan_diri' => [],
-        'dibatalkan' => [],
         'dibatalkan_oleh_mahasiswa' => []
     ];
 

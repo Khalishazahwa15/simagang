@@ -84,6 +84,48 @@
                     </div>
                 </div>
                 
+                <div style="margin: 24px 0 16px 0; padding-top: 20px; border-top: 1px solid var(--border);">
+                    <div style="font-family: var(--font-body); font-weight: 700; font-size: 13px; color: var(--text-primary); margin-bottom: 4px;">Data Akademik</div>
+                    <div style="font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary);">Dipakai Sekretariat untuk menilai permohonan magang Anda.</div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label required">NIM</label>
+                        <input type="text" name="nim" class="form-control" placeholder="Nomor Induk Mahasiswa" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Semester</label>
+                        <input type="number" name="semester" class="form-control" placeholder="Contoh: 6" min="1" max="14" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label required">Universitas</label>
+                    <input type="text" name="universitas" class="form-control" placeholder="Contoh: Universitas Lampung" required>
+                </div>
+
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label required">Fakultas</label>
+                        <input type="text" name="fakultas" class="form-control" placeholder="Contoh: Teknik" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Program Studi</label>
+                        <input type="text" name="program_studi" class="form-control" placeholder="Contoh: Teknik Informatika" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label required">Nomor HP</label>
+                    <input type="text" name="nomor_hp" class="form-control" placeholder="Contoh: 081234567890" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label required">Alamat</label>
+                    <textarea name="alamat" class="form-control" placeholder="Alamat tempat tinggal saat ini" rows="2" required></textarea>
+                </div>
+
                 <div class="form-group" style="margin-top: 8px;">
                     <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer;">
                         <input type="checkbox" required style="margin-top: 4px; accent-color: var(--primary);">

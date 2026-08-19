@@ -5,12 +5,15 @@ use App\Core\Auth;
 use App\Core\Session;
 use App\Core\ErrorHandler;
 use App\Services\AuthService;
+use App\Services\LoginThrottleService;
 
 class AuthController extends Controller {
     private $authService;
+    private $throttleService;
 
     public function __construct() {
         $this->authService = new AuthService();
+        $this->throttleService = new LoginThrottleService();
     }
 
     public function login() {
@@ -28,11 +31,19 @@ class AuthController extends Controller {
             $email = $_POST['email'] ?? '';
             $password = $_POST['password'] ?? '';
             
+            $terkunci = $this->throttleService->lockedForMinutes($email);
+            if ($terkunci > 0) {
+                Session::setFlash('error', "Terlalu banyak percobaan login. Coba lagi dalam {$terkunci} menit.");
+                return $this->redirect('login');
+            }
+
             try {
                 if ($this->authService->login($email, $password)) {
+                    $this->throttleService->clear($email);
                     $role = \App\Core\Auth::role();
                     return $this->redirect($role . '/dashboard');
                 }
+                $this->throttleService->recordFailure($email);
                 Session::setFlash('error', 'Email atau password salah.');
             } catch (\Exception $e) {
                 Session::setFlash('error', ErrorHandler::userMessage($e));
@@ -67,6 +78,7 @@ class AuthController extends Controller {
             $passwordConfirm = $_POST['password_confirm'] ?? '';
             $nim = $_POST['nim'] ?? '';
             $universitas = $_POST['universitas'] ?? '';
+            $fakultas = $_POST['fakultas'] ?? '';
             $programStudi = $_POST['program_studi'] ?? '';
             $semester = $_POST['semester'] ?? 0;
             $nomorHp = $_POST['nomor_hp'] ?? '';
@@ -78,7 +90,7 @@ class AuthController extends Controller {
             }
 
             try {
-                $this->authService->registerMahasiswa($nama, $email, $password, $nim, $universitas, $programStudi, $semester, $nomorHp, $alamat);
+                $this->authService->registerMahasiswa($nama, $email, $password, $nim, $universitas, $fakultas, $programStudi, $semester, $nomorHp, $alamat);
                 Session::setFlash('success', 'Registrasi berhasil. Silakan login.');
                 return $this->redirect('login');
             } catch (\Exception $e) {
@@ -108,10 +120,9 @@ class AuthController extends Controller {
             
             if ($user) {
                 $token = bin2hex(random_bytes(32));
-                $expires = date('Y-m-d H:i:s', strtotime('+1 hour'));
                 
-                $stmt = $db->prepare("UPDATE users SET reset_token = ?, reset_token_expires = ? WHERE id = ?");
-                $stmt->execute([$token, $expires, $user['id']]);
+                $stmt = $db->prepare("UPDATE users SET reset_token = ?, reset_token_expires = DATE_ADD(NOW(), INTERVAL 1 HOUR) WHERE id = ?");
+                $stmt->execute([hash('sha256', $token), $user['id']]);
                 
                 // Fallback email mechanism (writes to local log)
                 $resetLink = BASE_URL . '/reset-password?token=' . $token;
@@ -152,7 +163,7 @@ class AuthController extends Controller {
         
         $db = \App\Core\Database::getInstance()->getConnection();
         $stmt = $db->prepare("SELECT id FROM users WHERE reset_token = ? AND reset_token_expires > NOW()");
-        $stmt->execute([$token]);
+        $stmt->execute([hash('sha256', $token)]);
         $user = $stmt->fetch();
         
         if (!$user) {

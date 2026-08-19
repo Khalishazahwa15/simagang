@@ -360,31 +360,76 @@ class SekretariatController extends Controller {
         ]);
     }
 
+    /**
+     * Penyaring periode dan divisi yang dipakai bersama oleh halaman Laporan
+     * dan ekspor CSV, agar angka di layar selalu sama dengan isi berkas.
+     */
+    private function filterLaporan() {
+        $dari = trim($_GET['dari'] ?? '');
+        $sampai = trim($_GET['sampai'] ?? '');
+        $divisi = trim($_GET['divisi'] ?? '');
+
+        $klausa = [];
+        $params = [];
+
+        if ($dari !== '') {
+            $klausa[] = "DATE(p.created_at) >= ?";
+            $params[] = $dari;
+        }
+        if ($sampai !== '') {
+            $klausa[] = "DATE(p.created_at) <= ?";
+            $params[] = $sampai;
+        }
+        if ($divisi !== '') {
+            $klausa[] = "p.divisi_id_preferensi = ?";
+            $params[] = $divisi;
+        }
+
+        return [implode(' AND ', $klausa), $params];
+    }
+
     public function laporan() {
         $db = \App\Core\Database::getInstance()->getConnection();
-        
+
+        list($kondisi, $params) = $this->filterLaporan();
+        $where = $kondisi === '' ? '' : "WHERE {$kondisi}";
+        $onTambahan = $kondisi === '' ? '' : "AND {$kondisi}";
+
         // Distribusi Status Pengajuan
-        $statusRaw = $db->query("SELECT status, COUNT(*) as count FROM pengajuan GROUP BY status")->fetchAll(\PDO::FETCH_ASSOC);
+        $stmt = $db->prepare("SELECT p.status, COUNT(*) as count FROM pengajuan p {$where} GROUP BY p.status");
+        $stmt->execute($params);
+        $statusRaw = $stmt->fetchAll(\PDO::FETCH_ASSOC);
         $distribusi_status = [];
         foreach ($statusRaw as $s) {
             $distribusi_status[$s['status']] = $s['count'];
         }
 
-        // Pengajuan per Divisi (Preferensi)
-        $distribusi_divisi = $db->query("
-            SELECT d.nama_divisi, COUNT(p.id) as count 
-            FROM divisi d 
-            LEFT JOIN pengajuan p ON d.id = p.divisi_id_preferensi 
-            GROUP BY d.id, d.nama_divisi 
+        // Pengajuan per Divisi (Preferensi).
+        // Penyaring diletakkan di ON, bukan WHERE, supaya divisi tanpa pengajuan tetap tampil.
+        $stmt = $db->prepare("
+            SELECT d.nama_divisi, COUNT(p.id) as count
+            FROM divisi d
+            LEFT JOIN pengajuan p ON d.id = p.divisi_id_preferensi {$onTambahan}
+            GROUP BY d.id, d.nama_divisi
             ORDER BY count DESC
-        ")->fetchAll(\PDO::FETCH_ASSOC);
+        ");
+        $stmt->execute($params);
+        $distribusi_divisi = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+
+        $stmt = $db->prepare("SELECT COUNT(*) FROM pengajuan p {$where}");
+        $stmt->execute($params);
+        $totalRows = (int)$stmt->fetchColumn();
+
+        $divisiList = $db->query("SELECT id, nama_divisi FROM divisi ORDER BY nama_divisi ASC")->fetchAll(\PDO::FETCH_ASSOC);
 
         $this->renderView('sekretariat/laporan', [
             'title' => 'Laporan & Ekspor',
             'subtitle' => 'Ringkasan data pengajuan magang untuk keperluan pelaporan.',
             'currentPage' => 'laporan',
             'distribusi_status' => $distribusi_status,
-            'distribusi_divisi' => $distribusi_divisi
+            'distribusi_divisi' => $distribusi_divisi,
+            'divisiList' => $divisiList,
+            'totalRows' => $totalRows
         ]);
     }
 
@@ -392,19 +437,26 @@ class SekretariatController extends Controller {
         $db = \App\Core\Database::getInstance()->getConnection();
         
         $filter = $_GET['filter'] ?? 'semua';
-        $whereClause = "";
-        
-        if ($filter === 'aktif') {
-            $whereClause = "WHERE p.status = 'sedang_magang'";
-        } elseif ($filter === 'selesai') {
-            $whereClause = "WHERE p.status = 'selesai'";
-        } elseif ($filter === 'ditolak') {
-            $whereClause = "WHERE p.status IN ('ditolak', 'mengundurkan_diri')";
-        } elseif ($filter === 'baru') {
-            $whereClause = "WHERE p.status IN ('diajukan', 'dalam_verifikasi', 'revisi', 'cek_divisi', 'diterima')";
+
+        list($kondisi, $params) = $this->filterLaporan();
+        $klausa = [];
+        if ($kondisi !== '') {
+            $klausa[] = $kondisi;
         }
-        
-        $pengajuanRaw = $db->query("
+
+        if ($filter === 'aktif') {
+            $klausa[] = "p.status = 'sedang_magang'";
+        } elseif ($filter === 'selesai') {
+            $klausa[] = "p.status = 'selesai'";
+        } elseif ($filter === 'ditolak') {
+            $klausa[] = "p.status IN ('ditolak', 'mengundurkan_diri')";
+        } elseif ($filter === 'baru') {
+            $klausa[] = "p.status IN ('diajukan', 'dalam_verifikasi', 'revisi', 'diterima')";
+        }
+
+        $whereClause = empty($klausa) ? '' : 'WHERE ' . implode(' AND ', $klausa);
+
+        $stmt = $db->prepare("
             SELECT p.nomor_pengajuan, u.nama, u.email, mp.universitas, mp.program_studi,
                    p.status, p.tanggal_mulai_rencana, p.tanggal_selesai_rencana,
                    dp.nama_divisi as divisi_preferensi, df.nama_divisi as divisi_final
@@ -413,9 +465,11 @@ class SekretariatController extends Controller {
             LEFT JOIN mahasiswa_profiles mp ON u.id = mp.user_id
             LEFT JOIN divisi dp ON p.divisi_id_preferensi = dp.id
             LEFT JOIN divisi df ON p.divisi_id_final = df.id
-            $whereClause
+            {$whereClause}
             ORDER BY p.created_at DESC
-        ")->fetchAll(\PDO::FETCH_ASSOC);
+        ");
+        $stmt->execute($params);
+        $pengajuanRaw = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 
         $filename = "laporan_magang_" . $filter . "_" . date('Ymd_His') . ".csv";
 

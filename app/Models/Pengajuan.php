@@ -12,6 +12,11 @@ class Pengajuan extends Model {
         return $this->db->lastInsertId();
     }
 
+    public function updateNomorPengajuan($id, $nomorPengajuan) {
+        $stmt = $this->db->prepare("UPDATE {$this->table} SET nomor_pengajuan = ? WHERE id = ?");
+        return $stmt->execute([$nomorPengajuan, $id]);
+    }
+
     public function findByUserId($userId) {
         $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE user_id = ? ORDER BY created_at DESC");
         $stmt->execute([$userId]);

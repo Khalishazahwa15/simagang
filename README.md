@@ -28,22 +28,34 @@ Proyek ini dibangun menggunakan **PHP Native MVC**, **MySQL**, tanpa bantuan fra
    APP_ENV=development
    DB_HOST=127.0.0.1
    DB_PORT=3306
-   DB_NAME=simagang
+   DB_NAME=simagang_db
    DB_USER=root
    DB_PASS=
    ```
 
 3. **Impor Skema Database**
-   - Buat database baru bernama `simagang` di phpMyAdmin / MySQL CLI.
-   - Impor file `database/schema.sql` ke dalam database tersebut. File ini memuat struktur tabel standar.
+   - Impor file `database/schema.sql` lewat phpMyAdmin / MySQL CLI. Berkas ini sudah
+     memuat perintah `CREATE DATABASE simagang_db`, jadi databasenya tidak perlu
+     dibuat manual lebih dulu.
+   - Nama database harus sama dengan `DB_NAME` di `.env`, yaitu `simagang_db`.
 
 4. **Isi Data Dummy (Seeder)**
-   Untuk keperluan tes, Anda dapat menjalankan seeder dengan memanggil skrip dari terminal / browser:
-   - Via Terminal: `php database/seeder.php`
-   - Via Browser: Akses `http://localhost/simagang/database/seeder.php`
+   ```bash
+   php database/seeder.php
+   ```
+   > **Perhatian:** seeder meng-`TRUNCATE` seluruh tabel sebelum mengisi ulang data
+   > contoh. Jangan pernah menjalankannya di lingkungan yang sudah berisi data nyata,
+   > dan jangan mengaksesnya lewat browser.
 
 5. **Jalankan Aplikasi**
-   Akses `http://localhost/simagang` di web browser. Anda bisa langsung mencoba login.
+   Direktori yang dilayani web server adalah `public/`, bukan folder root proyek.
+   - Laragon (disarankan): virtual host otomatis aktif di `http://simagang.test`.
+   - Tanpa virtual host: `http://localhost/simagang/public`.
+
+6. **Jika Anda Menarik Perubahan ke Instalasi Lama**
+   `schema.sql` memakai `CREATE TABLE IF NOT EXISTS`, sehingga database yang sudah
+   ada tidak ikut berubah saat Anda `git pull`. Jalankan `database/UPGRADE.sql`
+   sekali untuk menyusulkan perubahan struktur. Lihat berkas tersebut untuk detailnya.
 
 ---
 
@@ -52,14 +64,17 @@ Proyek ini dibangun menggunakan **PHP Native MVC**, **MySQL**, tanpa bantuan fra
 Jika Anda mengeksekusi `seeder.php`, beberapa akun yang bisa dipakai untuk menguji aplikasi:
 
 - **Admin**:
-  - Email: `admin@bappeda.lampungprov.go.id`
+  - Email: `admin@bappeda.lampung.go.id`
   - Pass : `password123`
 - **Sekretariat**:
-  - Email: `sekretariat@bappeda.lampungprov.go.id`
+  - Email: `sekretariat@bappeda.lampung.go.id`
   - Pass : `password123`
 - **Mahasiswa**:
-  - Email: `najwa@students.unila.ac.id`
+  - Email: `najwa@student.unila.ac.id`
   - Pass : `password123`
+
+> Setelah lima kali gagal login berturut-turut dari satu perangkat, akun terkunci
+> selama 15 menit. Login yang berhasil langsung mengosongkan hitungannya.
 
 ---
 

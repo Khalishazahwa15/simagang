@@ -31,9 +31,25 @@ class AuthService {
         return true;
     }
 
-    public function registerMahasiswa($nama, $email, $password, $nim, $universitas, $programStudi, $semester, $nomorHp, $alamat) {
+    public function registerMahasiswa($nama, $email, $password, $nim, $universitas, $fakultas, $programStudi, $semester, $nomorHp, $alamat) {
         if (strlen($password) < self::MIN_PASSWORD_LENGTH) {
             throw new \Exception("Kata sandi minimal " . self::MIN_PASSWORD_LENGTH . " karakter.");
+        }
+
+        $wajib = [
+            'Nama' => $nama, 'Email' => $email, 'NIM' => $nim,
+            'Universitas' => $universitas, 'Fakultas' => $fakultas,
+            'Program studi' => $programStudi, 'Nomor HP' => $nomorHp, 'Alamat' => $alamat
+        ];
+        foreach ($wajib as $label => $nilai) {
+            if (trim((string)$nilai) === '') {
+                throw new \Exception("{$label} wajib diisi.");
+            }
+        }
+
+        $semester = (int)$semester;
+        if ($semester < 1 || $semester > 14) {
+            throw new \Exception("Semester harus berupa angka 1 sampai 14.");
         }
 
         // Validate email uniqueness
@@ -46,7 +62,7 @@ class AuthService {
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
             $userId = $this->userModel->create($nama, $email, $passwordHash, 'mahasiswa');
             
-            $this->profileModel->create($userId, $nim, $universitas, $programStudi, $semester, $nomorHp, $alamat);
+            $this->profileModel->create($userId, $nim, $universitas, $fakultas, $programStudi, $semester, $nomorHp, $alamat);
             
             $this->userModel->commit();
             return true;

@@ -38,9 +38,6 @@ class PengajuanService {
             }
         }
 
-        // Generate Nomor Pengajuan
-        $nomorPengajuan = 'PM-' . date('Ymd') . '-' . rand(1000, 9999);
-
         // Transaction handling for creating pengajuan and uploading files
         $this->pengajuanModel->beginTransaction();
         try {
@@ -54,7 +51,13 @@ class PengajuanService {
             }
 
             // Create pengajuan (Status: diajukan initially since it's fully submitted, or draft then diajukan. Based on AC, straight to diajukan)
-            $pengajuanId = $this->pengajuanModel->create($userId, $nomorPengajuan, $divisiPreferensi, $tanggalMulai, $tanggalSelesai);
+            // Nomor pengajuan mengikuti id dari basis data agar dijamin unik.
+            // Baris dibuat dengan nomor sementara lebih dulu karena kolomnya NOT NULL UNIQUE.
+            $nomorSementara = 'TMP-' . bin2hex(random_bytes(12));
+            $pengajuanId = $this->pengajuanModel->create($userId, $nomorSementara, $divisiPreferensi, $tanggalMulai, $tanggalSelesai);
+
+            $nomorPengajuan = 'PM-' . date('Ymd') . '-' . str_pad($pengajuanId, 6, '0', STR_PAD_LEFT);
+            $this->pengajuanModel->updateNomorPengajuan($pengajuanId, $nomorPengajuan);
 
             // Upload files (handled safely in DokumenService via its own local transactions, but since we share DB connection, it participates in this transaction)
             foreach (['surat_lamaran', 'cv', 'transkrip'] as $jenis) {

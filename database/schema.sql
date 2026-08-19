@@ -108,7 +108,17 @@ CREATE TABLE IF NOT EXISTS notifications (
     FOREIGN KEY (pengajuan_id) REFERENCES pengajuan(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 8. audit_logs
+-- 8. login_attempts
+CREATE TABLE IF NOT EXISTS login_attempts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(150) NOT NULL,
+    ip_address VARCHAR(45) NOT NULL,
+    attempted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_email_waktu (email, attempted_at),
+    INDEX idx_ip_waktu (ip_address, attempted_at)
+) ENGINE=InnoDB;
+
+-- 9. audit_logs
 CREATE TABLE IF NOT EXISTS audit_logs (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NULL,
