@@ -252,6 +252,28 @@ $stepNames = [
     <?php endif; ?>
     
     <?php endif; ?>
+
+    <?php
+    // Status akhir tidak punya langkah lanjutan otomatis. Tanpa ajakan
+    // bertindak di sini, mahasiswa yang ditolak berhenti di layar ini tanpa
+    // tahu bahwa ia boleh mendaftar lagi.
+    $statusAkhir = ['ditolak', 'selesai', 'dibatalkan_oleh_mahasiswa', 'mengundurkan_diri'];
+    ?>
+    <?php if ($pengajuan && in_array($pengajuan['status'], $statusAkhir)): ?>
+    <div class="card fade-up" style="margin: 0;">
+        <div class="card-body" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+            <div>
+                <div style="font-family: var(--font-body); font-weight: 700; font-size: 14px; color: var(--text-primary); margin-bottom: 4px;">
+                    Pengajuan ini sudah selesai diproses
+                </div>
+                <div style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+                    Riwayat di atas tetap tersimpan. Anda dapat membuat pengajuan magang baru kapan saja.
+                </div>
+            </div>
+            <a href="<?= BASE_URL ?>/mahasiswa/pengajuan" class="btn btn-primary" style="white-space: nowrap;">Ajukan Kembali</a>
+        </div>
+    </div>
+    <?php endif; ?>
 </div>
 
 

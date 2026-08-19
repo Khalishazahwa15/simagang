@@ -50,6 +50,20 @@ class StatusService {
         $this->notificationService = new NotificationService();
     }
 
+    /**
+     * Status yang tidak punya transisi keluar. Diturunkan dari peta transisi
+     * agar tidak perlu dirawat sebagai daftar kedua yang bisa ketinggalan.
+     */
+    public function statusFinal() {
+        $final = [];
+        foreach ($this->allowedTransitions as $status => $tujuan) {
+            if (empty($tujuan)) {
+                $final[] = $status;
+            }
+        }
+        return $final;
+    }
+
     public function updateStatus($pengajuanId, $statusAwal, $statusBaru, $catatan = null) {
         if (!isset($this->allowedTransitions[$statusAwal]) || !in_array($statusBaru, $this->allowedTransitions[$statusAwal])) {
             throw new \Exception("Transisi status ilegal dari '{$statusAwal}' ke '{$statusBaru}'.");

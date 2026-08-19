@@ -379,6 +379,57 @@ foreach ($berkasTampilan as $bt) {
 periksa(empty($pemakaianSalah),
     'Warna aksen tidak dipakai sebagai warna teks' . ($pemakaianSalah ? ' (' . implode(', ', $pemakaianSalah) . ')' : ''));
 
+// --- Pengajuan ulang setelah pengajuan sebelumnya berakhir ---
+$statusAkhir = $statusService->statusFinal();
+sort($statusAkhir);
+$diharapkan = ['dibatalkan_oleh_mahasiswa', 'ditolak', 'mengundurkan_diri', 'selesai'];
+periksa($statusAkhir === $diharapkan,
+    'Status akhir diturunkan dari peta transisi (' . implode(', ', $statusAkhir) . ')');
+
+// Memakai berkas contoh yang benar-benar ada, supaya alur unggah ikut teruji
+$pdfContoh = __DIR__ . '/files/valid.pdf';
+$berkasPalsu2 = [
+    'surat_lamaran' => ['error' => UPLOAD_ERR_OK, 'tmp_name' => $pdfContoh, 'name' => 'a.pdf', 'size' => filesize($pdfContoh)],
+    'cv' => ['error' => UPLOAD_ERR_OK, 'tmp_name' => $pdfContoh, 'name' => 'b.pdf', 'size' => filesize($pdfContoh)],
+    'transkrip' => ['error' => UPLOAD_ERR_OK, 'tmp_name' => $pdfContoh, 'name' => 'c.pdf', 'size' => filesize($pdfContoh)],
+];
+$mulaiSah = (new DateTime('today'))->modify('+30 days')->format('Y-m-d');
+$selesaiSah = (new DateTime('today'))->modify('+120 days')->format('Y-m-d');
+
+// Setiap status akhir harus melepas kunci; sebelumnya hanya ditolak dan
+// selesai yang dikenali, sehingga mahasiswa yang menolak tawaran divisi
+// terkunci selamanya.
+foreach ($diharapkan as $st) {
+    $db->exec("DELETE FROM pengajuan");
+    $stmt = $db->prepare("INSERT INTO pengajuan (nomor_pengajuan, user_id, divisi_id_preferensi, tanggal_mulai_rencana, tanggal_selesai_rencana, status)
+                          VALUES (?, 3, 1, ?, ?, ?)");
+    $stmt->execute(['UJI-ULANG-' . $st, $mulaiSah, $selesaiSah, $st]);
+
+    $terkunci = false;
+    try {
+        $pengajuanService->createPengajuan(3, 1, $mulaiSah, $selesaiSah, $berkasPalsu2);
+    } catch (\Exception $e) {
+        $terkunci = strpos($e->getMessage(), 'sedang diproses') !== false;
+    }
+    periksa(!$terkunci, "Boleh mengajukan lagi setelah status {$st}");
+}
+
+// Pengajuan yang masih berjalan tetap memblokir
+$db->exec("DELETE FROM pengajuan");
+$stmt = $db->prepare("INSERT INTO pengajuan (nomor_pengajuan, user_id, divisi_id_preferensi, tanggal_mulai_rencana, tanggal_selesai_rencana, status)
+                      VALUES ('UJI-AKTIF', 3, 1, ?, ?, 'dalam_verifikasi')");
+$stmt->execute([$mulaiSah, $selesaiSah]);
+
+$terkunci = false;
+try {
+    $pengajuanService->createPengajuan(3, 1, $mulaiSah, $selesaiSah, $berkasPalsu2);
+} catch (\Exception $e) {
+    $terkunci = strpos($e->getMessage(), 'sedang diproses') !== false;
+}
+periksa($terkunci, 'Pengajuan yang masih berjalan tetap memblokir pengajuan baru');
+
+$db->exec("DELETE FROM pengajuan");
+
 echo "====================================\n";
 echo "JALUR RUSAK: {$lulus} lulus, {$gagal} gagal.\n";
 

@@ -51,9 +51,17 @@ class DokumenService {
             throw new \Exception("Ukuran file {$jenisDokumen} melebihi batas 2MB.");
         }
 
+        // Berkas sementara harus benar-benar ada sebelum diperiksa isinya;
+        // finfo_file() melempar ValueError, bukan mengembalikan false, bila
+        // jalurnya kosong atau tidak terbaca.
+        $berkasSementara = $fileArray['tmp_name'] ?? '';
+        if ($berkasSementara === '' || !is_file($berkasSementara) || !is_readable($berkasSementara)) {
+            throw new \Exception("File {$jenisDokumen} tidak dapat dibaca. Silakan unggah ulang.");
+        }
+
         // MIME validation
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mimeType = finfo_file($finfo, $fileArray['tmp_name']);
+        $mimeType = finfo_file($finfo, $berkasSementara);
         finfo_close($finfo);
 
         if ($mimeType !== 'application/pdf') {
