@@ -36,11 +36,14 @@ try {
     $mahasiswa_id = $pdo->lastInsertId();
 
     // Seed Mahasiswa Profile
-    $stmt_profile = $pdo->prepare("INSERT INTO mahasiswa_profiles (user_id, nim, universitas, program_studi, semester, nomor_hp, alamat) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt_profile = $pdo->prepare("INSERT INTO mahasiswa_profiles (user_id, nim, tempat_lahir, tanggal_lahir, universitas, fakultas, program_studi, semester, nomor_hp, alamat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt_profile->execute([
         $mahasiswa_id,
         '2015061001',
+        'Bandar Lampung',
+        '2003-05-10',
         'Universitas Lampung',
+        'Teknik',
         'Teknik Informatika',
         6,
         '081234567890',
