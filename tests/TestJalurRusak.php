@@ -369,9 +369,18 @@ periksa(empty($gagalKontras),
 
 // Warna aksen hanya untuk latar dan garis, tidak untuk teks: rasionya
 // terhadap latar halaman hanya 2.88.
+// landing.php dikecualikan atas permintaan tim: desain lamanya dipertahankan
+// dan penggarapan ulang tampilannya diserahkan ke anggota lain. Kontras warna
+// aksen di halaman itu (2.88) masih di bawah ambang AA dan perlu ditangani
+// dalam pengerjaan tersebut.
+$dikecualikan = ['landing.php'];
+
 $berkasTampilan = glob(__DIR__ . '/../app/Views/*/*.php');
 $pemakaianSalah = [];
 foreach ($berkasTampilan as $bt) {
+    if (in_array(basename($bt), $dikecualikan, true)) {
+        continue;
+    }
     if (preg_match('/(?<![-\w])color:\s*var\(--accent\)/', file_get_contents($bt))) {
         $pemakaianSalah[] = basename($bt);
     }

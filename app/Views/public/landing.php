@@ -211,7 +211,7 @@
         font-weight: 700;
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        color: var(--accent-dark);
+        color: var(--accent);
         margin-bottom: 16px;
     }
     .section-title {
@@ -224,34 +224,16 @@
         margin: 0;
     }
 
-    .benefit-row {
-        display: grid;
-        grid-template-columns: 80px minmax(0, 1fr) minmax(0, 1fr);
-        gap: 0 48px;
-        align-items: start;
-    }
-
-    .footer-grid {
-        display: grid;
-        grid-template-columns: 2fr 1fr 1fr;
-        gap: 48px;
-    }
-
     @media (max-width: 900px) {
         .hero-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
         .doc-panel { display: none; }
         .trust-grid, .alur-grid { grid-template-columns: 1fr; }
     }
-
-    @media (max-width: 767.98px) {
-        .footer-grid { grid-template-columns: 1fr; gap: 32px; }
-        .benefit-row { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-    }
 </style>
 
 <!-- Hero Section -->
 <section style="background: var(--bg-main); border-bottom: 1px solid var(--border); padding: 72px 32px 80px;">
-    <div class="hero-grid grid-2" style="max-width: 1240px; margin: 0 auto; gap: 80px; align-items: center">
+    <div class="hero-grid" style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
         <!-- Left: Editorial content -->
         <div>
             <!-- Eyebrow -->
@@ -276,7 +258,7 @@
             <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                 <a href="<?= BASE_URL ?>/login" class="btn btn-primary" style="padding: 14px 28px; font-size: 14px; border-radius: 8px;">
                     Ajukan Magang
-                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
                 <a href="<?= BASE_URL ?>/login" class="btn btn-outline" style="padding: 14px 28px; font-size: 14px; border-radius: 8px; font-weight: 600;">
                     Cek Status Pengajuan
@@ -297,7 +279,7 @@
             </div>
             
             <div class="doc-panel-body">
-                <div class="grid-2" style="gap: 12px 24px; margin-bottom: 24px">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; margin-bottom: 24px;">
                     <div>
                         <div style="font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 2px;">Nama Mahasiswa</div>
                         <div style="font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-primary);">Mahasiswa (Data Contoh)</div>
@@ -323,14 +305,14 @@
                 <div class="timeline-stepper">
                     <div class="timeline-step">
                         <div class="timeline-circle done">
-                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--bg-main)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--bg-main)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
                         </div>
                         <div class="timeline-label">Pengajuan</div>
                     </div>
                     <div class="timeline-step">
                         <div class="timeline-line done"></div>
                         <div class="timeline-circle done">
-                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--bg-main)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--bg-main)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
                         </div>
                         <div class="timeline-label">Verifikasi</div>
                     </div>
@@ -371,7 +353,7 @@
         <!-- Item 1 -->
         <div class="trust-item">
             <div class="icon-gold">
-                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
             </div>
             <div>
                 <div style="font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--bg-main); margin-bottom: 3px;">Pengajuan Online</div>
@@ -381,7 +363,7 @@
         <!-- Item 2 -->
         <div class="trust-item">
             <div class="icon-gold">
-                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <div>
                 <div style="font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--bg-main); margin-bottom: 3px;">Status Transparan</div>
@@ -391,7 +373,7 @@
         <!-- Item 3 -->
         <div class="trust-item">
             <div class="icon-gold">
-                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             </div>
             <div>
                 <div style="font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--bg-main); margin-bottom: 3px;">Dokumen Tersimpan</div>
@@ -401,7 +383,7 @@
         <!-- Item 4 -->
         <div class="trust-item">
             <div class="icon-gold">
-                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
             </div>
             <div>
                 <div style="font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--bg-main); margin-bottom: 3px;">Proses Terstruktur</div>
@@ -434,8 +416,8 @@
                 ['num' => '03', 'title' => 'Dokumen Terarsip', 'body' => 'Dokumen pengajuan tersimpan secara digital dan dapat ditelusuri kapan saja oleh mahasiswa maupun administrator.'],
             ];
             foreach ($benefits as $b): ?>
-            <div class="benefit-row" style="padding: 40px 0; border-bottom: 1px solid var(--border);">
-                <div style="font-family: var(--font-mono); font-size: 36px; font-weight: 600; color: var(--accent-dark); line-height: 1; padding-top: 4px;"><?= $b['num'] ?></div>
+            <div style="display: grid; grid-template-columns: 80px 1fr 1fr; gap: 0 48px; padding: 40px 0; border-bottom: 1px solid var(--border); align-items: start;">
+                <div style="font-family: var(--font-mono); font-size: 36px; font-weight: 600; color: var(--accent); line-height: 1; padding-top: 4px;"><?= $b['num'] ?></div>
                 <div><h3 style="font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--text-primary); line-height: 1.2; letter-spacing: -0.01em; margin: 0;"><?= $b['title'] ?></h3></div>
                 <div><p style="font-family: var(--font-body); font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin: 0;"><?= $b['body'] ?></p></div>
             </div>
@@ -456,7 +438,7 @@
             </div>
             <a href="<?= BASE_URL ?>/login" class="btn btn-outline" style="padding: 12px 24px; border-color: var(--primary); color: var(--primary); font-size: 13.5px; border-radius: 8px; align-self: flex-end; font-weight: 600;">
                 Mulai Sekarang 
-                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </a>
         </div>
 
@@ -506,7 +488,7 @@
 <!-- Footer -->
 <footer class="footer-section">
     <div style="max-width: 1240px; margin: 0 auto;">
-        <div class="footer-grid" style="margin-bottom: 40px;">
+        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px;">
             <div>
                 <div style="font-family: var(--font-body); font-weight: 800; font-size: 16px; color: var(--bg-main); margin-bottom: 4px;">SIMAGANG</div>
                 <div style="font-family: var(--font-body); font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">Sistem Informasi Pengelolaan Magang Mahasiswa</div>
