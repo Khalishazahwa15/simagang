@@ -1,0 +1,16 @@
+export const palette = {
+  green: '#4f6f64',
+  greenDark: '#233f3a',
+  greenMid: '#3d5d54',
+  greenSoft: '#e7efeb',
+  greenPale: '#f2f7f4',
+  gold: '#b9785f',
+  goldSoft: '#f3e5dc',
+  goldPale: '#fbf1ea',
+  ivory: '#f7f3ec',
+  offwhite: '#fffefa',
+  ink: '#1f2724',
+  muted: '#647069',
+  rule: '#ddd6c9',
+  ruleSoft: '#ece5da',
+}

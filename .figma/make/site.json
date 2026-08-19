@@ -1,0 +1,10 @@
+{
+  "description": "Generate custom designs effortlessly by inputting prompts, enabling users to create unique visuals quickly for personal or professional use.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

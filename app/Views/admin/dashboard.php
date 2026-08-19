@@ -1,0 +1,215 @@
+<?php
+function getDistCount($dist, $status) {
+    return isset($dist[$status]) ? $dist[$status] : 0;
+}
+
+$maxDist = max(1, array_sum($distribusi));
+
+$distItems = [
+    ['label' => 'Diajukan', 'status' => 'diajukan', 'color' => '#1D4ED8'],
+    ['label' => 'Diperiksa', 'status' => 'dalam_verifikasi', 'color' => '#7A5A00'],
+    ['label' => 'Perlu Revisi', 'status' => 'revisi', 'color' => '#991B1B'],
+    ['label' => 'Cek Kebutuhan Divisi', 'status' => 'cek_divisi', 'color' => 'var(--accent)'], // Dummy for UI presentation
+    ['label' => 'Diterima', 'status' => 'diterima', 'color' => 'var(--primary)'],
+    ['label' => 'Sedang Magang', 'status' => 'sedang_magang', 'color' => 'var(--primary-dark)'],
+    ['label' => 'Selesai', 'status' => 'selesai', 'color' => 'var(--primary)']
+];
+
+function getBadgeStyle($status) {
+    switch ($status) {
+        case 'diajukan': return 'background: #EFF6FF; color: #1D4ED8;';
+        case 'dalam_verifikasi': return 'background: #FEF3C7; color: #7A5A00;';
+        case 'revisi': return 'background: #FEE2E2; color: #991B1B;';
+        default: return 'background: var(--bg-soft); color: var(--text-secondary);';
+    }
+}
+
+function getBadgeLabel($status) {
+    switch ($status) {
+        case 'diajukan': return 'DIAJUKAN';
+        case 'dalam_verifikasi': return 'DIPERIKSA';
+        case 'revisi': return 'REVISI';
+        default: return strtoupper(str_replace('_', ' ', $status));
+    }
+}
+?>
+
+<div style="display: flex; flex-direction: column; gap: 24px; max-width: 1040px; font-family: 'Plus Jakarta Sans', sans-serif;">
+    
+    <!-- Info Banner -->
+    <div style="background: var(--accent-light); border-width: 0.666667px 0.666667px 0.666667px 4px; border-style: solid; border-color: var(--accent); border-radius: 8px; padding: 14px 18px;">
+        <div style="font-weight: 700; font-size: 12px; line-height: 18px; letter-spacing: 0.96px; text-transform: uppercase; color: #7A5A00; margin-bottom: 4px;">
+            Ruang Lingkup Admin Sistem
+        </div>
+        <div style="font-weight: 400; font-size: 13px; line-height: 1.6; color: #7A5A00;">
+            Anda memiliki akses penuh untuk mengelola operasional magang sekaligus administrasi sistem (divisi dan pengguna).
+        </div>
+    </div>
+
+    <!-- 4 Summary Cards - Sekretariat Metrics -->
+    <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; display: grid; grid-template-columns: repeat(4, 1fr);">
+        <div style="padding: 20px; display: flex; flex-direction: column;">
+            <div style="font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">PERLU DITINDAKLANJUTI</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; color: var(--primary); line-height: 1; margin-bottom: 4px;"><?= $stats['tindak_lanjut'] ?></div>
+            <div style="font-weight: 400; font-size: 11.5px; line-height: 17px; color: var(--text-secondary);">Menunggu tindakan</div>
+        </div>
+        <div style="padding: 20px; border-left: 0.666667px solid var(--border); display: flex; flex-direction: column;">
+            <div style="font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">SEDANG MAGANG</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; color: var(--accent); line-height: 1; margin-bottom: 4px;"><?= $stats['aktif'] ?></div>
+            <div style="font-weight: 400; font-size: 11.5px; line-height: 17px; color: var(--text-secondary);">Aktif menjalani magang</div>
+        </div>
+        <div style="padding: 20px; border-left: 0.666667px solid var(--border); display: flex; flex-direction: column;">
+            <div style="font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">TOTAL PENGAJUAN</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; color: var(--text-primary); line-height: 1; margin-bottom: 4px;"><?= $stats['total'] ?></div>
+            <div style="font-weight: 400; font-size: 11.5px; line-height: 17px; color: var(--text-secondary);"><?= $stats['selesai'] ?> selesai &middot; <?= $stats['diterima'] ?> diterima</div>
+        </div>
+        <div style="padding: 20px; border-left: 0.666667px solid var(--border); display: flex; flex-direction: column;">
+            <div style="font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">KAPASITAS TOTAL</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; color: var(--text-primary); line-height: 1; margin-bottom: 4px;"><?= $stats['kapasitas_total'] ?></div>
+            <div style="font-weight: 400; font-size: 11.5px; line-height: 17px; color: var(--text-secondary);"><?= $stats['slot_terpakai'] ?> terpakai &middot; <?= $stats['divisi_total'] ?> divisi</div>
+        </div>
+    </div>
+
+    <!-- Main Grid - Unified -->
+    <div class="grid" style="grid-template-columns: 3fr 2fr; gap: 24px; align-items: stretch;">
+        
+        <!-- Left Column: Pending List (from Sekretariat) -->
+        <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; display: flex; flex-direction: column; height: 100%;">
+            <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">
+                <div style="font-weight: 700; font-size: 13px; line-height: 20px; color: var(--text-primary);">Pengajuan Terbaru</div>
+                <a href="<?= BASE_URL ?>/sekretariat/pengajuan" style="font-weight: 600; font-size: 12.5px; line-height: 19px; color: var(--primary); text-decoration: none;">Lihat Semua &rarr;</a>
+            </div>
+            
+            <div style="padding: 0; flex-grow: 1; display: flex; flex-direction: column;">
+                <?php if (empty($pengajuan_terbaru)): ?>
+                    <div style="padding: 32px 24px; text-align: center; color: var(--text-secondary); font-size: 13px;">Belum ada pengajuan yang perlu ditindaklanjuti.</div>
+                <?php else: ?>
+                    <?php foreach ($pengajuan_terbaru as $item): ?>
+                    <a href="<?= BASE_URL ?>/sekretariat/pengajuan/detail/<?= $item['id'] ?>" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border); text-decoration: none; transition: background 0.15s;" onmouseover="this.style.background='var(--bg-main)'" onmouseout="this.style.background='transparent'">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                                <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--primary);">PGJ-<?= str_pad($item['id'], 4, '0', STR_PAD_LEFT) ?></div>
+                                <div style="padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; <?= getBadgeStyle($item['status']) ?>">
+                                    <?= getBadgeLabel($item['status']) ?>
+                                </div>
+                            </div>
+                            <div style="font-size: 13.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px;"><?= htmlspecialchars($item['mahasiswa_nama']) ?></div>
+                            <div style="font-size: 12px; color: var(--text-secondary);">
+                                <?php
+                                    $univ = !empty($item['universitas']) ? $item['universitas'] : 'Profil belum lengkap';
+                                    $prodi = !empty($item['program_studi']) ? ' - ' . $item['program_studi'] : '';
+                                    echo htmlspecialchars($univ . $prodi) . ' &middot; ' . date('d M Y', strtotime($item['created_at']));
+                                ?>
+                            </div>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                    </a>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+            <!-- Status Divisi -->
+            <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border);">
+                    <div style="font-weight: 700; font-size: 13px; line-height: 20px; color: var(--text-primary);">
+                        Status Divisi
+                    </div>
+                    <a href="<?= BASE_URL ?>/admin/bidang" style="font-weight: 600; font-size: 12.5px; line-height: 19px; color: var(--primary); text-decoration: none;">
+                        Kelola &rarr;
+                    </a>
+                </div>
+                
+                <div style="padding: 0; max-height: 220px; overflow-y: auto;">
+                    <?php if (empty($list_divisi)): ?>
+                        <div style="padding: 40px 24px; text-align: center; color: var(--text-secondary); font-size: 13px;">Belum ada data divisi.</div>
+                    <?php else: ?>
+                        <?php foreach ($list_divisi as $index => $div): 
+                            $isFull = $div['terisi'] >= $div['kapasitas'];
+                            $pct = $div['kapasitas'] > 0 ? min(100, round(($div['terisi'] / $div['kapasitas']) * 100)) : 0;
+                            
+                            $badgeBg = $isFull ? '#FEF3C7' : '#E7F2EF';
+                            $badgeText = $isFull ? '#92400E' : 'var(--primary)';
+                            $badgeLabel = $isFull ? 'PENUH' : 'DIBUTUHKAN';
+                            
+                            $barColor = $isFull ? '#9B2C2C' : 'var(--primary)';
+                        ?>
+                        <div style="padding: 12px 20px; <?= $index < count($list_divisi) - 1 ? 'border-bottom: 0.666667px solid var(--border);' : '' ?>">
+                            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                                <div style="font-weight: 500; font-size: 12.5px; line-height: 18px; color: var(--text-primary);">
+                                    <?= htmlspecialchars($div['nama_divisi']) ?>
+                                </div>
+                                <div style="background: <?= $badgeBg ?>; border-radius: 4px; padding: 2px 6px; font-weight: 700; font-size: 10px; line-height: 14px; letter-spacing: 0.5px; text-transform: uppercase; color: <?= $badgeText ?>;">
+                                    <?= $badgeLabel ?>
+                                </div>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div style="flex-grow: 1; height: 5px; background: var(--border); border-radius: 3px; position: relative;">
+                                    <div style="position: absolute; left: 0; top: 0; bottom: 0; width: <?= $pct ?>%; background: <?= $barColor ?>; border-radius: 3px;"></div>
+                                </div>
+                                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 400; font-size: 11px; color: var(--text-secondary);">
+                                    <?= $div['terisi'] ?>/<?= $div['kapasitas'] ?>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <!-- Pengguna Internal -->
+            <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border);">
+                    <div style="font-weight: 700; font-size: 13px; line-height: 20px; color: var(--text-primary);">
+                        Tim Internal
+                    </div>
+                    <a href="<?= BASE_URL ?>/admin/users" style="font-weight: 600; font-size: 12.5px; line-height: 19px; color: var(--primary); text-decoration: none;">
+                        Semua Tim &rarr;
+                    </a>
+                </div>
+                
+                <div style="padding: 0; max-height: 200px; overflow-y: auto;">
+                    <?php if (empty($list_internal)): ?>
+                        <div style="padding: 30px 24px; text-align: center; color: var(--text-secondary); font-size: 13px;">Belum ada pengguna internal terdaftar.</div>
+                    <?php else: ?>
+                        <?php foreach (array_slice($list_internal, 0, 5) as $index => $user): 
+                            $isAdmin = $user['role'] === 'admin';
+                            $avatarBg = $isAdmin ? 'var(--text-primary)' : '#E7F2EF';
+                            $avatarText = $isAdmin ? 'var(--bg-card)' : 'var(--primary)';
+                            
+                            $badgeBg = $isAdmin ? 'rgba(23, 32, 31, 0.063)' : '#E7F2EF';
+                            $badgeText = $isAdmin ? 'var(--text-primary)' : 'var(--primary)';
+                            $badgeLabel = $isAdmin ? 'ADMIN' : 'SEKRETARIAT';
+                            
+                            $initial = strtoupper(substr($user['nama'], 0, 1));
+                        ?>
+                        <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; gap: 12px; <?= $index < min(5, count($list_internal)) - 1 ? 'border-bottom: 0.666667px solid var(--border);' : '' ?>">
+                            <div style="display: flex; align-items: center; gap: 10px; overflow: hidden;">
+                                <div style="width: 32px; height: 32px; border-radius: 16px; background: <?= $avatarBg ?>; color: <?= $avatarText ?>; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;">
+                                    <?= $initial ?>
+                                </div>
+                                <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    <div style="font-weight: 600; font-size: 13px; line-height: 18px; color: var(--text-primary); margin-bottom: 2px;">
+                                        <?= htmlspecialchars($user['nama']) ?>
+                                    </div>
+                                    <div style="font-weight: 400; font-size: 11px; line-height: 15px; color: var(--text-secondary);">
+                                        <?= htmlspecialchars($user['email']) ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="background: <?= $badgeBg ?>; border-radius: 4px; padding: 2px 6px; font-weight: 700; font-size: 10px; line-height: 14px; letter-spacing: 0.5px; text-transform: uppercase; color: <?= $badgeText ?>; flex-shrink: 0;">
+                                <?= $badgeLabel ?>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
