@@ -116,6 +116,15 @@ MAIL_FROM_NAME=SIMAGANG Bappeda Lampung
 - Kegagalan pengiriman dicatat di `storage/logs/error.log`. Pengguna tetap melihat
   pesan netral yang sama agar alamat email yang terdaftar tidak bisa ditebak.
 
+Uji konfigurasi tanpa lewat halaman web:
+
+```bash
+php tools/kirim-email-uji.php alamat-tujuan@contoh.com
+```
+
+Perintah tersebut menampilkan konfigurasi yang terbaca beserta percakapan SMTP-nya,
+sehingga penyebab kegagalan langsung terlihat.
+
 ---
 
 ## Manajemen Lingkungan (Environment)
