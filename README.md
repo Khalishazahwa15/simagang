@@ -83,11 +83,38 @@ Jika Anda mengeksekusi `seeder.php`, beberapa akun yang bisa dipakai untuk mengu
 - `app/` - Inti aplikasi MVC (Models, Views, Controllers, Services).
 - `app/Core/` - Router, Session, Middleware, Env loader, dan kelas utama lainnya.
 - `config/` - Konfigurasi routing (routes.php) dan database (database.php).
-- `database/` - Skema asli (`schema.sql`) dan skrip populasi data (`seeder.php`).
+- `database/` - Skema asli (`schema.sql`), pemutakhiran struktur (`UPGRADE.sql`), dan skrip populasi data (`seeder.php`).
+- `lib/` - Pustaka pihak ketiga yang dipasang manual karena proyek ini tidak memakai Composer.
+  - `lib/PHPMailer/` - PHPMailer 7.1.1 (LGPL-2.1), dipakai untuk mengirim email lewat SMTP.
 - `public/` - Direktori web-facing (CSS, JavaScript, dan Front Controller `index.php`).
 - `storage/` - Penyimpanan file hasil upload dan catatan log.
   - `storage/uploads/` - Lokasi asli dokumen mahasiswa.
   - `storage/logs/` - File error saat berjalan pada *production mode*.
+
+---
+
+## Konfigurasi Email (SMTP)
+
+Fitur Lupa Password mengirim tautan pengaturan ulang lewat email. Isi kredensial
+SMTP di `.env`:
+
+```ini
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=akun@gmail.com
+SMTP_PASS=app-password-16-karakter
+SMTP_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=akun@gmail.com
+MAIL_FROM_NAME=SIMAGANG Bappeda Lampung
+```
+
+- `SMTP_ENCRYPTION` menerima `tls` (port 587), `ssl` (port 465), atau `none`.
+- Untuk Gmail, `SMTP_PASS` harus **App Password**, bukan kata sandi akun biasa.
+- **Bila `SMTP_HOST` dibiarkan kosong**, email tidak dikirim melainkan ditulis ke
+  `storage/logs/mail.log`. Berguna saat pengembangan lokal: tautan resetnya tetap
+  bisa diambil dari berkas tersebut.
+- Kegagalan pengiriman dicatat di `storage/logs/error.log`. Pengguna tetap melihat
+  pesan netral yang sama agar alamat email yang terdaftar tidak bisa ditebak.
 
 ---
 

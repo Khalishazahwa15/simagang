@@ -28,6 +28,22 @@ spl_autoload_register(function ($class) {
     }
 });
 
+// Autoload PHPMailer (dipasang manual di lib/, proyek ini tidak memakai Composer)
+spl_autoload_register(function ($class) {
+    $prefix = 'PHPMailer\\PHPMailer\\';
+
+    $len = strlen($prefix);
+    if (strncmp($prefix, $class, $len) !== 0) {
+        return;
+    }
+
+    $file = ROOT_PATH . '/lib/PHPMailer/' . substr($class, $len) . '.php';
+
+    if (file_exists($file)) {
+        require_once $file;
+    }
+});
+
 // Load Environment Variables
 \App\Core\Env::load(ROOT_PATH . '/.env');
 

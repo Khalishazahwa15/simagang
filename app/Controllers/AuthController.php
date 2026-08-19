@@ -124,22 +124,28 @@ class AuthController extends Controller {
                 $stmt = $db->prepare("UPDATE users SET reset_token = ?, reset_token_expires = DATE_ADD(NOW(), INTERVAL 1 HOUR) WHERE id = ?");
                 $stmt->execute([hash('sha256', $token), $user['id']]);
                 
-                // Fallback email mechanism (writes to local log)
                 $resetLink = BASE_URL . '/reset-password?token=' . $token;
-                $logMessage = "[" . date('Y-m-d H:i:s') . "] RESET PASSWORD LINK FOR {$email}:\n";
-                $logMessage .= "Halo {$user['nama']},\nKlik link ini untuk reset password Anda (berlaku 1 jam): {$resetLink}\n";
-                $logMessage .= "--------------------------------------------------\n";
-                
-                $logDir = ROOT_PATH . '/storage/logs';
-                if (!is_dir($logDir)) {
-                    mkdir($logDir, 0777, true);
-                }
-                // TODO: Replace this file-based mock with a real SMTP implementation (e.g. PHPMailer) before production go-live
-                file_put_contents($logDir . '/mail.log', $logMessage, FILE_APPEND);
+
+                $isiTeks = "Halo {$user['nama']},\n\n"
+                    . "Kami menerima permintaan pengaturan ulang kata sandi untuk akun Anda.\n"
+                    . "Buka tautan berikut untuk membuat kata sandi baru (berlaku 1 jam):\n\n"
+                    . $resetLink . "\n\n"
+                    . "Abaikan email ini bila Anda tidak merasa meminta.\n\n"
+                    . "SIMAGANG Bappeda Provinsi Lampung";
+
+                $isiHtml = '<p>Halo ' . htmlspecialchars($user['nama']) . ',</p>'
+                    . '<p>Kami menerima permintaan pengaturan ulang kata sandi untuk akun Anda. '
+                    . 'Tautan di bawah berlaku selama 1 jam.</p>'
+                    . '<p><a href="' . htmlspecialchars($resetLink) . '">Atur Ulang Kata Sandi</a></p>'
+                    . '<p>Abaikan email ini bila Anda tidak merasa meminta.</p>'
+                    . '<p>SIMAGANG Bappeda Provinsi Lampung</p>';
+
+                $mailService = new \App\Services\MailService();
+                $mailService->kirim($email, $user['nama'], 'Atur Ulang Kata Sandi SIMAGANG', $isiHtml, $isiTeks);
             }
             
             // Always show success message to prevent email enumeration
-            Session::setFlash('success', 'Jika email terdaftar, tautan untuk mereset password telah dikirim (Cek storage/logs/mail.log).');
+            Session::setFlash('success', 'Jika email terdaftar, tautan untuk mengatur ulang kata sandi telah dikirim. Silakan periksa kotak masuk Anda.');
             return $this->redirect('forgot-password');
         }
 
