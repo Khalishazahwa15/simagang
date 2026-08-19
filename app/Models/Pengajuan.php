@@ -51,6 +51,22 @@ class Pengajuan extends Model {
         return $stmt->execute([$nomorPengajuan, $id]);
     }
 
+    /**
+     * Jumlah pengajuan per status dalam satu kueri.
+     * Dasbor sebelumnya menjalankan satu COUNT terpisah untuk tiap status,
+     * padahal seluruh angkanya ada di hasil GROUP BY yang sama.
+     */
+    public function hitungPerStatus() {
+        $stmt = $this->db->query("SELECT status, COUNT(*) AS jumlah FROM {$this->table} GROUP BY status");
+
+        $hasil = [];
+        foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $baris) {
+            $hasil[$baris['status']] = (int)$baris['jumlah'];
+        }
+
+        return $hasil;
+    }
+
     public function findByUserId($userId) {
         $stmt = $this->db->prepare("SELECT * FROM {$this->table} WHERE user_id = ? ORDER BY created_at DESC");
         $stmt->execute([$userId]);

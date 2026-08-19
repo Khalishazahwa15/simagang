@@ -44,20 +44,22 @@ class SekretariatController extends Controller {
         $db = \App\Core\Database::getInstance()->getConnection();
         
         // Metrics for summary cards
-        $totalTindakLanjut = $db->query("SELECT COUNT(*) as total FROM pengajuan WHERE status IN ('diajukan', 'dalam_verifikasi')")->fetch()['total'];
-        $totalRevisi = $db->query("SELECT COUNT(*) as total FROM pengajuan WHERE status = 'revisi'")->fetch()['total'];
-        $totalAktif = $db->query("SELECT COUNT(*) as total FROM pengajuan WHERE status = 'sedang_magang'")->fetch()['total'];
-        $totalPengajuan = $db->query("SELECT COUNT(*) as total FROM pengajuan")->fetch()['total'];
-        
-        $totalSelesai = $db->query("SELECT COUNT(*) as total FROM pengajuan WHERE status = 'selesai'")->fetch()['total'];
-        $totalDiterima = $db->query("SELECT COUNT(*) as total FROM pengajuan WHERE status = 'diterima'")->fetch()['total'];
+        // Seluruh angka di bawah berasal dari satu kueri GROUP BY.
+        $dist = (new \App\Models\Pengajuan())->hitungPerStatus();
+        $jumlah = function (...$status) use ($dist) {
+            $n = 0;
+            foreach ($status as $s) {
+                $n += $dist[$s] ?? 0;
+            }
+            return $n;
+        };
 
-        // Distribusi Status
-        $distribusi = $db->query("SELECT status, COUNT(*) as count FROM pengajuan GROUP BY status")->fetchAll(\PDO::FETCH_ASSOC);
-        $dist = [];
-        foreach ($distribusi as $d) {
-            $dist[$d['status']] = $d['count'];
-        }
+        $totalTindakLanjut = $jumlah('diajukan', 'dalam_verifikasi');
+        $totalRevisi = $jumlah('revisi');
+        $totalAktif = $jumlah('sedang_magang');
+        $totalSelesai = $jumlah('selesai');
+        $totalDiterima = $jumlah('diterima');
+        $totalPengajuan = array_sum($dist);
 
         $pengajuan_terbaru = $db->query("
             SELECT p.*, u.nama as mahasiswa_nama, mp.universitas, mp.program_studi, d.nama_divisi as divisi_nama 

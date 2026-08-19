@@ -11,6 +11,22 @@ define('BASE_URL', $baseUrl);
 define('APP_NAME', 'SIMAGANG Bappeda Provinsi Lampung');
 define('UPLOAD_DIR', ROOT_PATH . '/storage/uploads');
 
+/**
+ * URL aset beserta penanda versinya.
+ *
+ * Penandanya diambil dari waktu ubah berkas, bukan time(). Dengan time(),
+ * setiap kunjungan menghasilkan URL berbeda sehingga peramban tidak pernah
+ * bisa menyimpan salinannya; sebaliknya tanpa penanda sama sekali, perubahan
+ * CSS tidak sampai ke pengguna sampai mereka menekan Ctrl+F5.
+ */
+function aset($jalur) {
+    $jalur = ltrim($jalur, '/');
+    $berkas = ROOT_PATH . '/public/' . $jalur;
+    $versi = is_file($berkas) ? filemtime($berkas) : null;
+
+    return BASE_URL . '/' . $jalur . ($versi ? '?v=' . $versi : '');
+}
+
 // Header keamanan. Dikirim untuk seluruh permintaan web, bukan hanya halaman
 // tertentu, sehingga tidak ada halaman yang terlewat.
 if (PHP_SAPI !== 'cli' && !headers_sent()) {

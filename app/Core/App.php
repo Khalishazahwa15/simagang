@@ -22,6 +22,9 @@ class App {
         // sengaja tidak didukung: token CSRF hanya diperiksa pada POST,
         // sehingga POST yang menyamar jadi GET akan lolos pemeriksaan.
         $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+        if ($method === 'HEAD') {
+            $method = 'GET';
+        }
         
         // Remove base url path from uri to get relative route
         $baseUrlPath = parse_url(BASE_URL, PHP_URL_PATH);

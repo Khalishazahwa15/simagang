@@ -6,10 +6,10 @@
     <title><?= $title ?? APP_NAME ?></title>
     
     <!-- Design System CSS -->
-    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/tokens.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/layout.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/components.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/css/responsive.css">
+    <link rel="stylesheet" href="<?= aset('assets/css/tokens.css') ?>">
+    <link rel="stylesheet" href="<?= aset('assets/css/layout.css') ?>">
+    <link rel="stylesheet" href="<?= aset('assets/css/components.css') ?>">
+    <link rel="stylesheet" href="<?= aset('assets/css/responsive.css') ?>">
 </head>
 <body class="admin-layout">
     <?php include APP_PATH . '/Views/components/sidebar.php'; ?>

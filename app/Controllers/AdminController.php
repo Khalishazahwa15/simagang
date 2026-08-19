@@ -36,12 +36,16 @@ class AdminController extends Controller {
         $db = \App\Core\Database::getInstance()->getConnection();
         
         // Admin Metrics
-        $totalSekretariat = $db->query("SELECT COUNT(*) as total FROM users WHERE role = 'sekretariat'")->fetch()['total'];
-        $totalAdmin = $db->query("SELECT COUNT(*) as total FROM users WHERE role = 'admin'")->fetch()['total'];
-        $totalDivisi = $db->query("SELECT COUNT(*) as total FROM divisi")->fetch()['total'];
-        
-        $kapasitasTotal = $db->query("SELECT SUM(kapasitas) as total FROM divisi")->fetch()['total'] ?? 0;
-        $slotTerpakai = $db->query("SELECT COUNT(*) as total FROM pengajuan WHERE status IN ('diterima', 'sedang_magang')")->fetch()['total'] ?? 0;
+        $peran = [];
+        foreach ($db->query("SELECT role, COUNT(*) AS jumlah FROM users GROUP BY role")->fetchAll(\PDO::FETCH_ASSOC) as $baris) {
+            $peran[$baris['role']] = (int)$baris['jumlah'];
+        }
+        $totalSekretariat = $peran['sekretariat'] ?? 0;
+        $totalAdmin = $peran['admin'] ?? 0;
+
+        $ringkasDivisi = $db->query("SELECT COUNT(*) AS jumlah, IFNULL(SUM(kapasitas), 0) AS kapasitas FROM divisi")->fetch();
+        $totalDivisi = (int)$ringkasDivisi['jumlah'];
+        $kapasitasTotal = (int)$ringkasDivisi['kapasitas'];
         
         $listDivisi = $db->query("
             SELECT d.*, 
@@ -60,19 +64,23 @@ class AdminController extends Controller {
         $listInternal = $db->query("SELECT id, nama, email, role FROM users WHERE role IN ('admin', 'sekretariat') ORDER BY role DESC, nama ASC")->fetchAll();
 
         // Sekretariat Metrics
-        $totalTindakLanjut = $db->query("SELECT COUNT(*) as total FROM pengajuan WHERE status IN ('diajukan', 'dalam_verifikasi')")->fetch()['total'];
-        $totalRevisi = $db->query("SELECT COUNT(*) as total FROM pengajuan WHERE status = 'revisi'")->fetch()['total'];
-        $totalAktif = $db->query("SELECT COUNT(*) as total FROM pengajuan WHERE status = 'sedang_magang'")->fetch()['total'];
-        $totalPengajuan = $db->query("SELECT COUNT(*) as total FROM pengajuan")->fetch()['total'];
-        
-        $totalSelesai = $db->query("SELECT COUNT(*) as total FROM pengajuan WHERE status = 'selesai'")->fetch()['total'];
-        $totalDiterima = $db->query("SELECT COUNT(*) as total FROM pengajuan WHERE status = 'diterima'")->fetch()['total'];
+        // Seluruh angka di bawah berasal dari satu kueri GROUP BY.
+        $dist = (new \App\Models\Pengajuan())->hitungPerStatus();
+        $jumlah = function (...$status) use ($dist) {
+            $n = 0;
+            foreach ($status as $s) {
+                $n += $dist[$s] ?? 0;
+            }
+            return $n;
+        };
 
-        $distribusi = $db->query("SELECT status, COUNT(*) as count FROM pengajuan GROUP BY status")->fetchAll(\PDO::FETCH_ASSOC);
-        $dist = [];
-        foreach ($distribusi as $d) {
-            $dist[$d['status']] = $d['count'];
-        }
+        $totalTindakLanjut = $jumlah('diajukan', 'dalam_verifikasi');
+        $totalRevisi = $jumlah('revisi');
+        $totalAktif = $jumlah('sedang_magang');
+        $totalSelesai = $jumlah('selesai');
+        $totalDiterima = $jumlah('diterima');
+        $totalPengajuan = array_sum($dist);
+        $slotTerpakai = $jumlah('diterima', 'sedang_magang');
 
         $pengajuan_terbaru = $db->query("
             SELECT p.*, u.nama as mahasiswa_nama, mp.universitas, mp.program_studi, d.nama_divisi as divisi_nama 
