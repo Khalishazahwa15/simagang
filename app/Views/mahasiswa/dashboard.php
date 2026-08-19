@@ -37,6 +37,20 @@ if ($pengajuan) {
 $dokCount = count($dokumen ?? []);
 $dokDesc = 'Berkas terunggah';
 ?>
+<?php if (!empty($profilKurang)): ?>
+<div style="background: #FEF3C7; border: 1px solid #FBBF24; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 14px;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+    <div style="flex: 1;">
+        <div style="font-family: var(--font-body); font-weight: 700; font-size: 14px; color: #7A5A00; margin-bottom: 4px;">Lengkapi profil dulu sebelum mengajukan magang</div>
+        <div style="font-family: var(--font-body); font-size: 13px; color: #7A5A00; line-height: 1.6;">
+            Data berikut belum terisi: <strong><?= htmlspecialchars(implode(', ', $profilKurang)) ?></strong>.
+            Formulir pengajuan magang baru bisa dibuka setelah semuanya lengkap.
+        </div>
+        <a href="<?= BASE_URL ?>/mahasiswa/profil" style="display: inline-block; margin-top: 12px; padding: 8px 16px; background: #7A5A00; color: #FEF3C7; text-decoration: none; border-radius: 6px; font-family: var(--font-body); font-size: 13px; font-weight: 600;">Lengkapi Profil</a>
+    </div>
+</div>
+<?php endif; ?>
+
 
 <!-- Metric Cards -->
 <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; display: grid; grid-template-columns: repeat(4, 1fr); margin-bottom: 24px;">

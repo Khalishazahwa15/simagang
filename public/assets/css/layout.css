@@ -20,6 +20,7 @@
 .admin-sidebar {
     position: sticky;
     top: 0;
+    z-index: var(--z-sidebar);
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -172,11 +173,10 @@
     justify-content: space-between;
     gap: var(--space-6);
     padding: var(--space-6) var(--space-8);
-    background: rgba(255, 254, 250, 0.82);
+    background: var(--bg-main);
     border-bottom: 1px solid var(--border-light);
-    backdrop-filter: blur(12px);
     position: relative;
-    z-index: 50;
+    z-index: var(--z-header);
 }
 
 .admin-header-title {

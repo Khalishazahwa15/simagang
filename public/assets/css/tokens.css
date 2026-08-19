@@ -241,3 +241,13 @@ textarea {
     background: var(--accent-soft);
     color: var(--text-primary);
 }
+
+/* Urutan lapisan tampilan. Selalu pakai variabel ini, jangan angka lepas,
+   agar tidak ada komponen yang saling menimpa tanpa disadari. */
+:root {
+    --z-content: 1;
+    --z-sidebar: 100;
+    --z-header: 200;
+    --z-dropdown: 300;
+    --z-modal: 1000;
+}

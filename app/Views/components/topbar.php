@@ -33,7 +33,7 @@ if ($userId) {
             </button>
 
             <!-- Dropdown Menu -->
-            <div id="notif-menu" style="display: none; position: absolute; right: 0; top: 100%; width: 320px; background: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-radius: 8px; border: 1px solid #eee; z-index: 100; margin-top: 8px;">
+            <div id="notif-menu" style="display: none; position: absolute; right: 0; top: 100%; width: 320px; background: #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-radius: 8px; border: 1px solid #eee; z-index: var(--z-dropdown); margin-top: 8px;">
                 <div style="padding: 12px 16px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-weight: 600; font-size: 14px; color: var(--text-primary);">Notifikasi</span>
                     <?php if ($unreadCount > 0): ?>

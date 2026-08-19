@@ -1,3 +1,17 @@
+<?php
+// Divisi yang tampil terpilih pada daftar penempatan final:
+// tawaran yang sudah disetujui mahasiswa lebih diutamakan daripada preferensi awal.
+$divisiTerpilih = $pengajuan['divisi_id_final']
+    ?: ($pengajuan['divisi_id_tawaran'] ?: $pengajuan['divisi_id_preferensi']);
+
+$namaDivisiTawaran = '';
+foreach ($divisi as $d) {
+    if ($d['id'] == ($pengajuan['divisi_id_tawaran'] ?? null)) {
+        $namaDivisiTawaran = $d['nama_divisi'];
+        break;
+    }
+}
+?>
 <div class="mb-6">
     <div class="d-flex align-center gap-2 mb-2">
         <a href="<?= BASE_URL ?>/sekretariat/pengajuan" class="text-muted" style="text-decoration: none; display: flex; align-items: center; gap: 6px;">
@@ -179,6 +193,27 @@
 
     <!-- Right: Action Form -->
     <div>
+        <?php if ($pengajuan['status'] === 'menunggu_finalisasi_sekretariat'): ?>
+        <div class="card fade-up interactive-card" style="margin: 0 0 24px 0;">
+            <div class="card-header" style="background: rgba(217,165,29,0.05);">
+                <h3 class="card-title">Finalisasi Penempatan</h3>
+            </div>
+            <div class="card-body">
+                <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-top: 0; margin-bottom: 16px;">
+                    Mahasiswa telah <strong>menyetujui</strong> tawaran divisi
+                    <strong><?= htmlspecialchars($namaDivisiTawaran ?: 'yang ditawarkan') ?></strong>.
+                    Tekan tombol di bawah untuk menetapkannya sebagai penempatan final &mdash;
+                    divisinya terisi otomatis, tidak perlu dipilih ulang.
+                </p>
+                <form action="<?= BASE_URL ?>/sekretariat/pengajuan/finalisasi-tawaran" method="POST">
+                    <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?? '' ?>">
+                    <input type="hidden" name="pengajuan_id" value="<?= htmlspecialchars($pengajuan['id']) ?>">
+                    <button type="submit" class="btn btn-primary">Tetapkan <?= htmlspecialchars($namaDivisiTawaran ?: 'Divisi Tawaran') ?> sebagai Penempatan Final</button>
+                </form>
+            </div>
+        </div>
+        <?php endif; ?>
+
         <?php if ($pengajuan['status'] === 'diajukan'): ?>
         <div class="card fade-up interactive-card" style="margin: 0 0 24px 0;">
             <div class="card-header" style="background: rgba(217,165,29,0.05);">
@@ -224,7 +259,7 @@
                             <select name="divisi_id_final" class="form-control" style="background: var(--bg-soft);">
                                 <option value="">-- Pilih Divisi Penempatan --</option>
                                 <?php foreach($divisi as $d): ?>
-                                    <option value="<?= $d['id'] ?>" <?= (($pengajuan['divisi_id'] ?? $pengajuan['divisi_id_preferensi'] ?? '') == $d['id']) ? 'selected' : '' ?>><?= htmlspecialchars($d['nama_divisi']) ?> (Sisa Kuota: <?= max(0, $d['kapasitas'] - ($d['terisi'] ?? 0)) ?>)</option>
+                                    <option value="<?= $d['id'] ?>" <?= ($divisiTerpilih == $d['id']) ? 'selected' : '' ?>><?= htmlspecialchars($d['nama_divisi']) ?> (Sisa Kuota: <?= max(0, $d['kapasitas'] - ($d['terisi'] ?? 0)) ?>)</option>
                                 <?php endforeach; ?>
                             </select>
                         </div>

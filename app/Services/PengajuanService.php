@@ -29,6 +29,11 @@ class PengajuanService {
             }
         }
 
+        $profilKurang = (new \App\Models\MahasiswaProfile())->fieldBelumLengkap($userId);
+        if (!empty($profilKurang)) {
+            throw new \Exception("Lengkapi profil Anda lebih dulu. Belum terisi: " . implode(', ', $profilKurang) . ".");
+        }
+
         // Prevent multiple active applications
         $existing = $this->pengajuanModel->findByUserId($userId);
         if (!empty($existing)) {

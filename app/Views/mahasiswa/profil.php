@@ -1,8 +1,28 @@
 <?php
 $namaLengkap = $user['nama'] ?? 'Mahasiswa';
 $initial = strtoupper(substr($namaLengkap, 0, 1));
+
+$profilKurang = [];
+foreach (\App\Models\MahasiswaProfile::FIELD_WAJIB as $kolom => $label) {
+    if (trim((string)($user[$kolom] ?? '')) === '') {
+        $profilKurang[] = $label;
+    }
+}
 ?>
 <div style="display: flex; flex-direction: column; gap: 24px; max-width: 911px;">
+    <?php if (!empty($profilKurang)): ?>
+    <div style="background: #FEF3C7; border: 1px solid #FBBF24; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 14px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+        <div style="flex: 1;">
+            <div style="font-family: var(--font-body); font-weight: 700; font-size: 14px; color: #7A5A00; margin-bottom: 4px;">Profil belum lengkap</div>
+            <div style="font-family: var(--font-body); font-size: 13px; color: #7A5A00; line-height: 1.6;">
+                Data berikut belum terisi: <strong><?= htmlspecialchars(implode(', ', $profilKurang)) ?></strong>.
+                Isi kolom tersebut di formulir di bawah, lalu simpan.
+            </div>
+        </div>
+    </div>
+    <?php endif; ?>
+
     <!-- Header -->
     <div>
         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
@@ -86,12 +106,7 @@ $initial = strtoupper(substr($namaLengkap, 0, 1));
                     </div>
                     <div class="form-group" style="margin-bottom: 0;">
                         <label class="form-label required">Semester Saat Ini</label>
-                        <select name="semester" class="form-control" required>
-                            <option value="6" <?= ($user['semester'] ?? '') == '6' ? 'selected' : '' ?>>Semester 6</option>
-                            <option value="7" <?= ($user['semester'] ?? '') == '7' ? 'selected' : '' ?>>Semester 7</option>
-                            <option value="8" <?= ($user['semester'] ?? '') == '8' ? 'selected' : '' ?>>Semester 8</option>
-                            <option value="9" <?= ($user['semester'] ?? '') == '9' ? 'selected' : '' ?>>Semester 9</option>
-                        </select>
+                        <input type="number" name="semester" class="form-control" value="<?= htmlspecialchars($user['semester'] ?? '') ?>" placeholder="Contoh: 6" min="1" max="14" required>
                     </div>
                 </div>
 

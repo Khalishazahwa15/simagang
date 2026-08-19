@@ -136,7 +136,7 @@
 </div>
 
 <!-- Modal Tambah Divisi -->
-<div id="modalTambahDivisi" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+<div id="modalTambahDivisi" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: var(--z-modal); align-items: center; justify-content: center;">
     <div style="background: #fff; width: 100%; max-width: 500px; border-radius: 12px; margin: 10vh auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
         <div style="padding: 20px 24px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
             <h3 style="margin: 0; font-family: var(--font-display); font-size: 18px; color: var(--text-primary);">Tambah Divisi Baru</h3>
@@ -169,7 +169,7 @@
 </div>
 
 <!-- Modal Edit Divisi -->
-<div id="modalEditDivisi" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+<div id="modalEditDivisi" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: var(--z-modal); align-items: center; justify-content: center;">
     <div style="background: #fff; width: 100%; max-width: 500px; border-radius: 12px; margin: 10vh auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
         <div style="padding: 20px 24px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
             <h3 style="margin: 0; font-family: var(--font-display); font-size: 18px; color: var(--text-primary);">Edit Divisi</h3>

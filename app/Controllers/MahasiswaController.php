@@ -33,7 +33,8 @@ class MahasiswaController extends Controller {
 
     public function dashboard() {
         $nama = Session::get('nama') ?? 'Mahasiswa';
-        
+        $profilKurang = (new \App\Models\MahasiswaProfile())->fieldBelumLengkap(Session::get('user_id'));
+
         $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Session::get('user_id'));
         $aktif = $pengajuan[0] ?? null;
 
@@ -64,11 +65,18 @@ class MahasiswaController extends Controller {
             'pengajuan' => $aktif,
             'riwayat' => $history,
             'dokumen' => $dokumen,
-            'namaLengkap' => $nama
+            'namaLengkap' => $nama,
+            'profilKurang' => $profilKurang
         ]);
     }
 
     public function pengajuan() {
+        $profilKurang = (new \App\Models\MahasiswaProfile())->fieldBelumLengkap(Session::get('user_id'));
+        if (!empty($profilKurang)) {
+            Session::setFlash('warning', 'Lengkapi profil Anda lebih dulu sebelum mengajukan magang. Belum terisi: ' . implode(', ', $profilKurang) . '.');
+            return $this->redirect('mahasiswa/profil');
+        }
+
         $pengajuanList = $this->pengajuanService->getPengajuanMahasiswa(Session::get('user_id'));
         $aktif = $pengajuanList[0] ?? null;
 
@@ -243,6 +251,10 @@ class MahasiswaController extends Controller {
 
                 if (empty($nama) || empty($nim) || empty($tempat_lahir) || empty($tanggal_lahir) || empty($no_hp) || empty($alamat) || empty($universitas) || empty($fakultas) || empty($prodi) || empty($semester)) {
                     throw new \Exception("Semua field wajib diisi.");
+                }
+
+                if ($semester < 1 || $semester > 14) {
+                    throw new \Exception("Semester harus berupa angka 1 sampai 14.");
                 }
 
                 $db = \App\Core\Database::getInstance()->getConnection();
