@@ -77,7 +77,7 @@
                         <td style="padding: 13px 16px;">
                             <div style="font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary); white-space: nowrap;"><?= $mulai->format('d M') ?> - <?= $selesai->format('d M Y') ?></div>
                             <?php if ($sisaHari > 0): ?>
-                                <div style="font-family: var(--font-body); font-size: 11px; color: var(--accent); font-weight: 600;">Sisa <?= $sisaHari ?> hari</div>
+                                <div style="font-family: var(--font-body); font-size: 11px; color: var(--accent-dark); font-weight: 600;">Sisa <?= $sisaHari ?> hari</div>
                             <?php endif; ?>
                         </td>
                         <td style="padding: 13px 16px;"><span class="badge badge-disetujui"><?= $p['status'] === 'sedang_magang' ? 'Aktif' : 'Diterima' ?></span></td>

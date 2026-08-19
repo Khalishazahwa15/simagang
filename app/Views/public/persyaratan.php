@@ -303,7 +303,7 @@ $divisiList = $divisiData ?? [];
         <!-- CTA -->
         <div class="bottom-cta" style="margin-top: 48px;">
             <div>
-                <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px;">Sudah Siap?</div>
+                <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent-dark); text-transform: uppercase; margin-bottom: 8px;">Sudah Siap?</div>
                 <h3 style="font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--bg-main); line-height: 1.2; margin: 0;">Ajukan magang Anda sekarang</h3>
             </div>
             <div style="display: flex; gap: 12px; flex-shrink: 0;">

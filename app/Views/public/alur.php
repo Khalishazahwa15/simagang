@@ -154,7 +154,7 @@ $badgeColors = [
                         <!-- Left: number + connector -->
                         <div style="display: flex; flex-direction: column; align-items: center; padding-top: 4px;">
                             <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                <span style="font-family: var(--font-mono); font-size: 13px; color: var(--accent); letter-spacing: 0.05em;"><?= $step['num'] ?></span>
+                                <span style="font-family: var(--font-mono); font-size: 13px; color: var(--accent-dark); letter-spacing: 0.05em;"><?= $step['num'] ?></span>
                             </div>
                             <?php if (!$isLast): ?>
                                 <div style="width: 2px; flex: 1; background: linear-gradient(to bottom, var(--primary), var(--border)); min-height: 40px; margin-top: 4px;"></div>
@@ -205,7 +205,7 @@ $badgeColors = [
         <!-- CTA -->
         <div class="bottom-cta">
             <div>
-                <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px;">Siap Mengajukan?</div>
+                <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent-dark); text-transform: uppercase; margin-bottom: 8px;">Siap Mengajukan?</div>
                 <h3 style="font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--bg-main); line-height: 1.2; margin: 0;">Mulai proses pengajuan Anda sekarang</h3>
             </div>
             <div style="display: flex; gap: 12px; flex-shrink: 0;">

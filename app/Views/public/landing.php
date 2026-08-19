@@ -211,7 +211,7 @@
         font-weight: 700;
         letter-spacing: 0.15em;
         text-transform: uppercase;
-        color: var(--accent);
+        color: var(--accent-dark);
         margin-bottom: 16px;
     }
     .section-title {
@@ -435,7 +435,7 @@
             ];
             foreach ($benefits as $b): ?>
             <div class="benefit-row" style="padding: 40px 0; border-bottom: 1px solid var(--border);">
-                <div style="font-family: var(--font-mono); font-size: 36px; font-weight: 600; color: var(--accent); line-height: 1; padding-top: 4px;"><?= $b['num'] ?></div>
+                <div style="font-family: var(--font-mono); font-size: 36px; font-weight: 600; color: var(--accent-dark); line-height: 1; padding-top: 4px;"><?= $b['num'] ?></div>
                 <div><h3 style="font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--text-primary); line-height: 1.2; letter-spacing: -0.01em; margin: 0;"><?= $b['title'] ?></h3></div>
                 <div><p style="font-family: var(--font-body); font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin: 0;"><?= $b['body'] ?></p></div>
             </div>

@@ -301,6 +301,84 @@ foreach ($kasus as $k) {
 
 $db->exec("DELETE FROM pengajuan");
 
+// --- Kontras warna teks terhadap ambang WCAG AA ---
+$css = file_get_contents(__DIR__ . '/../public/assets/css/tokens.css');
+preg_match_all('/--([\w-]+):\s*([^;]+);/', $css, $cocok, PREG_SET_ORDER);
+$token = [];
+foreach ($cocok as $c) {
+    $token[$c[1]] = trim($c[2]);
+}
+
+$keRgb = function ($nilai, $dalam = 0) use (&$keRgb, $token) {
+    $nilai = trim($nilai);
+    if ($dalam > 8) {
+        return null;
+    }
+    if (preg_match('/var\(--([\w-]+)\)/', $nilai, $m)) {
+        return isset($token[$m[1]]) ? $keRgb($token[$m[1]], $dalam + 1) : null;
+    }
+    if (preg_match('/^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/', $nilai, $m)) {
+        $h = $m[1];
+        if (strlen($h) === 3) {
+            $h = $h[0] . $h[0] . $h[1] . $h[1] . $h[2] . $h[2];
+        }
+        return [hexdec(substr($h, 0, 2)), hexdec(substr($h, 2, 2)), hexdec(substr($h, 4, 2))];
+    }
+    return null;
+};
+
+$luminansi = function ($rgb) {
+    $k = function ($c) {
+        $c = $c / 255;
+        return $c <= 0.03928 ? $c / 12.92 : pow(($c + 0.055) / 1.055, 2.4);
+    };
+    return 0.2126 * $k($rgb[0]) + 0.7152 * $k($rgb[1]) + 0.0722 * $k($rgb[2]);
+};
+
+$pasangan = [
+    ['text-primary', 'bg-main'],
+    ['text-secondary', 'bg-main'],
+    ['text-secondary', 'bg-soft'],
+    ['text-muted', 'bg-main'],
+    ['color-text-inverse', 'color-primary'],
+    ['color-danger-ink', 'color-danger-soft'],
+    ['color-warning-ink', 'color-warning-soft'],
+    ['color-success-ink', 'color-success-soft'],
+    ['color-info-ink', 'color-info-soft'],
+    ['color-accent-dark', 'bg-main'],
+    ['color-primary-dark', 'color-accent'],
+];
+
+$gagalKontras = [];
+foreach ($pasangan as $p) {
+    $a = $keRgb($token[$p[0]] ?? '');
+    $b = $keRgb($token[$p[1]] ?? '');
+    if (!$a || !$b) {
+        $gagalKontras[] = $p[0] . ' (token tidak terbaca)';
+        continue;
+    }
+    $la = $luminansi($a);
+    $lb = $luminansi($b);
+    $rasio = (max($la, $lb) + 0.05) / (min($la, $lb) + 0.05);
+    if ($rasio < 4.5) {
+        $gagalKontras[] = sprintf('%s di atas %s (%.2f)', $p[0], $p[1], $rasio);
+    }
+}
+periksa(empty($gagalKontras),
+    'Kontras teks memenuhi WCAG AA' . ($gagalKontras ? ' (gagal: ' . implode('; ', $gagalKontras) . ')' : ''));
+
+// Warna aksen hanya untuk latar dan garis, tidak untuk teks: rasionya
+// terhadap latar halaman hanya 2.88.
+$berkasTampilan = glob(__DIR__ . '/../app/Views/*/*.php');
+$pemakaianSalah = [];
+foreach ($berkasTampilan as $bt) {
+    if (preg_match('/(?<![-\w])color:\s*var\(--accent\)/', file_get_contents($bt))) {
+        $pemakaianSalah[] = basename($bt);
+    }
+}
+periksa(empty($pemakaianSalah),
+    'Warna aksen tidak dipakai sebagai warna teks' . ($pemakaianSalah ? ' (' . implode(', ', $pemakaianSalah) . ')' : ''));
+
 echo "====================================\n";
 echo "JALUR RUSAK: {$lulus} lulus, {$gagal} gagal.\n";
 

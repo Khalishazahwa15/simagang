@@ -264,7 +264,7 @@ $categories = [
                         <?php foreach ($cat['items'] as $idx => $item): ?>
                             <div class="faq-accordion <?= $idx === 0 ? 'active' : '' ?>">
                                 <button class="faq-header" onclick="toggleFaq(this)">
-                                    <span style="font-family: var(--font-mono); font-size: 12px; color: var(--accent); flex-shrink: 0; margin-top: 3px; font-weight: 700;">Q</span>
+                                    <span style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-dark); flex-shrink: 0; margin-top: 3px; font-weight: 700;">Q</span>
                                     <span style="font-family: var(--font-body); font-size: 15.5px; font-weight: 600; color: var(--text-primary); line-height: 1.5; flex: 1;"><?= $item['q'] ?></span>
                                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-chevron"><path d="m6 9 6 6 6-6"/></svg>
                                 </button>
@@ -283,7 +283,7 @@ $categories = [
     <div style="max-width: 960px; margin: 0 auto 80px; padding: 0 40px;">
         <div class="bottom-cta" style="margin: 0;">
             <div>
-                <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; margin-bottom: 8px;">Portal SIMAGANG</div>
+                <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent-dark); text-transform: uppercase; margin-bottom: 8px;">Portal SIMAGANG</div>
                 <h3 style="font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--bg-main); line-height: 1.2; margin: 0;">Ajukan magang Anda secara digital</h3>
             </div>
             <div style="display: flex; gap: 12px; flex-shrink: 0;">

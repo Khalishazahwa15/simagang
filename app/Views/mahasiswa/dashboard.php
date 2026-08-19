@@ -79,7 +79,7 @@ $dokDesc = 'Berkas terunggah';
     <!-- Card 3: Durasi -->
     <div style="padding: 20px; border-left: 0.666667px solid var(--border); display: flex; flex-direction: column;">
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">DURASI MAGANG</div>
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent); margin-bottom: 4px; line-height: 1.3; letter-spacing: -0.24px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?= htmlspecialchars($durasi) ?>">
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent-dark); margin-bottom: 4px; line-height: 1.3; letter-spacing: -0.24px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?= htmlspecialchars($durasi) ?>">
             <?= htmlspecialchars($durasi) ?>
         </div>
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 11.5px; line-height: 17px; color: var(--text-secondary);">
