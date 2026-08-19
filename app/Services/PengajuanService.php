@@ -78,6 +78,15 @@ class PengajuanService {
             $this->auditService->log('create_pengajuan', 'pengajuan', $pengajuanId, "Mengajukan permohonan magang baru: {$nomorPengajuan}");
 
             $this->pengajuanModel->commit();
+
+            // Riwayat dan pemberitahuan dicatat setelah transaksi berhasil,
+            // supaya kegagalan pengiriman email tidak membatalkan pengajuan.
+            try {
+                $this->statusService->catatStatusAwal($pengajuanId);
+            } catch (\Throwable $e) {
+                \App\Core\Logger::error('STATUS AWAL', $e->getMessage());
+            }
+
             return $pengajuanId;
 
         } catch (\Exception $e) {

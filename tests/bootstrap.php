@@ -33,9 +33,15 @@ spl_autoload_register(function ($class) {
 require_once APP_PATH . '/Core/Env.php';
 \App\Core\Env::load(ROOT_PATH . '/.env');
 
-// Paksa nama basis data uji sebelum config/database.php membaca konfigurasi.
-// Env::load melewati putenv untuk kunci yang sudah ada di $_ENV/$_SERVER,
-// jadi penetapan di sini menang atas isi .env.
+// Penetapan di sini menang atas isi .env: Env::load melewati putenv untuk
+// kunci yang sudah ada di $_ENV/$_SERVER.
+
+// Pengujian tidak boleh mengirim email ke siapa pun.
+putenv('MAIL_NOTIFIKASI=false');
+$_ENV['MAIL_NOTIFIKASI'] = 'false';
+$_SERVER['MAIL_NOTIFIKASI'] = 'false';
+
+// Basis data uji, ditetapkan sebelum config/database.php membacanya.
 $namaDbUji = getenv('SIMAGANG_TEST_DB') ?: 'simagang_test';
 putenv('DB_NAME=' . $namaDbUji);
 $_ENV['DB_NAME'] = $namaDbUji;

@@ -114,7 +114,9 @@ git pull
 mysql -u root simagang_db < database/UPGRADE.sql
 ```
 
-Berkas itu aman dijalankan berulang. Galat `Duplicate column name` atau `table already exists` berarti bagian tersebut sudah pernah dieksekusi dan boleh diabaikan.
+Berkas itu aman dijalankan berulang. Setiap perubahan diperiksa dulu ke `information_schema`, jadi bagian yang sudah pernah dieksekusi dilewati begitu saja tanpa galat. Bila berhasil, baris terakhir keluarannya berbunyi `UPGRADE.sql selesai dijalankan.` — kalau baris itu tidak muncul, berarti ada yang gagal dan perlu diperiksa.
+
+Bisa juga lewat phpMyAdmin: pilih database `simagang_db` → tab **Import** → pilih berkasnya.
 
 Melewatkan langkah ini membuat halaman login galat, karena tabel `login_attempts` belum ada.
 
@@ -154,6 +156,27 @@ MAIL_FROM_NAME=SIMAGANG Bappeda Lampung
 - Untuk Gmail, `SMTP_PASS` harus **App Password**, bukan kata sandi akun. App Password baru muncul setelah verifikasi 2 langkah aktif, dan dibuat di `myaccount.google.com/apppasswords`.
 - `MAIL_FROM_ADDRESS` sebaiknya sama dengan `SMTP_USER`; Gmail menolak alamat pengirim yang bukan miliknya.
 - **Bila `SMTP_HOST` dibiarkan kosong**, email tidak dikirim melainkan ditulis ke `storage/logs/mail.log`. Berguna saat pengembangan lokal: tautan resetnya tetap bisa diambil dari berkas itu.
+
+### Email otomatis perubahan status
+
+Selain tautan reset kata sandi, sistem mengirim email ke mahasiswa **setiap kali
+status pengajuannya berubah** — dari "Diajukan" sampai "Selesai", termasuk
+transisi otomatis berbasis tanggal. Isinya sama dengan notifikasi dalam aplikasi,
+ditambah tautan ke halaman status.
+
+Matikan sementara saat pengembangan agar kotak masuk tidak penuh:
+
+```ini
+MAIL_NOTIFIKASI=false
+```
+
+Pengujian otomatis selalu mematikannya sendiri, jadi menjalankan tes tidak akan
+mengirim email ke siapa pun.
+
+Kegagalan pengiriman dicatat di `storage/logs/error.log` dan **tidak pernah**
+membatalkan perubahan status yang sudah tersimpan.
+
+### Menguji konfigurasi
 
 Uji konfigurasi tanpa lewat halaman web:
 

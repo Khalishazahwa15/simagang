@@ -181,6 +181,45 @@ periksa(!empty($detail['mahasiswa_nama']) && !empty($detail['nim']) && !empty($d
 
 $db->exec("DELETE FROM pengajuan");
 
+// --- Pemberitahuan dan email perubahan status ---
+$isiService = file_get_contents(__DIR__ . '/../app/Services/StatusService.php');
+preg_match_all("/case '(\\w+)':/", $isiService, $cocok);
+$tanpaEmail = [];
+foreach ($cocok[1] as $st) {
+    if (preg_match("/case '{$st}':(.*?)break;/s", $isiService, $blok)
+        && strpos($blok[1], "'email' => true") === false) {
+        $tanpaEmail[] = $st;
+    }
+}
+periksa(empty($tanpaEmail),
+    'Setiap status mengirim email ke mahasiswa' . ($tanpaEmail ? ' (belum: ' . implode(', ', $tanpaEmail) . ')' : ''));
+
+// Status pembuka wajib tercatat dan diberitahukan, karena pembuatan pengajuan
+// tidak melewati updateStatus()
+$db->exec("DELETE FROM pengajuan");
+$db->exec("INSERT INTO pengajuan (nomor_pengajuan, user_id, divisi_id_preferensi, tanggal_mulai_rencana, tanggal_selesai_rencana, status)
+           VALUES ('UJI-AWAL-1', 3, 1, '2026-09-01', '2026-11-30', 'diajukan')");
+$idAwal = (int)$db->lastInsertId();
+$db->exec("DELETE FROM notifications");
+
+$statusService->catatStatusAwal($idAwal);
+
+$riwayat = $db->query("SELECT COUNT(*) FROM status_history WHERE pengajuan_id = {$idAwal}")->fetchColumn();
+periksa((int)$riwayat === 1, 'Pengiriman pertama tercatat di riwayat status');
+
+$keMahasiswa = $db->query("SELECT COUNT(*) FROM notifications WHERE pengajuan_id = {$idAwal} AND user_id = 3")->fetchColumn();
+$keSekretariat = $db->query("SELECT COUNT(*) FROM notifications WHERE pengajuan_id = {$idAwal} AND user_id = 2")->fetchColumn();
+periksa((int)$keMahasiswa >= 1, 'Mahasiswa diberi tahu pengajuannya masuk');
+periksa((int)$keSekretariat >= 1, 'Sekretariat diberi tahu ada berkas baru');
+
+// Sinkronisasi otomatis berjalan tanpa sesi pengguna
+$kolom = $db->query("SELECT IS_NULLABLE FROM information_schema.COLUMNS
+                     WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'status_history'
+                       AND COLUMN_NAME = 'changed_by'")->fetchColumn();
+periksa($kolom === 'YES', 'changed_by boleh kosong untuk tindakan sistem');
+
+$db->exec("DELETE FROM pengajuan");
+
 echo "====================================\n";
 echo "JALUR RUSAK: {$lulus} lulus, {$gagal} gagal.\n";
 

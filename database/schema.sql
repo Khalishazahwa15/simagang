@@ -94,11 +94,11 @@ CREATE TABLE IF NOT EXISTS status_history (
     pengajuan_id INT NOT NULL,
     status_awal VARCHAR(50) NOT NULL,
     status_baru VARCHAR(50) NOT NULL,
-    changed_by INT NOT NULL,
+    changed_by INT NULL,
     catatan TEXT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (pengajuan_id) REFERENCES pengajuan(id) ON DELETE CASCADE,
-    FOREIGN KEY (changed_by) REFERENCES users(id) ON DELETE RESTRICT
+    FOREIGN KEY (changed_by) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
 -- 7. notifications
