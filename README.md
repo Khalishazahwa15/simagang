@@ -212,7 +212,7 @@ app/
   Views/         Berkas tampilan, dikelompokkan per peran
 config/          routes.php, database.php, app.php
 database/        schema.sql, UPGRADE.sql, seeder.php
-docs/            Rancangan basis data dan matriks keterlacakan PRD
+docs/            Rancangan basis data, matriks keterlacakan PRD, rencana migrasi Supabase
 lib/PHPMailer/   PHPMailer 7.1.1 (LGPL-2.1), dipasang manual tanpa Composer
 public/          Direktori web-facing: index.php dan aset
 storage/         Dibuat otomatis saat dipakai
