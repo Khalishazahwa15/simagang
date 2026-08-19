@@ -12,6 +12,11 @@ class User extends Model {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function catatWaktuLogin($userId) {
+        $stmt = $this->db->prepare("UPDATE {$this->table} SET last_login_at = NOW() WHERE id = ?");
+        return $stmt->execute([$userId]);
+    }
+
     public function create($nama, $email, $passwordHash, $role = 'mahasiswa') {
         $stmt = $this->db->prepare("INSERT INTO {$this->table} (nama, email, password, role) VALUES (?, ?, ?, ?)");
         $stmt->execute([$nama, $email, $passwordHash, $role]);

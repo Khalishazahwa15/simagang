@@ -21,17 +21,19 @@ class PengajuanService {
     }
 
     public function createPengajuan($userId, $divisiPreferensi, $tanggalMulai, $tanggalSelesai, $files) {
+        // Profil adalah prasyarat formulir, jadi diperiksa lebih dulu daripada
+        // isi formulirnya sendiri.
+        $profilKurang = (new \App\Models\MahasiswaProfile())->fieldBelumLengkap($userId);
+        if (!empty($profilKurang)) {
+            throw new \Exception("Lengkapi profil Anda lebih dulu. Belum terisi: " . implode(', ', $profilKurang) . ".");
+        }
+
         // Validate required files
         $requiredFiles = ['surat_lamaran', 'cv', 'transkrip'];
         foreach ($requiredFiles as $req) {
             if (!isset($files[$req]) || $files[$req]['error'] !== UPLOAD_ERR_OK) {
                 throw new \Exception("Dokumen {$req} wajib diunggah.");
             }
-        }
-
-        $profilKurang = (new \App\Models\MahasiswaProfile())->fieldBelumLengkap($userId);
-        if (!empty($profilKurang)) {
-            throw new \Exception("Lengkapi profil Anda lebih dulu. Belum terisi: " . implode(', ', $profilKurang) . ".");
         }
 
         // Prevent multiple active applications
@@ -99,7 +101,7 @@ class PengajuanService {
         try {
             // Update fields manually
             $stmt = $this->pengajuanModel->getDb()->prepare("UPDATE pengajuan SET divisi_id_final = ?, pembina_lapangan = ?, tanggal_mulai_aktual = ?, tanggal_selesai_aktual = ?, catatan_verifikasi = ?, diputuskan_oleh = ?, diputuskan_at = NOW() WHERE id = ?");
-            $stmt->execute([$divisiIdFinal, $pembinaLapangan, $tanggalMulaiAktual, $tanggalSelesaiAktual, $catatan, Session::get('user_id'), $pengajuanId]);
+            $stmt->execute([$divisiIdFinal, $pembinaLapangan, $tanggalMulaiAktual, $tanggalSelesaiAktual, $catatan, \App\Core\Auth::id(), $pengajuanId]);
 
             // Transition state
             $this->statusService->updateStatus($pengajuanId, $pengajuan['status'], 'diterima', "Diterima dan ditempatkan.");
@@ -128,7 +130,7 @@ class PengajuanService {
         $this->pengajuanModel->beginTransaction();
         try {
             $stmt = $this->pengajuanModel->getDb()->prepare("UPDATE pengajuan SET alasan_penolakan = ?, catatan_verifikasi = ?, diputuskan_oleh = ?, diputuskan_at = NOW() WHERE id = ?");
-            $stmt->execute([$alasanPenolakan, $catatan, Session::get('user_id'), $pengajuanId]);
+            $stmt->execute([$alasanPenolakan, $catatan, \App\Core\Auth::id(), $pengajuanId]);
 
             // Transition state
             $this->statusService->updateStatus($pengajuanId, $pengajuan['status'], 'ditolak', $alasanPenolakan);
@@ -187,7 +189,7 @@ class PengajuanService {
             throw new \Exception("Pengajuan tidak ditemukan.");
         }
 
-        if ($pengajuan['user_id'] != $userIdMahasiswa || $pengajuan['user_id'] != Session::get('user_id')) {
+        if ($pengajuan['user_id'] != $userIdMahasiswa || $pengajuan['user_id'] != \App\Core\Auth::id()) {
             throw new \Exception("Akses Ditolak. Anda tidak dapat merespons tawaran milik orang lain.");
         }
 

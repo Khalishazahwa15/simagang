@@ -41,3 +41,8 @@ ALTER TABLE pengajuan  ADD INDEX idx_pengajuan_status (status),
 ALTER TABLE notifications ADD INDEX idx_notif_user_baca (user_id, is_read);
 ALTER TABLE audit_logs ADD INDEX idx_audit_dibuat (created_at),
                        ADD INDEX idx_audit_entitas (entity, entity_id);
+
+-- Kolom waktu login terakhir. Halaman Kelola Pengguna sebelumnya
+-- menampilkan updated_at dengan label "Terakhir Aktif", padahal kolom itu
+-- berubah setiap kali data pengguna disunting, bukan saat pengguna masuk.
+ALTER TABLE users ADD COLUMN last_login_at DATETIME NULL AFTER reset_token_expires;

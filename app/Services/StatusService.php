@@ -39,7 +39,7 @@ class StatusService {
             throw new \Exception("Transisi status ilegal dari '{$statusAwal}' ke '{$statusBaru}'.");
         }
 
-        $userId = Session::get('user_id');
+        $userId = \App\Core\Auth::id();
 
         $this->pengajuanModel->beginTransaction();
         try {

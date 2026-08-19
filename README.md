@@ -127,6 +127,20 @@ sehingga penyebab kegagalan langsung terlihat.
 
 ---
 
+## Pengujian
+
+```bash
+php tests/TestSystemFlow.php   # alur normal: tawaran, IDOR, hak akses, otomasi tanggal
+php tests/TestJalurRusak.php   # jalur yang harus ditolak sistem
+```
+
+Kedua berkas memuat `tests/bootstrap.php`, yang **membangun ulang basis data
+`simagang_test` dari nol** setiap kali dijalankan. Basis data pengembangan tidak
+tersentuh sama sekali. Ganti namanya lewat variabel lingkungan `SIMAGANG_TEST_DB`
+bila perlu.
+
+---
+
 ## Manajemen Lingkungan (Environment)
 
 - **Development**: Set `APP_ENV=development` di `.env` untuk menampilkan semua pesan error secara langsung di browser demi kemudahan debugging.

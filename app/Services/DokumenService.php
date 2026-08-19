@@ -20,7 +20,7 @@ class DokumenService {
     }
 
     public function uploadDokumen($pengajuanId, $nomorPengajuan, $jenisDokumen, $fileArray) {
-        $userId = Session::get('user_id');
+        $userId = \App\Core\Auth::id();
         $role = \App\Core\Auth::role();
 
         // RBAC / IDOR Protection
@@ -98,7 +98,7 @@ class DokumenService {
                 $fileArray['name'], 
                 $newVersion, 
                 true, 
-                Session::get('user_id')
+                \App\Core\Auth::id()
             );
 
             $this->auditService->log('upload_dokumen', 'dokumen', $docId, "Mengunggah {$jenisDokumen} versi {$newVersion}");
@@ -120,7 +120,7 @@ class DokumenService {
     }
 
     public function downloadDokumen($dokumenId) {
-        $userId = Session::get('user_id');
+        $userId = \App\Core\Auth::id();
         $role = \App\Core\Auth::role();
 
         $dokumen = $this->dokumenModel->findById($dokumenId);

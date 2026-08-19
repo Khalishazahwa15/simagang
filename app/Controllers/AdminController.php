@@ -354,7 +354,7 @@ class AdminController extends Controller {
                 }
 
                 // Protect self privilege demotion
-                if ($id == \App\Core\Session::get('user_id') && $role !== 'admin') {
+                if ($id == Auth::id() && $role !== 'admin') {
                     throw new \Exception("Anda tidak dapat menurunkan role akun Anda sendiri.");
                 }
 
@@ -390,7 +390,7 @@ class AdminController extends Controller {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
                 // Prevent self-deactivation
-                if ($id == \App\Core\Session::get('user_id')) {
+                if ($id == Auth::id()) {
                     throw new \Exception("Anda tidak dapat menonaktifkan akun Anda sendiri.");
                 }
 

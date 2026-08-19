@@ -1,7 +1,7 @@
 <?php
 // Initialize variables safely
-$role = $_SESSION['user']['role'] ?? \App\Core\Auth::role() ?? 'mahasiswa';
-$nama = $_SESSION['user']['nama'] ?? \App\Core\Auth::user()['nama'] ?? 'Pengguna';
+$role = \App\Core\Auth::role() ?? 'mahasiswa';
+$nama = \App\Core\Auth::user()['nama'] ?? 'Pengguna';
 $initial = strtoupper(substr($nama, 0, 1));
 $currentPage = $currentPage ?? 'dashboard';
 

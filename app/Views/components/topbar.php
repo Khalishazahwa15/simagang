@@ -4,7 +4,7 @@ $headerTitle = $title ?? 'Dashboard';
 $headerSubtitle = $subtitle ?? '';
 
 // Fetch notifications
-$userId = \App\Core\Session::get('user_id');
+$userId = \App\Core\Auth::id();
 $unreadCount = 0;
 $notifications = [];
 if ($userId) {

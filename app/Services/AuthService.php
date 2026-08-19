@@ -27,6 +27,8 @@ class AuthService {
             throw new \Exception("Akun Anda dinonaktifkan. Silakan hubungi Administrator.");
         }
 
+        $this->userModel->catatWaktuLogin($user['id']);
+
         \App\Core\Auth::login($user);
         return true;
     }

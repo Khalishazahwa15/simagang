@@ -1,33 +1,12 @@
 <?php
-define('ROOT_PATH', dirname(__DIR__));
-define('APP_PATH', ROOT_PATH . '/app');
-define('CONFIG_PATH', ROOT_PATH . '/config');
+require_once __DIR__ . '/bootstrap.php';
 
-spl_autoload_register(function ($class) {
-    $prefix = 'App\\';
-    $base_dir = APP_PATH . '/';
-    $len = strlen($prefix);
-    if (strncmp($prefix, $class, $len) !== 0) {
-        return;
-    }
-    $relative_class = substr($class, $len);
-    $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
-    if (file_exists($file)) {
-        require_once $file;
-    }
-});
-
-use App\Core\Env;
 use App\Core\Database;
 use App\Core\Session;
 use App\Core\Auth;
 use App\Services\PengajuanService;
 use App\Services\DokumenService;
 use App\Services\StatusService;
-
-Env::load(ROOT_PATH . '/.env');
-require_once CONFIG_PATH . '/database.php';
-Session::init();
 
 class TestRunner {
     private $db;

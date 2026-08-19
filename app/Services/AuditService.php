@@ -12,7 +12,7 @@ class AuditService {
     }
 
     public function log($action, $entity, $entityId, $details = null) {
-        $userId = Session::get('user_id'); // Can be null if not logged in
+        $userId = \App\Core\Auth::id(); // Can be null if not logged in
         $ipAddress = $_SERVER['REMOTE_ADDR'] ?? null;
         
         $this->auditModel->create($userId, $action, $entity, $entityId, $details, $ipAddress);

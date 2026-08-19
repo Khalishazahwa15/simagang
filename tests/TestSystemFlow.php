@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../public/index.php';
+require_once __DIR__ . '/bootstrap.php';
 require_once __DIR__ . '/TestTawaranFlow.php';
 
 // Menambahkan testing tambahan untuk CRUD, Automation, dan IDOR

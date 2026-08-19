@@ -80,10 +80,10 @@
                             <span class="badge" style="background: #F3F4F6; color: #4B5563;">Nonaktif</span>
                         <?php endif; ?>
                     </td>
-                    <td style="padding: 13px 16px; font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary);"><?= date('d M Y H:i', strtotime($u['updated_at'])) ?></td>
+                    <td style="padding: 13px 16px; font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary);"><?= empty($u['last_login_at']) ? 'Belum pernah' : date('d M Y H:i', strtotime($u['last_login_at'])) ?></td>
                     <td style="padding: 13px 16px;">
                         <div class="d-flex gap-2">
-                            <?php if ($u['id'] != \App\Core\Session::get('user_id')): ?>
+                            <?php if ($u['id'] != \App\Core\Auth::id()): ?>
                             <button onclick="editUser(<?= htmlspecialchars(json_encode([
                                 'id' => $u['id'],
                                 'nama' => $u['nama'],

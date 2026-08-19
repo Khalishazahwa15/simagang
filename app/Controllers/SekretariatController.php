@@ -191,7 +191,7 @@ class SekretariatController extends Controller {
                     }
                 } elseif ($action === 'tawarkan') {
                     $divisiTawaranId = $_POST['divisi_id_tawaran'] ?? null;
-                    $this->pengajuanService->menawarkanDivisi($id, $divisiTawaranId, Session::get('user_id'));
+                    $this->pengajuanService->menawarkanDivisi($id, $divisiTawaranId, Auth::id());
                     Session::setFlash('success', 'Tawaran divisi alternatif berhasil dikirim ke mahasiswa.');
                 }
             } catch (\Exception $e) {
@@ -634,7 +634,7 @@ class SekretariatController extends Controller {
                     throw new \Exception("Parameter tidak lengkap.");
                 }
 
-                $this->pengajuanService->menawarkanDivisi($pengajuanId, $divisiTawaranId, Session::get('user_id'));
+                $this->pengajuanService->menawarkanDivisi($pengajuanId, $divisiTawaranId, Auth::id());
                 Session::setFlash('success', 'Tawaran divisi berhasil dikirim ke mahasiswa.');
             } catch (\Exception $e) {
                 Session::setFlash('error', ErrorHandler::userMessage($e));
@@ -653,7 +653,7 @@ class SekretariatController extends Controller {
                     throw new \Exception("Parameter tidak lengkap.");
                 }
 
-                $this->pengajuanService->finalisasiTawaran($pengajuanId, Session::get('user_id'));
+                $this->pengajuanService->finalisasiTawaran($pengajuanId, Auth::id());
                 Session::setFlash('success', 'Finalisasi penempatan berhasil. Status pengajuan menjadi diterima.');
             } catch (\Exception $e) {
                 Session::setFlash('error', ErrorHandler::userMessage($e));

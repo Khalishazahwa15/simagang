@@ -32,10 +32,10 @@ class MahasiswaController extends Controller {
     }
 
     public function dashboard() {
-        $nama = Session::get('nama') ?? 'Mahasiswa';
-        $profilKurang = (new \App\Models\MahasiswaProfile())->fieldBelumLengkap(Session::get('user_id'));
+        $nama = Auth::user()['nama'] ?? 'Mahasiswa';
+        $profilKurang = (new \App\Models\MahasiswaProfile())->fieldBelumLengkap(Auth::id());
 
-        $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Session::get('user_id'));
+        $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Auth::id());
         $aktif = $pengajuan[0] ?? null;
 
         $history = [];
@@ -71,13 +71,13 @@ class MahasiswaController extends Controller {
     }
 
     public function pengajuan() {
-        $profilKurang = (new \App\Models\MahasiswaProfile())->fieldBelumLengkap(Session::get('user_id'));
+        $profilKurang = (new \App\Models\MahasiswaProfile())->fieldBelumLengkap(Auth::id());
         if (!empty($profilKurang)) {
             Session::setFlash('warning', 'Lengkapi profil Anda lebih dulu sebelum mengajukan magang. Belum terisi: ' . implode(', ', $profilKurang) . '.');
             return $this->redirect('mahasiswa/profil');
         }
 
-        $pengajuanList = $this->pengajuanService->getPengajuanMahasiswa(Session::get('user_id'));
+        $pengajuanList = $this->pengajuanService->getPengajuanMahasiswa(Auth::id());
         $aktif = $pengajuanList[0] ?? null;
 
         if ($aktif && !in_array($aktif['status'], ['ditolak', 'selesai'])) {
@@ -103,7 +103,7 @@ class MahasiswaController extends Controller {
                 $tanggalSelesai = $_POST['end_date'] ?? null;
                 
                 $this->pengajuanService->createPengajuan(
-                    Session::get('user_id'),
+                    Auth::id(),
                     $divisiPreferensi,
                     $tanggalMulai,
                     $tanggalSelesai,
@@ -121,7 +121,7 @@ class MahasiswaController extends Controller {
     }
 
     public function status() {
-        $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Session::get('user_id'));
+        $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Auth::id());
         $aktif = $pengajuan[0] ?? null; // Ambil yang paling baru
         
         $history = [];
@@ -153,7 +153,7 @@ class MahasiswaController extends Controller {
     }
 
     public function dokumen() {
-        $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Session::get('user_id'));
+        $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Auth::id());
         $aktif = $pengajuan[0] ?? null;
         
         $dokumen = [];
@@ -172,7 +172,7 @@ class MahasiswaController extends Controller {
     }
 
     public function profil() {
-        $userId = Session::get('user_id');
+        $userId = Auth::id();
         $db = \App\Core\Database::getInstance()->getConnection();
         
         $stmt = $db->prepare("SELECT u.nama, u.email, p.* FROM users u LEFT JOIN mahasiswa_profiles p ON u.id = p.user_id WHERE u.id = ?");
@@ -237,7 +237,7 @@ class MahasiswaController extends Controller {
     public function updateProfil() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
-                $userId = Session::get('user_id');
+                $userId = Auth::id();
                 $nama = trim($_POST['nama'] ?? '');
                 $nim = trim($_POST['nim'] ?? '');
                 $tempat_lahir = trim($_POST['tempat_lahir'] ?? '');
@@ -281,10 +281,8 @@ class MahasiswaController extends Controller {
                 
                 $db->commit();
                 
-                // Update nama di session
-                $userSession = Session::get('user');
-                $userSession['nama'] = $nama;
-                Session::set('user', $userSession);
+                // Segarkan nama yang dipakai sapaan dan sidebar
+                Session::set('user_name', $nama);
                 
                 $auditService = new \App\Services\AuditService();
                 $auditService->log('UPDATE_PROFIL', 'users', $userId, "Mahasiswa memperbarui profil");
@@ -303,7 +301,7 @@ class MahasiswaController extends Controller {
     public function updatePassword() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             try {
-                $userId = Session::get('user_id');
+                $userId = Auth::id();
                 $new_password = $_POST['new_password'] ?? '';
                 $confirm_password = $_POST['new_password_confirm'] ?? '';
 
@@ -347,7 +345,7 @@ class MahasiswaController extends Controller {
                 }
 
                 // Verify pengajuan is indeed in revisi state
-                $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Session::get('user_id'))[0] ?? null;
+                $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Auth::id())[0] ?? null;
                 if (!$pengajuan || $pengajuan['id'] != $pengajuanId || $pengajuan['status'] !== 'revisi') {
                     throw new \Exception("Akses Ditolak. Anda tidak dapat merevisi dokumen ini.");
                 }
@@ -378,7 +376,7 @@ class MahasiswaController extends Controller {
                     throw new \Exception("Parameter tidak lengkap.");
                 }
 
-                $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Session::get('user_id'))[0] ?? null;
+                $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Auth::id())[0] ?? null;
                 if (!$pengajuan || $pengajuan['id'] != $pengajuanId || $pengajuan['status'] !== 'sedang_magang') {
                     throw new \Exception("Akses Ditolak. Anda hanya dapat mengunggah laporan akhir saat status sedang magang.");
                 }
@@ -387,7 +385,7 @@ class MahasiswaController extends Controller {
                 $dokumenService->uploadDokumen($pengajuanId, $pengajuan['nomor_pengajuan'], 'laporan', $_FILES['file_dokumen']);
 
                 $statusHistory = new \App\Models\StatusHistory();
-                $statusHistory->create($pengajuanId, 'sedang_magang', 'sedang_magang', Session::get('user_id'), 'Mahasiswa telah mengunggah Laporan Akhir Magang.');
+                $statusHistory->create($pengajuanId, 'sedang_magang', 'sedang_magang', Auth::id(), 'Mahasiswa telah mengunggah Laporan Akhir Magang.');
 
                 Session::setFlash('success', 'Laporan akhir berhasil diunggah.');
             } catch (\Exception $e) {
@@ -399,7 +397,7 @@ class MahasiswaController extends Controller {
     }
 
     public function pengunduranDiri() {
-        $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Session::get('user_id'));
+        $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Auth::id());
         $aktif = $pengajuan[0] ?? null;
         
         // HANYA muncul kalau status pengajuan aktif == diterima atau sedang_magang
@@ -426,7 +424,7 @@ class MahasiswaController extends Controller {
                     throw new \Exception("Mohon lengkapi surat pengunduran diri.");
                 }
 
-                $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Session::get('user_id'))[0] ?? null;
+                $pengajuan = $this->pengajuanService->getPengajuanMahasiswa(Auth::id())[0] ?? null;
                 if (!$pengajuan || $pengajuan['id'] != $pengajuanId || !in_array($pengajuan['status'], ['diterima', 'sedang_magang'])) {
                     throw new \Exception("Akses Ditolak.");
                 }
@@ -462,7 +460,7 @@ class MahasiswaController extends Controller {
                 }
 
                 $terima = ($action === 'terima');
-                $this->pengajuanService->responTawaran($pengajuanId, Session::get('user_id'), $terima);
+                $this->pengajuanService->responTawaran($pengajuanId, Auth::id(), $terima);
 
                 if ($terima) {
                     Session::setFlash('success', 'Anda telah menerima tawaran divisi. Menunggu finalisasi Sekretariat.');

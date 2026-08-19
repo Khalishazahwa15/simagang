@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS users (
     INDEX idx_users_role_status (role, status),
     reset_token VARCHAR(64) NULL,
     reset_token_expires DATETIME NULL,
+    last_login_at DATETIME NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
