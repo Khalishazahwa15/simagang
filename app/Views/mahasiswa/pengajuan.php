@@ -1,7 +1,7 @@
 <div class="mb-6">
     <div class="d-flex align-center gap-2 mb-2">
         <a href="<?= BASE_URL ?>/mahasiswa/dashboard" class="text-muted" style="text-decoration: none;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
         </a>
         <div class="text-overline" style="margin: 0;">Pengajuan Magang</div>
     </div>
@@ -49,8 +49,8 @@
                     </p>
                     
                     <div class="form-group">
-                        <label class="form-label required">Preferensi Divisi / Bidang</label>
-                        <select name="divisi" class="form-control" required>
+                        <label for="app-views-mahasiswa-pengajuan-divisi" class="form-label required">Preferensi Divisi / Bidang</label>
+                        <select id="app-views-mahasiswa-pengajuan-divisi" name="divisi" class="form-control" required>
                             <option value="">Pilih divisi...</option>
                             <?php foreach ($divisi as $div): ?>
                             <option value="<?= $div['id'] ?>">
@@ -62,9 +62,9 @@
                     </div>
                     
                     <div class="form-group">
-                        <label class="form-label required">Rencana Periode Magang</label>
+                        <label for="app-views-mahasiswa-pengajuan-start_date" class="form-label required">Rencana Periode Magang</label>
                         <div class="grid grid-2" style="gap: 12px;">
-                            <input type="date" name="start_date" class="form-control" required>
+                            <input id="app-views-mahasiswa-pengajuan-start_date" type="date" name="start_date" class="form-control" required>
                             <input type="date" name="end_date" class="form-control" required>
                         </div>
                         <div class="form-help">Perkiraan tanggal mulai dan selesai yang Anda harapkan.</div>
@@ -80,7 +80,7 @@
                     <div class="form-group">
                         <label class="form-label required">Surat Lamaran / Pernyataan</label>
                         <label style="display: block; border: 1px dashed var(--border); border-radius: var(--radius-lg); padding: 24px; text-align: center; background: var(--bg-soft); cursor: pointer; transition: all 0.2s ease;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
                             <div class="text-value" style="font-size: 13px; margin-bottom: 4px;">Klik untuk mengunggah file</div>
                             <div class="text-muted" style="font-size: 11.5px; font-family: var(--font-body);">Format PDF, Maksimal 2MB</div>
                             <input type="file" name="surat_lamaran" accept="application/pdf" style="opacity: 0; position: absolute; z-index: -1;" required>
@@ -90,7 +90,7 @@
                     <div class="form-group">
                         <label class="form-label required">Curriculum Vitae (CV)</label>
                         <label style="display: block; border: 1px dashed var(--border); border-radius: var(--radius-lg); padding: 24px; text-align: center; background: var(--bg-soft); cursor: pointer; transition: all 0.2s ease;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
                             <div class="text-value" style="font-size: 13px; margin-bottom: 4px;">Klik untuk mengunggah file</div>
                             <div class="text-muted" style="font-size: 11.5px; font-family: var(--font-body);">Format PDF, Maksimal 2MB</div>
                             <input type="file" name="cv" accept="application/pdf" style="opacity: 0; position: absolute; z-index: -1;" required>
@@ -100,7 +100,7 @@
                     <div class="form-group">
                         <label class="form-label required">Transkrip Nilai</label>
                         <label style="display: block; border: 1px dashed var(--border); border-radius: var(--radius-lg); padding: 24px; text-align: center; background: var(--bg-soft); cursor: pointer; transition: all 0.2s ease;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
                             <div class="text-value" style="font-size: 13px; margin-bottom: 4px;">Klik untuk mengunggah file</div>
                             <div class="text-muted" style="font-size: 11.5px; font-family: var(--font-body);">Format PDF, Maksimal 2MB</div>
                             <input type="file" name="transkrip" accept="application/pdf" style="opacity: 0; position: absolute; z-index: -1;" required>
@@ -110,7 +110,7 @@
                     <div class="form-group mb-0">
                         <label class="form-label">Dokumen Tambahan (Opsional)</label>
                         <label style="display: block; border: 1px dashed var(--border); border-radius: var(--radius-lg); padding: 24px; text-align: center; background: var(--bg-soft); cursor: pointer; transition: all 0.2s ease;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
                             <div class="text-value" style="font-size: 13px; margin-bottom: 4px;">Klik untuk mengunggah file</div>
                             <div class="text-muted" style="font-size: 11.5px; font-family: var(--font-body);">Format PDF, Maksimal 2MB, misal: Portofolio</div>
                             <input type="file" name="tambahan" accept="application/pdf" style="opacity: 0; position: absolute; z-index: -1;">
@@ -130,8 +130,8 @@
                     </div>
 
                     <div style="background: var(--accent-soft); border: 1px solid rgba(217, 165, 29, 0.25); border-radius: 8px; padding: 14px 16px; display: flex; gap: 10px; margin-bottom: 24px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></svg>
-                        <p style="font-family: var(--font-body); font-size: 13px; color: #7A5A00; line-height: 1.55; margin: 0;">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></svg>
+                        <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-warning-ink); line-height: 1.55; margin: 0;">
                             Pastikan seluruh dokumen sudah benar sebelum mengirimkan. Pengajuan yang sudah dikirim akan masuk antrean pemeriksaan Sekretariat.
                         </p>
                     </div>
@@ -147,7 +147,7 @@
                     <div style="display: flex; gap: 12px;">
                         <button type="button" id="btnNext" class="btn btn-primary">
                             Lanjutkan 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </button>
                     </div>
                 </div>
@@ -161,18 +161,18 @@
             <div style="background: var(--bg-green-soft); border: 1px solid var(--primary-light); border-radius: 10px; padding: 18px 20px;">
                 <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--primary); text-transform: uppercase; margin-bottom: 8px;">Dokumen Wajib</div>
                 <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
                     <span style="font-family: var(--font-body); font-size: 12.5px; color: var(--primary); line-height: 1.4;">Surat Lamaran / Pernyataan</span>
                 </div>
                 <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
                     <span style="font-family: var(--font-body); font-size: 12.5px; color: var(--primary); line-height: 1.4;">Curriculum Vitae (CV)</span>
                 </div>
                 <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
                     <span style="font-family: var(--font-body); font-size: 12.5px; color: var(--primary); line-height: 1.4;">Transkrip Nilai</span>
                 </div>
-                <div style="font-family: var(--font-body); font-size: 11.5px; color: var(--primary); margin-top: 10px; padding-top: 10px; border-top: 1px solid #A7D4CB;">
+                <div style="font-family: var(--font-body); font-size: 11.5px; color: var(--primary); margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--color-success-border);">
                     Persiapkan file berformat PDF sebelum mengisi formulir.
                 </div>
             </div>
@@ -227,7 +227,7 @@
                     // Completed
                     circle.style.background = 'var(--primary)';
                     circle.style.borderColor = 'var(--primary)';
-                    circle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--bg-main)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
+                    circle.innerHTML = '<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--bg-main)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>';
                     label.style.fontWeight = '400';
                     label.style.color = 'var(--text-secondary)';
                     if (line) line.style.background = 'var(--primary)';

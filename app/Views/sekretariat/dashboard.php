@@ -6,9 +6,9 @@ function getDistCount($dist, $status) {
 $maxDist = max(1, array_sum($distribusi));
 
 $distItems = [
-    ['label' => 'Diajukan', 'status' => 'diajukan', 'color' => '#1D4ED8'],
-    ['label' => 'Diperiksa', 'status' => 'dalam_verifikasi', 'color' => '#7A5A00'],
-    ['label' => 'Perlu Revisi', 'status' => 'revisi', 'color' => '#991B1B'],
+    ['label' => 'Diajukan', 'status' => 'diajukan', 'color' => 'var(--color-info-ink)'],
+    ['label' => 'Diperiksa', 'status' => 'dalam_verifikasi', 'color' => 'var(--color-warning-ink)'],
+    ['label' => 'Perlu Revisi', 'status' => 'revisi', 'color' => 'var(--color-danger-ink)'],
     ['label' => 'Cek Kebutuhan Divisi', 'status' => 'cek_divisi', 'color' => 'var(--accent)'], // Dummy for UI presentation
     ['label' => 'Diterima', 'status' => 'diterima', 'color' => 'var(--primary)'],
     ['label' => 'Sedang Magang', 'status' => 'sedang_magang', 'color' => 'var(--primary-dark)'],
@@ -17,9 +17,9 @@ $distItems = [
 
 function getBadgeStyle($status) {
     switch ($status) {
-        case 'diajukan': return 'background: #EFF6FF; color: #1D4ED8;';
-        case 'dalam_verifikasi': return 'background: #FEF3C7; color: #7A5A00;';
-        case 'revisi': return 'background: #FEE2E2; color: #991B1B;';
+        case 'diajukan': return 'background: var(--color-info-soft); color: var(--color-info-ink);';
+        case 'dalam_verifikasi': return 'background: var(--color-warning-soft); color: var(--color-warning-ink);';
+        case 'revisi': return 'background: var(--color-danger-soft); color: var(--color-danger-ink);';
         default: return 'background: var(--bg-soft); color: var(--text-secondary);';
     }
 }
@@ -96,7 +96,7 @@ function getBadgeLabel($status) {
                                 ?>
                             </div>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                     </a>
                     <?php endforeach; ?>
                 <?php endif; ?>

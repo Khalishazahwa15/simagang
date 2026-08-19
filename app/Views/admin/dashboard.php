@@ -6,9 +6,9 @@ function getDistCount($dist, $status) {
 $maxDist = max(1, array_sum($distribusi));
 
 $distItems = [
-    ['label' => 'Diajukan', 'status' => 'diajukan', 'color' => '#1D4ED8'],
-    ['label' => 'Diperiksa', 'status' => 'dalam_verifikasi', 'color' => '#7A5A00'],
-    ['label' => 'Perlu Revisi', 'status' => 'revisi', 'color' => '#991B1B'],
+    ['label' => 'Diajukan', 'status' => 'diajukan', 'color' => 'var(--color-info-ink)'],
+    ['label' => 'Diperiksa', 'status' => 'dalam_verifikasi', 'color' => 'var(--color-warning-ink)'],
+    ['label' => 'Perlu Revisi', 'status' => 'revisi', 'color' => 'var(--color-danger-ink)'],
     ['label' => 'Cek Kebutuhan Divisi', 'status' => 'cek_divisi', 'color' => 'var(--accent)'], // Dummy for UI presentation
     ['label' => 'Diterima', 'status' => 'diterima', 'color' => 'var(--primary)'],
     ['label' => 'Sedang Magang', 'status' => 'sedang_magang', 'color' => 'var(--primary-dark)'],
@@ -17,9 +17,9 @@ $distItems = [
 
 function getBadgeStyle($status) {
     switch ($status) {
-        case 'diajukan': return 'background: #EFF6FF; color: #1D4ED8;';
-        case 'dalam_verifikasi': return 'background: #FEF3C7; color: #7A5A00;';
-        case 'revisi': return 'background: #FEE2E2; color: #991B1B;';
+        case 'diajukan': return 'background: var(--color-info-soft); color: var(--color-info-ink);';
+        case 'dalam_verifikasi': return 'background: var(--color-warning-soft); color: var(--color-warning-ink);';
+        case 'revisi': return 'background: var(--color-danger-soft); color: var(--color-danger-ink);';
         default: return 'background: var(--bg-soft); color: var(--text-secondary);';
     }
 }
@@ -38,10 +38,10 @@ function getBadgeLabel($status) {
     
     <!-- Info Banner -->
     <div style="background: var(--accent-light); border-width: 0.666667px 0.666667px 0.666667px 4px; border-style: solid; border-color: var(--accent); border-radius: 8px; padding: 14px 18px;">
-        <div style="font-weight: 700; font-size: 12px; line-height: 18px; letter-spacing: 0.96px; text-transform: uppercase; color: #7A5A00; margin-bottom: 4px;">
+        <div style="font-weight: 700; font-size: 12px; line-height: 18px; letter-spacing: 0.96px; text-transform: uppercase; color: var(--color-warning-ink); margin-bottom: 4px;">
             Ruang Lingkup Admin Sistem
         </div>
-        <div style="font-weight: 400; font-size: 13px; line-height: 1.6; color: #7A5A00;">
+        <div style="font-weight: 400; font-size: 13px; line-height: 1.6; color: var(--color-warning-ink);">
             Anda memiliki akses penuh untuk mengelola operasional magang sekaligus administrasi sistem (divisi dan pengguna).
         </div>
     </div>
@@ -102,7 +102,7 @@ function getBadgeLabel($status) {
                                 ?>
                             </div>
                         </div>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
                     </a>
                     <?php endforeach; ?>
                 <?php endif; ?>
@@ -130,11 +130,11 @@ function getBadgeLabel($status) {
                             $isFull = $div['terisi'] >= $div['kapasitas'];
                             $pct = $div['kapasitas'] > 0 ? min(100, round(($div['terisi'] / $div['kapasitas']) * 100)) : 0;
                             
-                            $badgeBg = $isFull ? '#FEF3C7' : '#E7F2EF';
-                            $badgeText = $isFull ? '#92400E' : 'var(--primary)';
+                            $badgeBg = $isFull ? 'var(--color-warning-soft)' : 'var(--color-success-soft)';
+                            $badgeText = $isFull ? 'var(--color-warning-ink)' : 'var(--primary)';
                             $badgeLabel = $isFull ? 'PENUH' : 'DIBUTUHKAN';
                             
-                            $barColor = $isFull ? '#9B2C2C' : 'var(--primary)';
+                            $barColor = $isFull ? 'var(--color-danger-ink)' : 'var(--primary)';
                         ?>
                         <div style="padding: 12px 20px; <?= $index < count($list_divisi) - 1 ? 'border-bottom: 0.666667px solid var(--border);' : '' ?>">
                             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
@@ -176,10 +176,10 @@ function getBadgeLabel($status) {
                     <?php else: ?>
                         <?php foreach (array_slice($list_internal, 0, 5) as $index => $user): 
                             $isAdmin = $user['role'] === 'admin';
-                            $avatarBg = $isAdmin ? 'var(--text-primary)' : '#E7F2EF';
+                            $avatarBg = $isAdmin ? 'var(--text-primary)' : 'var(--color-success-soft)';
                             $avatarText = $isAdmin ? 'var(--bg-card)' : 'var(--primary)';
                             
-                            $badgeBg = $isAdmin ? 'rgba(23, 32, 31, 0.063)' : '#E7F2EF';
+                            $badgeBg = $isAdmin ? 'rgba(23, 32, 31, 0.063)' : 'var(--color-success-soft)';
                             $badgeText = $isAdmin ? 'var(--text-primary)' : 'var(--primary)';
                             $badgeLabel = $isAdmin ? 'ADMIN' : 'SEKRETARIAT';
                             

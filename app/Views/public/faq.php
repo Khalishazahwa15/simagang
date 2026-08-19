@@ -145,7 +145,7 @@ $categories = [
         float: right;
         font-family: var(--font-mono);
         font-size: 11px;
-        color: #B0B8B5;
+        color: var(--text-muted);
         background: var(--border);
         border-radius: 99px;
         padding: 1px 7px;
@@ -242,7 +242,7 @@ $categories = [
 
                 <!-- Contact card -->
                 <div style="margin-top: 32px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 12px; padding: 20px 18px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 10px;"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 10px;"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
                     <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">Belum menemukan jawaban?</div>
                     <p style="font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 14px; margin-top: 0;">
                         Hubungi Sekretariat Bappeda Provinsi Lampung melalui email resmi atau kunjungi kantor pada jam kerja.
@@ -266,10 +266,10 @@ $categories = [
                                 <button class="faq-header" onclick="toggleFaq(this)">
                                     <span style="font-family: var(--font-mono); font-size: 12px; color: var(--accent); flex-shrink: 0; margin-top: 3px; font-weight: 700;">Q</span>
                                     <span style="font-family: var(--font-body); font-size: 15.5px; font-weight: 600; color: var(--text-primary); line-height: 1.5; flex: 1;"><?= $item['q'] ?></span>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-chevron"><path d="m6 9 6 6 6-6"/></svg>
+                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-chevron"><path d="m6 9 6 6 6-6"/></svg>
                                 </button>
                                 <div class="faq-content">
-                                    <p style="font-family: var(--font-body); font-size: 14.5px; color: #3D4844; line-height: 1.8; margin: 0;"><?= $item['a'] ?></p>
+                                    <p style="font-family: var(--font-body); font-size: 14.5px; color: var(--text-primary); line-height: 1.8; margin: 0;"><?= $item['a'] ?></p>
                                 </div>
                             </div>
                         <?php endforeach; ?>

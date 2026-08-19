@@ -1,12 +1,12 @@
 <?php
 $statusMapping = [
-    'diajukan' => ['label' => 'Diajukan', 'color' => '#1D4ED8'],
-    'dalam_verifikasi' => ['label' => 'Diperiksa', 'color' => '#7A5A00'],
-    'revisi' => ['label' => 'Perlu Revisi', 'color' => '#92400E'],
+    'diajukan' => ['label' => 'Diajukan', 'color' => 'var(--color-info-ink)'],
+    'dalam_verifikasi' => ['label' => 'Diperiksa', 'color' => 'var(--color-warning-ink)'],
+    'revisi' => ['label' => 'Perlu Revisi', 'color' => 'var(--color-warning-ink)'],
     'diterima' => ['label' => 'Diterima', 'color' => 'var(--primary)'],
-    'ditolak' => ['label' => 'Ditolak', 'color' => '#991B1B'],
+    'ditolak' => ['label' => 'Ditolak', 'color' => 'var(--color-danger-ink)'],
     'sedang_magang' => ['label' => 'Sedang Magang', 'color' => 'var(--primary)'],
-    'selesai' => ['label' => 'Selesai', 'color' => '#065F46']
+    'selesai' => ['label' => 'Selesai', 'color' => 'var(--color-success-ink)']
 ];
 
 $maxStatus = 0;
@@ -36,16 +36,16 @@ $tautanEkspor = function ($preset) use ($filterAktif) {
     <form method="GET" action="<?= BASE_URL ?>/sekretariat/laporan">
         <div class="d-flex align-center" style="flex-wrap: wrap; gap: 12px; width: 100%;">
             <div>
-                <label class="form-label" style="display: block; margin-bottom: 4px;">Dari Tanggal</label>
-                <input type="date" name="dari" value="<?= htmlspecialchars($_GET['dari'] ?? '') ?>" style="padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none;">
+                <label for="app-views-sekretariat-laporan-dari" class="form-label" style="display: block; margin-bottom: 4px;">Dari Tanggal</label>
+                <input id="app-views-sekretariat-laporan-dari" type="date" name="dari" value="<?= htmlspecialchars($_GET['dari'] ?? '') ?>" style="padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none;">
             </div>
             <div>
-                <label class="form-label" style="display: block; margin-bottom: 4px;">Sampai Tanggal</label>
-                <input type="date" name="sampai" value="<?= htmlspecialchars($_GET['sampai'] ?? '') ?>" style="padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none;">
+                <label for="app-views-sekretariat-laporan-sampai" class="form-label" style="display: block; margin-bottom: 4px;">Sampai Tanggal</label>
+                <input id="app-views-sekretariat-laporan-sampai" type="date" name="sampai" value="<?= htmlspecialchars($_GET['sampai'] ?? '') ?>" style="padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none;">
             </div>
             <div style="flex: 1; min-width: 180px;">
-                <label class="form-label" style="display: block; margin-bottom: 4px;">Divisi Preferensi</label>
-                <select name="divisi" style="width: 100%; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none; cursor: pointer;">
+                <label for="app-views-sekretariat-laporan-divisi" class="form-label" style="display: block; margin-bottom: 4px;">Divisi Preferensi</label>
+                <select id="app-views-sekretariat-laporan-divisi" name="divisi" style="width: 100%; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none; cursor: pointer;">
                     <option value="">Semua Divisi</option>
                     <?php foreach (($divisiList ?? []) as $d): ?>
                         <option value="<?= $d['id'] ?>" <?= ($_GET['divisi'] ?? '') == $d['id'] ? 'selected' : '' ?>><?= htmlspecialchars($d['nama_divisi']) ?></option>
@@ -136,7 +136,7 @@ $tautanEkspor = function ($preset) use ($filterAktif) {
         <div style="display: flex; flex-wrap: wrap; gap: 12px;">
             <a href="<?= $tautanEkspor('semua') ?>" style="text-decoration: none; padding: 12px 18px; background: #F7F4EC; border: 1px solid var(--border); border-radius: 8px; display: inline-flex; flex-direction: column; justify-content: center; min-width: 280px; flex: 1;">
                 <div style="display: flex; align-items: center; gap: 7px; margin-bottom: 4px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.33333" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.33333" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     <div style="font-weight: 700; font-size: 13.5px; line-height: 20px; color: var(--text-primary);">Ekspor Semua Data</div>
                 </div>
                 <div style="font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">
@@ -146,7 +146,7 @@ $tautanEkspor = function ($preset) use ($filterAktif) {
             
             <a href="<?= $tautanEkspor('baru') ?>" style="text-decoration: none; padding: 12px 18px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; display: inline-flex; flex-direction: column; justify-content: center; min-width: 280px; flex: 1;">
                 <div style="display: flex; align-items: center; gap: 7px; margin-bottom: 4px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-info)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
                     <div style="font-weight: 700; font-size: 13.5px; line-height: 20px; color: var(--text-primary);">Pendaftar Baru</div>
                 </div>
                 <div style="font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">
@@ -156,7 +156,7 @@ $tautanEkspor = function ($preset) use ($filterAktif) {
             
             <a href="<?= $tautanEkspor('aktif') ?>" style="text-decoration: none; padding: 12px 18px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; display: inline-flex; flex-direction: column; justify-content: center; min-width: 280px; flex: 1;">
                 <div style="display: flex; align-items: center; gap: 7px; margin-bottom: 4px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-success)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     <div style="font-weight: 700; font-size: 13.5px; line-height: 20px; color: var(--text-primary);">Peserta Aktif</div>
                 </div>
                 <div style="font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">
@@ -166,7 +166,7 @@ $tautanEkspor = function ($preset) use ($filterAktif) {
             
             <a href="<?= $tautanEkspor('selesai') ?>" style="text-decoration: none; padding: 12px 18px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; display: inline-flex; flex-direction: column; justify-content: center; min-width: 280px; flex: 1;">
                 <div style="display: flex; align-items: center; gap: 7px; margin-bottom: 4px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-warning-ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     <div style="font-weight: 700; font-size: 13.5px; line-height: 20px; color: var(--text-primary);">Alumni (Selesai)</div>
                 </div>
                 <div style="font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">
@@ -176,7 +176,7 @@ $tautanEkspor = function ($preset) use ($filterAktif) {
             
             <a href="<?= $tautanEkspor('ditolak') ?>" style="text-decoration: none; padding: 12px 18px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; display: inline-flex; flex-direction: column; justify-content: center; min-width: 280px; flex: 1;">
                 <div style="display: flex; align-items: center; gap: 7px; margin-bottom: 4px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-danger)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
                     <div style="font-weight: 700; font-size: 13.5px; line-height: 20px; color: var(--text-primary);">Ditolak / Mundur</div>
                 </div>
                 <div style="font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">

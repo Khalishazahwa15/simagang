@@ -3,11 +3,11 @@ function getStatusBadgeStyle($status) {
     switch($status) {
         case 'dalam_verifikasi': 
         case 'revisi':
-            return 'background: #FEF3C7; color: #7A5A00;';
-        case 'diterima': return 'background: #E7F2EF; color: var(--primary);';
-        case 'ditolak': return 'background: #FEE2E2; color: #991B1B;';
-        case 'sedang_magang': return 'background: #E7F2EF; color: var(--primary-dark);';
-        case 'selesai': return 'background: #E7F2EF; color: var(--primary);';
+            return 'background: var(--color-warning-soft); color: var(--color-warning-ink);';
+        case 'diterima': return 'background: var(--color-success-soft); color: var(--primary);';
+        case 'ditolak': return 'background: var(--color-danger-soft); color: var(--color-danger-ink);';
+        case 'sedang_magang': return 'background: var(--color-success-soft); color: var(--primary-dark);';
+        case 'selesai': return 'background: var(--color-success-soft); color: var(--primary);';
         default: return 'background: #F7F4EC; color: var(--text-secondary);'; // Draft / Diajukan
     }
 }
@@ -91,7 +91,7 @@ $stepNames = [
                 <!-- Step Circle -->
                 <?php if ($step > $i): ?>
                 <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--primary); border: 2px solid var(--primary); display: flex; align-items: center; justify-content: center; z-index: 1; position: relative; margin-bottom: 12px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--bg-soft)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--bg-soft)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
                 </div>
                 <?php else: ?>
                 <div style="width: 32px; height: 32px; border-radius: 50%; background: <?= $step == $i ? 'var(--accent)' : 'transparent' ?>; border: 2px solid <?= $step == $i ? 'var(--accent)' : 'var(--border)' ?>; display: flex; align-items: center; justify-content: center; z-index: 1; position: relative; margin-bottom: 12px;">
@@ -123,7 +123,7 @@ $stepNames = [
                     
                     <div style="margin-top: 2px; width: 15px; height: 15px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; <?= $index === 0 ? 'background: var(--primary);' : 'border: 1.25px solid var(--primary);' ?>">
                         <?php if ($index === 0): ?>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--bg-soft)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="var(--bg-soft)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
                         <?php endif; ?>
                     </div>
                     
@@ -170,8 +170,8 @@ $stepNames = [
                 <input type="hidden" name="pengajuan_id" value="<?= htmlspecialchars($pengajuan['id']) ?>">
                 
                 <div class="form-group mb-4">
-                    <label class="form-label required">Jenis Dokumen yang Direvisi</label>
-                    <select name="jenis_dokumen" class="form-control" required style="background: var(--bg-main);">
+                    <label for="app-views-mahasiswa-status-jenis_dokumen" class="form-label required">Jenis Dokumen yang Direvisi</label>
+                    <select id="app-views-mahasiswa-status-jenis_dokumen" name="jenis_dokumen" class="form-control" required style="background: var(--bg-main);">
                         <option value="">-- Pilih Jenis Dokumen --</option>
                         <option value="surat_lamaran">Surat Lamaran / Surat Pengantar</option>
                         <option value="cv">Curriculum Vitae (CV)</option>
@@ -180,13 +180,13 @@ $stepNames = [
                 </div>
                 
                 <div class="form-group mb-4">
-                    <label class="form-label required">Pilih File Baru (PDF)</label>
-                    <input type="file" name="file_dokumen" class="form-control" accept=".pdf" required style="background: var(--bg-main);">
+                    <label for="app-views-mahasiswa-status-file_dokumen" class="form-label required">Pilih File Baru (PDF)</label>
+                    <input id="app-views-mahasiswa-status-file_dokumen" type="file" name="file_dokumen" class="form-control" accept=".pdf" required style="background: var(--bg-main);">
                     <div class="form-help mt-1">Maksimal ukuran file: 2 MB. File baru akan otomatis di-versioning, file lama tetap tersimpan.</div>
                 </div>
                 
                 <button type="submit" class="btn btn-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                     Kirim Revisi
                 </button>
             </form>
@@ -211,10 +211,10 @@ $stepNames = [
                 <input type="hidden" name="pengajuan_id" value="<?= htmlspecialchars($pengajuan['id']) ?>">
                 
                 <button type="submit" name="action" value="terima" class="btn btn-primary" style="padding: 10px 24px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     Terima Tawaran
                 </button>
-                <button type="submit" name="action" value="tolak" class="btn btn-outline" style="padding: 10px 24px; color: #991B1B; border-color: #FCA5A5; background: #FEF2F2;" onclick="return confirm('PENTING: Jika Anda menolak tawaran ini, maka seluruh proses pengajuan Anda akan DIBATALKAN. Anda harus mengajukan ulang dari awal jika ingin mendaftar lagi.\n\nApakah Anda yakin ingin menolak?');">
+                <button type="submit" name="action" value="tolak" class="btn btn-outline" style="padding: 10px 24px; color: var(--color-danger-ink); border-color: var(--color-danger-border); background: var(--color-danger-soft);" onclick="return confirm('PENTING: Jika Anda menolak tawaran ini, maka seluruh proses pengajuan Anda akan DIBATALKAN. Anda harus mengajukan ulang dari awal jika ingin mendaftar lagi.\n\nApakah Anda yakin ingin menolak?');">
                     Tolak Tawaran
                 </button>
             </form>
@@ -237,13 +237,13 @@ $stepNames = [
                 <input type="hidden" name="pengajuan_id" value="<?= htmlspecialchars($pengajuan['id']) ?>">
                 
                 <div class="form-group mb-4">
-                    <label class="form-label required">File Laporan Akhir (PDF)</label>
-                    <input type="file" name="file_dokumen" class="form-control" accept=".pdf" required style="background: var(--bg-main);">
+                    <label for="app-views-mahasiswa-status-file_dokumen-2" class="form-label required">File Laporan Akhir (PDF)</label>
+                    <input id="app-views-mahasiswa-status-file_dokumen-2" type="file" name="file_dokumen" class="form-control" accept=".pdf" required style="background: var(--bg-main);">
                     <div class="form-help mt-1">Maksimal ukuran file: 2 MB. Dokumen akan diverifikasi oleh Sekretariat.</div>
                 </div>
                 
                 <button type="submit" class="btn btn-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                     Unggah Laporan
                 </button>
             </form>

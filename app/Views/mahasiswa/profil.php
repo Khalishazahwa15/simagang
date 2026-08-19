@@ -11,11 +11,11 @@ foreach (\App\Models\MahasiswaProfile::FIELD_WAJIB as $kolom => $label) {
 ?>
 <div style="display: flex; flex-direction: column; gap: 24px; max-width: 911px;">
     <?php if (!empty($profilKurang)): ?>
-    <div style="background: #FEF3C7; border: 1px solid #FBBF24; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 14px;">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+    <div style="background: var(--color-warning-soft); border: 1px solid var(--color-warning-border); border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 14px;">
+        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-warning-ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
         <div style="flex: 1;">
-            <div style="font-family: var(--font-body); font-weight: 700; font-size: 14px; color: #7A5A00; margin-bottom: 4px;">Profil belum lengkap</div>
-            <div style="font-family: var(--font-body); font-size: 13px; color: #7A5A00; line-height: 1.6;">
+            <div style="font-family: var(--font-body); font-weight: 700; font-size: 14px; color: var(--color-warning-ink); margin-bottom: 4px;">Profil belum lengkap</div>
+            <div style="font-family: var(--font-body); font-size: 13px; color: var(--color-warning-ink); line-height: 1.6;">
                 Data berikut belum terisi: <strong><?= htmlspecialchars(implode(', ', $profilKurang)) ?></strong>.
                 Isi kolom tersebut di formulir di bawah, lalu simpan.
             </div>
@@ -27,7 +27,7 @@ foreach (\App\Models\MahasiswaProfile::FIELD_WAJIB as $kolom => $label) {
     <div>
         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
             <a href="<?= BASE_URL ?>/mahasiswa/dashboard" style="color: var(--text-secondary); text-decoration: none; display: flex; align-items: center;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             </a>
             <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; color: var(--text-secondary); letter-spacing: 0.88px; text-transform: uppercase;">Pengaturan Akun</div>
         </div>
@@ -54,34 +54,34 @@ foreach (\App\Models\MahasiswaProfile::FIELD_WAJIB as $kolom => $label) {
                 
                 <div class="grid grid-2" style="gap: 20px; margin-bottom: 20px;">
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label class="form-label required">Nama Lengkap</label>
-                        <input type="text" name="nama" class="form-control" value="<?= htmlspecialchars($user['nama'] ?? '') ?>" required>
+                        <label for="app-views-mahasiswa-profil-nama" class="form-label required">Nama Lengkap</label>
+                        <input id="app-views-mahasiswa-profil-nama" type="text" name="nama" class="form-control" value="<?= htmlspecialchars($user['nama'] ?? '') ?>" required>
                     </div>
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label class="form-label required">NPM / NIM</label>
-                        <input type="text" name="nim" class="form-control" value="<?= htmlspecialchars($user['nim'] ?? '') ?>" required>
+                        <label for="app-views-mahasiswa-profil-nim" class="form-label required">NPM / NIM</label>
+                        <input id="app-views-mahasiswa-profil-nim" type="text" name="nim" class="form-control" value="<?= htmlspecialchars($user['nim'] ?? '') ?>" required>
                     </div>
                 </div>
 
                 <div class="grid grid-2" style="gap: 20px; margin-bottom: 20px;">
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label class="form-label required">Tempat Lahir</label>
-                        <input type="text" name="tempat_lahir" class="form-control" value="<?= htmlspecialchars($user['tempat_lahir'] ?? '') ?>" required>
+                        <label for="app-views-mahasiswa-profil-tempat_lahir" class="form-label required">Tempat Lahir</label>
+                        <input id="app-views-mahasiswa-profil-tempat_lahir" type="text" name="tempat_lahir" class="form-control" value="<?= htmlspecialchars($user['tempat_lahir'] ?? '') ?>" required>
                     </div>
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label class="form-label required">Tanggal Lahir</label>
-                        <input type="date" name="tanggal_lahir" class="form-control" value="<?= htmlspecialchars($user['tanggal_lahir'] ?? '') ?>" required>
+                        <label for="app-views-mahasiswa-profil-tanggal_lahir" class="form-label required">Tanggal Lahir</label>
+                        <input id="app-views-mahasiswa-profil-tanggal_lahir" type="date" name="tanggal_lahir" class="form-control" value="<?= htmlspecialchars($user['tanggal_lahir'] ?? '') ?>" required>
                     </div>
                 </div>
 
                 <div class="form-group" style="margin-bottom: 20px;">
-                    <label class="form-label required">Nomor HP</label>
-                    <input type="text" name="no_hp" class="form-control" value="<?= htmlspecialchars($user['nomor_hp'] ?? '') ?>" required>
+                    <label for="app-views-mahasiswa-profil-no_hp" class="form-label required">Nomor HP</label>
+                    <input id="app-views-mahasiswa-profil-no_hp" type="text" name="no_hp" class="form-control" value="<?= htmlspecialchars($user['nomor_hp'] ?? '') ?>" required>
                 </div>
 
                 <div class="form-group" style="margin-bottom: 32px;">
-                    <label class="form-label required">Alamat Lengkap</label>
-                    <textarea name="alamat" class="form-control" rows="3" required><?= htmlspecialchars($user['alamat'] ?? '') ?></textarea>
+                    <label for="app-views-mahasiswa-profil-alamat" class="form-label required">Alamat Lengkap</label>
+                    <textarea id="app-views-mahasiswa-profil-alamat" name="alamat" class="form-control" rows="3" required><?= htmlspecialchars($user['alamat'] ?? '') ?></textarea>
                 </div>
 
                 <div style="height: 1px; background: var(--border); margin-bottom: 32px;"></div>
@@ -90,23 +90,23 @@ foreach (\App\Models\MahasiswaProfile::FIELD_WAJIB as $kolom => $label) {
 
                 <div class="grid grid-2" style="gap: 20px; margin-bottom: 20px;">
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label class="form-label required">Asal Perguruan Tinggi</label>
-                        <input type="text" name="universitas" class="form-control" value="<?= htmlspecialchars($user['universitas'] ?? '') ?>" required>
+                        <label for="app-views-mahasiswa-profil-universitas" class="form-label required">Asal Perguruan Tinggi</label>
+                        <input id="app-views-mahasiswa-profil-universitas" type="text" name="universitas" class="form-control" value="<?= htmlspecialchars($user['universitas'] ?? '') ?>" required>
                     </div>
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label class="form-label required">Fakultas</label>
-                        <input type="text" name="fakultas" class="form-control" value="<?= htmlspecialchars($user['fakultas'] ?? '') ?>" required>
+                        <label for="app-views-mahasiswa-profil-fakultas" class="form-label required">Fakultas</label>
+                        <input id="app-views-mahasiswa-profil-fakultas" type="text" name="fakultas" class="form-control" value="<?= htmlspecialchars($user['fakultas'] ?? '') ?>" required>
                     </div>
                 </div>
 
                 <div class="grid grid-2" style="gap: 20px; margin-bottom: 32px;">
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label class="form-label required">Program Studi</label>
-                        <input type="text" name="prodi" class="form-control" value="<?= htmlspecialchars($user['program_studi'] ?? '') ?>" required>
+                        <label for="app-views-mahasiswa-profil-prodi" class="form-label required">Program Studi</label>
+                        <input id="app-views-mahasiswa-profil-prodi" type="text" name="prodi" class="form-control" value="<?= htmlspecialchars($user['program_studi'] ?? '') ?>" required>
                     </div>
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label class="form-label required">Semester Saat Ini</label>
-                        <input type="number" name="semester" class="form-control" value="<?= htmlspecialchars($user['semester'] ?? '') ?>" placeholder="Contoh: 6" min="1" max="14" required>
+                        <label for="app-views-mahasiswa-profil-semester" class="form-label required">Semester Saat Ini</label>
+                        <input id="app-views-mahasiswa-profil-semester" type="number" name="semester" class="form-control" value="<?= htmlspecialchars($user['semester'] ?? '') ?>" placeholder="Contoh: 6" min="1" max="14" required>
                     </div>
                 </div>
 
@@ -130,12 +130,12 @@ foreach (\App\Models\MahasiswaProfile::FIELD_WAJIB as $kolom => $label) {
                 
                 <div class="grid grid-2" style="gap: 20px; margin-bottom: 24px;">
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label class="form-label required">Kata Sandi Baru</label>
-                        <input type="password" name="new_password" class="form-control" required>
+                        <label for="app-views-mahasiswa-profil-new_password" class="form-label required">Kata Sandi Baru</label>
+                        <input id="app-views-mahasiswa-profil-new_password" type="password" name="new_password" class="form-control" required>
                     </div>
                     <div class="form-group" style="margin-bottom: 0;">
-                        <label class="form-label required">Konfirmasi Kata Sandi Baru</label>
-                        <input type="password" name="new_password_confirm" class="form-control" required>
+                        <label for="app-views-mahasiswa-profil-new_password_confirm" class="form-label required">Konfirmasi Kata Sandi Baru</label>
+                        <input id="app-views-mahasiswa-profil-new_password_confirm" type="password" name="new_password_confirm" class="form-control" required>
                     </div>
                 </div>
                 

@@ -15,7 +15,7 @@ foreach ($divisi as $d) {
 <div class="mb-6">
     <div class="d-flex align-center gap-2 mb-2">
         <a href="<?= BASE_URL ?>/sekretariat/pengajuan" class="text-muted" style="text-decoration: none; display: flex; align-items: center; gap: 6px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             Kembali ke Daftar
         </a>
     </div>
@@ -109,7 +109,7 @@ foreach ($divisi as $d) {
                         <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border);">
                             <div class="d-flex align-center gap-3">
                                 <div style="width: 32px; height: 32px; background: var(--bg-green-soft); border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
                                 </div>
                                 <div>
                                     <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($doc['jenis_dokumen']) ?></div>
@@ -118,10 +118,10 @@ foreach ($divisi as $d) {
                             </div>
                             <div style="display: flex; gap: 8px;">
                                 <a href="<?= BASE_URL ?>/sekretariat/dokumen/view/<?= htmlspecialchars($doc['id']) ?>" target="_blank" style="display: flex; align-items: center; justify-content: center; padding: 6px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--primary); text-decoration: none;" title="Lihat Dokumen">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                                 </a>
                                 <a href="<?= BASE_URL ?>/sekretariat/dokumen/download/<?= htmlspecialchars($doc['id']) ?>" style="display: flex; align-items: center; justify-content: center; padding: 6px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--text-secondary); text-decoration: none;" title="Unduh Dokumen">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                                 </a>
                             </div>
                         </div>
@@ -140,7 +140,7 @@ foreach ($divisi as $d) {
                         <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border);">
                             <div class="d-flex align-center gap-3">
                                 <div style="width: 32px; height: 32px; background: var(--bg-green-soft); border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
                                 </div>
                                 <div>
                                     <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars(str_replace('_', ' ', ucwords($doc['jenis_dokumen'], '_'))) ?></div>
@@ -149,10 +149,10 @@ foreach ($divisi as $d) {
                             </div>
                             <div style="display: flex; gap: 8px;">
                                 <a href="<?= BASE_URL ?>/sekretariat/dokumen/view/<?= htmlspecialchars($doc['id']) ?>" target="_blank" style="display: flex; align-items: center; justify-content: center; padding: 6px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--primary); text-decoration: none;" title="Lihat Dokumen">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                                 </a>
                                 <a href="<?= BASE_URL ?>/sekretariat/dokumen/download/<?= htmlspecialchars($doc['id']) ?>" style="display: flex; align-items: center; justify-content: center; padding: 6px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--text-secondary); text-decoration: none;" title="Unduh Dokumen">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                                 </a>
                             </div>
                         </div>
@@ -243,7 +243,7 @@ foreach ($divisi as $d) {
                     <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-top: 0; margin-bottom: 16px;">Tentukan hasil pemeriksaan kelengkapan berkas dan alokasi penempatan.</p>
                     
                     <div class="form-group">
-                        <label class="form-label required">Keputusan</label>
+                        <label for="verifikasiStatus" class="form-label required">Keputusan</label>
                         <select name="action" class="form-control" required id="verifikasiStatus" onchange="toggleFormFields()" style="background: var(--bg-soft);">
                             <option value="">-- Pilih Keputusan --</option>
                             <option value="diterima">Terima & Tetapkan Penempatan</option>
@@ -255,8 +255,8 @@ foreach ($divisi as $d) {
 
                     <div id="diterimaFields" style="display: none; padding-top: 10px; border-top: 1px dashed var(--border); margin-top: 10px;">
                         <div class="form-group">
-                            <label class="form-label required">Bidang/Divisi Final</label>
-                            <select name="divisi_id_final" class="form-control" style="background: var(--bg-soft);">
+                            <label for="app-views-sekretariat-pengajuan-detail-divisi_id_final" class="form-label required">Bidang/Divisi Final</label>
+                            <select id="app-views-sekretariat-pengajuan-detail-divisi_id_final" name="divisi_id_final" class="form-control" style="background: var(--bg-soft);">
                                 <option value="">-- Pilih Divisi Penempatan --</option>
                                 <?php foreach($divisi as $d): ?>
                                     <option value="<?= $d['id'] ?>" <?= ($divisiTerpilih == $d['id']) ? 'selected' : '' ?>><?= htmlspecialchars($d['nama_divisi']) ?> (Sisa Kuota: <?= max(0, $d['kapasitas'] - ($d['terisi'] ?? 0)) ?>)</option>
@@ -264,30 +264,30 @@ foreach ($divisi as $d) {
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="form-label">Pembina Lapangan (Opsional)</label>
-                            <input type="text" name="pembina_lapangan" class="form-control" placeholder="Nama Pembina Lapangan" style="background: var(--bg-soft);">
+                            <label for="app-views-sekretariat-pengajuan-detail-pembina_lapangan" class="form-label">Pembina Lapangan (Opsional)</label>
+                            <input id="app-views-sekretariat-pengajuan-detail-pembina_lapangan" type="text" name="pembina_lapangan" class="form-control" placeholder="Nama Pembina Lapangan" style="background: var(--bg-soft);">
                         </div>
                         <div class="form-group">
-                            <label class="form-label required">Tanggal Mulai Aktual</label>
-                            <input type="date" name="tanggal_mulai_aktual" class="form-control" value="<?= $pengajuan['tanggal_mulai_rencana'] ?>" style="background: var(--bg-soft);">
+                            <label for="app-views-sekretariat-pengajuan-detail-tanggal_mulai_aktual" class="form-label required">Tanggal Mulai Aktual</label>
+                            <input id="app-views-sekretariat-pengajuan-detail-tanggal_mulai_aktual" type="date" name="tanggal_mulai_aktual" class="form-control" value="<?= $pengajuan['tanggal_mulai_rencana'] ?>" style="background: var(--bg-soft);">
                         </div>
                         <div class="form-group">
-                            <label class="form-label required">Tanggal Selesai Aktual</label>
-                            <input type="date" name="tanggal_selesai_aktual" class="form-control" value="<?= $pengajuan['tanggal_selesai_rencana'] ?>" style="background: var(--bg-soft);">
+                            <label for="app-views-sekretariat-pengajuan-detail-tanggal_selesai_aktual" class="form-label required">Tanggal Selesai Aktual</label>
+                            <input id="app-views-sekretariat-pengajuan-detail-tanggal_selesai_aktual" type="date" name="tanggal_selesai_aktual" class="form-control" value="<?= $pengajuan['tanggal_selesai_rencana'] ?>" style="background: var(--bg-soft);">
                         </div>
                     </div>
 
                     <div id="alasanFields" style="display: none; padding-top: 10px; border-top: 1px dashed var(--border); margin-top: 10px;">
                         <div class="form-group">
-                            <label class="form-label required">Alasan Penolakan</label>
-                            <textarea name="alasan_penolakan" class="form-control" placeholder="Contoh: Kuota penuh..." rows="3" style="background: var(--bg-soft);"></textarea>
+                            <label for="app-views-sekretariat-pengajuan-detail-alasan_penolakan" class="form-label required">Alasan Penolakan</label>
+                            <textarea id="app-views-sekretariat-pengajuan-detail-alasan_penolakan" name="alasan_penolakan" class="form-control" placeholder="Contoh: Kuota penuh..." rows="3" style="background: var(--bg-soft);"></textarea>
                         </div>
                     </div>
 
                     <div id="tawarkanFields" style="display: none; padding-top: 10px; border-top: 1px dashed var(--border); margin-top: 10px;">
                         <div class="form-group">
-                            <label class="form-label required">Tawarkan ke Divisi Lain</label>
-                            <select name="divisi_id_tawaran" class="form-control" style="background: var(--bg-soft);">
+                            <label for="app-views-sekretariat-pengajuan-detail-divisi_id_tawaran" class="form-label required">Tawarkan ke Divisi Lain</label>
+                            <select id="app-views-sekretariat-pengajuan-detail-divisi_id_tawaran" name="divisi_id_tawaran" class="form-control" style="background: var(--bg-soft);">
                                 <option value="">-- Pilih Divisi Alternatif --</option>
                                 <?php foreach($divisi as $d): ?>
                                     <option value="<?= $d['id'] ?>"><?= htmlspecialchars($d['nama_divisi']) ?> (Sisa Kuota: <?= max(0, $d['kapasitas'] - ($d['terisi'] ?? 0)) ?>)</option>
@@ -297,15 +297,15 @@ foreach ($divisi as $d) {
                     </div>
 
                     <div class="form-group mt-3">
-                        <label class="form-label">Catatan Tambahan (Opsional)</label>
-                        <textarea name="catatan" class="form-control" placeholder="Beri catatan untuk mahasiswa terkait..." rows="3" style="background: var(--bg-soft);"></textarea>
+                        <label for="app-views-sekretariat-pengajuan-detail-catatan" class="form-label">Catatan Tambahan (Opsional)</label>
+                        <textarea id="app-views-sekretariat-pengajuan-detail-catatan" name="catatan" class="form-control" placeholder="Beri catatan untuk mahasiswa terkait..." rows="3" style="background: var(--bg-soft);"></textarea>
                         <div class="form-help">Wajib diisi jika meminta revisi dokumen.</div>
                     </div>
 
                     <div class="gold-rule mt-4 mb-4"></div>
 
                     <button type="submit" class="btn btn-primary" style="width: 100%;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
                         Simpan Keputusan
                     </button>
                 </form>
@@ -341,7 +341,7 @@ foreach ($divisi as $d) {
         <div class="card fade-up interactive-card fade-up interactive-card" style="margin: 0;">
             <div class="card-body">
                 <div style="text-align: center; padding: 20px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
                     <h3 style="font-family: var(--font-display); font-size: 18px; color: var(--text-primary); margin-bottom: 8px;">Pengajuan Telah Diproses</h3>
                     <p style="font-size: 13.5px; color: var(--text-secondary);">Status saat ini: <?= htmlspecialchars(str_replace('_', ' ', strtoupper($pengajuan['status']))) ?></p>
                 </div>
@@ -358,8 +358,8 @@ foreach ($divisi as $d) {
                 <form action="<?= BASE_URL ?>/sekretariat/pengajuan/detail/<?= $pengajuan['id'] ?>/upload-final" method="POST" enctype="multipart/form-data" style="margin-bottom: 24px;">
                     <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?? '' ?>">
                     <div class="form-group mb-3">
-                        <label class="form-label required">Unggah Dokumen / Surat Resmi</label>
-                        <select name="jenis_dokumen" class="form-control" required style="background: var(--bg-main);">
+                        <label for="app-views-sekretariat-pengajuan-detail-jenis_dokumen" class="form-label required">Unggah Dokumen / Surat Resmi</label>
+                        <select id="app-views-sekretariat-pengajuan-detail-jenis_dokumen" name="jenis_dokumen" class="form-control" required style="background: var(--bg-main);">
                             <option value="">-- Pilih Jenis Dokumen --</option>
                             <option value="surat_balasan">Surat Balasan / Jawaban Magang</option>
                             <option value="surat_penerimaan_final">Surat Penerimaan Final (Bappeda)</option>
@@ -402,17 +402,17 @@ foreach ($divisi as $d) {
         $suratMundur = reset($suratMundur);
         if ($suratMundur && !in_array($pengajuan['status'], ['mengundurkan_diri', 'ditolak', 'selesai'])):
         ?>
-        <div class="card fade-up interactive-card fade-up interactive-card" style="margin: 0; margin-top: 16px; border: 1px solid #F87171;">
-            <div class="card-header" style="background: #FEF2F2; border-bottom: 1px solid #F87171;">
-                <h3 class="card-title" style="color: #B91C1C;">Verifikasi Pengunduran Diri</h3>
+        <div class="card fade-up interactive-card fade-up interactive-card" style="margin: 0; margin-top: 16px; border: 1px solid var(--color-danger-border);">
+            <div class="card-header" style="background: var(--color-danger-soft); border-bottom: 1px solid var(--color-danger-border);">
+                <h3 class="card-title" style="color: var(--color-danger);">Verifikasi Pengunduran Diri</h3>
             </div>
             <div class="card-body">
                 <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Mahasiswa ini telah mengajukan pengunduran diri. Silakan periksa surat pengunduran diri yang dilampirkan.</p>
-                <a href="<?= BASE_URL ?>/sekretariat/dokumen/download/<?= $suratMundur['id'] ?>" target="_blank" class="btn btn-outline" style="width: 100%; margin-bottom: 16px; justify-content: center; border-color: #F87171; color: #B91C1C;">Unduh Surat Pengunduran Diri</a>
+                <a href="<?= BASE_URL ?>/sekretariat/dokumen/download/<?= $suratMundur['id'] ?>" target="_blank" class="btn btn-outline" style="width: 100%; margin-bottom: 16px; justify-content: center; border-color: var(--color-danger-border); color: var(--color-danger);">Unduh Surat Pengunduran Diri</a>
                 
                 <form action="<?= BASE_URL ?>/sekretariat/pengajuan/detail/<?= $pengajuan['id'] ?>/verifikasi-mundur" method="POST">
                     <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?? '' ?>">
-                    <button type="submit" class="btn btn-primary" style="width: 100%; background: #B91C1C; border-color: #B91C1C;" onclick="return confirm('Setujui pengunduran diri? Status akan diubah dan tidak dapat dikembalikan.')">Setujui Pengunduran Diri</button>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; background: var(--color-danger); border-color: var(--color-danger);" onclick="return confirm('Setujui pengunduran diri? Status akan diubah dan tidak dapat dikembalikan.')">Setujui Pengunduran Diri</button>
                 </form>
             </div>
         </div>

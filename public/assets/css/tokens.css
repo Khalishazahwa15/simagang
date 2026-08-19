@@ -33,6 +33,17 @@
     --color-info: #5d7fa6;
 
     --color-success-soft: #e7f1ec;
+
+    /* Varian teks dan garis untuk kotak status. Nilainya diturunkan dari
+       warna status di atas, bukan dari palet lain, supaya satu keluarga. */
+    --color-success-ink: #3f6154;
+    --color-success-border: #aec9bd;
+    --color-warning-ink: #7a5320;
+    --color-warning-border: #e2c288;
+    --color-danger-ink: #7d3540;
+    --color-danger-border: #dcaab1;
+    --color-info-ink: #3d5a78;
+    --color-info-border: #adc3d8;
     --color-warning-soft: var(--color-highlight-soft);
     --color-danger-soft: #f6dfe2;
     --color-info-soft: var(--color-secondary-soft);

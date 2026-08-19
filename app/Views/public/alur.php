@@ -88,25 +88,25 @@ $alurSteps = [
 ];
 
 $statusMap = [
-    ['key' => 'Draft', 'color' => 'var(--text-secondary)', 'bg' => '#F3F5F3', 'desc' => 'Formulir belum dikirim'],
-    ['key' => 'Diajukan', 'color' => '#2563EB', 'bg' => '#EFF6FF', 'desc' => 'Menunggu pemeriksaan'],
+    ['key' => 'Draft', 'color' => 'var(--text-secondary)', 'bg' => 'var(--bg-soft)', 'desc' => 'Formulir belum dikirim'],
+    ['key' => 'Diajukan', 'color' => 'var(--color-info)', 'bg' => 'var(--color-info-soft)', 'desc' => 'Menunggu pemeriksaan'],
     ['key' => 'Diperiksa', 'color' => '#7C3AED', 'bg' => '#F5F3FF', 'desc' => 'Sedang diperiksa Sekretariat'],
-    ['key' => 'Perlu Revisi', 'color' => '#B45309', 'bg' => '#FFFBEB', 'desc' => 'Dokumen perlu diperbaiki'],
-    ['key' => 'Cek Kebutuhan Divisi', 'color' => '#0369A1', 'bg' => '#F0F9FF', 'desc' => 'Berkas lengkap, konfirmasi divisi'],
+    ['key' => 'Perlu Revisi', 'color' => 'var(--color-warning)', 'bg' => 'var(--color-warning-soft)', 'desc' => 'Dokumen perlu diperbaiki'],
+    ['key' => 'Cek Kebutuhan Divisi', 'color' => 'var(--color-info-ink)', 'bg' => 'var(--color-info-soft)', 'desc' => 'Berkas lengkap, konfirmasi divisi'],
     ['key' => 'Diterima', 'color' => 'var(--primary)', 'bg' => 'var(--bg-green-soft)', 'desc' => 'Pengajuan diterima'],
-    ['key' => 'Ditolak', 'color' => '#9B2C2C', 'bg' => '#FEF2F2', 'desc' => 'Pengajuan ditolak'],
-    ['key' => 'Sedang Magang', 'color' => 'var(--primary)', 'bg' => '#F0F7F5', 'desc' => 'Periode magang aktif berjalan'],
-    ['key' => 'Mengundurkan Diri', 'color' => '#92400E', 'bg' => '#FFFBEB', 'desc' => 'Mengundurkan diri dari magang'],
+    ['key' => 'Ditolak', 'color' => 'var(--color-danger-ink)', 'bg' => 'var(--color-danger-soft)', 'desc' => 'Pengajuan ditolak'],
+    ['key' => 'Sedang Magang', 'color' => 'var(--primary)', 'bg' => 'var(--color-success-soft)', 'desc' => 'Periode magang aktif berjalan'],
+    ['key' => 'Mengundurkan Diri', 'color' => 'var(--color-warning-ink)', 'bg' => 'var(--color-warning-soft)', 'desc' => 'Mengundurkan diri dari magang'],
     ['key' => 'Selesai', 'color' => 'var(--primary)', 'bg' => 'var(--bg-green-soft)', 'desc' => 'Magang selesai, dokumen tersedia'],
-    ['key' => 'Dibatalkan', 'color' => 'var(--text-secondary)', 'bg' => '#F3F5F3', 'desc' => 'Pengajuan dibatalkan mahasiswa'],
+    ['key' => 'Dibatalkan', 'color' => 'var(--text-secondary)', 'bg' => 'var(--bg-soft)', 'desc' => 'Pengajuan dibatalkan mahasiswa'],
 ];
 
 $badgeColors = [
-    'Publik' => ['bg' => 'var(--accent-soft)', 'text' => '#92400E'],
+    'Publik' => ['bg' => 'var(--accent-soft)', 'text' => 'var(--color-warning-ink)'],
     'Mahasiswa' => ['bg' => 'var(--bg-green-soft)', 'text' => 'var(--primary)'],
-    'Sekretariat' => ['bg' => '#EFF6FF', 'text' => '#2563EB'],
+    'Sekretariat' => ['bg' => 'var(--color-info-soft)', 'text' => 'var(--color-info)'],
     'Aktif' => ['bg' => 'var(--bg-green-soft)', 'text' => 'var(--primary)'],
-    'Selesai' => ['bg' => '#F0F9FF', 'text' => '#0369A1'],
+    'Selesai' => ['bg' => 'var(--color-info-soft)', 'text' => 'var(--color-info-ink)'],
 ];
 ?>
 
@@ -147,7 +147,7 @@ $badgeColors = [
             <h2 style="font-family: var(--font-display); font-size: 30px; font-weight: 400; color: var(--text-primary); letter-spacing: -0.01em; margin-bottom: 40px;">Tahapan Proses</h2>
             <div style="display: flex; flex-direction: column; gap: 0;">
                 <?php foreach ($alurSteps as $i => $step): 
-                    $badge = $badgeColors[$step['badge']] ?? ['bg' => 'var(--accent-soft)', 'text' => '#92400E'];
+                    $badge = $badgeColors[$step['badge']] ?? ['bg' => 'var(--accent-soft)', 'text' => 'var(--color-warning-ink)'];
                     $isLast = $i === count($alurSteps) - 1;
                 ?>
                     <div class="layout-step" style="gap: 0">
@@ -168,7 +168,7 @@ $badgeColors = [
                                 <span style="background: <?= $badge['bg'] ?>; color: <?= $badge['text'] ?>; font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; padding: 3px 10px; border-radius: 99px; text-transform: uppercase;"><?= $step['badge'] ?></span>
                             </div>
                             <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 10px;"><?= $step['subtitle'] ?> &middot; <?= $step['duration'] ?></div>
-                            <p style="font-family: var(--font-body); font-size: 15px; color: #3D4844; line-height: 1.75; margin-bottom: 16px; margin-top: 0;"><?= $step['desc'] ?></p>
+                            <p style="font-family: var(--font-body); font-size: 15px; color: var(--text-primary); line-height: 1.75; margin-bottom: 16px; margin-top: 0;"><?= $step['desc'] ?></p>
                             
                             <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px;">
                                 <?php foreach ($step['detail'] as $di => $d): 
@@ -194,7 +194,7 @@ $badgeColors = [
             </p>
             <div style="display: flex; flex-direction: column; gap: 2px;">
                 <?php foreach ($statusMap as $s): ?>
-                    <div style="display: flex; align-items: center; gap: 16px; padding: 12px 16px; background: var(--bg-soft); border-radius: 8px; border: 1px solid #EAEEE8;">
+                    <div style="display: flex; align-items: center; gap: 16px; padding: 12px 16px; background: var(--bg-soft); border-radius: 8px; border: 1px solid var(--bg-soft);">
                         <span style="background: <?= $s['bg'] ?>; color: <?= $s['color'] ?>; font-family: var(--font-mono); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 6px; white-space: nowrap; min-width: 210px; display: inline-block; text-align: center;"><?= $s['key'] ?></span>
                         <span style="font-family: var(--font-body); font-size: 14px; color: var(--text-secondary);"><?= $s['desc'] ?></span>
                     </div>

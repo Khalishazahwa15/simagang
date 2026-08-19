@@ -136,22 +136,22 @@ button:disabled {
 .btn-danger {
     background: var(--color-danger-soft);
     border-color: #e7c2bd;
-    color: #91424a;
+    color: var(--color-danger-ink);
 }
 
 .btn-danger:hover {
     background: #edd0cc;
-    color: #7c3940;
+    color: var(--color-danger-ink);
 }
 
 .btn-success {
     background: var(--color-success-soft);
-    border-color: #c7ddcf;
-    color: #426b5b;
+    border-color: var(--color-success-border);
+    color: var(--color-success-ink);
 }
 
 .btn-success:hover {
-    background: #d8eadf;
+    background: var(--color-success-soft);
 }
 
 .btn-icon {
@@ -287,16 +287,16 @@ button:disabled {
 }
 
 .badge-draft { background: var(--status-draft-bg); color: var(--status-draft-text); border-color: var(--border); }
-.badge-diajukan { background: var(--status-diajukan-bg); color: var(--status-diajukan-text); border-color: #c9d8e6; }
+.badge-diajukan { background: var(--status-diajukan-bg); color: var(--status-diajukan-text); border-color: var(--color-info-border); }
 .badge-menunggu_verifikasi,
 .badge-dalam_verifikasi { background: var(--status-dalam-verifikasi-bg); color: var(--status-dalam-verifikasi-text); border-color: #e2cabd; }
 .badge-diteruskan { background: var(--status-diteruskan-bg); color: var(--status-diteruskan-text); border-color: #d9d1e3; }
-.badge-revisi { background: var(--status-revisi-bg); color: var(--status-revisi-text); border-color: #e7d2aa; }
+.badge-revisi { background: var(--status-revisi-bg); color: var(--status-revisi-text); border-color: var(--color-warning-border); }
 .badge-disetujui,
-.badge-diterima { background: var(--status-diterima-bg); color: var(--status-diterima-text); border-color: #c7ddcf; }
+.badge-diterima { background: var(--status-diterima-bg); color: var(--status-diterima-text); border-color: var(--color-success-border); }
 .badge-ditolak { background: var(--status-ditolak-bg); color: var(--status-ditolak-text); border-color: #e7c2bd; }
 .badge-sedang_magang { background: var(--status-sedang-magang-bg); color: var(--status-sedang-magang-text); border-color: #d9d1e3; }
-.badge-selesai { background: var(--status-selesai-bg); color: var(--status-selesai-text); border-color: #d6dbd3; }
+.badge-selesai { background: var(--status-selesai-bg); color: var(--status-selesai-text); border-color: var(--border); }
 .badge-mengundurkan_diri { background: var(--status-mengundurkan-diri-bg); color: var(--status-mengundurkan-diri-text); border-color: #e7c2bd; }
 
 /* Forms */
@@ -496,26 +496,26 @@ table tbody tr:hover {
 
 .alert-info {
     background: var(--color-info-soft);
-    border-color: #c9d8e6;
-    color: #456888;
+    border-color: var(--color-info-border);
+    color: var(--color-info);
 }
 
 .alert-success {
     background: var(--color-success-soft);
-    border-color: #c7ddcf;
-    color: #426b5b;
+    border-color: var(--color-success-border);
+    color: var(--color-success-ink);
 }
 
 .alert-warning {
     background: var(--color-warning-soft);
-    border-color: #e7d2aa;
-    color: #805b29;
+    border-color: var(--color-warning-border);
+    color: var(--color-warning-ink);
 }
 
 .alert-danger {
     background: var(--color-danger-soft);
     border-color: #e7c2bd;
-    color: #91424a;
+    color: var(--color-danger-ink);
 }
 
 /* Accordion family */
@@ -549,7 +549,7 @@ table tbody tr:hover {
 
 .accordion-item.active,
 .faq-accordion.active {
-    border-color: #cfd9d2;
+    border-color: var(--color-success-border);
 }
 
 /* Grid & flex utilities */

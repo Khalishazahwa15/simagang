@@ -44,7 +44,7 @@
                             $dateStr = date('d M Y', strtotime($dok['created_at']));
                             
                             // Status mapping (since schema doesn't have status on dokumen, we assume it's valid if it exists, or check pengajuan status)
-                            $statusBadge = '<span class="badge" style="background: #E8F5E9; color: var(--primary);">TERUNGGAH</span>';
+                            $statusBadge = '<span class="badge" style="background: var(--color-success-soft); color: var(--primary);">TERUNGGAH</span>';
                         ?>
                         <tr style="border-bottom: 1px solid var(--border);">
                             <td style="padding: 13px 16px;">
@@ -63,14 +63,14 @@
                             <td style="padding: 13px 16px; text-align: right;">
                                 <div style="display: flex; justify-content: flex-end; gap: 12px;">
                                     <a href="<?= BASE_URL ?>/mahasiswa/dokumen/view/<?= $dok['id'] ?>" target="_blank" style="display: flex; align-items: center; justify-content: center; padding: 6px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--primary); text-decoration: none;" title="Lihat Dokumen">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                                     </a>
                                     <a href="<?= BASE_URL ?>/mahasiswa/dokumen/download/<?= $dok['id'] ?>" style="display: flex; align-items: center; justify-content: center; padding: 6px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--text-secondary); text-decoration: none;" title="Unduh Dokumen">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                                     </a>
                                     <?php if ($pengajuan && $pengajuan['status'] === 'revisi'): ?>
                                     <a href="<?= BASE_URL ?>/mahasiswa/pengajuan/revisi" style="display: flex; align-items: center; justify-content: center; padding: 6px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--text-secondary); text-decoration: none;" title="Perbarui Dokumen">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                                     </a>
                                     <?php endif; ?>
                                 </div>
@@ -132,7 +132,7 @@
                             if (!$ext) $ext = 'PDF';
                             
                             $dateStr = date('d M Y', strtotime($dok['created_at']));
-                            $statusBadge = '<span class="badge" style="background: #E7F2EF; color: var(--primary);">RESMI BAPPEDA</span>';
+                            $statusBadge = '<span class="badge" style="background: var(--color-success-soft); color: var(--primary);">RESMI BAPPEDA</span>';
                         ?>
                         <tr style="border-bottom: 1px solid var(--border);">
                             <td style="padding: 13px 16px;">
@@ -151,10 +151,10 @@
                             <td style="padding: 13px 16px; text-align: right;">
                                 <div style="display: flex; justify-content: flex-end; gap: 12px;">
                                     <a href="<?= BASE_URL ?>/mahasiswa/dokumen/view/<?= $dok['id'] ?>" target="_blank" style="display: flex; align-items: center; justify-content: center; padding: 6px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--primary); text-decoration: none;" title="Lihat Dokumen">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                                     </a>
                                     <a href="<?= BASE_URL ?>/mahasiswa/dokumen/download/<?= $dok['id'] ?>" style="display: flex; align-items: center; justify-content: center; padding: 6px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 6px; cursor: pointer; color: var(--text-secondary); text-decoration: none;" title="Unduh Dokumen">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                                     </a>
                                 </div>
                             </td>

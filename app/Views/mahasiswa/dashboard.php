@@ -38,15 +38,15 @@ $dokCount = count($dokumen ?? []);
 $dokDesc = 'Berkas terunggah';
 ?>
 <?php if (!empty($profilKurang)): ?>
-<div style="background: #FEF3C7; border: 1px solid #FBBF24; border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 14px;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7A5A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+<div style="background: var(--color-warning-soft); border: 1px solid var(--color-warning-border); border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 14px;">
+    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-warning-ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
     <div style="flex: 1;">
-        <div style="font-family: var(--font-body); font-weight: 700; font-size: 14px; color: #7A5A00; margin-bottom: 4px;">Lengkapi profil dulu sebelum mengajukan magang</div>
-        <div style="font-family: var(--font-body); font-size: 13px; color: #7A5A00; line-height: 1.6;">
+        <div style="font-family: var(--font-body); font-weight: 700; font-size: 14px; color: var(--color-warning-ink); margin-bottom: 4px;">Lengkapi profil dulu sebelum mengajukan magang</div>
+        <div style="font-family: var(--font-body); font-size: 13px; color: var(--color-warning-ink); line-height: 1.6;">
             Data berikut belum terisi: <strong><?= htmlspecialchars(implode(', ', $profilKurang)) ?></strong>.
             Formulir pengajuan magang baru bisa dibuka setelah semuanya lengkap.
         </div>
-        <a href="<?= BASE_URL ?>/mahasiswa/profil" style="display: inline-block; margin-top: 12px; padding: 8px 16px; background: #7A5A00; color: #FEF3C7; text-decoration: none; border-radius: 6px; font-family: var(--font-body); font-size: 13px; font-weight: 600;">Lengkapi Profil</a>
+        <a href="<?= BASE_URL ?>/mahasiswa/profil" style="display: inline-block; margin-top: 12px; padding: 8px 16px; background: var(--color-warning-ink); color: var(--color-warning-soft); text-decoration: none; border-radius: 6px; font-family: var(--font-body); font-size: 13px; font-weight: 600;">Lengkapi Profil</a>
     </div>
 </div>
 <?php endif; ?>
@@ -101,16 +101,16 @@ $dokDesc = 'Berkas terunggah';
 
 <!-- Warning/Alert for Revisions or Rejections -->
 <?php if ($pengajuan && $pengajuan['status'] === 'revisi'): ?>
-<div style="background: #FEF3C7; border: 1px solid #FDE68A; border-radius: 10px; padding: 16px 24px; margin-bottom: 24px; display: flex; gap: 16px; align-items: flex-start;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#92400E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
+<div style="background: var(--color-warning-soft); border: 1px solid var(--color-warning-border); border-radius: 10px; padding: 16px 24px; margin-bottom: 24px; display: flex; gap: 16px; align-items: flex-start;">
+    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-warning-ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
     <div>
-        <div style="font-family: var(--font-body); font-size: 14px; font-weight: 700; color: #92400E; margin-bottom: 4px;">Terdapat Permintaan Revisi</div>
-        <div style="font-family: var(--font-body); font-size: 13px; color: #92400E;">Mohon segera perbaiki dokumen atau data Anda sesuai dengan catatan yang diberikan pada halaman Status Pengajuan.</div>
+        <div style="font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--color-warning-ink); margin-bottom: 4px;">Terdapat Permintaan Revisi</div>
+        <div style="font-family: var(--font-body); font-size: 13px; color: var(--color-warning-ink);">Mohon segera perbaiki dokumen atau data Anda sesuai dengan catatan yang diberikan pada halaman Status Pengajuan.</div>
     </div>
 </div>
 <?php elseif ($pengajuan && in_array($pengajuan['status'], ['diterima', 'sedang_magang'])): ?>
 <div style="background: var(--bg-green-soft); border: 1px solid var(--border); border-radius: 10px; padding: 16px 24px; margin-bottom: 24px; display: flex; gap: 16px; align-items: flex-start;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
     <div>
         <div style="font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--primary-dark); margin-bottom: 4px;">Selamat! Anda telah diterima.</div>
         <div style="font-family: var(--font-body); font-size: 13px; color: var(--primary-dark);">Silakan cek menu Dokumen untuk mengunduh Surat Penerimaan Final. Pastikan Anda hadir pada tanggal mulai magang.</div>

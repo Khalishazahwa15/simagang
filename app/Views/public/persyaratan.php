@@ -138,8 +138,8 @@ $divisiList = $divisiData ?? [];
     <div style="max-width: 900px; margin: 0 auto; padding: 64px 40px;">
         <!-- Alert -->
         <div style="display: flex; gap: 14px; background: var(--accent-soft); border: 1px solid rgba(217, 165, 29, 0.25); border-radius: 10px; padding: 16px 20px; margin-bottom: 48px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <div style="font-family: var(--font-body); font-size: 14px; color: #78350F; line-height: 1.7;">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <div style="font-family: var(--font-body); font-size: 14px; color: var(--color-warning-ink); line-height: 1.7;">
                 <strong>Pendaftaran terbuka sepanjang tahun.</strong> Tidak ada periode pendaftaran tetap — pengajuan dapat dilakukan kapan saja, tergantung ketersediaan kapasitas divisi.
             </div>
         </div>
@@ -149,17 +149,17 @@ $divisiList = $divisiData ?? [];
             <?php
             $summaries = [
                 [
-                    'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+                    'icon' => '<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
                     'label' => '6 Kriteria Eligibilitas',
                     'sub' => 'yang harus dipenuhi'
                 ],
                 [
-                    'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>',
+                    'icon' => '<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>',
                     'label' => '3 Dokumen Wajib',
                     'sub' => '+ opsional untuk penunjang'
                 ],
                 [
-                    'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>',
+                    'icon' => '<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>',
                     'label' => 'Unggah Mandiri',
                     'sub' => 'melalui portal SIMAGANG'
                 ],
@@ -188,9 +188,9 @@ $divisiList = $divisiData ?? [];
                         <?php foreach ($eligibles as $e): ?>
                             <div style="display: flex; gap: 14px; align-items: flex-start;">
                                 <div style="width: 22px; height: 22px; border-radius: 50%; background: var(--bg-green-soft); border: 1px solid rgba(11, 79, 71, 0.19); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                                 </div>
-                                <p style="font-family: var(--font-body); font-size: 14.5px; color: #3D4844; line-height: 1.7; margin: 0;"><?= $e ?></p>
+                                <p style="font-family: var(--font-body); font-size: 14.5px; color: var(--text-primary); line-height: 1.7; margin: 0;"><?= $e ?></p>
                             </div>
                         <?php endforeach; ?>
                     </div>
@@ -210,7 +210,7 @@ $divisiList = $divisiData ?? [];
                                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
                                     <span style="font-family: var(--font-mono); font-size: 11px; color: var(--primary); background: var(--bg-green-soft); padding: 3px 8px; border-radius: 5px;"><?= $doc['code'] ?></span>
                                     <h4 style="font-family: var(--font-body); font-size: 15px; font-weight: 700; color: var(--text-primary); margin: 0;"><?= $doc['title'] ?></h4>
-                                    <span style="margin-left: auto; background: #FEF2F2; color: #9B2C2C; font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 99px; letter-spacing: 0.06em;">WAJIB</span>
+                                    <span style="margin-left: auto; background: var(--color-danger-soft); color: var(--color-danger-ink); font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 99px; letter-spacing: 0.06em;">WAJIB</span>
                                 </div>
                                 <p style="font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 10px; margin-top: 0;"><?= $doc['desc'] ?></p>
                                 <div style="display: flex; gap: 16px; flex-wrap: wrap;">
@@ -218,7 +218,7 @@ $divisiList = $divisiData ?? [];
                                     <span style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);"><strong style="color: var(--text-primary);">Maks. ukuran:</strong> <?= $doc['maxSize'] ?></span>
                                 </div>
                                 <?php if (isset($doc['notes'])): ?>
-                                    <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #EAEEE8; font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary);">
+                                    <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--bg-soft); font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary);">
                                         <em>Catatan: <?= $doc['notes'] ?></em>
                                     </div>
                                 <?php endif; ?>
@@ -242,7 +242,7 @@ $divisiList = $divisiData ?? [];
                         <div style="display: flex; flex-direction: column; gap: 12px;">
                             <?php foreach ($docsOpsional as $doc): ?>
                                 <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start;">
-                                    <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); background: #F3F5F3; padding: 3px 8px; border-radius: 5px; flex-shrink: 0; margin-top: 2px;"><?= $doc['code'] ?></span>
+                                    <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); background: var(--bg-soft); padding: 3px 8px; border-radius: 5px; flex-shrink: 0; margin-top: 2px;"><?= $doc['code'] ?></span>
                                     <div>
                                         <div style="font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;"><?= $doc['title'] ?></div>
                                         <div style="font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 6px;"><?= $doc['desc'] ?></div>
@@ -287,7 +287,7 @@ $divisiList = $divisiData ?? [];
                                         </div>
                                         <?php $sisa = max(0, $div['kapasitas'] - ($div['terisi'] ?? 0)); ?>
                                         <div style="flex-shrink: 0; text-align: right;">
-                                            <span style="display: inline-block; background: <?= $sisa > 0 ? 'var(--accent-soft)' : '#FEF2F2' ?>; color: <?= $sisa > 0 ? 'var(--primary-dark)' : '#9B2C2C' ?>; padding: 4px 12px; border-radius: 6px; font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.04em;">
+                                            <span style="display: inline-block; background: <?= $sisa > 0 ? 'var(--accent-soft)' : 'var(--color-danger-soft)' ?>; color: <?= $sisa > 0 ? 'var(--primary-dark)' : 'var(--color-danger-ink)' ?>; padding: 4px 12px; border-radius: 6px; font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.04em;">
                                                 <?= $sisa > 0 ? "SISA KUOTA: {$sisa}" : "KUOTA PENUH" ?>
                                             </span>
                                         </div>

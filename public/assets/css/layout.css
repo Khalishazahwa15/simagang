@@ -329,7 +329,7 @@
 .nav-link.active {
     background: var(--primary-light);
     color: var(--primary-dark);
-    border-color: #cfdcd5;
+    border-color: var(--color-success-border);
     border-bottom-color: var(--accent);
 }
 
