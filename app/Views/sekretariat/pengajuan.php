@@ -1,10 +1,5 @@
 <div class="mb-6">
-    <div class="d-flex align-center justify-between">
-        <div>
-            <h1 class="card-title" style="font-family: var(--font-display); font-size: 28px; font-weight: 400; text-transform: none; letter-spacing: -0.01em; margin: 0 0 4px 0;">Kelola Pengajuan</h1>
-            <p class="text-muted" style="font-family: var(--font-body); font-size: 13.5px; margin: 0;"><?= isset($totalRows) ? $totalRows : '0' ?> total pengajuan ditemukan</p>
-        </div>
-    </div>
+    <p class="text-muted" style="font-family: var(--font-body); font-size: 13.5px; margin: 0;"><?= isset($totalRows) ? $totalRows : '0' ?> total pengajuan ditemukan</p>
 </div>
 
 <form method="GET" action="<?= BASE_URL ?>/sekretariat/pengajuan">

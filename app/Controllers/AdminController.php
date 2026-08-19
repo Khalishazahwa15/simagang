@@ -158,7 +158,7 @@ class AdminController extends Controller {
 
         $this->renderView('admin/users', [
             'title' => 'Kelola Pengguna',
-            'subtitle' => 'Manajemen akses sistem.',
+            'subtitle' => 'Kelola akses akun untuk Mahasiswa, Sekretariat, dan Administrator.',
             'currentPage' => 'users',
             'users' => $users,
             'page' => $page,
@@ -473,7 +473,7 @@ class AdminController extends Controller {
 
         $this->renderView('admin/audit_log', [
             'title' => 'Audit Log',
-            'subtitle' => 'Jejak aktivitas penting dalam sistem.',
+            'subtitle' => 'Pantau aktivitas administratif dan perubahan data penting dalam sistem.',
             'currentPage' => 'audit_log',
             'logs' => $logs,
             'actionFilter' => $action,

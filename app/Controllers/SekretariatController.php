@@ -288,7 +288,7 @@ class SekretariatController extends Controller {
 
         $this->renderView('sekretariat/peserta', [
             'title' => 'Daftar Peserta',
-            'subtitle' => 'Kelola mahasiswa magang aktif.',
+            'subtitle' => 'Kelola data mahasiswa yang sedang menjalani masa magang saat ini.',
             'currentPage' => 'peserta',
             'peserta' => $peserta,
             'q' => $q,
@@ -350,7 +350,7 @@ class SekretariatController extends Controller {
 
         $this->renderView('sekretariat/dokumen', [
             'title' => 'Arsip Dokumen',
-            'subtitle' => 'Laporan akhir mahasiswa magang.',
+            'subtitle' => 'Kelola laporan akhir magang yang telah diunggah oleh peserta.',
             'currentPage' => 'dokumen',
             'dokumenList' => $dokumenList,
             'q' => $q,
@@ -364,6 +364,23 @@ class SekretariatController extends Controller {
      * Penyaring periode dan divisi yang dipakai bersama oleh halaman Laporan
      * dan ekspor CSV, agar angka di layar selalu sama dengan isi berkas.
      */
+    /**
+     * Tulis satu baris CSV setelah menetralkan sel yang bisa ditafsirkan
+     * Excel sebagai rumus. Nama mahasiswa berisi "=cmd|..." misalnya, akan
+     * dieksekusi saat berkasnya dibuka bila tidak dinetralkan lebih dulu.
+     */
+    private function tulisBarisCsv($output, array $kolom) {
+        $aman = array_map(function ($nilai) {
+            $teks = (string)$nilai;
+            if ($teks !== '' && strpos("=+-@\t\r", $teks[0]) !== false) {
+                return "'" . $teks;
+            }
+            return $teks;
+        }, $kolom);
+
+        fputcsv($output, $aman);
+    }
+
     private function filterLaporan() {
         $dari = trim($_GET['dari'] ?? '');
         $sampai = trim($_GET['sampai'] ?? '');
@@ -477,13 +494,17 @@ class SekretariatController extends Controller {
         header('Content-Disposition: attachment; filename="' . $filename . '"');
         
         $output = fopen('php://output', 'w');
-        fputcsv($output, [
+
+        // BOM UTF-8 agar Excel membaca huruf beraksen dengan benar
+        fwrite($output, "\xEF\xBB\xBF");
+
+        $this->tulisBarisCsv($output, [
             'Nomor Pengajuan', 'Nama Mahasiswa', 'Email', 'Universitas', 'Program Studi',
             'Status', 'Tanggal Mulai', 'Tanggal Selesai', 'Divisi Preferensi', 'Divisi Final'
         ]);
 
         foreach ($pengajuanRaw as $row) {
-            fputcsv($output, [
+            $this->tulisBarisCsv($output, [
                 $row['nomor_pengajuan'],
                 $row['nama'],
                 $row['email'],

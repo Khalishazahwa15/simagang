@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR(255) NOT NULL,
     role ENUM('mahasiswa', 'sekretariat', 'admin') NOT NULL,
     status ENUM('aktif', 'nonaktif') DEFAULT 'aktif',
+    INDEX idx_users_role_status (role, status),
     reset_token VARCHAR(64) NULL,
     reset_token_expires DATETIME NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -60,6 +61,9 @@ CREATE TABLE IF NOT EXISTS pengajuan (
     diputuskan_at TIMESTAMP NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_pengajuan_status (status),
+    INDEX idx_pengajuan_dibuat (created_at),
+    INDEX idx_pengajuan_user_status (user_id, status),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (divisi_id_preferensi) REFERENCES divisi(id) ON DELETE SET NULL,
     FOREIGN KEY (divisi_id_tawaran) REFERENCES divisi(id) ON DELETE SET NULL,
@@ -104,6 +108,7 @@ CREATE TABLE IF NOT EXISTS notifications (
     pesan TEXT NOT NULL,
     is_read BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_notif_user_baca (user_id, is_read),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (pengajuan_id) REFERENCES pengajuan(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
@@ -128,5 +133,7 @@ CREATE TABLE IF NOT EXISTS audit_logs (
     details TEXT,
     ip_address VARCHAR(45),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_audit_dibuat (created_at),
+    INDEX idx_audit_entitas (entity, entity_id),
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;

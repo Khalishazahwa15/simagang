@@ -1,9 +1,5 @@
 <div class="mb-6">
-    <div class="d-flex align-center justify-between">
-        <div>
-            <h1 class="card-title" style="font-family: var(--font-display); font-size: 28px; font-weight: 400; text-transform: none; letter-spacing: -0.01em; margin: 0 0 4px 0;">Manajemen Pengguna</h1>
-            <p class="text-muted" style="font-family: var(--font-body); font-size: 13.5px; margin: 0;">Kelola akses akun untuk Mahasiswa, Sekretariat, dan Administrator.</p>
-        </div>
+    <div class="d-flex align-center justify-end">
         <button onclick="document.getElementById('modalTambahUser').style.display='flex'" style="display: flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--primary); color: var(--bg-main); border: none; border-radius: 8px; cursor: pointer; font-family: var(--font-body); font-size: 13.5px; font-weight: 600;">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
             Tambah Pengguna

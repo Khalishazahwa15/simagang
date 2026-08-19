@@ -35,9 +35,37 @@ class NotificationController extends Controller {
                 exit;
             }
             
-            $referer = $_SERVER['HTTP_REFERER'] ?? BASE_URL;
-            header("Location: $referer");
+            header('Location: ' . $this->kembaliKeHalamanSebelumnya());
             exit;
         }
+    }
+
+    /**
+     * Referer datang dari peramban dan bisa diisi apa saja, termasuk domain
+     * luar. Hanya alamat di dalam aplikasi ini yang boleh dijadikan tujuan
+     * pengalihan; selain itu dikembalikan ke beranda.
+     */
+    private function kembaliKeHalamanSebelumnya() {
+        $referer = $_SERVER['HTTP_REFERER'] ?? '';
+        if ($referer === '') {
+            return BASE_URL;
+        }
+
+        $tujuan = parse_url($referer);
+        $aplikasi = parse_url(BASE_URL);
+
+        $hostTujuan = $tujuan['host'] ?? '';
+        $hostAplikasi = $aplikasi['host'] ?? '';
+
+        if ($hostTujuan === '' || strcasecmp($hostTujuan, $hostAplikasi) !== 0) {
+            return BASE_URL;
+        }
+
+        if (isset($tujuan['port']) !== isset($aplikasi['port'])
+            || (isset($tujuan['port']) && $tujuan['port'] != $aplikasi['port'])) {
+            return BASE_URL;
+        }
+
+        return $referer;
     }
 }

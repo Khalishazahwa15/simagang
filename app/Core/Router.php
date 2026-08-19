@@ -4,20 +4,19 @@ namespace App\Core;
 class Router {
     protected $routes = [];
 
-    public function get($uri, $controllerAction, $middlewares = []) {
-        $this->addRoute('GET', $uri, $controllerAction, $middlewares);
+    public function get($uri, $controllerAction) {
+        $this->addRoute('GET', $uri, $controllerAction);
     }
 
-    public function post($uri, $controllerAction, $middlewares = []) {
-        $this->addRoute('POST', $uri, $controllerAction, $middlewares);
+    public function post($uri, $controllerAction) {
+        $this->addRoute('POST', $uri, $controllerAction);
     }
 
-    protected function addRoute($method, $uri, $controllerAction, $middlewares) {
+    protected function addRoute($method, $uri, $controllerAction) {
         $this->routes[] = [
             'method' => $method,
             'uri' => $uri,
-            'action' => $controllerAction,
-            'middlewares' => (array) $middlewares
+            'action' => $controllerAction
         ];
     }
 
@@ -28,11 +27,6 @@ class Router {
 
             if (preg_match($pattern, $uri, $matches) && $route['method'] === $method) {
                 
-                // Process Middlewares
-                foreach ($route['middlewares'] as $middleware) {
-                    Middleware::resolve($middleware);
-                }
-
                 // CSRF Protection for POST requests
                 if ($method === 'POST') {
                     if (!CSRF::verify($_POST['csrf_token'] ?? '')) {

@@ -30,3 +30,14 @@ CREATE TABLE IF NOT EXISTS login_attempts (
     INDEX idx_email_waktu (email, attempted_at),
     INDEX idx_ip_waktu (ip_address, attempted_at)
 ) ENGINE=InnoDB;
+
+-- 2026-08-19 - Tahap 3
+-- Indeks sekunder. Sebelumnya tidak ada satu pun, padahal setiap halaman
+-- daftar menyaring dan mengurutkan lewat kolom-kolom ini.
+ALTER TABLE users      ADD INDEX idx_users_role_status (role, status);
+ALTER TABLE pengajuan  ADD INDEX idx_pengajuan_status (status),
+                       ADD INDEX idx_pengajuan_dibuat (created_at),
+                       ADD INDEX idx_pengajuan_user_status (user_id, status);
+ALTER TABLE notifications ADD INDEX idx_notif_user_baca (user_id, is_read);
+ALTER TABLE audit_logs ADD INDEX idx_audit_dibuat (created_at),
+                       ADD INDEX idx_audit_entitas (entity, entity_id);

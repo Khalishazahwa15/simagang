@@ -16,7 +16,7 @@ class SyncStatusService {
     /**
      * Sinkronisasi status pengajuan secara otomatis berdasarkan tanggal.
      * Karena tidak ada cron job, fungsi ini akan dipanggil secara "lazy" 
-     * setiap kali aplikasi diakses (misalnya di Middleware atau boot).
+     * setiap kali aplikasi diakses, yaitu saat App melakukan boot.
      */
     public function sync() {
         // Prevent double sync or infinite loop issues by making it fast and simple
