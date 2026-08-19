@@ -12,19 +12,7 @@
 define('ROOT_PATH', dirname(__DIR__));
 define('APP_PATH', ROOT_PATH . '/app');
 
-require_once APP_PATH . '/Core/Env.php';
-
-spl_autoload_register(function ($class) {
-    $prefix = 'PHPMailer\\PHPMailer\\';
-    $len = strlen($prefix);
-    if (strncmp($prefix, $class, $len) !== 0) {
-        return;
-    }
-    $file = ROOT_PATH . '/lib/PHPMailer/' . substr($class, $len) . '.php';
-    if (file_exists($file)) {
-        require_once $file;
-    }
-});
+require_once APP_PATH . '/Core/autoload.php';
 
 \App\Core\Env::load(ROOT_PATH . '/.env');
 
