@@ -31,7 +31,7 @@ foreach ($divisi as $d) {
     </div>
 </div>
 
-<div class="grid" style="grid-template-columns: 1fr 360px; gap: 24px;">
+<div class="grid layout-detail" style="gap: 24px">
     <!-- Left: Data & Riwayat -->
     <div class="d-flex flex-column gap-6">
         <!-- Informasi Pendaftar -->

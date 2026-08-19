@@ -233,7 +233,7 @@
 
 <!-- Hero Section -->
 <section style="background: var(--bg-main); border-bottom: 1px solid var(--border); padding: 72px 32px 80px;">
-    <div class="hero-grid" style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
+    <div class="hero-grid grid-2" style="max-width: 1240px; margin: 0 auto; gap: 80px; align-items: center">
         <!-- Left: Editorial content -->
         <div>
             <!-- Eyebrow -->
@@ -279,7 +279,7 @@
             </div>
             
             <div class="doc-panel-body">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; margin-bottom: 24px;">
+                <div class="grid-2" style="gap: 12px 24px; margin-bottom: 24px">
                     <div>
                         <div style="font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 2px;">Nama Mahasiswa</div>
                         <div style="font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-primary);">Mahasiswa (Data Contoh)</div>

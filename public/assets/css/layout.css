@@ -10,6 +10,7 @@
 
 .admin-main {
     min-height: 100vh;
+    min-width: 0;
     overflow: auto;
 }
 
@@ -21,6 +22,7 @@
     position: sticky;
     top: 0;
     z-index: var(--z-sidebar);
+    min-width: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -476,3 +478,47 @@
 .gap-sm { gap: var(--space-3); }
 .gap-md { gap: var(--space-4); }
 .gap-lg { gap: var(--space-6); }
+
+/* Tata letak dua kolom yang menyatu jadi satu kolom di layar sempit.
+   Dipakai menggantikan grid-template-columns sebaris pada tampilan. */
+.layout-split {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: var(--space-6);
+    align-items: start;
+}
+
+.layout-detail {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: var(--space-6);
+    align-items: start;
+}
+
+.layout-aside {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: var(--space-6);
+    align-items: start;
+}
+
+.layout-step {
+    display: grid;
+    grid-template-columns: 80px minmax(0, 1fr);
+    gap: var(--space-5);
+    align-items: start;
+}
+
+@media (max-width: 991.98px) {
+    .layout-split,
+    .layout-detail,
+    .layout-aside {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 575.98px) {
+    .layout-step {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}

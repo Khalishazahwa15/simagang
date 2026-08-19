@@ -65,7 +65,7 @@ $tautanEkspor = function ($preset) use ($filterAktif) {
     </form>
 
     
-    <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+    <div class="grid grid-2" style="gap: 20px">
         
         <!-- Distribusi Status Pengajuan -->
         <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px;">

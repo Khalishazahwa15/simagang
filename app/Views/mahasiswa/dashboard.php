@@ -53,7 +53,7 @@ $dokDesc = 'Berkas terunggah';
 
 
 <!-- Metric Cards -->
-<div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; display: grid; grid-template-columns: repeat(4, 1fr); margin-bottom: 24px;">
+<div class="grid-4" style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; margin-bottom: 24px">
     <!-- Card 1: Status -->
     <div style="padding: 20px; display: flex; flex-direction: column;">
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">STATUS PENGAJUAN</div>
@@ -119,7 +119,7 @@ $dokDesc = 'Berkas terunggah';
 <?php endif; ?>
 
 <!-- Main 2-Column Grid -->
-<div style="display: grid; grid-template-columns: 3fr 2fr; gap: 24px; align-items: start;">
+<div class="layout-split" style="gap: 24px; align-items: start">
     <!-- Left: Detail Ringkasan -->
     <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; display: flex; flex-direction: column; height: 100%;">
         <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">

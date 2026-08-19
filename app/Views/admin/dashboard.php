@@ -47,7 +47,7 @@ function getBadgeLabel($status) {
     </div>
 
     <!-- 4 Summary Cards - Sekretariat Metrics -->
-    <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; display: grid; grid-template-columns: repeat(4, 1fr);">
+    <div class="grid-4" style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px">
         <div style="padding: 20px; display: flex; flex-direction: column;">
             <div style="font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">PERLU DITINDAKLANJUTI</div>
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; color: var(--primary); line-height: 1; margin-bottom: 4px;"><?= $stats['tindak_lanjut'] ?></div>
@@ -71,7 +71,7 @@ function getBadgeLabel($status) {
     </div>
 
     <!-- Main Grid - Unified -->
-    <div class="grid" style="grid-template-columns: 3fr 2fr; gap: 24px; align-items: stretch;">
+    <div class="grid layout-split" style="gap: 24px; align-items: stretch">
         
         <!-- Left Column: Pending List (from Sekretariat) -->
         <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; display: flex; flex-direction: column; height: 100%;">

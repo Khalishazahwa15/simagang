@@ -37,7 +37,7 @@ function getBadgeLabel($status) {
 <div style="display: flex; flex-direction: column; gap: 24px; max-width: 1040px; font-family: 'Plus Jakarta Sans', sans-serif;">
     
     <!-- 4 Summary Cards -->
-    <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; display: grid; grid-template-columns: repeat(4, 1fr);">
+    <div class="grid-4" style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px">
         <!-- Card 1 -->
         <div style="padding: 20px; display: flex; flex-direction: column;">
             <div style="font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">PERLU DITINDAKLANJUTI</div>
@@ -65,7 +65,7 @@ function getBadgeLabel($status) {
     </div>
 
     <!-- Main Grid -->
-    <div class="grid" style="grid-template-columns: 3fr 2fr; gap: 24px; align-items: stretch;">
+    <div class="grid layout-split" style="gap: 24px; align-items: stretch">
         
         <!-- Left Column: Pending List -->
         <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; display: flex; flex-direction: column; height: 100%;">

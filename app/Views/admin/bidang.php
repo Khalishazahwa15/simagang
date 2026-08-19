@@ -10,6 +10,7 @@
 
     <!-- Table Container -->
     <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 24px;">
+        <div style="overflow-x: auto;">
         <table style="width: 100%; border-collapse: collapse; min-width: 860px; text-align: left;">
             <thead>
                 <tr style="background: #F7F4EC;">
@@ -94,6 +95,7 @@
                 <?php endif; ?>
             </tbody>
         </table>
+        </div>
     </div>
 
     <!-- Pagination -->

@@ -145,7 +145,7 @@ $divisiList = $divisiData ?? [];
         </div>
 
         <!-- Quick summary -->
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 48px;">
+        <div class="grid-3" style="gap: 20px; margin-bottom: 48px">
             <?php
             $summaries = [
                 [

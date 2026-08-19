@@ -126,7 +126,7 @@ $badgeColors = [
 
     <div style="max-width: 900px; margin: 0 auto; padding: 64px 40px;">
         <!-- Quick overview -->
-        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 64px;">
+        <div class="grid-3" style="gap: 20px; margin-bottom: 64px">
             <?php
             $overviews = [
                 ['label' => 'Total Tahap', 'value' => '6 Langkah', 'sub' => 'dari daftar hingga selesai'],
@@ -150,7 +150,7 @@ $badgeColors = [
                     $badge = $badgeColors[$step['badge']] ?? ['bg' => 'var(--accent-soft)', 'text' => '#92400E'];
                     $isLast = $i === count($alurSteps) - 1;
                 ?>
-                    <div style="display: grid; grid-template-columns: 80px 1fr; gap: 0;">
+                    <div class="layout-step" style="gap: 0">
                         <!-- Left: number + connector -->
                         <div style="display: flex; flex-direction: column; align-items: center; padding-top: 4px;">
                             <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
