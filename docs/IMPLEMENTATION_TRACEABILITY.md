@@ -22,7 +22,7 @@ disertai catatan mengenai apa yang masih kurang dan langkah tindak lanjutnya.
 | FR-018 | Sekretariat unggah dokumen final (Surat Penerimaan) hasil proses luar sistem. | Dokumen | `SekretariatController`, `pengajuan_detail.php` | DONE |  |
 | FR-020 | Sekretariat unggah dokumen akhir (Selesai/Penilaian/Sertifikat) hasil proses luar sistem. | Dokumen | `SekretariatController`, `pengajuan_detail.php` | DONE |  |
 | SEC-04 | State machine protection di layer backend (DRAFT -> DITERIMA = ILEGAL). | Services | `StatusService`, `PengajuanService`, `SekretariatController` | DONE | 19 Agustus 2026: status `dibatalkan` dihapus dari peta transisi karena tidak ada di ENUM `pengajuan.status` dan tidak pernah dipakai. Transisi otomatis saat halaman detail dibuka juga dipindahkan ke aksi POST. |
-| UI-02 | Visual dan Layout mengacu pada Figma Make. Hindari elemen desain generik / glassmorphism. | Views | `app/Views/*` | SEBAGIAN | Tata letak mengikuti rancangan, tetapi antarmuka internal belum responsif (1.152 gaya sebaris) dan dua palet warna masih bertabrakan (146 heks tertulis langsung). Masuk Tahap 3 rekomendasi audit. |
+| UI-02 | Visual dan Layout mengacu pada Figma Make. Hindari elemen desain generik / glassmorphism. | Views | `app/Views/*` | DONE | 19 Agustus 2026: antarmuka internal kini muat di layar 382px tanpa geser mendatar (sebelumnya halaman melebar sampai 968px), dan 220 warna sisa palet lama dialihkan ke token di `tokens.css`. |
 | FR-031 | Fitur Lupa dan Reset Password menggunakan token satu kali pakai (1 jam). | Auth | `AuthController`, `schema.sql` | DONE | Baru benar-benar berfungsi sejak 19 Agustus 2026. Sebelumnya halaman galat fatal karena `Session::getFlash()` belum ada, dan setiap token langsung kedaluwarsa karena masa berlaku ditulis dengan jam PHP lalu dibandingkan dengan jam MySQL. Token kini juga disimpan sebagai hash SHA-256. |
 | FR-032 | Sistem Notifikasi untuk setiap perubahan status pengajuan. | Services | `NotificationService`, `StatusService`, `topbar.php` | DONE |  |
 | FR-033 | Fitur Laporan Ekspor CSV untuk Sekretariat. | Sekretariat | `SekretariatController`, `laporan.php` | DONE | 19 Agustus 2026: penyaring periode dan divisi ditambahkan, dipakai bersama oleh ringkasan di layar dan berkas CSV. |
@@ -30,7 +30,6 @@ disertai catatan mengenai apa yang masih kurang dan langkah tindak lanjutnya.
 
 ## Ringkasan
 
-- **DONE** — 18 butir
-- **SEBAGIAN** — 1 butir (UI-02)
+- **DONE** — 19 butir
 - **TIDAK SESUAI** — 1 butir (BR-005)
 - **PERLU PEMUTAKHIRAN PRD** — 1 butir (BR-014)
