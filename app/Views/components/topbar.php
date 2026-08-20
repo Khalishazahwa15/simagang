@@ -22,7 +22,7 @@ if ($userId) {
             <p class="admin-header-subtitle"><?= htmlspecialchars($headerSubtitle) ?></p>
         <?php endif; ?>
     </div>
-    <div style="display: flex; align-items: center; gap: 12px; position: relative;">
+    <div class="admin-header-actions" style="display: flex; align-items: center; gap: 12px; position: relative;">
         <!-- Notification Dropdown -->
         <div class="notification-dropdown" style="position: relative;">
             <button onclick="document.getElementById('notif-menu').classList.toggle('show')" style="position: relative; background: none; border: none; cursor: pointer; color: var(--text-secondary); padding: 8px;">

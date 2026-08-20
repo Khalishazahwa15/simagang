@@ -47,7 +47,7 @@ function getBadgeLabel($status) {
     </div>
 
     <!-- 4 Summary Cards - Sekretariat Metrics -->
-    <div class="grid-4" style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px">
+    <div class="grid-4 surface-card">
         <div style="padding: 20px; display: flex; flex-direction: column;">
             <div style="font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">PERLU DITINDAKLANJUTI</div>
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; color: var(--primary); line-height: 1; margin-bottom: 4px;"><?= $stats['tindak_lanjut'] ?></div>
@@ -74,7 +74,7 @@ function getBadgeLabel($status) {
     <div class="grid layout-split" style="gap: 24px; align-items: stretch">
         
         <!-- Left Column: Pending List (from Sekretariat) -->
-        <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; display: flex; flex-direction: column; height: 100%;">
+        <div class="surface-card" style="display: flex; flex-direction: column; height: 100%;">
             <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">
                 <div style="font-weight: 700; font-size: 13px; line-height: 20px; color: var(--text-primary);">Pengajuan Terbaru</div>
                 <a href="<?= BASE_URL ?>/sekretariat/pengajuan" style="font-weight: 600; font-size: 12.5px; line-height: 19px; color: var(--primary); text-decoration: none;">Lihat Semua &rarr;</a>
@@ -112,7 +112,7 @@ function getBadgeLabel($status) {
         <!-- Right Column -->
         <div style="display: flex; flex-direction: column; gap: 24px;">
             <!-- Status Divisi -->
-            <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px;">
+            <div class="surface-card">
                 <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border);">
                     <div style="font-weight: 700; font-size: 13px; line-height: 20px; color: var(--text-primary);">
                         Status Divisi
@@ -160,7 +160,7 @@ function getBadgeLabel($status) {
             </div>
 
             <!-- Pengguna Internal -->
-            <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px;">
+            <div class="surface-card">
                 <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border);">
                     <div style="font-weight: 700; font-size: 13px; line-height: 20px; color: var(--text-primary);">
                         Tim Internal

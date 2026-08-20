@@ -53,7 +53,7 @@ $dokDesc = 'Berkas terunggah';
 
 
 <!-- Metric Cards -->
-<div class="grid-4" style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; margin-bottom: 24px">
+<div class="grid-4 surface-card" style="margin-bottom: 24px">
     <!-- Card 1: Status -->
     <div style="padding: 20px; display: flex; flex-direction: column;">
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">STATUS PENGAJUAN</div>
@@ -121,7 +121,7 @@ $dokDesc = 'Berkas terunggah';
 <!-- Main 2-Column Grid -->
 <div class="layout-split" style="gap: 24px; align-items: start">
     <!-- Left: Detail Ringkasan -->
-    <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; display: flex; flex-direction: column; height: 100%;">
+    <div class="surface-card" style="display: flex; flex-direction: column; height: 100%;">
         <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">
             <div>
                 <div style="font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px;">Informasi Magang</div>
@@ -170,7 +170,7 @@ $dokDesc = 'Berkas terunggah';
     </div>
 
     <!-- Right: Aktivitas Terbaru -->
-    <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; display: flex; flex-direction: column; height: 100%;">
+    <div class="surface-card" style="display: flex; flex-direction: column; height: 100%;">
         <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">
             <div>
                 <div style="font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px;">Aktivitas Terbaru</div>

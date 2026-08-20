@@ -2,18 +2,18 @@
     
     <!-- Top Action -->
     <div style="display: flex; justify-content: flex-end; margin-bottom: 16px;">
-        <button onclick="document.getElementById('modalTambahDivisi').style.display='block'" style="display: flex; align-items: center; justify-content: center; gap: 7px; padding: 9px 18px; background: var(--primary); color: var(--bg-card); border: none; border-radius: 8px; font-weight: 600; font-size: 13.5px; line-height: 20px; cursor: pointer; transition: background 0.15s;" onmouseover="this.style.background='#083f39'" onmouseout="this.style.background='var(--primary)'">
+        <button onclick="document.getElementById('modalTambahDivisi').style.display='block'" style="display: flex; align-items: center; justify-content: center; gap: 7px; padding: 9px 18px; background: var(--primary); color: var(--bg-card); border: none; border-radius: 8px; font-weight: 600; font-size: 13.5px; line-height: 20px; cursor: pointer; transition: background 0.15s;" onmouseover="this.style.background='var(--primary-dark)'" onmouseout="this.style.background='var(--primary)'">
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             Tambah Divisi
         </button>
     </div>
 
     <!-- Table Container -->
-    <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 24px;">
+    <div class="surface-card" style="margin-bottom: 24px;">
         <div style="overflow-x: auto;">
         <table style="width: 100%; border-collapse: collapse; min-width: 860px; text-align: left;">
             <thead>
-                <tr style="background: #F7F4EC;">
+                <tr style="background: var(--color-surface-soft);">
                     <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 10.5px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 30%;">DIVISI / BIDANG</th>
                     <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 10.5px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 12%;">KAPASITAS</th>
                     <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 10.5px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 15%;">TERPAKAI</th>
@@ -74,7 +74,7 @@
                         </td>
                         <td style="padding: 16px; text-align: right;">
                             <div style="display: flex; align-items: center; justify-content: flex-end; gap: 6px;">
-                                <button onclick="editDivisi(<?= htmlspecialchars(json_encode($d)) ?>)" style="display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: #F7F4EC; border: 0.666667px solid var(--border); border-radius: 5px; cursor: pointer;" title="Edit Divisi">
+                                <button onclick="editDivisi(<?= htmlspecialchars(json_encode($d)) ?>)" style="display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; background: var(--color-surface-soft); border: 0.666667px solid var(--border); border-radius: 5px; cursor: pointer;" title="Edit Divisi">
                                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="1.16667" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
                                 </button>
                                 
@@ -138,8 +138,8 @@
 </div>
 
 <!-- Modal Tambah Divisi -->
-<div id="modalTambahDivisi" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: var(--z-modal); align-items: center; justify-content: center;">
-    <div style="background: var(--bg-card); width: 100%; max-width: 500px; border-radius: 12px; margin: 10vh auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+    <div id="modalTambahDivisi" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: var(--z-modal); align-items: center; justify-content: center;">
+    <div class="modal-content" style="background: var(--bg-card); width: 100%; max-width: 500px; border-radius: 12px; margin: 10vh auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
         <div style="padding: 20px 24px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
             <h3 style="margin: 0; font-family: var(--font-display); font-size: 18px; color: var(--text-primary);">Tambah Divisi Baru</h3>
             <button aria-label="Tutup dialog" onclick="document.getElementById('modalTambahDivisi').style.display='none'" style="background: none; border: none; cursor: pointer; color: var(--text-secondary);">
@@ -172,7 +172,7 @@
 
 <!-- Modal Edit Divisi -->
 <div id="modalEditDivisi" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: var(--z-modal); align-items: center; justify-content: center;">
-    <div style="background: var(--bg-card); width: 100%; max-width: 500px; border-radius: 12px; margin: 10vh auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+    <div class="modal-content" style="background: var(--bg-card); width: 100%; max-width: 500px; border-radius: 12px; margin: 10vh auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
         <div style="padding: 20px 24px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
             <h3 style="margin: 0; font-family: var(--font-display); font-size: 18px; color: var(--text-primary);">Edit Divisi</h3>
             <button aria-label="Tutup dialog" onclick="document.getElementById('modalEditDivisi').style.display='none'" style="background: none; border: none; cursor: pointer; color: var(--text-secondary);">

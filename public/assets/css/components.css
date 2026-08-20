@@ -84,16 +84,30 @@ button:disabled {
 }
 
 .btn-primary {
-    background: linear-gradient(180deg, #5b4a7b 0%, var(--primary) 100%);
+    background: var(--primary);
     color: var(--color-text-inverse);
-    border-color: rgba(35, 63, 58, 0.12);
-    box-shadow: 0 8px 18px rgba(74, 59, 104, 0.18);
+    border-color: rgba(0, 32, 80, 0.12);
+    box-shadow: 0 8px 18px rgba(0, 100, 176, 0.22);
 }
 
 .btn-primary:hover {
-    background: linear-gradient(180deg, #50406f 0%, var(--primary-dark) 100%);
+    background: var(--primary-dark);
     color: var(--color-text-inverse);
-    box-shadow: 0 10px 22px rgba(74, 59, 104, 0.22);
+    box-shadow: 0 10px 22px rgba(0, 32, 80, 0.26);
+}
+
+.btn-danger {
+    background: var(--color-danger);
+    color: var(--color-text-inverse);
+    border-color: var(--color-danger);
+    box-shadow: 0 8px 18px rgba(180, 35, 24, 0.18);
+}
+
+.btn-danger:hover {
+    background: var(--color-danger-ink);
+    color: var(--color-text-inverse);
+    border-color: var(--color-danger-ink);
+    box-shadow: 0 10px 22px rgba(138, 28, 21, 0.22);
 }
 
 .btn-secondary {
@@ -105,25 +119,25 @@ button:disabled {
 
 .btn-secondary:hover {
     background: var(--color-surface-tinted);
-    border-color: #d7cfdf;
+    border-color: var(--color-step-line);
     color: var(--primary-dark);
 }
 
 .btn-outline {
-    background: rgba(255, 254, 250, 0.58);
+    background: rgba(255, 255, 255, 0.72);
     color: var(--text-primary);
     border-color: var(--border);
 }
 
 .btn-outline:hover {
     background: var(--accent-pale);
-    border-color: #d7c2b6;
+    border-color: #F5DFA6;
     color: var(--accent-dark);
 }
 
 /* Cards */
 .card {
-    background: linear-gradient(180deg, rgba(255, 254, 250, 0.98), rgba(255, 254, 250, 0.92));
+    background: var(--bg-card);
     border: 1px solid var(--border-light);
     border-radius: var(--radius-lg);
     padding: var(--space-6);
@@ -134,7 +148,21 @@ button:disabled {
 }
 
 .card:hover {
-    border-color: #d5ccc0;
+    border-color: var(--color-step-line);
+    box-shadow: var(--shadow-md);
+}
+
+.surface-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.surface-card:hover {
+    border-color: var(--color-step-line);
     box-shadow: var(--shadow-md);
 }
 
@@ -146,7 +174,7 @@ button:disabled {
     justify-content: space-between;
     gap: var(--space-4);
     margin: calc(var(--space-6) * -1) calc(var(--space-6) * -1) var(--space-6);
-    background: rgba(241, 236, 228, 0.62);
+    background: var(--color-surface-soft);
 }
 
 .card-title {
@@ -208,13 +236,13 @@ button:disabled {
 .badge-draft { background: var(--status-draft-bg); color: var(--status-draft-text); border-color: var(--border); }
 .badge-diajukan { background: var(--status-diajukan-bg); color: var(--status-diajukan-text); border-color: var(--color-info-border); }
 .badge-menunggu_verifikasi,
-.badge-dalam_verifikasi { background: var(--status-dalam-verifikasi-bg); color: var(--status-dalam-verifikasi-text); border-color: #e2cabd; }
-.badge-diteruskan { background: var(--status-diteruskan-bg); color: var(--status-diteruskan-text); border-color: #d9d1e3; }
+.badge-dalam_verifikasi { background: var(--status-dalam-verifikasi-bg); color: var(--status-dalam-verifikasi-text); border-color: #F0DBA0; }
+.badge-diteruskan { background: var(--status-diteruskan-bg); color: var(--status-diteruskan-text); border-color: #F0DBA0; }
 .badge-revisi { background: var(--status-revisi-bg); color: var(--status-revisi-text); border-color: var(--color-warning-border); }
 .badge-disetujui,
 .badge-diterima { background: var(--status-diterima-bg); color: var(--status-diterima-text); border-color: var(--color-success-border); }
 .badge-ditolak { background: var(--status-ditolak-bg); color: var(--status-ditolak-text); border-color: #e7c2bd; }
-.badge-sedang_magang { background: var(--status-sedang-magang-bg); color: var(--status-sedang-magang-text); border-color: #d9d1e3; }
+.badge-sedang_magang { background: var(--status-sedang-magang-bg); color: var(--status-sedang-magang-text); border-color: #B8D4EE; }
 .badge-selesai { background: var(--status-selesai-bg); color: var(--status-selesai-text); border-color: var(--border); }
 .badge-mengundurkan_diri { background: var(--status-mengundurkan-diri-bg); color: var(--status-mengundurkan-diri-text); border-color: #e7c2bd; }
 
@@ -248,7 +276,7 @@ textarea {
     width: 100%;
     min-height: 42px;
     padding: 11px 14px;
-    background: rgba(255, 254, 250, 0.86);
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: var(--radius-md);
     font-family: var(--font-body);
@@ -262,7 +290,7 @@ textarea {
 input:hover,
 select:hover,
 textarea:hover {
-    border-color: #cbc1b4;
+    border-color: var(--color-step-line);
 }
 
 .form-control:focus,
@@ -367,7 +395,7 @@ table tbody tr:last-child td {
 
 .table tbody tr:hover,
 table tbody tr:hover {
-    background: rgba(74, 59, 104, 0.05);
+    background: rgba(0, 100, 176, 0.05);
 }
 
 /* Alerts */
@@ -413,8 +441,24 @@ table tbody tr:hover {
 
 .alert-danger {
     background: var(--color-danger-soft);
-    border-color: #e7c2bd;
+    border-color: var(--color-danger-border);
     color: var(--color-danger-ink);
+}
+
+.surface-card,
+.card,
+.auth-card {
+    min-width: 0;
+}
+
+.card-body {
+    min-width: 0;
+}
+
+.table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* Accordion family */
@@ -443,7 +487,7 @@ table tbody tr:hover {
 
 .accordion-header:hover,
 .faq-header:hover {
-    background: rgba(74, 59, 104, 0.06);
+    background: rgba(0, 100, 176, 0.06);
 }
 
 .accordion-item.active,

@@ -8,7 +8,7 @@ function getStatusBadgeStyle($status) {
         case 'ditolak': return 'background: var(--color-danger-soft); color: var(--color-danger-ink);';
         case 'sedang_magang': return 'background: var(--color-success-soft); color: var(--primary-dark);';
         case 'selesai': return 'background: var(--color-success-soft); color: var(--primary);';
-        default: return 'background: #F7F4EC; color: var(--text-secondary);'; // Draft / Diajukan
+        default: return 'background: var(--color-surface-soft); color: var(--text-secondary);'; // Draft / Diajukan
     }
 }
 function getStatusBadgeLabel($status) {

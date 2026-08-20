@@ -1,52 +1,56 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-    /* Core palette: modern Gen Z editorial, grounded for civic/academic use */
-    --color-primary: #4a3b68;
-    --color-primary-dark: #242238;
-    --color-primary-ink: #332946;
-    --color-primary-soft: #eee9f7;
-    --color-primary-pale: #f8f4fc;
+    /* Core palette: SIMAGANG biru + kuning */
+    --color-primary: #0064B0;
+    --color-primary-dark: #002050;
+    --color-primary-ink: #002060;
+    --color-primary-soft: #E0F0F0;
+    --color-primary-pale: #F0F8FF;
+    --color-header-dark: #003070;
 
-    --color-accent: #d97763;
-    --color-accent-dark: #9e4e42;
-    --color-accent-soft: #f7e2dc;
-    --color-accent-pale: #fff1ec;
-    --color-secondary-soft: #e7eef8;
-    --color-highlight-soft: #f8e9c9;
+    --color-accent: #F5B323;
+    --color-accent-dark: #C98A0F;
+    --color-accent-soft: #FFF4D6;
+    --color-accent-pale: #FFFAEB;
+    --color-accent-ink: #8A5A00;
+    --color-secondary-soft: #E0F0F0;
+    --color-highlight-soft: #FFF4D6;
 
-    --color-background: #faf6ef;
-    --color-surface: #fffefa;
-    --color-surface-soft: #f2ece6;
-    --color-surface-tinted: #eaf1f9;
+    --color-background: #FFFFFF;
+    --color-surface: #FFFFFF;
+    --color-surface-soft: #F0F8FF;
+    --color-surface-tinted: #E0F0F0;
 
-    --color-text: #252431;
-    --color-text-secondary: #666178;
-    --color-text-muted: #6f6a7d;
-    --color-text-inverse: #fffaf2;
-    --color-border: #e3dbd3;
-    --color-border-soft: #eee6de;
+    --color-text: #002060;
+    --color-text-secondary: #64748B;
+    --color-text-muted: #8695A7;
+    --color-text-inverse: #FFFFFF;
+    --color-border: #D8E4F0;
+    --color-border-soft: #E8F0FA;
+    --color-step-inactive: #DCEBFA;
+    --color-step-line: #C9DCF0;
 
-    --color-success: #5f8b78;
-    --color-warning: #b98539;
-    --color-danger: #ba5b66;
-    --color-info: #5d7fa6;
+    --color-success: #0064B0;
+    --color-warning: #F5B323;
+    --color-danger: #B42318;
+    --color-info: #0064B0;
 
-    --color-success-soft: #e7f1ec;
+    --color-success-soft: #E0F0F0;
 
     /* Varian teks dan garis untuk kotak status. Nilainya diturunkan dari
        warna status di atas, bukan dari palet lain, supaya satu keluarga. */
-    --color-success-ink: #3f6154;
-    --color-success-border: #aec9bd;
-    --color-warning-ink: #7a5320;
-    --color-warning-border: #e2c288;
-    --color-danger-ink: #7d3540;
-    --color-danger-border: #dcaab1;
-    --color-info-ink: #3d5a78;
-    --color-info-border: #adc3d8;
+    --color-success-ink: #002060;
+    --color-success-border: #D8E4F0;
+    --color-warning-ink: #8A5A00;
+    --color-warning-border: #F5DFA6;
+    --color-danger-ink: #8A1C15;
+    --color-danger-border: #F0B8B2;
+    --color-info-ink: #002060;
+    --color-info-border: #B8D4EE;
     --color-warning-soft: var(--color-highlight-soft);
-    --color-danger-soft: #f6dfe2;
-    --color-info-soft: var(--color-secondary-soft);
+    --color-danger-soft: #FDE8E7;
+    --color-info-soft: var(--color-primary-soft);
 
     /* Backward-compatible aliases used throughout existing views */
     --primary: var(--color-primary);
@@ -61,7 +65,7 @@
     --bg-soft: var(--color-surface-soft);
     --bg-card: var(--color-surface);
     --bg-green-soft: var(--color-primary-soft);
-    --bg-soft-dark: #d9d2e3;
+    --bg-soft-dark: var(--color-step-inactive);
     --text-primary: var(--color-text);
     --text-secondary: var(--color-text-secondary);
     --text-muted: var(--color-text-muted);
@@ -76,25 +80,25 @@
     --status-draft-bg: var(--color-surface-soft);
     --status-draft-text: var(--color-text-secondary);
     --status-diajukan-bg: var(--color-info-soft);
-    --status-diajukan-text: #456888;
+    --status-diajukan-text: #0064B0;
     --status-menunggu-bg: var(--color-accent-soft);
-    --status-menunggu-text: #8b4c3f;
+    --status-menunggu-text: var(--color-accent-ink);
     --status-dalam-verifikasi-bg: var(--color-accent-soft);
-    --status-dalam-verifikasi-text: #8b4c3f;
+    --status-dalam-verifikasi-text: var(--color-accent-ink);
     --status-revisi-bg: var(--color-warning-soft);
-    --status-revisi-text: #805b29;
-    --status-diteruskan-bg: var(--color-primary-soft);
-    --status-diteruskan-text: var(--color-primary-ink);
+    --status-revisi-text: var(--color-accent-ink);
+    --status-diteruskan-bg: var(--color-accent-soft);
+    --status-diteruskan-text: var(--color-accent-ink);
     --status-disetujui-bg: var(--color-success-soft);
-    --status-disetujui-text: #426b5b;
+    --status-disetujui-text: #002060;
     --status-diterima-bg: var(--color-success-soft);
-    --status-diterima-text: #426b5b;
+    --status-diterima-text: #002060;
     --status-ditolak-bg: var(--color-danger-soft);
     --status-ditolak-text: #91424a;
     --status-sedang-magang-bg: var(--color-primary-soft);
     --status-sedang-magang-text: var(--color-primary-dark);
-    --status-selesai-bg: #e8ece7;
-    --status-selesai-text: #4e5e57;
+    --status-selesai-bg: #F0F8FF;
+    --status-selesai-text: #64748B;
     --status-mengundurkan-diri-bg: var(--color-danger-soft);
     --status-mengundurkan-diri-text: #91424a;
 
@@ -157,10 +161,10 @@
     --spacing-lg: var(--space-6);
     --spacing-xl: var(--space-8);
 
-    --shadow-sm: 0 1px 2px rgba(37, 36, 49, 0.04), 0 8px 24px rgba(37, 36, 49, 0.04);
-    --shadow-md: 0 12px 30px rgba(37, 36, 49, 0.08);
-    --shadow-lg: 0 18px 48px rgba(37, 36, 49, 0.12);
-    --ring: 0 0 0 3px rgba(217, 119, 99, 0.22);
+    --shadow-sm: 0 1px 2px rgba(0, 32, 96, 0.04), 0 8px 24px rgba(0, 32, 96, 0.04);
+    --shadow-md: 0 12px 30px rgba(0, 32, 96, 0.08);
+    --shadow-lg: 0 18px 48px rgba(0, 32, 96, 0.12);
+    --ring: 0 0 0 3px rgba(245, 179, 35, 0.28);
 }
 
 *, *::before, *::after {
@@ -176,9 +180,7 @@ body {
     font-family: var(--font-body);
     font-size: var(--text-body);
     line-height: var(--leading-body);
-    background:
-        linear-gradient(180deg, rgba(255, 254, 250, 0.72) 0%, rgba(250, 246, 239, 0) 34%),
-        var(--color-background);
+    background: var(--color-background);
     color: var(--color-text);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -233,8 +235,8 @@ textarea {
 
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #d2c8d9; border-radius: 999px; border: 2px solid transparent; background-clip: content-box; }
-::-webkit-scrollbar-thumb:hover { background: #b9aec6; border: 2px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-thumb { background: var(--color-step-line); border-radius: 999px; border: 2px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-thumb:hover { background: #B8D4EE; border: 2px solid transparent; background-clip: content-box; }
 
 .gold-rule { border: none; border-top: 1px solid var(--accent); }
 

@@ -37,7 +37,7 @@ function getBadgeLabel($status) {
 <div style="display: flex; flex-direction: column; gap: 24px; max-width: 1040px; font-family: 'Plus Jakarta Sans', sans-serif;">
     
     <!-- 4 Summary Cards -->
-    <div class="grid-4" style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px">
+    <div class="grid-4 surface-card">
         <!-- Card 1 -->
         <div style="padding: 20px; display: flex; flex-direction: column;">
             <div style="font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">PERLU DITINDAKLANJUTI</div>
@@ -68,7 +68,7 @@ function getBadgeLabel($status) {
     <div class="grid layout-split" style="gap: 24px; align-items: stretch">
         
         <!-- Left Column: Pending List -->
-        <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; display: flex; flex-direction: column; height: 100%;">
+        <div class="surface-card" style="display: flex; flex-direction: column; height: 100%;">
             <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">
                 <div style="font-weight: 700; font-size: 13px; line-height: 20px; color: var(--text-primary);">Pengajuan Terbaru</div>
                 <a href="<?= BASE_URL ?>/sekretariat/pengajuan" style="font-weight: 600; font-size: 12.5px; line-height: 19px; color: var(--primary); text-decoration: none;">Lihat Semua &rarr;</a>
@@ -105,7 +105,7 @@ function getBadgeLabel($status) {
 
         <!-- Right Column: Status Distribution -->
         <div style="display: flex; flex-direction: column; gap: 24px;">
-            <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px;">
+            <div class="surface-card">
                 <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border);">
                     <div style="font-weight: 700; font-size: 13px; line-height: 20px; color: var(--text-primary);">Distribusi Status</div>
                 </div>

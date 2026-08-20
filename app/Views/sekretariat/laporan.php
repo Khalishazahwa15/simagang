@@ -68,7 +68,7 @@ $tautanEkspor = function ($preset) use ($filterAktif) {
     <div class="grid grid-2" style="gap: 20px">
         
         <!-- Distribusi Status Pengajuan -->
-        <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px;">
+        <div class="surface-card">
             <div style="padding: 13px 20px; border-bottom: 0.666667px solid var(--border);">
                 <div style="font-weight: 700; font-size: 11.5px; line-height: 17px; letter-spacing: 1.15px; text-transform: uppercase; color: var(--text-secondary);">
                     Distribusi Status Pengajuan
@@ -96,7 +96,7 @@ $tautanEkspor = function ($preset) use ($filterAktif) {
         </div>
 
         <!-- Pengajuan per Divisi -->
-        <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px;">
+        <div class="surface-card">
             <div style="padding: 13px 20px; border-bottom: 0.666667px solid var(--border);">
                 <div style="font-weight: 700; font-size: 11.5px; line-height: 17px; letter-spacing: 1.15px; text-transform: uppercase; color: var(--text-secondary);">
                     Pengajuan per Divisi (Preferensi)
@@ -129,12 +129,12 @@ $tautanEkspor = function ($preset) use ($filterAktif) {
     </div>
 
     <!-- Ekspor Data -->
-    <div style="background: var(--bg-card); border: 0.666667px solid var(--border); border-radius: 10px; padding: 20px 24px;">
+    <div class="surface-card" style="padding: 20px 24px;">
         <div style="font-weight: 700; font-size: 12px; line-height: 18px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 14px;">
             Pilihan Ekspor Data (CSV)
         </div>
         <div style="display: flex; flex-wrap: wrap; gap: 12px;">
-            <a href="<?= $tautanEkspor('semua') ?>" style="text-decoration: none; padding: 12px 18px; background: #F7F4EC; border: 1px solid var(--border); border-radius: 8px; display: inline-flex; flex-direction: column; justify-content: center; min-width: 280px; flex: 1;">
+            <a href="<?= $tautanEkspor('semua') ?>" style="text-decoration: none; padding: 12px 18px; background: var(--color-surface-soft); border: 1px solid var(--border); border-radius: 8px; display: inline-flex; flex-direction: column; justify-content: center; min-width: 280px; flex: 1;">
                 <div style="display: flex; align-items: center; gap: 7px; margin-bottom: 4px;">
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.33333" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
                     <div style="font-weight: 700; font-size: 13.5px; line-height: 20px; color: var(--text-primary);">Ekspor Semua Data</div>

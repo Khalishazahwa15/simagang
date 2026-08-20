@@ -63,10 +63,15 @@ if ($role === 'admin') {
                 <div class="user-role"><?= ucfirst(htmlspecialchars($role)) ?></div>
             </div>
         </div>
+
+        <button type="button" class="sidebar-menu-toggle" aria-expanded="false" aria-controls="sidebar-navigation" aria-label="Buka menu utama">
+            <svg class="sidebar-menu-icon-open" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+            <svg class="sidebar-menu-icon-close" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+        </button>
     </div>
 
     <!-- Navigation -->
-    <nav class="sidebar-nav">
+    <nav id="sidebar-navigation" class="sidebar-nav">
         
         <?php foreach ($menus as $menu): ?>
             <?php if (isset($menu['is_header'])): ?>
@@ -80,12 +85,26 @@ if ($role === 'admin') {
                 </a>
             <?php endif; ?>
         <?php endforeach; ?>
-    </nav>
 
-    <!-- Footer -->
-    <div style="padding: 0 12px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px;">
-        <a href="<?= BASE_URL ?>/logout" style="display: flex; align-items: center; gap: 10px; width: 100%; padding: 9px 10px; background: none; border: none; cursor: pointer; font-family: var(--font-body); font-size: 13px; color: rgba(255,255,255,0.38); text-align: left; text-decoration: none; transition: all 0.15s;" onmouseover="this.style.color='rgba(255,255,255,0.8)'" onmouseout="this.style.color='rgba(255,255,255,0.38)'">
-            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg> Keluar
-        </a>
-    </div>
+        <div class="sidebar-logout-group">
+            <div class="sidebar-nav-divider" aria-hidden="true"></div>
+            <a href="<?= BASE_URL ?>/logout" class="sidebar-logout" aria-label="Keluar dari SIMAGANG">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" x2="9" y1="12" y2="12"/></svg> Keluar
+            </a>
+        </div>
+    </nav>
 </aside>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const toggle = document.querySelector('.sidebar-menu-toggle');
+    const sidebar = document.querySelector('.admin-sidebar');
+    if (!toggle || !sidebar) return;
+
+    toggle.addEventListener('click', function () {
+        const isOpen = sidebar.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        toggle.setAttribute('aria-label', isOpen ? 'Tutup menu utama' : 'Buka menu utama');
+    });
+});
+</script>
