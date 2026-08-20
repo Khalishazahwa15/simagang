@@ -68,6 +68,20 @@ if (DB_DRIVER === 'pgsql') {
     }
 
     $server = new PDO(dsn_basis_data(), DB_USER, DB_PASS, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+
+    // Pengujian yang dihentikan di tengah jalan meninggalkan transaksi terbuka
+    // di sisi server. Transaksi itu memegang kunci pada schema uji, sehingga
+    // DROP SCHEMA pada percobaan berikutnya menunggu sampai batas waktu lalu
+    // gagal dengan "canceling statement due to statement timeout" — pesan yang
+    // mengarahkan tuduhan ke basis datanya, bukan ke sesi telantar.
+    //
+    // Lebih buruk lagi, seluruh berkas uji berhenti sebelum sempat mencetak
+    // apa pun, sehingga hasilnya terbaca "0 lulus, 0 gagal" dan mudah dikira
+    // aman padahal tidak ada satu pun pengujian yang berjalan.
+    //
+    // Dengan batas ini, transaksi telantar menutup dirinya sendiri.
+    $server->exec("SET idle_in_transaction_session_timeout = '30s'");
+
     $server->exec('DROP SCHEMA IF EXISTS "' . $skemaUji . '" CASCADE');
     $server->exec('CREATE SCHEMA "' . $skemaUji . '"');
     terapkan_schema($server);
@@ -99,6 +113,14 @@ if (DB_DRIVER === 'pgsql') {
 ob_start();
 require_once ROOT_PATH . '/database/seeder.php';
 ob_end_clean();
+
+// Koneksi yang dipakai pengujian juga perlu batas yang sama seperti koneksi
+// bootstrap di atas: transaksi telantar dari proses yang mati justru berasal
+// dari sini, bukan dari koneksi pembangun schema.
+if (DB_DRIVER === 'pgsql') {
+    \App\Core\Database::getInstance()->getConnection()
+        ->exec("SET idle_in_transaction_session_timeout = '30s'");
+}
 
 \App\Core\Session::init();
 
