@@ -1,6 +1,9 @@
-# FIGMA VISUAL ANALYSIS — SIMAGANG BAPPEDA LAMPUNG (KOREKSI FINAL)
+# PANDUAN DESAIN SIMAGANG
 
-## 1. Visual Source of Truth
+Arah visual antarmuka: apa yang menjadi acuan, apa yang dilarang, dan bagaimana
+memperluasnya ke halaman yang belum ada di rancangan awal.
+
+## 1. Acuan Visual
 Figma Make (beserta tangkapan layar yang diberikan) adalah acuan tunggal untuk *Visual Direction*. 
 Meskipun Figma mungkin tidak menyertakan seluruh halaman yang diminta PRD (seperti form pengajuan lengkap, form revisi, tabel peserta aktif, atau upload dokumen akhir), **desain harus diperluas secara konsisten dari bahasa visual yang sudah ada**, BUKAN menggunakan template generik.
 

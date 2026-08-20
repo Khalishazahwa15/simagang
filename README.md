@@ -2,7 +2,9 @@
 
 Sistem Informasi Magang (SIMAGANG) Bappeda Provinsi Lampung adalah platform manajemen magang terpadu, mulai dari pengajuan mahasiswa sampai penerbitan dokumen akhir.
 
-Dibangun dengan **PHP Native MVC** dan **MySQL**, tanpa framework dan tanpa Composer.
+Dibangun dengan **PHP Native MVC**, tanpa framework dan tanpa Composer. Berjalan
+di atas **MySQL** maupun **PostgreSQL/Supabase** — penggeraknya dipilih lewat satu
+baris di `.env`, tanpa mengubah kode.
 
 ---
 
@@ -15,6 +17,8 @@ Dibangun dengan **PHP Native MVC** dan **MySQL**, tanpa framework dan tanpa Comp
 - [Konfigurasi Email (SMTP)](#konfigurasi-email-smtp)
 - [Pengujian](#pengujian)
 - [Struktur Folder](#struktur-folder)
+- [Perkakas](#perkakas)
+- [Dokumentasi](#dokumentasi)
 - [Alur Pengajuan](#alur-pengajuan)
 - [Pemecahan Masalah](#pemecahan-masalah)
 
@@ -24,19 +28,24 @@ Dibangun dengan **PHP Native MVC** dan **MySQL**, tanpa framework dan tanpa Comp
 
 | Kebutuhan | Versi | Catatan |
 |---|---|---|
-| PHP | 7.4+ (diuji pada 8.3) | Ekstensi `pdo_mysql`, `fileinfo`, `mbstring`, `openssl` harus aktif |
-| MySQL | 5.7+ (diuji pada 5.7.39) | MariaDB 10.4+ juga berjalan |
+| PHP | 7.4+ (diuji pada 8.3) | Ekstensi `fileinfo`, `mbstring`, `openssl`, dan salah satu penggerak basis data di bawah |
+| Basis data | MySQL 5.7+ (diuji pada 5.7.39) | Perlu ekstensi `pdo_mysql`. MariaDB 10.4+ juga berjalan |
+| | atau PostgreSQL 13+ (diuji pada 17.6) | Perlu ekstensi `pdo_pgsql`. Supabase termasuk di sini |
 | Web server | Apache atau Nginx | Laragon, XAMPP, atau MAMP |
 
 **Tidak ada dependensi yang perlu di-install.** Tidak ada `composer install`, tidak ada `npm install`. Satu-satunya pustaka pihak ketiga, PHPMailer, sudah disertakan di `lib/PHPMailer/`.
 
-Keempat ekstensi PHP di atas aktif secara bawaan pada Laragon dan XAMPP. Untuk memastikan:
+Ekstensi di atas aktif secara bawaan pada Laragon dan XAMPP, **kecuali
+`pdo_pgsql`** yang harus dinyalakan sendiri bila memakai PostgreSQL. Untuk
+memastikan:
 
 ```bash
-php -m
+php -r "echo implode(', ', PDO::getAvailableDrivers());"
 ```
 
-Bila `pdo_mysql`, `fileinfo`, `mbstring`, atau `openssl` tidak muncul di daftar, hapus tanda `;` pada baris `extension=...` yang sesuai di `php.ini`, lalu mulai ulang web server.
+Keluarannya harus memuat penggerak yang akan Anda pakai. Bila belum, hapus tanda
+`;` pada baris `extension=...` yang sesuai di `php.ini`, lalu mulai ulang web
+server.
 
 ---
 
@@ -65,12 +74,17 @@ Buka `.env` dan sesuaikan bila perlu:
 
 ```ini
 APP_ENV=development
+DB_DRIVER=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
 DB_NAME=simagang_db
 DB_USER=root
 DB_PASS=
 ```
+
+Untuk PostgreSQL atau Supabase, isi `DB_DRIVER=pgsql` beserta `DB_SSLMODE` dan
+`DB_SCHEMA`. Seluruh kuncinya dijelaskan di `.env.example`, dan langkah
+lengkapnya ada di [docs/MIGRASI_SUPABASE.md](docs/MIGRASI_SUPABASE.md).
 
 `APP_ENV=development` menampilkan pesan galat di layar. Untuk server sungguhan gunakan `production`, yang menyembunyikan galat dari pengguna dan menuliskannya ke `storage/logs/error.log`.
 
@@ -83,6 +97,9 @@ mysql -u root < database/schema.sql
 ```
 
 Atau lewat phpMyAdmin: tab **Import** → pilih `database/schema.sql` → Go.
+
+Untuk PostgreSQL, pakai `database/schema.pgsql.sql`. Berkas itu tidak membuat
+basis data sendiri karena Supabase sudah menyediakannya.
 
 Berkas itu sudah memuat perintah `CREATE DATABASE simagang_db`, jadi databasenya tidak perlu dibuat manual. Namanya harus sama dengan `DB_NAME` di `.env`.
 
@@ -193,11 +210,27 @@ Memeriksa konfigurasi lewat halaman web tidak disarankan: halaman Lupa Password 
 ## Pengujian
 
 ```bash
-php tests/TestSystemFlow.php   # alur normal: tawaran, IDOR, hak akses, otomasi tanggal
-php tests/TestJalurRusak.php   # perbuatan yang harus ditolak sistem
+php tests/TestSystemFlow.php    # alur sistem dan otomasi berbasis tanggal
+php tests/TestJalurRusak.php    # perbuatan yang harus ditolak sistem
+php tests/TestTawaranFlow.php   # tawaran divisi, IDOR, dan hak akses
 ```
 
-Kedua berkas memuat `tests/bootstrap.php`, yang **membangun ulang basis data `simagang_test` dari nol** setiap kali dijalankan. Basis data pengembangan tidak tersentuh. Ganti namanya lewat variabel lingkungan `SIMAGANG_TEST_DB` bila perlu.
+Ketiganya memuat `tests/bootstrap.php`, yang **membangun ulang lingkungan uji
+dari nol** setiap kali dijalankan, sehingga basis data pengembangan tidak
+tersentuh:
+
+- MySQL memakai basis data terpisah, `simagang_test` (ganti lewat `SIMAGANG_TEST_DB`)
+- PostgreSQL memakai schema terpisah, `simagang_test` (ganti lewat `SIMAGANG_TEST_SCHEMA`)
+
+Untuk menjalankannya di atas basis data lain tanpa menyentuh `.env` sehari-hari,
+tunjuk berkas `.env` lain lewat `SIMAGANG_ENV`:
+
+```bash
+SIMAGANG_ENV=.env.supabase php tests/TestJalurRusak.php
+```
+
+Setiap perubahan yang menyentuh kueri sebaiknya diuji di **kedua** penggerak.
+Angka lulusnya harus sama; bila salah satu berbeda, ada kueri yang tidak setara.
 
 ---
 
@@ -211,8 +244,9 @@ app/
   Services/      Aturan bisnis: pengajuan, status, dokumen, email, notifikasi
   Views/         Berkas tampilan, dikelompokkan per peran
 config/          routes.php, database.php, app.php
-database/        schema.sql, UPGRADE.sql, seeder.php
-docs/            Rancangan basis data, matriks keterlacakan PRD, rencana migrasi Supabase
+database/        schema.sql (MySQL), schema.pgsql.sql (PostgreSQL),
+                 UPGRADE.sql, seeder.php
+docs/            Dokumentasi. Mulai dari docs/README.md
 lib/PHPMailer/   PHPMailer 7.1.1 (LGPL-2.1), dipasang manual tanpa Composer
 public/          Direktori web-facing: index.php dan aset
 storage/         Dibuat otomatis saat dipakai
@@ -221,6 +255,33 @@ storage/         Dibuat otomatis saat dipakai
 tests/           Berkas pengujian
 tools/           Perkakas baris perintah
 ```
+
+## Perkakas
+
+```bash
+php tools/kirim-email-uji.php alamat@contoh.com   # uji konfigurasi SMTP
+php tools/banding-skema.php                        # bandingkan skema MySQL vs PostgreSQL
+```
+
+`banding-skema.php` membandingkan struktur kedua basis data yang benar-benar
+berjalan, lalu keluar dengan kode 1 bila berbeda. Skema ditulis di dua berkas,
+dan perubahan yang hanya masuk ke salah satunya tidak tertangkap pengujian —
+pengujian hanya menjalankan satu penggerak dalam satu waktu, sehingga keduanya
+tetap lulus di lingkungannya sendiri.
+
+## Dokumentasi
+
+Seluruhnya ada di [docs/](docs/README.md):
+
+| Berkas | Isi |
+|---|---|
+| [ATURAN_BISNIS.md](docs/ATURAN_BISNIS.md) | Aturan yang ditegakkan sistem, ringkas |
+| [PRD.md](docs/PRD.md) | Dokumen kebutuhan resmi beserta riwayat revisinya |
+| [KETERLACAKAN_PRD.md](docs/KETERLACAKAN_PRD.md) | Status pengerjaan tiap butir PRD |
+| [RANCANGAN_BASIS_DATA.md](docs/RANCANGAN_BASIS_DATA.md) | Tabel, relasi, dan alasan rancangannya |
+| [PANDUAN_DESAIN.md](docs/PANDUAN_DESAIN.md) | Arah visual antarmuka |
+| [MIGRASI_SUPABASE.md](docs/MIGRASI_SUPABASE.md) | Cara menjalankannya di atas PostgreSQL |
+| [VERIFIKASI_MIGRASI.html](docs/VERIFIKASI_MIGRASI.html) | Hasil pengujian migrasi beserta angkanya |
 
 ---
 
@@ -250,7 +311,7 @@ Beberapa aturan ditegakkan sistem, bukan sekadar konvensi:
 - Keputusan hanya dapat ditetapkan saat status `dalam_verifikasi`, dan tidak dapat diubah setelahnya.
 - Menerima pengajuan selalu menempatkan mahasiswa pada divisi preferensinya. Menempatkan di divisi lain wajib lewat tawaran yang disetujui mahasiswa.
 
-Rincian tabel dan relasinya ada di `docs/DATABASE_DESIGN.md`.
+Rincian tabel dan relasinya ada di [docs/RANCANGAN_BASIS_DATA.md](docs/RANCANGAN_BASIS_DATA.md).
 
 ---
 
@@ -262,6 +323,10 @@ Rincian tabel dan relasinya ada di `docs/DATABASE_DESIGN.md`.
 | Profil mahasiswa gagal disimpan | Kolom profil belum lengkap. Jalankan `database/UPGRADE.sql`. |
 | Tampilan berantakan setelah `git pull` | CSS lama ter-cache. Tekan `Ctrl+F5`. |
 | `Unknown database 'simagang_db'` | `schema.sql` belum diimpor, atau `DB_NAME` di `.env` berbeda. |
+| `could not find driver` | Ekstensi penggerak belum aktif. Periksa dengan `php -r "echo implode(', ', PDO::getAvailableDrivers());"`. |
+| Pencarian selalu kosong di PostgreSQL | Ada kueri `LIKE` yang belum lewat `App\Core\Sql::searchText()`. Gagal tanpa pesan galat. |
+| Kueri gagal acak saat banyak pengguna | Koneksi Supabase memakai Transaction pooler (port 6543). Pindah ke Session pooler (port 5432). |
+| Halaman berjalan lambat di Supabase | Wajar bila aplikasi dan basis datanya berjauhan: tiap kueri menempuh jaringan. Tempatkan keduanya berdekatan. |
 | Tautan reset kata sandi tidak masuk email | Baca `storage/logs/error.log`. Bila justru muncul di `storage/logs/mail.log`, berarti `SMTP_HOST` masih kosong. |
 | Halaman kosong tanpa pesan apa pun | Set `APP_ENV=development` di `.env`, atau baca `storage/logs/error.log`. |
 | Akun tidak bisa login padahal sandi benar | Terkunci 15 menit karena percobaan gagal berulang, atau statusnya `nonaktif`. |
