@@ -52,7 +52,7 @@ $db->exec("UPDATE users SET status = 'aktif' WHERE id = 3");
 // --- K-2: kata sandi terlalu pendek ditolak ---
 $ditolak = false;
 try {
-    $auth->registerMahasiswa('Uji Pendek', 'pendek@test.local', '1', '111', 'Unila', 'Teknik', 'TI', 5, '0812', 'Jl. Uji');
+    $auth->registerMahasiswa('Uji Pendek', 'pendek@test.local', '1', '111', 'Metro', '2003-01-01', 'Unila', 'Teknik', 'TI', 5, '0812', 'Jl. Uji');
 } catch (\Exception $e) {
     $ditolak = strpos($e->getMessage(), 'minimal') !== false;
 }
@@ -61,7 +61,7 @@ periksa($ditolak, 'K-2 Kata sandi di bawah 8 karakter ditolak');
 // --- T-7: data akademik wajib lengkap saat registrasi ---
 $ditolak = false;
 try {
-    $auth->registerMahasiswa('Uji Kosong', 'kosong@test.local', 'rahasia123', '', 'Unila', 'Teknik', 'TI', 5, '0812', 'Jl. Uji');
+    $auth->registerMahasiswa('Uji Kosong', 'kosong@test.local', 'rahasia123', '', 'Metro', '2003-01-01', 'Unila', 'Teknik', 'TI', 5, '0812', 'Jl. Uji');
 } catch (\Exception $e) {
     $ditolak = strpos($e->getMessage(), 'NIM') !== false;
 }
@@ -70,11 +70,39 @@ periksa($ditolak, 'T-7 Registrasi tanpa NIM ditolak');
 // --- Semester di luar rentang wajar ditolak ---
 $ditolak = false;
 try {
-    $auth->registerMahasiswa('Uji Semester', 'semester@test.local', 'rahasia123', '222', 'Unila', 'Teknik', 'TI', 99, '0812', 'Jl. Uji');
+    $auth->registerMahasiswa('Uji Semester', 'semester@test.local', 'rahasia123', '222', 'Metro', '2003-01-01', 'Unila', 'Teknik', 'TI', 99, '0812', 'Jl. Uji');
 } catch (\Exception $e) {
     $ditolak = strpos($e->getMessage(), 'Semester') !== false;
 }
 periksa($ditolak, 'Semester 99 ditolak saat registrasi');
+
+// --- Tanggal lahir harus masuk akal ---
+$ditolak = false;
+try {
+    $auth->registerMahasiswa('Uji Tanggal', 'tanggal@test.local', 'rahasia123', '333', 'Metro', '31-02-2003', 'Unila', 'Teknik', 'TI', 5, '0812', 'Jl. Uji');
+} catch (\Exception $e) {
+    $ditolak = strpos($e->getMessage(), 'Tanggal lahir') !== false;
+}
+periksa($ditolak, 'Tanggal lahir yang tidak dikenali ditolak');
+
+// --- Registrasi harus menghasilkan profil yang langsung lengkap ---
+// Bila pendaftaran melewatkan satu saja isian pada FIELD_WAJIB, mahasiswanya
+// mendaftar dengan sukses lalu terhenti: halaman Pengajuan tidak menampilkan
+// formulir apa pun sampai profilnya dilengkapi lewat halaman lain.
+$auth->registerMahasiswa('Uji Lengkap', 'lengkap@test.local', 'rahasia123', '444',
+    'Bandar Lampung', '2003-05-10', 'Unila', 'Teknik', 'TI', 5, '081200000000', 'Jl. Uji');
+
+$stmt = $db->prepare("SELECT id FROM users WHERE email = ?");
+$stmt->execute(['lengkap@test.local']);
+$idBaru = (int)$stmt->fetchColumn();
+
+$profilModel = new \App\Models\MahasiswaProfile();
+$kurang = $profilModel->fieldBelumLengkap($idBaru);
+periksa(empty($kurang),
+    'Registrasi menghasilkan profil yang langsung lengkap'
+    . ($kurang ? ' (belum terisi: ' . implode(', ', $kurang) . ')' : ''));
+
+$db->exec("DELETE FROM users WHERE email = 'lengkap@test.local'");
 
 // --- T-4: token reset tidak boleh tersimpan polos ---
 $token = bin2hex(random_bytes(32));
