@@ -15,6 +15,16 @@ abstract class Model {
         return $this->db;
     }
 
+    /**
+     * Id baris yang baru saja dibuat pada tabel model ini.
+     *
+     * PostgreSQL memerlukan nama sequence-nya, MySQL tidak. Dikumpulkan di
+     * sini supaya setiap model tidak perlu tahu perbedaan itu.
+     */
+    public function lastId() {
+        return Sql::lastInsertId($this->db, $this->table);
+    }
+
     private static $transactionDepth = 0;
 
     public function beginTransaction() {

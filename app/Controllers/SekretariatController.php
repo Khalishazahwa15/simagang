@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\Auth;
+use App\Core\Sql;
 use App\Core\Session;
 use App\Core\ErrorHandler;
 use App\Services\PengajuanService;
@@ -103,7 +104,7 @@ class SekretariatController extends Controller {
         $params = [];
 
         if (!empty($q)) {
-            $conditions .= " AND (u.nama LIKE ? OR p.nomor_pengajuan LIKE ?)";
+            $conditions .= ' AND (' . Sql::searchText('u.nama') . ' OR ' . Sql::searchText('p.nomor_pengajuan') . ')';
             $params[] = "%$q%";
             $params[] = "%$q%";
         }
@@ -238,7 +239,8 @@ class SekretariatController extends Controller {
         $params = [];
         
         if (!empty($q)) {
-            $conditions .= " AND (u.nama LIKE ? OR mp.universitas LIKE ? OR d.nama_divisi LIKE ?)";
+            $conditions .= ' AND (' . Sql::searchText('u.nama') . ' OR ' . Sql::searchText('mp.universitas')
+                . ' OR ' . Sql::searchText('d.nama_divisi') . ')';
             $qLike = "%$q%";
             $params = array_merge($params, [$qLike, $qLike, $qLike]);
         }
@@ -309,10 +311,10 @@ class SekretariatController extends Controller {
         $limit = 20;
         $offset = ($page - 1) * $limit;
 
-        $conditions = "WHERE d.jenis_dokumen = 'laporan' AND d.is_current = 1";
+        $conditions = "WHERE d.jenis_dokumen = 'laporan' AND d.is_current = TRUE";
         $params = [];
         if (!empty($q)) {
-            $conditions .= " AND (u.nama LIKE ? OR p.nomor_pengajuan LIKE ?)";
+            $conditions .= ' AND (' . Sql::searchText('u.nama') . ' OR ' . Sql::searchText('p.nomor_pengajuan') . ')';
             $qLike = "%$q%";
             $params = [$qLike, $qLike];
         }

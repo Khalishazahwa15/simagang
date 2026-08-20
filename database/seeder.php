@@ -1,24 +1,26 @@
 <?php
 require_once dirname(__DIR__) . '/app/Core/Env.php';
+require_once dirname(__DIR__) . '/app/Core/Sql.php';
 \App\Core\Env::load(dirname(__DIR__) . '/.env');
 require_once dirname(__DIR__) . '/config/database.php';
 
 try {
-    $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
+    $dsn = dsn_basis_data();
     $pdo = new PDO($dsn, DB_USER, DB_PASS, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
     ]);
+    terapkan_schema($pdo);
 
     // Clear existing data
-    $pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
-    $pdo->exec("TRUNCATE TABLE mahasiswa_profiles");
-    $pdo->exec("TRUNCATE TABLE dokumen");
-    $pdo->exec("TRUNCATE TABLE status_history");
-    $pdo->exec("TRUNCATE TABLE audit_logs");
-    $pdo->exec("TRUNCATE TABLE pengajuan");
-    $pdo->exec("TRUNCATE TABLE users");
-    $pdo->exec("TRUNCATE TABLE divisi");
-    $pdo->exec("SET FOREIGN_KEY_CHECKS = 1");
+    \App\Core\Sql::truncate($pdo, [
+        'mahasiswa_profiles',
+        'dokumen',
+        'status_history',
+        'audit_logs',
+        'pengajuan',
+        'users',
+        'divisi',
+    ]);
 
     // Seed Users
     $password = password_hash('password123', PASSWORD_DEFAULT);
@@ -33,7 +35,7 @@ try {
     
     // Mahasiswa
     $stmt->execute(['Najwa Ramadhani', 'najwa@student.unila.ac.id', $password, 'mahasiswa']);
-    $mahasiswa_id = $pdo->lastInsertId();
+    $mahasiswa_id = \App\Core\Sql::lastInsertId($pdo, 'users');
 
     // Seed Mahasiswa Profile
     $stmt_profile = $pdo->prepare("INSERT INTO mahasiswa_profiles (user_id, nim, tempat_lahir, tanggal_lahir, universitas, fakultas, program_studi, semester, nomor_hp, alamat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");

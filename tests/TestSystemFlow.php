@@ -30,7 +30,7 @@ try {
     // Create User
     $stmt = $db->prepare("INSERT INTO users (nama, email, password, role, status) VALUES (?, ?, ?, ?, 'aktif')");
     $stmt->execute(['Test User', 'testuser@example.com', password_hash('password', PASSWORD_BCRYPT), 'sekretariat']);
-    $userId = $db->lastInsertId();
+    $userId = \App\Core\Sql::lastInsertId($db, 'users');
     assertTest($userId > 0, "Super Admin can create User");
 
     // Update User
@@ -73,13 +73,13 @@ try {
     // Buat data palsu untuk automasi (tanpa transaction karena updateStatus pake transaction sendiri)
     $stmt = $db->prepare("INSERT INTO users (nama, email, password, role) VALUES ('Auto Test', 'auto@test.com', 'pwd', 'mahasiswa')");
     $stmt->execute();
-    $mhsId = $db->lastInsertId();
+    $mhsId = \App\Core\Sql::lastInsertId($db, 'users');
     
     // Pengajuan diterima dengan tanggal_mulai_aktual = hari ini
     $today = date('Y-m-d');
     $stmt = $db->prepare("INSERT INTO pengajuan (user_id, nomor_pengajuan, divisi_id_preferensi, divisi_id_final, status, tanggal_mulai_rencana, tanggal_selesai_rencana, tanggal_mulai_aktual) VALUES (?, 'PGJ-TEST', 1, 1, 'diterima', ?, ?, ?)");
     $stmt->execute([$mhsId, $today, $today, $today]);
-    $pId = $db->lastInsertId();
+    $pId = \App\Core\Sql::lastInsertId($db, 'pengajuan');
     
     // Jalankan sync
     try {

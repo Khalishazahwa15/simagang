@@ -9,7 +9,7 @@ class Pengajuan extends Model {
     public function create($userId, $nomorPengajuan, $divisiPreferensi, $tanggalMulai, $tanggalSelesai) {
         $stmt = $this->db->prepare("INSERT INTO {$this->table} (user_id, nomor_pengajuan, divisi_id_preferensi, tanggal_mulai_rencana, tanggal_selesai_rencana, status) VALUES (?, ?, ?, ?, ?, 'diajukan')");
         $stmt->execute([$userId, $nomorPengajuan, $divisiPreferensi, $tanggalMulai, $tanggalSelesai]);
-        return $this->db->lastInsertId();
+        return $this->lastId();
     }
 
     /**

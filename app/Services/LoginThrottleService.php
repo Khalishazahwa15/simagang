@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Core\Database;
+use App\Core\Sql;
 
 class LoginThrottleService {
     const MAX_ATTEMPTS = 5;
@@ -18,12 +19,14 @@ class LoginThrottleService {
      * Dihitung per kombinasi email dan alamat IP.
      */
     public function lockedForMinutes($email) {
+        $sisaDetik = Sql::secondsFromNow(Sql::plusMinutesParam('MAX(attempted_at)'));
+
         $stmt = $this->db->prepare("
             SELECT COUNT(*) AS jumlah,
-                   TIMESTAMPDIFF(SECOND, NOW(), DATE_ADD(MAX(attempted_at), INTERVAL ? MINUTE)) AS sisa_detik
+                   {$sisaDetik} AS sisa_detik
             FROM login_attempts
             WHERE email = ? AND ip_address = ?
-              AND attempted_at > DATE_SUB(NOW(), INTERVAL ? MINUTE)
+              AND attempted_at > " . Sql::nowMinusMinutesParam() . "
         ");
         $stmt->execute([self::WINDOW_MINUTES, $email, $this->ip(), self::WINDOW_MINUTES]);
         $row = $stmt->fetch(\PDO::FETCH_ASSOC);

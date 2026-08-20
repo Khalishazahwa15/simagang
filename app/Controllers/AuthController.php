@@ -4,6 +4,7 @@ use App\Core\Controller;
 use App\Core\Auth;
 use App\Core\Session;
 use App\Core\ErrorHandler;
+use App\Core\Sql;
 use App\Services\AuthService;
 use App\Services\LoginThrottleService;
 
@@ -132,7 +133,7 @@ class AuthController extends Controller {
             if ($user) {
                 $token = bin2hex(random_bytes(32));
                 
-                $stmt = $db->prepare("UPDATE users SET reset_token = ?, reset_token_expires = DATE_ADD(NOW(), INTERVAL 1 HOUR) WHERE id = ?");
+                $stmt = $db->prepare('UPDATE users SET reset_token = ?, reset_token_expires = ' . Sql::nowPlusHours(1) . ' WHERE id = ?');
                 $stmt->execute([hash('sha256', $token), $user['id']]);
                 
                 $resetLink = BASE_URL . '/reset-password?token=' . $token;

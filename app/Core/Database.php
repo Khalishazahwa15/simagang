@@ -9,7 +9,7 @@ class Database {
     private $pdo;
 
     private function __construct() {
-        $dsn = "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET;
+        $dsn = dsn_basis_data();
         $options = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
@@ -18,6 +18,7 @@ class Database {
 
         try {
             $this->pdo = new PDO($dsn, DB_USER, DB_PASS, $options);
+            terapkan_schema($this->pdo);
         } catch (PDOException $e) {
             // Pesan aslinya memuat host, nama basis data, dan nama pengguna.
             Logger::error('KONEKSI DATABASE', $e->getMessage());

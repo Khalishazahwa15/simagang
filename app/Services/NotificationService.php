@@ -16,7 +16,7 @@ class NotificationService {
     }
 
     public function getUnreadCount($userId) {
-        $stmt = $this->db->prepare("SELECT COUNT(*) as count FROM notifications WHERE user_id = ? AND is_read = 0");
+        $stmt = $this->db->prepare("SELECT COUNT(*) as count FROM notifications WHERE user_id = ? AND is_read = FALSE");
         $stmt->execute([$userId]);
         return $stmt->fetch()['count'];
     }
@@ -31,7 +31,7 @@ class NotificationService {
     }
     
     public function markAllAsRead($userId) {
-        $stmt = $this->db->prepare("UPDATE notifications SET is_read = 1 WHERE user_id = ? AND is_read = 0");
+        $stmt = $this->db->prepare("UPDATE notifications SET is_read = TRUE WHERE user_id = ? AND is_read = FALSE");
         return $stmt->execute([$userId]);
     }
 }

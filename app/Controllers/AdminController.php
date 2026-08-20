@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use App\Core\Controller;
 use App\Core\Auth;
+use App\Core\Sql;
 use App\Models\User;
 use App\Models\Divisi;
 use App\Services\AuditService;
@@ -43,7 +44,7 @@ class AdminController extends Controller {
         $totalSekretariat = $peran['sekretariat'] ?? 0;
         $totalAdmin = $peran['admin'] ?? 0;
 
-        $ringkasDivisi = $db->query("SELECT COUNT(*) AS jumlah, IFNULL(SUM(kapasitas), 0) AS kapasitas FROM divisi")->fetch();
+        $ringkasDivisi = $db->query("SELECT COUNT(*) AS jumlah, COALESCE(SUM(kapasitas), 0) AS kapasitas FROM divisi")->fetch();
         $totalDivisi = (int)$ringkasDivisi['jumlah'];
         $kapasitasTotal = (int)$ringkasDivisi['kapasitas'];
         
@@ -132,7 +133,8 @@ class AdminController extends Controller {
         $params = [];
         
         if (!empty($q)) {
-            $conditions .= " AND (nama LIKE ? OR email LIKE ? OR id LIKE ?)";
+            $conditions .= ' AND (' . Sql::searchText('nama') . ' OR ' . Sql::searchText('email')
+                . ' OR ' . Sql::searchNumber('id') . ')';
             $params[] = "%$q%";
             $params[] = "%$q%";
             $params[] = "%$q%";
@@ -236,7 +238,7 @@ class AdminController extends Controller {
 
                 $stmt = $db->prepare("INSERT INTO divisi (nama_divisi, deskripsi, kapasitas) VALUES (?, ?, ?)");
                 $stmt->execute([$nama, $deskripsi, $kapasitas]);
-                $divisiId = $db->lastInsertId();
+                $divisiId = Sql::lastInsertId($db, 'divisi');
 
                 $this->auditService->log('CREATE_DIVISI', 'divisi', $divisiId, "Menambahkan divisi baru: $nama");
 
@@ -333,7 +335,7 @@ class AdminController extends Controller {
                 $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
                 $stmt = $db->prepare("INSERT INTO users (nama, email, password, role, status) VALUES (?, ?, ?, ?, 'aktif')");
                 $stmt->execute([$nama, $email, $hashedPassword, $role]);
-                $userId = $db->lastInsertId();
+                $userId = Sql::lastInsertId($db, 'users');
 
                 $this->auditService->log('CREATE_USER', 'users', $userId, "Membuat akun internal baru: $email ($role)");
 
@@ -441,7 +443,8 @@ class AdminController extends Controller {
         }
 
         if (!empty($q)) {
-            $conditions .= " AND (u.nama LIKE ? OR a.action LIKE ? OR a.entity LIKE ? OR a.details LIKE ?)";
+            $conditions .= ' AND (' . Sql::searchText('u.nama') . ' OR ' . Sql::searchText('a.action')
+                . ' OR ' . Sql::searchText('a.entity') . ' OR ' . Sql::searchText('a.details') . ')';
             $params[] = "%$q%";
             $params[] = "%$q%";
             $params[] = "%$q%";

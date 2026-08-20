@@ -78,7 +78,7 @@ periksa($ditolak, 'Semester 99 ditolak saat registrasi');
 
 // --- T-4: token reset tidak boleh tersimpan polos ---
 $token = bin2hex(random_bytes(32));
-$stmt = $db->prepare("UPDATE users SET reset_token = ?, reset_token_expires = DATE_ADD(NOW(), INTERVAL 1 HOUR) WHERE id = 3");
+$stmt = $db->prepare('UPDATE users SET reset_token = ?, reset_token_expires = ' . \App\Core\Sql::nowPlusHours(1) . ' WHERE id = 3');
 $stmt->execute([hash('sha256', $token)]);
 $tersimpan = $db->query("SELECT reset_token FROM users WHERE id = 3")->fetchColumn();
 periksa($tersimpan !== $token && $tersimpan === hash('sha256', $token), 'T-4 Token reset tersimpan sebagai hash');
@@ -137,7 +137,7 @@ periksa($netral('Najwa') === 'Najwa', 'S-8 Nama biasa tidak ikut diubah');
 $db->exec("DELETE FROM pengajuan");
 $db->exec("INSERT INTO pengajuan (nomor_pengajuan, user_id, divisi_id_preferensi, tanggal_mulai_rencana, tanggal_selesai_rencana, status)
            VALUES ('UJI-ALUR-1', 3, 1, '2026-09-01', '2026-11-30', 'diajukan')");
-$idUji = (int)$db->lastInsertId();
+$idUji = (int)\App\Core\Sql::lastInsertId($db, 'pengajuan');
 
 // Sekretariat bertindak sebagai pengambil keputusan
 $_SESSION['user_id'] = 2;
@@ -199,7 +199,7 @@ periksa(empty($tanpaEmail),
 $db->exec("DELETE FROM pengajuan");
 $db->exec("INSERT INTO pengajuan (nomor_pengajuan, user_id, divisi_id_preferensi, tanggal_mulai_rencana, tanggal_selesai_rencana, status)
            VALUES ('UJI-AWAL-1', 3, 1, '2026-09-01', '2026-11-30', 'diajukan')");
-$idAwal = (int)$db->lastInsertId();
+$idAwal = (int)\App\Core\Sql::lastInsertId($db, 'pengajuan');
 $db->exec("DELETE FROM notifications");
 
 $statusService->catatStatusAwal($idAwal);

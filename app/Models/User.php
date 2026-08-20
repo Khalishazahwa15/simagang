@@ -20,6 +20,6 @@ class User extends Model {
     public function create($nama, $email, $passwordHash, $role = 'mahasiswa') {
         $stmt = $this->db->prepare("INSERT INTO {$this->table} (nama, email, password, role) VALUES (?, ?, ?, ?)");
         $stmt->execute([$nama, $email, $passwordHash, $role]);
-        return $this->db->lastInsertId();
+        return $this->lastId();
     }
 }
