@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: 268px minmax(0, 1fr);
     background:
-        linear-gradient(135deg, rgba(237, 243, 239, 0.72), rgba(247, 243, 236, 0) 42%),
+        linear-gradient(135deg, rgba(224, 240, 240, 0.72), rgba(240, 248, 255, 0) 42%),
         var(--bg-main);
 }
 
@@ -27,8 +27,8 @@
     display: flex;
     flex-direction: column;
     padding: 0 0 var(--space-6);
-    background: linear-gradient(180deg, var(--primary-dark), #1b342f);
-    border-right: 1px solid rgba(255, 250, 242, 0.08);
+    background: linear-gradient(180deg, var(--primary-dark), var(--color-header-dark));
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .sidebar-header {
@@ -109,10 +109,53 @@
     color: rgba(255, 250, 242, 0.62);
 }
 
+.sidebar-menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-text-inverse);
+    cursor: pointer;
+}
+
+.sidebar-menu-toggle:hover,
+.sidebar-menu-toggle:focus-visible {
+    background: rgba(255, 255, 255, 0.16);
+}
+
+.sidebar-menu-icon-close {
+    display: none;
+}
+
+.admin-sidebar.is-open .sidebar-menu-icon-open {
+    display: none;
+}
+
+.admin-sidebar.is-open .sidebar-menu-icon-close {
+    display: block;
+}
+
 .sidebar-nav {
     flex: 1;
+    display: flex;
+    flex-direction: column;
     padding: var(--space-4) var(--space-3);
     overflow-y: auto;
+}
+
+.sidebar-nav-divider {
+    height: 1px;
+    margin: var(--space-4) 10px var(--space-3);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-logout-group {
+    margin-top: auto;
 }
 
 .nav-label {
@@ -169,6 +212,30 @@
     opacity: 1;
 }
 
+.sidebar-logout {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 10px;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.62);
+    font-family: var(--font-body);
+    font-size: 13px;
+    text-align: left;
+    text-decoration: none;
+    transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.sidebar-logout:hover,
+.sidebar-logout:focus-visible {
+    background: var(--color-danger);
+    border-color: var(--color-danger);
+    color: var(--color-text-inverse);
+}
+
 .admin-header {
     display: flex;
     align-items: flex-start;
@@ -195,6 +262,10 @@
     margin: 0;
     font-size: 14px;
     color: var(--text-secondary);
+}
+
+.admin-header-actions {
+    flex: 0 0 auto;
 }
 
 .content-pad {
@@ -228,7 +299,7 @@
     min-height: 72px;
     display: flex;
     align-items: center;
-    background: rgba(255, 254, 250, 0.86);
+    background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border-light);
 }
@@ -321,7 +392,7 @@
 
 .navbar-link:hover,
 .nav-link:hover {
-    background: rgba(79, 111, 100, 0.08);
+    background: var(--color-primary-pale);
     color: var(--primary-dark);
 }
 
@@ -383,7 +454,7 @@
     position: relative;
     overflow: hidden;
     background:
-        linear-gradient(135deg, rgba(237, 243, 239, 0.9), rgba(247, 243, 236, 0.3) 45%, rgba(251, 241, 234, 0.72)),
+        linear-gradient(135deg, var(--color-primary-pale), rgba(224, 240, 240, 0.55) 45%, rgba(255, 244, 214, 0.35)),
         var(--bg-main);
 }
 
@@ -391,7 +462,7 @@
     position: absolute;
     inset: 0;
     opacity: 0.28;
-    background-image: linear-gradient(90deg, rgba(79, 111, 100, 0.06) 1px, transparent 1px), linear-gradient(rgba(79, 111, 100, 0.06) 1px, transparent 1px);
+    background-image: linear-gradient(90deg, rgba(0, 100, 176, 0.06) 1px, transparent 1px), linear-gradient(rgba(0, 100, 176, 0.06) 1px, transparent 1px);
     background-size: 44px 44px;
 }
 
@@ -462,13 +533,13 @@
     align-items: center;
     justify-content: center;
     background:
-        linear-gradient(135deg, rgba(231, 239, 235, 0.9), rgba(247, 243, 236, 0.32) 52%, rgba(243, 229, 220, 0.72)),
+        linear-gradient(135deg, rgba(224, 240, 240, 0.9), rgba(240, 248, 255, 0.32) 52%, rgba(255, 244, 214, 0.48)),
         var(--bg-main);
 }
 
 .auth-card {
     width: min(100%, 460px);
-    background: rgba(255, 254, 250, 0.92);
+    background: rgba(255, 255, 255, 0.94);
     border: 1px solid var(--border-light);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);

@@ -70,7 +70,7 @@
         color: var(--text-secondary);
     }
     .timeline-circle.active .timeline-num {
-        color: var(--primary-dark);
+        color: var(--color-text-inverse);
     }
     .timeline-label {
         font-family: var(--font-body);
@@ -137,8 +137,8 @@
         width: 56px;
         height: 56px;
         border-radius: 50%;
-        background: var(--bg-main);
-        border: 2px solid var(--border);
+        background: var(--color-step-inactive);
+        border: 2px solid var(--color-step-inactive);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -152,10 +152,23 @@
         font-family: var(--font-mono);
         font-size: 14px;
         font-weight: 600;
-        color: var(--text-secondary);
+        color: var(--primary);
     }
     .alur-circle.active span {
         color: var(--bg-main);
+    }
+    .why-number {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--primary);
+        color: var(--color-text-inverse);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-mono);
+        font-size: 18px;
+        font-weight: 600;
     }
 
     .cta-section {
@@ -279,7 +292,7 @@
             </div>
             
             <div class="doc-panel-body">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; margin-bottom: 24px;">
+                <div class="landing-meta-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; margin-bottom: 24px;">
                     <div>
                         <div style="font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 2px;">Nama Mahasiswa</div>
                         <div style="font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-primary);">Mahasiswa (Data Contoh)</div>
@@ -416,8 +429,8 @@
                 ['num' => '03', 'title' => 'Dokumen Terarsip', 'body' => 'Dokumen pengajuan tersimpan secara digital dan dapat ditelusuri kapan saja oleh mahasiswa maupun administrator.'],
             ];
             foreach ($benefits as $b): ?>
-            <div style="display: grid; grid-template-columns: 80px 1fr 1fr; gap: 0 48px; padding: 40px 0; border-bottom: 1px solid var(--border); align-items: start;">
-                <div style="font-family: var(--font-mono); font-size: 36px; font-weight: 600; color: var(--accent); line-height: 1; padding-top: 4px;"><?= $b['num'] ?></div>
+            <div class="landing-why-item" style="display: grid; grid-template-columns: 80px 1fr 1fr; gap: 0 48px; padding: 40px 0; border-bottom: 1px solid var(--border); align-items: start;">
+                <div class="why-number"><?= $b['num'] ?></div>
                 <div><h3 style="font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--text-primary); line-height: 1.2; letter-spacing: -0.01em; margin: 0;"><?= $b['title'] ?></h3></div>
                 <div><p style="font-family: var(--font-body); font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin: 0;"><?= $b['body'] ?></p></div>
             </div>
@@ -443,7 +456,7 @@
         </div>
 
         <div style="position: relative;">
-            <div style="position: absolute; top: 28px; left: 28px; right: 28px; height: 1px; background: var(--border); z-index: 0;"></div>
+            <div style="position: absolute; top: 28px; left: 28px; right: 28px; height: 1px; background: var(--color-step-line); z-index: 0;"></div>
             
             <div class="alur-grid">
                 <?php
@@ -472,13 +485,13 @@
 
 <!-- CTA Section -->
 <section class="cta-section">
-    <div style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;">
+    <div class="landing-cta-inner" style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center;">
         <div>
             <div class="section-eyebrow">Siap Memulai?</div>
             <h2 style="font-family: var(--font-display); font-size: clamp(28px, 3vw, 42px); font-weight: 400; color: var(--bg-main); line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 12px;">Ajukan magang Anda hari ini.</h2>
             <p style="font-family: var(--font-body); font-size: 15px; color: rgba(255,255,255,0.65); line-height: 1.6; margin: 0;">Daftarkan diri dan mulai proses pengajuan magang di Bappeda Provinsi Lampung.</p>
         </div>
-        <div style="display: flex; flex-direction: column; gap: 12px; flex-shrink: 0;">
+        <div class="landing-cta-actions" style="display: flex; flex-direction: column; gap: 12px; flex-shrink: 0;">
             <a href="<?= BASE_URL ?>/register" class="btn btn-secondary" style="padding: 14px 32px; background: var(--accent); color: var(--primary-dark); border-radius: 8px; border: none; font-weight: 700; font-size: 14px; white-space: nowrap;">Daftar Sekarang</a>
             <a href="<?= BASE_URL ?>/login" class="btn btn-outline" style="padding: 14px 32px; background: transparent; color: rgba(255,255,255,0.8); border-radius: 8px; border: 1px solid rgba(255,255,255,0.25); font-weight: 600; font-size: 14px; white-space: nowrap;">Sudah Punya Akun</a>
         </div>
@@ -488,7 +501,7 @@
 <!-- Footer -->
 <footer class="footer-section">
     <div style="max-width: 1240px; margin: 0 auto;">
-        <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px;">
+        <div class="landing-footer-columns" style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px;">
             <div>
                 <div style="font-family: var(--font-body); font-weight: 800; font-size: 16px; color: var(--bg-main); margin-bottom: 4px;">SIMAGANG</div>
                 <div style="font-family: var(--font-body); font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">Sistem Informasi Pengelolaan Magang Mahasiswa</div>
@@ -516,7 +529,7 @@
         
         <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.08); margin-bottom: 24px;">
         
-        <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="landing-footer-bottom" style="display: flex; justify-content: space-between; align-items: center;">
             <div style="font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.3);">
                 &copy; <?= date('Y') ?> Bappeda Provinsi Lampung. Hak cipta dilindungi.
             </div>

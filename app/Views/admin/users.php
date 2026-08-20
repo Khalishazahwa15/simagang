@@ -148,7 +148,7 @@
 
 <!-- Modal Tambah Pengguna -->
 <div id="modalTambahUser" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: var(--z-modal); align-items: center; justify-content: center;">
-    <div style="background: var(--bg-card); width: 100%; max-width: 500px; border-radius: 12px; margin: 10vh auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+    <div class="modal-content" style="background: var(--bg-card); width: 100%; max-width: 500px; border-radius: 12px; margin: 10vh auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
         <div style="padding: 20px 24px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
             <h3 style="margin: 0; font-family: var(--font-display); font-size: 18px; color: var(--text-primary);">Tambah Pengguna Internal</h3>
             <button aria-label="Tutup dialog" onclick="document.getElementById('modalTambahUser').style.display='none'" style="background: none; border: none; cursor: pointer; color: var(--text-secondary);">
@@ -190,7 +190,7 @@
 
 <!-- Modal Edit Pengguna -->
 <div id="modalEditUser" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: var(--z-modal); align-items: center; justify-content: center;">
-    <div style="background: var(--bg-card); width: 100%; max-width: 500px; border-radius: 12px; margin: 10vh auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+    <div class="modal-content" style="background: var(--bg-card); width: 100%; max-width: 500px; border-radius: 12px; margin: 10vh auto; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
         <div style="padding: 20px 24px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
             <h3 style="margin: 0; font-family: var(--font-display); font-size: 18px; color: var(--text-primary);">Edit Pengguna</h3>
             <button aria-label="Tutup dialog" onclick="document.getElementById('modalEditUser').style.display='none'" style="background: none; border: none; cursor: pointer; color: var(--text-secondary);">

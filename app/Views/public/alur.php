@@ -90,7 +90,7 @@ $alurSteps = [
 $statusMap = [
     ['key' => 'Draft', 'color' => 'var(--text-secondary)', 'bg' => 'var(--bg-soft)', 'desc' => 'Formulir belum dikirim'],
     ['key' => 'Diajukan', 'color' => 'var(--color-info)', 'bg' => 'var(--color-info-soft)', 'desc' => 'Menunggu pemeriksaan'],
-    ['key' => 'Diperiksa', 'color' => '#7C3AED', 'bg' => '#F5F3FF', 'desc' => 'Sedang diperiksa Sekretariat'],
+    ['key' => 'Diperiksa', 'color' => 'var(--color-header-dark)', 'bg' => 'var(--color-primary-pale)', 'desc' => 'Sedang diperiksa Sekretariat'],
     ['key' => 'Perlu Revisi', 'color' => 'var(--color-warning)', 'bg' => 'var(--color-warning-soft)', 'desc' => 'Dokumen perlu diperbaiki'],
     ['key' => 'Cek Kebutuhan Divisi', 'color' => 'var(--color-info-ink)', 'bg' => 'var(--color-info-soft)', 'desc' => 'Berkas lengkap, konfirmasi divisi'],
     ['key' => 'Diterima', 'color' => 'var(--primary)', 'bg' => 'var(--bg-green-soft)', 'desc' => 'Pengajuan diterima'],
@@ -154,7 +154,7 @@ $badgeColors = [
                         <!-- Left: number + connector -->
                         <div style="display: flex; flex-direction: column; align-items: center; padding-top: 4px;">
                             <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                <span style="font-family: var(--font-mono); font-size: 13px; color: var(--accent-dark); letter-spacing: 0.05em;"><?= $step['num'] ?></span>
+                                <span style="font-family: var(--font-mono); font-size: 13px; color: var(--color-text-inverse); letter-spacing: 0.05em;"><?= $step['num'] ?></span>
                             </div>
                             <?php if (!$isLast): ?>
                                 <div style="width: 2px; flex: 1; background: linear-gradient(to bottom, var(--primary), var(--border)); min-height: 40px; margin-top: 4px;"></div>
