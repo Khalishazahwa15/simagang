@@ -1,4 +1,9 @@
-# PRD v4.1 ANALYSIS — SIMAGANG BAPPEDA LAMPUNG (KOREKSI FINAL)
+# ATURAN BISNIS SIMAGANG
+
+Ringkasan aturan yang ditegakkan sistem, disarikan dari PRD. Bila ada yang
+berbeda antara berkas ini dan `PRD.md`, PRD yang berlaku.
+
+Terakhir disamakan dengan sistem yang berjalan pada 20 Agustus 2026 (PRD v4.2).
 
 ## 1. Role Aplikasi vs Aktor Operasional
 Terdapat perbedaan tegas antara aktor operasional Bappeda di dunia nyata dengan role login di dalam sistem SIMAGANG.
@@ -6,7 +11,7 @@ Terdapat perbedaan tegas antara aktor operasional Bappeda di dunia nyata dengan 
 - **Role Login Sistem**: Hanya terdapat **3 role mutlak** di dalam sistem:
   1. **Mahasiswa**: Mengajukan magang secara individu, memantau status, unggah dokumen, unduh dokumen final.
   2. **Sekretariat**: Menjalankan fungsi operasional di dalam aplikasi (verifikasi kelengkapan, minta revisi, tetapkan Diterima/Ditolak, tentukan divisi final & pembina, unggah dokumen final).
-  3. **Admin**: Mengelola master data (divisi, kapasitas) dan akun pengguna. TIDAK mengambil keputusan penerimaan.
+  3. **Admin**: Super admin. Mengelola master data (divisi, kapasitas) dan akun pengguna, **serta berwenang menjalankan seluruh fungsi Sekretariat**, termasuk memutuskan penerimaan dan penempatan. Disediakan agar pengajuan tetap dapat diproses bila Sekretariat berhalangan. (Direvisi pada PRD v4.2.)
 
 **SANGAT DILARANG**: Membuat role/dashboard untuk "Kepala", "Sekretaris", atau "Verifikator" berjenjang. Sistem tidak melacak tahapan approval internal/paraf.
 
@@ -21,7 +26,9 @@ Tidak ada periode pendaftaran global (seperti periode ganjil/genap atau kuartal)
 ## 4. Kapasitas & Penempatan Divisi
 - **Kapasitas Bersifat Informasional**: Angka kapasitas divisi hanya sebagai panduan bagi Sekretariat. Sistem TIDAK BOLEH melakukan *hard validation* (otomatis menolak submission karena kuota penuh).
 - **Preferensi Tidak Mengikat**: Mahasiswa memberikan preferensi divisi, namun **Sekretariat yang menentukan divisi final dan pembimbing lapangan**.
-- **Tanpa Konfirmasi Mahasiswa**: Begitu Sekretariat menetapkan "Diterima" dan penempatan, status langsung menjadi DITERIMA (tidak ada status "Menunggu Persetujuan Mahasiswa").
+- **Penempatan sesuai preferensi langsung final**: Bila Sekretariat menerima dan menempatkan mahasiswa pada divisi yang ia pilih sendiri, status langsung menjadi DITERIMA tanpa langkah tambahan.
+- **Penempatan di luar preferensi ditawarkan lebih dulu**: Bila Sekretariat hendak menempatkan mahasiswa pada divisi lain, penempatan itu dikirim sebagai tawaran. Mahasiswa menyetujui atau menolaknya, lalu Sekretariat mengunci penempatannya. (Direvisi pada PRD v4.2; sebelumnya dinyatakan tidak ada konfirmasi mahasiswa sama sekali.)
+- **Menolak tawaran menghentikan pengajuan**: Statusnya menjadi `dibatalkan_oleh_mahasiswa`, dan mahasiswa boleh mendaftar ulang sebagai pengajuan baru.
 
 ## 5. Dokumen Awal & Revisi
 - **Dokumen Wajib Awal**: Hanya Surat Lamaran, CV, dan Transkrip Nilai (Proposal/KTP/Foto TIDAK wajib).
@@ -46,5 +53,12 @@ Hanya dapat dilakukan setelah berstatus DITERIMA.
 - Membutuhkan verifikasi dari Sekretariat sebelum status berubah menjadi MENGUNDURKAN_DIRI.
 
 ## 9. Status Lifecycle & Backend Protection
-Siklus wajib: `DRAFT` → `DIAJUKAN` → `DALAM_VERIFIKASI` → (bisa `REVISI` atau `DITOLAK`) → `DITERIMA` → `SEDANG_MAGANG` → `SELESAI`. (Serta opsi `MENGUNDURKAN_DIRI` pasca Diterima).
+Jalur utama: `DRAFT` → `DIAJUKAN` → `DALAM_VERIFIKASI` → (bisa `REVISI` atau `DITOLAK`) → `DITERIMA` → `SEDANG_MAGANG` → `SELESAI`. (Serta opsi `MENGUNDURKAN_DIRI` pasca Diterima).
+
+Jalur tawaran divisi, dipakai bila penempatannya di luar preferensi mahasiswa:
+`DALAM_VERIFIKASI` → `MENUNGGU_KONFIRMASI_TAWARAN` → `MENUNGGU_FINALISASI_SEKRETARIAT` → `DITERIMA`.
+Bila mahasiswa menolak tawaran: `MENUNGGU_KONFIRMASI_TAWARAN` → `DIBATALKAN_OLEH_MAHASISWA`.
+
+Peta transisi yang berlaku ada di `StatusService::$allowedTransitions`, dan
+kesesuaiannya dengan kolom `pengajuan.status` diperiksa `tests/TestJalurRusak.php`.
 - **Backend Protection**: Sistem / Service Layer wajib menolak keras manipulasi POST untuk melompati status (misal: DRAFT → DITERIMA, DITOLAK → SELESAI).

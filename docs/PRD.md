@@ -415,15 +415,17 @@ Diri            unggah surat      →
 Perubahan kunci dari v3.0: status Ditempatkan , Menunggu Tanda Tangan , dan Surat
 Terbit dihapus. Ketersediaan dokumen kini adalah atribut pada status
  Diterima / Selesai , bukan transisi status tersendiri — karena proses paraf/TTD tidak lagi
-dilacak sistem (BR-007), dan status Diterima langsung final tanpa menunggu konfirmasi
-mahasiswa (BR-013).
+dilacak sistem (BR-007). Penempatan pada divisi preferensi mahasiswa langsung
+berstatus Diterima; penempatan pada divisi lain ditawarkan lebih dulu dan harus
+disetujui mahasiswa (BR-013, direvisi pada v4.2).
 
 13. Detailed User Flow — Mahasiswa (Updated)
 Registrasi → Verifikasi email → Login → Lengkapi profil → Ajukan magang (preferensi divisi
 + 3 dokumen wajib + opsional) → Submit → Pantau status → (bila diminta) perbaiki &
-submit ulang → menerima keputusan langsung: Diterima (dengan penempatan final)
-atau Ditolak (dengan alasan) — tanpa langkah konfirmasi/acceptance tambahan dari
-mahasiswa → (bila Diterima) menunggu & mengunduh surat penerimaan begitu
+submit ulang → menerima keputusan: Diterima (dengan penempatan final) atau
+Ditolak (dengan alasan); bila Sekretariat menawarkan divisi di luar preferensinya,
+mahasiswa menyetujui atau menolak tawaran itu lebih dulu (v4.2) → (bila Diterima)
+menunggu & mengunduh surat penerimaan begitu
 Sekretariat mengunggahnya → menjalani magang → mengunduh dokumen akhir begitu
 tersedia → (bila ingin mengundurkan diri, kapan pun setelah diterima) unggah surat
 pengunduran diri resmi dari kampus.
@@ -594,9 +596,10 @@ ke tabel 25 skenario v3.0)
  6        Mahasiswa tidak melakukan    Tidak berubah — tetap tanpa batas waktu otomatis
           revisi                       (masih ⚠️ NEED CONFIRMATION minor)
 
- 8        Alternatif divisi tersedia   Ditegaskan: penempatan final langsung membuat
-                                       status Diterima tanpa approval ulang mahasiswa (BR-
-                                       005, BR-013)
+ 8        Alternatif divisi tersedia   Direvisi v4.2: penempatan pada divisi preferensi
+                                       langsung berstatus Diterima; penempatan pada divisi
+                                       lain ditawarkan lebih dulu dan harus disetujui
+                                       mahasiswa (BR-005, BR-013)
 
  13       Mahasiswa ditolak            Direvisi: alasan dicatat & dinotifikasi, tanpa proses
                                        pembuatan surat penolakan sama sekali
@@ -766,7 +769,66 @@ Perubahan yang dikunci:
 1. Individual application berarti setiap pengajuan diproses individual; satu mahasiswa tetap dapat memiliki riwayat beberapa pengajuan/re-apply.
 2. Paraf, disposisi, dan tanda tangan tidak dikelola di dalam sistem. Sistem hanya menyimpan dan mendistribusikan dokumen final.
 3. Sekretariat tetap menjadi satu role operasional yang mencakup Kasubag Umum & Kepegawaian beserta staf administrasi/verifikasi.
-4. Admin Sistem ditegaskan sebagai role teknis, bukan pengambil keputusan penerimaan atau penempatan.
+4. Admin Sistem berperan sebagai super admin: selain mengelola master data dan akun, berwenang menjalankan seluruh fungsi Sekretariat termasuk memutuskan penerimaan dan penempatan. (Direvisi pada v4.2; pada v4.1 butir ini menyatakan Admin sebagai role teknis yang tidak mengambil keputusan.)
 5. Dokumen akhir mengikuti dokumen yang benar-benar diterbitkan Bappeda. Sertifikat dicantumkan hanya jika diterbitkan; Surat Pengembalian Peserta tidak dipaksakan sebagai dokumen wajib bila tidak diterbitkan.
 6. Retensi data belum ditentukan; tidak dibuat asumsi penyimpanan tanpa batas waktu.
 7. Tidak ada perubahan terhadap alur inti yang telah dikonfirmasi: pengajuan individual → verifikasi → revisi bila perlu → cek kebutuhan divisi → keputusan dan penempatan final → dokumen final diproses di luar sistem → Sekretariat upload → mahasiswa download.
+
+---
+
+## V4.2 — PENYESUAIAN DENGAN SISTEM YANG BERJALAN
+
+Ditulis 20 Agustus 2026. Dasar perubahan: keputusan tim pada 19 Agustus 2026,
+yang sebelumnya sudah diambil tetapi belum pernah dituangkan ke dokumen ini.
+
+Selama dua butir di bawah belum diperbarui, keduanya berulang kali muncul
+sebagai temuan audit "kode tidak sesuai PRD" — padahal yang tertinggal adalah
+dokumennya, bukan kodenya.
+
+**Perlu persetujuan pemilik PRD sebelum dianggap final.**
+
+### 1. Admin adalah super admin, bukan role teknis
+
+| | |
+|---|---|
+| **Semula (v4.1)** | Admin Sistem adalah role teknis, tidak mengambil keputusan penerimaan maupun penempatan. |
+| **Menjadi (v4.2)** | Admin berwenang menjalankan seluruh fungsi Sekretariat, termasuk memutuskan penerimaan dan menetapkan penempatan. |
+| **Alasan** | Bappeda menghendaki satu akun yang tetap dapat memproses pengajuan bila Sekretariat berhalangan, tanpa perlu membuat role baru. |
+| **Terdampak** | Bagian 10 (Actor), Bagian 16 (Role Matrix), catatan penutup v4.1 butir 4, BR-014. |
+
+Jumlah role login **tidak bertambah**: tetap tiga — mahasiswa, sekretariat,
+admin. Yang berubah hanya kewenangan Admin. Larangan membuat role berjenjang
+seperti "Kepala" atau "Verifikator" tetap berlaku sepenuhnya.
+
+### 2. Penempatan di luar preferensi harus disetujui mahasiswa
+
+| | |
+|---|---|
+| **Semula (v4.1)** | Preferensi divisi tidak mengikat. Sekretariat menetapkan divisi final, status langsung Diterima, tanpa persetujuan balik mahasiswa. |
+| **Menjadi (v4.2)** | Penempatan pada divisi **preferensi** tetap langsung berstatus Diterima. Penempatan pada divisi **lain** ditawarkan lebih dulu, dan mahasiswa menyetujui atau menolaknya sebelum ditetapkan. |
+| **Alasan** | Menempatkan mahasiswa di divisi yang tidak ia pilih tanpa sepengetahuannya menimbulkan pembatalan di kemudian hari. Menawarkan lebih dulu menyelesaikannya sebelum keputusan dikunci. |
+| **Terdampak** | Bagian 12 (Status Lifecycle), Bagian 13 (User Flow Mahasiswa), Bagian 14 (User Flow Sekretariat), BR-005, BR-013. |
+
+Semangat BR-005 tidak berubah: **preferensi tetap tidak mengikat** dan
+Sekretariat tetap pemegang keputusan penempatan. Yang ditambahkan hanya satu
+langkah persetujuan, dan hanya bila penempatannya menyimpang dari preferensi.
+
+Dua status baru menyertainya:
+
+| Status | Arti |
+|---|---|
+| `menunggu_konfirmasi_tawaran` | Sekretariat sudah menawarkan divisi alternatif, menunggu jawaban mahasiswa |
+| `menunggu_finalisasi_sekretariat` | Mahasiswa sudah menyetujui, menunggu Sekretariat mengunci penempatannya |
+
+Bila mahasiswa menolak tawaran, pengajuannya berhenti dengan status
+`dibatalkan_oleh_mahasiswa`. Statusnya termasuk status akhir yang membuka kembali
+hak mengajukan, sehingga mahasiswa dapat mendaftar ulang dari awal sebagai
+pengajuan baru tanpa menghapus riwayat lamanya.
+
+### Yang tidak berubah
+
+Seluruh butir lain pada v4.1 tetap berlaku apa adanya, termasuk: pengajuan
+bersifat individual, pendaftaran bergulir tanpa periode global, kapasitas divisi
+hanya bersifat informasi, paraf dan tanda tangan di luar sistem, penolakan wajib
+disertai alasan, serta versioning dokumen saat revisi.
+

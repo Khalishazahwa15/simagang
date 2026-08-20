@@ -8,14 +8,14 @@ disertai catatan mengenai apa yang masih kurang dan langkah tindak lanjutnya.
 |--------|-------------|--------|---------|--------|---------|
 | BR-001 | Individual Application: 1 mhs = 1 akun = 1 pengajuan. TIDAK ADA fitur kelompok/tim. | Pengajuan | `MahasiswaController`, `PengajuanService` | DONE |  |
 | BR-003 | Keputusan berdasarkan prodi & kebutuhan operasional. Kapasitas HANYA info, tidak menolak submission secara otomatis. | Sekretariat | `SekretariatController`, `bidang.php` | DONE |  |
-| BR-005 | Preferensi divisi non-mengikat. Sekretariat menetapkan divisi final. TIDAK ADA persetujuan balik mahasiswa. | Sekretariat | `SekretariatController` | TIDAK SESUAI | Alur tawaran divisi dengan konfirmasi mahasiswa masih ada dan justru diperluas. Dua status (`menunggu_konfirmasi_tawaran`, `menunggu_finalisasi_sekretariat`) dan tiga rute tawaran masih terdaftar. Perlu keputusan: hapus alurnya atau ubah PRD. |
+| BR-005 | Preferensi divisi non-mengikat. Penempatan sesuai preferensi langsung final; penempatan di luar preferensi ditawarkan lebih dulu dan disetujui mahasiswa. | Sekretariat | `SekretariatController` | DONE | 20 Agustus 2026: PRD diperbarui ke v4.2 mengikuti keputusan tim 19 Agustus. Sebelumnya baris ini berstatus TIDAK SESUAI karena PRD v4.1 menyatakan tidak ada persetujuan balik mahasiswa, sedangkan alur tawaran justru dipertahankan dan diperkuat. |
 | BR-007 | Proses surat, paraf, & TTD Bappeda di LUAR sistem. Sistem BUKAN generator surat/digital signature. | Dokumen | `pengajuan_detail.php`, `status.php` | DONE |  |
 | BR-008 | Rolling registration (berdasar tanggal individu). TIDAK ADA "periode magang" global (ganjil/genap). | Pengajuan | `MahasiswaController`, `PengajuanService` | DONE |  |
 | BR-009 | Re-apply pasca penolakan membuat record BARU. Histori lama tidak ditimpa/dihapus. | Pengajuan | `MahasiswaController`, `PengajuanService` | DONE |  |
 | BR-010 | Pengunduran diri WAJIB surat kampus resmi + alasan, diverifikasi Sekretariat pasca Diterima. | Keputusan | `MahasiswaController`, `pengunduran_diri.php`, `SekretariatController` | DONE |  |
 | BR-011 | Revisi menggunakan Versioning. Versi lama dipertahankan, riwayat perubahan & catatan terlihat oleh mahasiswa. | Dokumen | `MahasiswaController`, `DokumenService`, `status.php` | DONE |  |
 | BR-012 | Penolakan wajib alasan + notifikasi. TIDAK ADA pembuatan/surat penolakan. | Keputusan | `SekretariatController` | DONE |  |
-| BR-014 | Sekretariat = 1 role login. Aktor operasional (Kepala, dll) TIDAK dibuat sebagai role login/approval di sistem. | RBAC | `schema.sql`, `Auth.php` | PERLU PEMUTAKHIRAN PRD | Peran login tetap tiga (admin, sekretariat, mahasiswa). Namun Admin kini juga berwenang memutuskan penerimaan, sedangkan PRD v4.1 catatan penutup butir 4 menyebut Admin sebagai peran teknis. Tim memutuskan 19 Agustus 2026 bahwa Admin memang berperan sebagai super admin, sehingga PRD yang perlu disesuaikan, bukan kodenya. |
+| BR-014 | Sekretariat = 1 role login. Aktor operasional (Kepala, dll) TIDAK dibuat sebagai role login/approval. Admin berperan sebagai super admin. | RBAC | `schema.sql`, `schema.pgsql.sql`, `Auth.php` | DONE | 20 Agustus 2026: PRD diperbarui ke v4.2. Peran login tetap tiga (admin, sekretariat, mahasiswa); yang berubah hanya kewenangan Admin, sesuai keputusan tim 19 Agustus. |
 | SEC-05 | IDOR Prevention. Mahasiswa hanya dapat mengunduh dokumen miliknya sendiri. | Dokumen | `DokumenService` | DONE |  |
 | FR-015 | Sekretariat input penempatan final & pembina/pembimbing. Status langsung DITERIMA. | Sekretariat | `SekretariatController`, `pengajuan_detail.php` | DONE |  |
 | FR-016 | Sekretariat tetapkan Ditolak (alasan wajib) tanpa surat otomatis. | Sekretariat | `SekretariatController`, `pengajuan_detail.php` | DONE |  |
@@ -30,6 +30,8 @@ disertai catatan mengenai apa yang masih kurang dan langkah tindak lanjutnya.
 
 ## Ringkasan
 
-- **DONE** — 19 butir
-- **TIDAK SESUAI** — 1 butir (BR-005)
-- **PERLU PEMUTAKHIRAN PRD** — 1 butir (BR-014)
+- **DONE** — 21 butir
+- Tidak ada butir yang tersisa berstatus tidak sesuai.
+
+BR-005 dan BR-014 ditutup pada 20 Agustus 2026 lewat pemutakhiran PRD ke v4.2,
+bukan lewat perubahan kode: pada keduanya yang tertinggal memang dokumennya.
