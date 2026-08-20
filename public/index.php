@@ -12,9 +12,7 @@ define('PUBLIC_PATH', __DIR__);
 require_once APP_PATH . '/Core/autoload.php';
 
 // Load Environment Variables
-// Berkas .env tambahan untuk menjalankan aplikasi di atas basis data lain,
-// dipilih lewat variabel lingkungan SIMAGANG_ENV. Dimuat lebih dulu karena
-// nilai yang masuk pertama yang dipakai.
+// Nilai yang masuk pertama yang dipakai.
 if (getenv('SIMAGANG_ENV')) {
     \App\Core\Env::load(ROOT_PATH . '/' . basename(getenv('SIMAGANG_ENV')));
 }

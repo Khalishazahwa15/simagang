@@ -22,7 +22,7 @@
         padding: 4px 12px;
         border-radius: 6px;
         font-family: var(--font-body);
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.06em;
     }
@@ -65,7 +65,7 @@
     }
     .timeline-num {
         font-family: var(--font-mono);
-        font-size: 10px;
+        font-size: 12px;
         font-weight: 600;
         color: var(--text-secondary);
     }
@@ -74,7 +74,7 @@
     }
     .timeline-label {
         font-family: var(--font-body);
-        font-size: 10.5px;
+        font-size: 12px;
         font-weight: 500;
         color: var(--text-secondary);
         text-align: center;
@@ -195,7 +195,7 @@
     }
     .hero-eyebrow-text {
         font-family: var(--font-body);
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.15em;
         text-transform: uppercase;
@@ -220,7 +220,7 @@
     }
     .section-eyebrow {
         font-family: var(--font-body);
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.15em;
         text-transform: uppercase;
@@ -242,17 +242,12 @@
         .trust-grid, .alur-grid { grid-template-columns: 1fr; }
     }
 
-    /*
-     * Kartu contoh surat sebelumnya disembunyikan sepenuhnya di bawah 900px.
-     * Padahal justru kartu itu yang menunjukkan wujud layanannya, sehingga
-     * pengunjung dari ponsel kehilangan bagian paling menjelaskan. Kini
-     * ditampilkan, dengan ruang dan ukuran yang menyesuaikan layar sempit.
-     */
+    /* Kartu contoh surat: ruang dan ukuran untuk layar sempit. */
     @media (max-width: 600px) {
         .doc-panel-header { padding: 16px 18px; gap: 12px; }
         .doc-panel-body { padding: 18px; }
         .landing-meta-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
-        .timeline-label { font-size: 9.5px; }
+        .timeline-label { font-size: 12px; }
         .timeline-circle { width: 24px; height: 24px; }
         .timeline-line { top: 12px; }
     }
@@ -297,7 +292,7 @@
         <div class="doc-panel">
             <div class="doc-panel-header">
                 <div>
-                    <div style="font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; color: rgba(255,255,255,0.6); text-transform: uppercase; margin-bottom: 4px;">Surat Keterangan Pengajuan</div>
+                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: rgba(255,255,255,0.6); text-transform: uppercase; margin-bottom: 4px;">Surat Keterangan Pengajuan</div>
                     <div style="font-family: var(--font-mono); font-size: 20px; font-weight: 600; color: var(--bg-main); letter-spacing: 0.02em;">PGJ-1002</div>
                 </div>
                 <div class="doc-panel-badge">
@@ -308,26 +303,26 @@
             <div class="doc-panel-body">
                 <div class="landing-meta-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; margin-bottom: 24px;">
                     <div>
-                        <div style="font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 2px;">Nama Mahasiswa</div>
+                        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 2px;">Nama Mahasiswa</div>
                         <div style="font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-primary);">Mahasiswa (Data Contoh)</div>
                     </div>
                     <div>
-                        <div style="font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 2px;">NIM</div>
+                        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 2px;">NIM</div>
                         <div style="font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-primary);">12345678</div>
                     </div>
                     <div>
-                        <div style="font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 2px;">Perguruan Tinggi</div>
+                        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 2px;">Perguruan Tinggi</div>
                         <div style="font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-primary);">Universitas Lampung</div>
                     </div>
                     <div>
-                        <div style="font-family: var(--font-body); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 2px;">Program Studi</div>
+                        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 2px;">Program Studi</div>
                         <div style="font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-primary);">Sistem Informasi</div>
                     </div>
                 </div>
                 
                 <hr style="border: none; border-top: 1px solid var(--border); margin-bottom: 20px;">
                 
-                <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 16px;">Tahapan Pengajuan</div>
+                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 16px;">Tahapan Pengajuan</div>
                 
                 <div class="timeline-stepper">
                     <div class="timeline-step">
@@ -365,7 +360,7 @@
                     <div style="font-family: var(--font-body); font-size: 12.5px; color: var(--primary); font-weight: 500; line-height: 1.5;">
                         Berkas dinyatakan lengkap dan diteruskan ke tahap persetujuan substansi.
                     </div>
-                    <div style="font-family: var(--font-body); font-size: 11px; color: var(--text-secondary); margin-top: 4px;">
+                    <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary); margin-top: 4px;">
                         07 Agustus 2026 &middot; 09:42 WIB
                     </div>
                 </div>
@@ -518,13 +513,13 @@
         <div class="landing-footer-columns" style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 48px; margin-bottom: 40px;">
             <div>
                 <div style="font-family: var(--font-body); font-weight: 800; font-size: 16px; color: var(--bg-main); margin-bottom: 4px;">SIMAGANG</div>
-                <div style="font-family: var(--font-body); font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">Sistem Informasi Pengelolaan Magang Mahasiswa</div>
+                <div style="font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;">Sistem Informasi Pengelolaan Magang Mahasiswa</div>
                 <p style="font-family: var(--font-body); font-size: 13.5px; color: rgba(255,255,255,0.5); line-height: 1.7; max-width: 360px; margin: 0;">
                     Layanan digital untuk pengelolaan magang mahasiswa pada Badan Perencanaan Pembangunan Daerah (Bappeda) Provinsi Lampung.
                 </p>
             </div>
             <div>
-                <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 16px;">Tautan</div>
+                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 16px;">Tautan</div>
                 <?php foreach (['Beranda' => '/', 'Alur Pengajuan' => '/alur', 'Persyaratan' => '/persyaratan', 'FAQ' => '/faq'] as $label => $url): ?>
                 <div style="margin-bottom: 10px;">
                     <a href="<?= BASE_URL . $url ?>" style="background: none; border: none; font-family: var(--font-body); font-size: 13.5px; color: rgba(255,255,255,0.6); padding: 0; text-decoration: none;"><?= $label ?></a>
@@ -532,7 +527,7 @@
                 <?php endforeach; ?>
             </div>
             <div>
-                <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 16px;">Kontak</div>
+                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: rgba(255,255,255,0.4); text-transform: uppercase; margin-bottom: 16px;">Kontak</div>
                 <p style="font-family: var(--font-body); font-size: 13.5px; color: rgba(255,255,255,0.5); line-height: 1.7; margin: 0;">
                     Bappeda Provinsi Lampung<br>
                     Jl. Cut Meutia No.4, Bandar Lampung<br>

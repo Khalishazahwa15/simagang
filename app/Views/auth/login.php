@@ -10,7 +10,7 @@
                 <div style="width: 48px; height: 48px; background-color: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 24px; color: var(--primary-dark);">S</div>
                 <div>
                     <div style="font-family: var(--font-body); font-weight: 800; font-size: 20px; color: var(--bg-main); line-height: 1.2;">SIMAGANG</div>
-                    <div style="font-family: var(--font-body); font-size: 11px; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; text-transform: uppercase;">BAPPEDA LAMPUNG</div>
+                    <div style="font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; text-transform: uppercase;">BAPPEDA LAMPUNG</div>
                 </div>
             </div>
             

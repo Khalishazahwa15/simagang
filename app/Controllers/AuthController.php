@@ -78,14 +78,10 @@ class AuthController extends Controller {
             $password = $_POST['password'] ?? '';
             $passwordConfirm = $_POST['password_confirm'] ?? '';
             $nim = $_POST['nim'] ?? '';
-            $tempatLahir = $_POST['tempat_lahir'] ?? '';
-            $tanggalLahir = $_POST['tanggal_lahir'] ?? '';
             $universitas = $_POST['universitas'] ?? '';
-            $fakultas = $_POST['fakultas'] ?? '';
             $programStudi = $_POST['program_studi'] ?? '';
             $semester = $_POST['semester'] ?? 0;
             $nomorHp = $_POST['nomor_hp'] ?? '';
-            $alamat = $_POST['alamat'] ?? '';
 
             if ($password !== $passwordConfirm) {
                 Session::setFlash('error', 'Konfirmasi kata sandi tidak cocok.');
@@ -93,7 +89,7 @@ class AuthController extends Controller {
             }
 
             try {
-                $this->authService->registerMahasiswa($nama, $email, $password, $nim, $tempatLahir, $tanggalLahir, $universitas, $fakultas, $programStudi, $semester, $nomorHp, $alamat);
+                $this->authService->registerMahasiswa($nama, $email, $password, $nim, $universitas, $programStudi, $semester, $nomorHp);
                 Session::setFlash('success', 'Registrasi berhasil. Silakan login.');
                 return $this->redirect('login');
             } catch (\Exception $e) {

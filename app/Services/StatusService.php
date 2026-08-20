@@ -32,9 +32,7 @@ class StatusService {
         'draft' => ['diajukan', 'dibatalkan_oleh_mahasiswa'],
         'diajukan' => ['dalam_verifikasi', 'revisi', 'diterima', 'ditolak', 'dibatalkan_oleh_mahasiswa'],
         'dalam_verifikasi' => ['revisi', 'diterima', 'ditolak', 'menunggu_konfirmasi_tawaran'],
-        // 'dalam_verifikasi' diperlukan saat mahasiswa mengunggah perbaikan:
-        // berkasnya kembali ke tangan Sekretariat yang meminta revisi, bukan
-        // ke antrean awal.
+        // 'dalam_verifikasi': tujuan saat mahasiswa mengunggah perbaikan.
         'revisi' => ['diajukan', 'dalam_verifikasi', 'dibatalkan_oleh_mahasiswa'],
         'menunggu_konfirmasi_tawaran' => ['menunggu_finalisasi_sekretariat', 'dibatalkan_oleh_mahasiswa'],
         'menunggu_finalisasi_sekretariat' => ['diterima', 'ditolak'],

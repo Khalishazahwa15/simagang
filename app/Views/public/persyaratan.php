@@ -208,9 +208,9 @@ $divisiList = $divisiData ?? [];
                         <?php foreach ($docsWajib as $doc): ?>
                             <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px;">
                                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                                    <span style="font-family: var(--font-mono); font-size: 11px; color: var(--primary); background: var(--bg-green-soft); padding: 3px 8px; border-radius: 5px;"><?= $doc['code'] ?></span>
+                                    <span style="font-family: var(--font-mono); font-size: 12px; color: var(--primary); background: var(--bg-green-soft); padding: 3px 8px; border-radius: 5px;"><?= $doc['code'] ?></span>
                                     <h4 style="font-family: var(--font-body); font-size: 15px; font-weight: 700; color: var(--text-primary); margin: 0;"><?= $doc['title'] ?></h4>
-                                    <span style="margin-left: auto; background: var(--color-danger-soft); color: var(--color-danger-ink); font-family: var(--font-body); font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 99px; letter-spacing: 0.06em;">WAJIB</span>
+                                    <span style="margin-left: auto; background: var(--color-danger-soft); color: var(--color-danger-ink); font-family: var(--font-body); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 99px; letter-spacing: 0.06em;">WAJIB</span>
                                 </div>
                                 <p style="font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 10px; margin-top: 0;"><?= $doc['desc'] ?></p>
                                 <div style="display: flex; gap: 16px; flex-wrap: wrap;">
@@ -242,7 +242,7 @@ $divisiList = $divisiData ?? [];
                         <div style="display: flex; flex-direction: column; gap: 12px;">
                             <?php foreach ($docsOpsional as $doc): ?>
                                 <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start;">
-                                    <span style="font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); background: var(--bg-soft); padding: 3px 8px; border-radius: 5px; flex-shrink: 0; margin-top: 2px;"><?= $doc['code'] ?></span>
+                                    <span style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); background: var(--bg-soft); padding: 3px 8px; border-radius: 5px; flex-shrink: 0; margin-top: 2px;"><?= $doc['code'] ?></span>
                                     <div>
                                         <div style="font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px;"><?= $doc['title'] ?></div>
                                         <div style="font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 6px;"><?= $doc['desc'] ?></div>
@@ -287,7 +287,7 @@ $divisiList = $divisiData ?? [];
                                         </div>
                                         <?php $sisa = max(0, $div['kapasitas'] - ($div['terisi'] ?? 0)); ?>
                                         <div style="flex-shrink: 0; text-align: right;">
-                                            <span style="display: inline-block; background: <?= $sisa > 0 ? 'var(--accent-soft)' : 'var(--color-danger-soft)' ?>; color: <?= $sisa > 0 ? 'var(--primary-dark)' : 'var(--color-danger-ink)' ?>; padding: 4px 12px; border-radius: 6px; font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.04em;">
+                                            <span style="display: inline-block; background: <?= $sisa > 0 ? 'var(--accent-soft)' : 'var(--color-danger-soft)' ?>; color: <?= $sisa > 0 ? 'var(--primary-dark)' : 'var(--color-danger-ink)' ?>; padding: 4px 12px; border-radius: 6px; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.04em;">
                                                 <?= $sisa > 0 ? "SISA KUOTA: {$sisa}" : "KUOTA PENUH" ?>
                                             </span>
                                         </div>
@@ -303,7 +303,7 @@ $divisiList = $divisiData ?? [];
         <!-- CTA -->
         <div class="bottom-cta" style="margin-top: 48px;">
             <div>
-                <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent-dark); text-transform: uppercase; margin-bottom: 8px;">Sudah Siap?</div>
+                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent-dark); text-transform: uppercase; margin-bottom: 8px;">Sudah Siap?</div>
                 <h3 style="font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--bg-main); line-height: 1.2; margin: 0;">Ajukan magang Anda sekarang</h3>
             </div>
             <div style="display: flex; gap: 12px; flex-shrink: 0;">

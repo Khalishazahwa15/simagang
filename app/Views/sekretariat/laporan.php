@@ -70,7 +70,7 @@ $tautanEkspor = function ($preset) use ($filterAktif) {
         <!-- Distribusi Status Pengajuan -->
         <div class="surface-card">
             <div style="padding: 13px 20px; border-bottom: 0.666667px solid var(--border);">
-                <div style="font-weight: 700; font-size: 11.5px; line-height: 17px; letter-spacing: 1.15px; text-transform: uppercase; color: var(--text-secondary);">
+                <div style="font-weight: 700; font-size: 12px; line-height: 17px; letter-spacing: 1.15px; text-transform: uppercase; color: var(--text-secondary);">
                     Distribusi Status Pengajuan
                 </div>
             </div>
@@ -98,7 +98,7 @@ $tautanEkspor = function ($preset) use ($filterAktif) {
         <!-- Pengajuan per Divisi -->
         <div class="surface-card">
             <div style="padding: 13px 20px; border-bottom: 0.666667px solid var(--border);">
-                <div style="font-weight: 700; font-size: 11.5px; line-height: 17px; letter-spacing: 1.15px; text-transform: uppercase; color: var(--text-secondary);">
+                <div style="font-weight: 700; font-size: 12px; line-height: 17px; letter-spacing: 1.15px; text-transform: uppercase; color: var(--text-secondary);">
                     Pengajuan per Divisi (Preferensi)
                 </div>
             </div>

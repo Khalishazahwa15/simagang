@@ -49,24 +49,24 @@ function getBadgeLabel($status) {
     <!-- 4 Summary Cards - Sekretariat Metrics -->
     <div class="grid-4 surface-card">
         <div style="padding: 20px; display: flex; flex-direction: column;">
-            <div style="font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">PERLU DITINDAKLANJUTI</div>
+            <div style="font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">PERLU DITINDAKLANJUTI</div>
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; color: var(--primary); line-height: 1; margin-bottom: 4px;"><?= $stats['tindak_lanjut'] ?></div>
-            <div style="font-weight: 400; font-size: 11.5px; line-height: 17px; color: var(--text-secondary);">Menunggu tindakan</div>
+            <div style="font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">Menunggu tindakan</div>
         </div>
         <div style="padding: 20px; border-left: 0.666667px solid var(--border); display: flex; flex-direction: column;">
-            <div style="font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">SEDANG MAGANG</div>
+            <div style="font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">SEDANG MAGANG</div>
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; color: var(--accent-dark); line-height: 1; margin-bottom: 4px;"><?= $stats['aktif'] ?></div>
-            <div style="font-weight: 400; font-size: 11.5px; line-height: 17px; color: var(--text-secondary);">Aktif menjalani magang</div>
+            <div style="font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">Aktif menjalani magang</div>
         </div>
         <div style="padding: 20px; border-left: 0.666667px solid var(--border); display: flex; flex-direction: column;">
-            <div style="font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">TOTAL PENGAJUAN</div>
+            <div style="font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">TOTAL PENGAJUAN</div>
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; color: var(--text-primary); line-height: 1; margin-bottom: 4px;"><?= $stats['total'] ?></div>
-            <div style="font-weight: 400; font-size: 11.5px; line-height: 17px; color: var(--text-secondary);"><?= $stats['selesai'] ?> selesai &middot; <?= $stats['diterima'] ?> diterima</div>
+            <div style="font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);"><?= $stats['selesai'] ?> selesai &middot; <?= $stats['diterima'] ?> diterima</div>
         </div>
         <div style="padding: 20px; border-left: 0.666667px solid var(--border); display: flex; flex-direction: column;">
-            <div style="font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">KAPASITAS TOTAL</div>
+            <div style="font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">KAPASITAS TOTAL</div>
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; color: var(--text-primary); line-height: 1; margin-bottom: 4px;"><?= $stats['kapasitas_total'] ?></div>
-            <div style="font-weight: 400; font-size: 11.5px; line-height: 17px; color: var(--text-secondary);"><?= $stats['slot_terpakai'] ?> terpakai &middot; <?= $stats['divisi_total'] ?> divisi</div>
+            <div style="font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);"><?= $stats['slot_terpakai'] ?> terpakai &middot; <?= $stats['divisi_total'] ?> divisi</div>
         </div>
     </div>
 
@@ -89,7 +89,7 @@ function getBadgeLabel($status) {
                         <div>
                             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
                                 <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--primary);"><?= htmlspecialchars($item['nomor_pengajuan']) ?></div>
-                                <div style="padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; <?= getBadgeStyle($item['status']) ?>">
+                                <div style="padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; <?= getBadgeStyle($item['status']) ?>">
                                     <?= getBadgeLabel($item['status']) ?>
                                 </div>
                             </div>
@@ -141,7 +141,7 @@ function getBadgeLabel($status) {
                                 <div style="font-weight: 500; font-size: 12.5px; line-height: 18px; color: var(--text-primary);">
                                     <?= htmlspecialchars($div['nama_divisi']) ?>
                                 </div>
-                                <div style="background: <?= $badgeBg ?>; border-radius: 4px; padding: 2px 6px; font-weight: 700; font-size: 10px; line-height: 14px; letter-spacing: 0.5px; text-transform: uppercase; color: <?= $badgeText ?>;">
+                                <div style="background: <?= $badgeBg ?>; border-radius: 4px; padding: 2px 6px; font-weight: 700; font-size: 12px; line-height: 14px; letter-spacing: 0.5px; text-transform: uppercase; color: <?= $badgeText ?>;">
                                     <?= $badgeLabel ?>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@ function getBadgeLabel($status) {
                                 <div style="flex-grow: 1; height: 5px; background: var(--border); border-radius: 3px; position: relative;">
                                     <div style="position: absolute; left: 0; top: 0; bottom: 0; width: <?= $pct ?>%; background: <?= $barColor ?>; border-radius: 3px;"></div>
                                 </div>
-                                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 400; font-size: 11px; color: var(--text-secondary);">
+                                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 400; font-size: 12px; color: var(--text-secondary);">
                                     <?= $div['terisi'] ?>/<?= $div['kapasitas'] ?>
                                 </div>
                             </div>
@@ -194,12 +194,12 @@ function getBadgeLabel($status) {
                                     <div style="font-weight: 600; font-size: 13px; line-height: 18px; color: var(--text-primary); margin-bottom: 2px;">
                                         <?= htmlspecialchars($user['nama']) ?>
                                     </div>
-                                    <div style="font-weight: 400; font-size: 11px; line-height: 15px; color: var(--text-secondary);">
+                                    <div style="font-weight: 400; font-size: 12px; line-height: 15px; color: var(--text-secondary);">
                                         <?= htmlspecialchars($user['email']) ?>
                                     </div>
                                 </div>
                             </div>
-                            <div style="background: <?= $badgeBg ?>; border-radius: 4px; padding: 2px 6px; font-weight: 700; font-size: 10px; line-height: 14px; letter-spacing: 0.5px; text-transform: uppercase; color: <?= $badgeText ?>; flex-shrink: 0;">
+                            <div style="background: <?= $badgeBg ?>; border-radius: 4px; padding: 2px 6px; font-weight: 700; font-size: 12px; line-height: 14px; letter-spacing: 0.5px; text-transform: uppercase; color: <?= $badgeText ?>; flex-shrink: 0;">
                                 <?= $badgeLabel ?>
                             </div>
                         </div>

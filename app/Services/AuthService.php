@@ -33,34 +33,21 @@ class AuthService {
         return true;
     }
 
-    public function registerMahasiswa($nama, $email, $password, $nim, $tempatLahir, $tanggalLahir, $universitas, $fakultas, $programStudi, $semester, $nomorHp, $alamat) {
+    /** Menanyakan lima data akademik; sisanya dilengkapi di halaman Profil. */
+    public function registerMahasiswa($nama, $email, $password, $nim, $universitas, $programStudi, $semester, $nomorHp) {
         if (strlen($password) < self::MIN_PASSWORD_LENGTH) {
             throw new \Exception("Kata sandi minimal " . self::MIN_PASSWORD_LENGTH . " karakter.");
         }
 
-        // Daftar ini harus mencakup seluruh isian pada
-        // MahasiswaProfile::FIELD_WAJIB. Bila ada yang terlewat, pendaftaran
-        // tetap berhasil tetapi mahasiswanya langsung terhenti: halaman
-        // Pengajuan tidak menampilkan formulir sama sekali sampai profilnya
-        // dilengkapi.
         $wajib = [
             'Nama' => $nama, 'Email' => $email, 'NIM' => $nim,
-            'Tempat lahir' => $tempatLahir, 'Tanggal lahir' => $tanggalLahir,
-            'Universitas' => $universitas, 'Fakultas' => $fakultas,
-            'Program studi' => $programStudi, 'Nomor HP' => $nomorHp, 'Alamat' => $alamat
+            'Universitas' => $universitas, 'Program studi' => $programStudi,
+            'Nomor HP' => $nomorHp
         ];
         foreach ($wajib as $label => $nilai) {
             if (trim((string)$nilai) === '') {
                 throw new \Exception("{$label} wajib diisi.");
             }
-        }
-
-        $lahir = \DateTime::createFromFormat('Y-m-d', trim((string)$tanggalLahir));
-        if (!$lahir || $lahir->format('Y-m-d') !== trim((string)$tanggalLahir)) {
-            throw new \Exception("Tanggal lahir tidak dikenali.");
-        }
-        if ($lahir > new \DateTime('today')) {
-            throw new \Exception("Tanggal lahir tidak boleh melewati hari ini.");
         }
 
         $semester = (int)$semester;
@@ -78,7 +65,7 @@ class AuthService {
             $passwordHash = password_hash($password, PASSWORD_DEFAULT);
             $userId = $this->userModel->create($nama, $email, $passwordHash, 'mahasiswa');
             
-            $this->profileModel->create($userId, $nim, $tempatLahir, $tanggalLahir, $universitas, $fakultas, $programStudi, $semester, $nomorHp, $alamat);
+            $this->profileModel->create($userId, $nim, $universitas, $programStudi, $semester, $nomorHp);
             
             $this->userModel->commit();
             return true;

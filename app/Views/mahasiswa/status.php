@@ -58,7 +58,7 @@ $stepNames = [
     <!-- NOMOR PENGAJUAN -->
     <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 24px; display: flex; justify-content: space-between; align-items: flex-start;">
         <div>
-            <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; color: var(--text-secondary); letter-spacing: 1.1px; text-transform: uppercase; margin-bottom: 8px;">
+            <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; color: var(--text-secondary); letter-spacing: 1.1px; text-transform: uppercase; margin-bottom: 8px;">
                 Nomor Pengajuan
             </div>
             <div style="font-family: var(--font-mono); font-size: 26px; font-weight: 600; color: var(--primary); line-height: 1.5;">
@@ -95,12 +95,12 @@ $stepNames = [
                 </div>
                 <?php else: ?>
                 <div style="width: 32px; height: 32px; border-radius: 50%; background: <?= $step == $i ? 'var(--accent)' : 'transparent' ?>; border: 2px solid <?= $step == $i ? 'var(--accent)' : 'var(--border)' ?>; display: flex; align-items: center; justify-content: center; z-index: 1; position: relative; margin-bottom: 12px;">
-                    <span style="font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: <?= $step == $i ? 'var(--primary-dark)' : 'var(--text-secondary)' ?>;"><?= str_pad($i + 1, 2, '0', STR_PAD_LEFT) ?></span>
+                    <span style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: <?= $step == $i ? 'var(--primary-dark)' : 'var(--text-secondary)' ?>;"><?= str_pad($i + 1, 2, '0', STR_PAD_LEFT) ?></span>
                 </div>
                 <?php endif; ?>
                 
                 <!-- Step Label -->
-                <div style="font-family: var(--font-body); font-size: 10.5px; font-weight: <?= $step == $i ? '700' : '400' ?>; color: <?= $step == $i ? 'var(--text-primary)' : 'var(--text-secondary)' ?>; text-align: center; max-width: 90px; line-height: 1.4;">
+                <div style="font-family: var(--font-body); font-size: 12px; font-weight: <?= $step == $i ? '700' : '400' ?>; color: <?= $step == $i ? 'var(--text-primary)' : 'var(--text-secondary)' ?>; text-align: center; max-width: 90px; line-height: 1.4;">
                     <?= $name ?>
                 </div>
                 
@@ -150,7 +150,7 @@ $stepNames = [
                                 else echo htmlspecialchars($item['catatan']);
                             ?>
                         </div>
-                        <div style="font-family: var(--font-body); font-size: 11px; color: var(--text-secondary);">
+                        <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">
                             <?= date('d M Y', strtotime($item['created_at'])) ?>
                         </div>
                     </div>

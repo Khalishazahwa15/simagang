@@ -10,7 +10,7 @@
                 <div style="width: 48px; height: 48px; background-color: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 24px; color: var(--primary-dark);">S</div>
                 <div>
                     <div style="font-family: var(--font-body); font-weight: 800; font-size: 20px; color: var(--bg-main); line-height: 1.2;">SIMAGANG</div>
-                    <div style="font-family: var(--font-body); font-size: 11px; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; text-transform: uppercase;">BAPPEDA LAMPUNG</div>
+                    <div style="font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; text-transform: uppercase;">BAPPEDA LAMPUNG</div>
                 </div>
             </div>
 
@@ -118,7 +118,7 @@
                 <!-- ============ Tahap 2: Data Akademik ============ -->
                 <fieldset class="tahap-panel" id="tahap-2">
                     <legend class="tahap-panel-judul">Data Akademik</legend>
-                    <p class="tahap-panel-ket">Dipakai Sekretariat untuk menilai permohonan magang Anda.</p>
+                    <p class="tahap-panel-ket">Lima isian ini yang dipakai Sekretariat untuk mengenali Anda. Sisanya dilengkapi nanti di halaman Profil.</p>
 
                     <div class="grid-2">
                         <div class="form-group">
@@ -131,31 +131,14 @@
                         </div>
                     </div>
 
-                    <div class="grid-2">
-                        <div class="form-group">
-                            <label for="app-views-auth-register-tempat_lahir" class="form-label required">Tempat Lahir</label>
-                            <input id="app-views-auth-register-tempat_lahir" type="text" name="tempat_lahir" class="form-control" placeholder="Contoh: Bandar Lampung" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="app-views-auth-register-tanggal_lahir" class="form-label required">Tanggal Lahir</label>
-                            <input id="app-views-auth-register-tanggal_lahir" type="date" name="tanggal_lahir" class="form-control" max="<?= date('Y-m-d') ?>" autocomplete="bday" required>
-                        </div>
-                    </div>
-
                     <div class="form-group">
                         <label for="app-views-auth-register-universitas" class="form-label required">Universitas</label>
                         <input id="app-views-auth-register-universitas" type="text" name="universitas" class="form-control" placeholder="Contoh: Universitas Lampung" autocomplete="organization" required>
                     </div>
 
-                    <div class="grid-2">
-                        <div class="form-group">
-                            <label for="app-views-auth-register-fakultas" class="form-label required">Fakultas</label>
-                            <input id="app-views-auth-register-fakultas" type="text" name="fakultas" class="form-control" placeholder="Contoh: Teknik" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="app-views-auth-register-program_studi" class="form-label required">Program Studi</label>
-                            <input id="app-views-auth-register-program_studi" type="text" name="program_studi" class="form-control" placeholder="Contoh: Teknik Informatika" required>
-                        </div>
+                    <div class="form-group">
+                        <label for="app-views-auth-register-program_studi" class="form-label required">Program Studi</label>
+                        <input id="app-views-auth-register-program_studi" type="text" name="program_studi" class="form-control" placeholder="Contoh: Teknik Informatika" required>
                     </div>
 
                     <div class="form-group">
@@ -163,9 +146,9 @@
                         <input id="app-views-auth-register-nomor_hp" type="tel" name="nomor_hp" class="form-control" placeholder="Contoh: 081234567890" inputmode="tel" autocomplete="tel" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="app-views-auth-register-alamat" class="form-label required">Alamat</label>
-                        <textarea id="app-views-auth-register-alamat" name="alamat" class="form-control" placeholder="Alamat tempat tinggal saat ini" rows="2" autocomplete="street-address" required></textarea>
+                    <div class="info-lanjutan">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                        <span>Tempat &amp; tanggal lahir, fakultas, dan alamat dilengkapi di halaman <strong>Profil</strong> setelah masuk. Keempatnya wajib terisi sebelum Anda dapat mengajukan magang.</span>
                     </div>
 
                     <div class="form-group" style="margin-top: 8px;">
@@ -242,7 +225,7 @@
         background: var(--bg-soft);
         color: var(--text-secondary);
         font-family: var(--font-mono);
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 700;
     }
 
@@ -267,7 +250,7 @@
 
     .tahap-ket {
         font-family: var(--font-body);
-        font-size: 11px;
+        font-size: 12px;
         color: var(--text-secondary);
         line-height: 1.3;
     }
@@ -284,8 +267,7 @@
         display: none;
     }
 
-    /* Judul panel hanya diperlukan saat kedua tahap tampil sekaligus,
-       yaitu ketika JavaScript tidak berjalan. */
+    /* Judul panel hanya tampil saat JavaScript tidak berjalan. */
     .tahap-panel-judul {
         font-family: var(--font-body);
         font-weight: 700;
@@ -300,6 +282,27 @@
         font-size: 12.5px;
         color: var(--text-secondary);
         margin: 0 0 16px 0;
+    }
+
+    /* Pemberitahuan data lanjutan. */
+    .info-lanjutan {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 20px;
+        padding: 12px 14px;
+        border: 1px solid var(--color-info-border, var(--border));
+        border-radius: var(--radius-md);
+        background: var(--color-info-soft);
+        color: var(--color-info-ink);
+        font-family: var(--font-body);
+        font-size: 12.5px;
+        line-height: 1.5;
+    }
+
+    .info-lanjutan svg {
+        flex: 0 0 auto;
+        margin-top: 1px;
     }
 
     #tahap-2 {
@@ -362,13 +365,7 @@ function togglePassword(inputId, btn) {
     }
 }
 
-/**
- * Pembagian formulir menjadi dua tahap.
- *
- * Tanpa JavaScript, kedua tahap tetap tampil sebagai satu formulir panjang
- * yang berfungsi penuh. Pembagiannya baru dipasang di sini, sehingga
- * pendaftaran tidak pernah bergantung pada skrip.
- */
+/* Pembagian dua tahap. Tanpa skrip, formulirnya tetap utuh dan berfungsi. */
 (function () {
     const form = document.getElementById('form-daftar');
     if (!form) return;
@@ -385,9 +382,7 @@ function togglePassword(inputId, btn) {
     aksiSatu.hidden = false;
     tombolKembali.hidden = false;
 
-    // Isian yang sedang disembunyikan tidak boleh berstatus wajib: peramban
-    // menolak mengirim formulir bila ada isian wajib yang tidak dapat
-    // difokuskan, dan pesannya tidak terlihat pengguna.
+    // Isian tersembunyi tidak boleh wajib: peramban menolak mengirim formulir.
     const wajib = panel.map(p => Array.from(p.querySelectorAll('[required]')));
 
     function tampilkan(ke) {
@@ -410,8 +405,7 @@ function togglePassword(inputId, btn) {
     }
 
     tombolLanjut.addEventListener('click', function () {
-        // Periksa tahap pertama lebih dulu supaya kesalahan ketik tidak baru
-        // ketahuan setelah seluruh data akademik terlanjur diisi.
+        // Diperiksa lebih dulu agar kesalahan tidak ketahuan di akhir.
         const belumSah = wajib[0].find(el => !el.checkValidity());
         if (belumSah) {
             belumSah.reportValidity();

@@ -34,12 +34,12 @@
         <table style="width: 100%; border-collapse: collapse; min-width: 860px;">
             <thead>
                 <tr style="background: var(--bg-soft);">
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Nama Lengkap</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Email / Kontak</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Peran (Role)</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Status</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Terakhir Aktif</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Aksi</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Nama Lengkap</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Email / Kontak</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Peran (Role)</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Status</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Terakhir Aktif</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,7 +67,7 @@
                 <tr style="border-bottom: 1px solid var(--border); transition: background 0.15s; opacity: <?= $isAktif ? '1' : '0.6' ?>;">
                     <td style="padding: 13px 16px;">
                         <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($u['nama']) ?></div>
-                        <div style="font-family: var(--font-mono); font-size: 11.5px; color: var(--text-secondary);">ID: <?= $u['id'] ?></div>
+                        <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary);">ID: <?= $u['id'] ?></div>
                     </td>
                     <td style="padding: 13px 16px;">
                         <div style="font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text-primary);"><?= htmlspecialchars($u['email']) ?></div>
@@ -103,7 +103,7 @@
                                 </button>
                             </form>
                             <?php else: ?>
-                                <span style="font-size: 11px; color: var(--text-secondary);">Anda</span>
+                                <span style="font-size: 12px; color: var(--text-secondary);">Anda</span>
                             <?php endif; ?>
                         </div>
                     </td>

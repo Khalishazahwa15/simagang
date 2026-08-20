@@ -144,7 +144,7 @@ $categories = [
     .cat-count {
         float: right;
         font-family: var(--font-mono);
-        font-size: 11px;
+        font-size: 12px;
         color: var(--text-muted);
         background: var(--border);
         border-radius: 99px;
@@ -232,7 +232,7 @@ $categories = [
         <div class="faq-layout">
             <!-- Sidebar -->
             <div>
-                <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 12px;">Kategori</div>
+                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 12px;">Kategori</div>
                 <?php foreach ($categories as $i => $cat): ?>
                     <button class="cat-btn <?= $i === 0 ? 'active' : '' ?>" onclick="switchCategory('<?= $cat['id'] ?>', this)">
                         <?= $cat['label'] ?>
@@ -247,9 +247,9 @@ $categories = [
                     <p style="font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 14px; margin-top: 0;">
                         Hubungi Sekretariat Bappeda Provinsi Lampung melalui email resmi atau kunjungi kantor pada jam kerja.
                     </p>
-                    <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 4px;">Email</div>
+                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 4px;">Email</div>
                     <div style="font-family: var(--font-mono); font-size: 12px; color: var(--primary);">bappeda@lampungprov.go.id</div>
-                    <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-top: 10px; margin-bottom: 4px;">Jam Kerja</div>
+                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-top: 10px; margin-bottom: 4px;">Jam Kerja</div>
                     <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">Senin–Jumat, 08.00–16.00 WIB</div>
                 </div>
             </div>
@@ -258,7 +258,7 @@ $categories = [
             <div>
                 <?php foreach ($categories as $i => $cat): ?>
                     <div id="cat-content-<?= $cat['id'] ?>" class="faq-category-content" style="display: <?= $i === 0 ? 'block' : 'none' ?>;">
-                        <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 20px;">
+                        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 20px;">
                             <?= $cat['label'] ?> &middot; <?= count($cat['items']) ?> pertanyaan
                         </div>
                         <?php foreach ($cat['items'] as $idx => $item): ?>
@@ -283,7 +283,7 @@ $categories = [
     <div style="max-width: 960px; margin: 0 auto 80px; padding: 0 40px;">
         <div class="bottom-cta" style="margin: 0;">
             <div>
-                <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent-dark); text-transform: uppercase; margin-bottom: 8px;">Portal SIMAGANG</div>
+                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent-dark); text-transform: uppercase; margin-bottom: 8px;">Portal SIMAGANG</div>
                 <h3 style="font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--bg-main); line-height: 1.2; margin: 0;">Ajukan magang Anda secara digital</h3>
             </div>
             <div style="display: flex; gap: 12px; flex-shrink: 0;">

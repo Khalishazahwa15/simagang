@@ -41,9 +41,10 @@ class MahasiswaProfile extends Model {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function create($userId, $nim, $tempatLahir, $tanggalLahir, $universitas, $fakultas, $programStudi, $semester, $nomorHp, $alamat) {
-        $stmt = $this->db->prepare("INSERT INTO {$this->table} (user_id, nim, tempat_lahir, tanggal_lahir, universitas, fakultas, program_studi, semester, nomor_hp, alamat) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$userId, $nim, $tempatLahir, $tanggalLahir, $universitas, $fakultas, $programStudi, $semester, $nomorHp, $alamat]);
+    /** Profil awal dari pendaftaran. Sisanya dilengkapi lewat halaman Profil. */
+    public function create($userId, $nim, $universitas, $programStudi, $semester, $nomorHp) {
+        $stmt = $this->db->prepare("INSERT INTO {$this->table} (user_id, nim, universitas, program_studi, semester, nomor_hp) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt->execute([$userId, $nim, $universitas, $programStudi, $semester, $nomorHp]);
         return $this->lastId();
     }
 }

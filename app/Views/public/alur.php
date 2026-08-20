@@ -135,7 +135,7 @@ $badgeColors = [
             ];
             foreach ($overviews as $item): ?>
                 <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 12px; padding: 24px 28px;">
-                    <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;"><?= $item['label'] ?></div>
+                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;"><?= $item['label'] ?></div>
                     <div style="font-family: var(--font-display); font-size: 28px; color: var(--primary); letter-spacing: -0.01em; margin-bottom: 4px;"><?= $item['value'] ?></div>
                     <div style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary);"><?= $item['sub'] ?></div>
                 </div>
@@ -165,9 +165,9 @@ $badgeColors = [
                         <div style="padding-left: 24px; padding-bottom: <?= $isLast ? '0' : '48px' ?>;">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
                                 <h3 style="font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--text-primary); letter-spacing: -0.01em; margin: 0;"><?= $step['title'] ?></h3>
-                                <span style="background: <?= $badge['bg'] ?>; color: <?= $badge['text'] ?>; font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; padding: 3px 10px; border-radius: 99px; text-transform: uppercase;"><?= $step['badge'] ?></span>
+                                <span style="background: <?= $badge['bg'] ?>; color: <?= $badge['text'] ?>; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; padding: 3px 10px; border-radius: 99px; text-transform: uppercase;"><?= $step['badge'] ?></span>
                             </div>
-                            <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 10px;"><?= $step['subtitle'] ?> &middot; <?= $step['duration'] ?></div>
+                            <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 10px;"><?= $step['subtitle'] ?> &middot; <?= $step['duration'] ?></div>
                             <p style="font-family: var(--font-body); font-size: 15px; color: var(--text-primary); line-height: 1.75; margin-bottom: 16px; margin-top: 0;"><?= $step['desc'] ?></p>
                             
                             <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px;">
@@ -205,7 +205,7 @@ $badgeColors = [
         <!-- CTA -->
         <div class="bottom-cta">
             <div>
-                <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent-dark); text-transform: uppercase; margin-bottom: 8px;">Siap Mengajukan?</div>
+                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent-dark); text-transform: uppercase; margin-bottom: 8px;">Siap Mengajukan?</div>
                 <h3 style="font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--bg-main); line-height: 1.2; margin: 0;">Mulai proses pengajuan Anda sekarang</h3>
             </div>
             <div style="display: flex; gap: 12px; flex-shrink: 0;">

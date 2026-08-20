@@ -68,7 +68,7 @@
 }
 
 .brand-text-secondary {
-    font-size: 10.5px;
+    font-size: 12px;
     color: rgba(255, 250, 242, 0.58);
     letter-spacing: 0;
     text-transform: uppercase;
@@ -105,7 +105,7 @@
 }
 
 .user-role {
-    font-size: 11px;
+    font-size: 12px;
     color: rgba(255, 250, 242, 0.62);
 }
 
@@ -161,7 +161,7 @@
 .nav-label {
     padding: 0 10px;
     margin-bottom: var(--space-2);
-    font-size: 10.5px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0;
     color: rgba(255, 250, 242, 0.42);
@@ -363,7 +363,7 @@
 }
 
 .navbar-logo-subtitle {
-    font-size: 10.5px;
+    font-size: 12px;
     color: var(--text-muted);
     letter-spacing: 0;
     line-height: 1.2;
@@ -419,17 +419,7 @@
     cursor: pointer;
 }
 
-/*
- * Menu ponsel tampil sebagai lapisan mengambang di bawah bilah atas.
- *
- * Sebelumnya menu ini ikut mengalir di dalam .navbar-header yang merupakan
- * flex baris dengan align-items: center. Begitu menu dibuka, ia menjadi item
- * kedua pada baris yang sama sehingga bilah atas ikut meninggi dan logonya
- * tertarik turun 102px, sekaligus mendorong seluruh isi halaman.
- *
- * Dikeluarkan dari alur agar bilah atasnya tetap setinggi semula: logo,
- * tombol, dan isi halaman tidak bergeser sedikit pun saat menu dibuka.
- */
+/* Menu ponsel mengambang di bawah bilah atas, agar logo dan isi tidak bergeser. */
 .mobile-nav {
     position: absolute;
     top: 100%;

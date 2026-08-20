@@ -14,12 +14,12 @@
         <table style="width: 100%; border-collapse: collapse; min-width: 860px; text-align: left;">
             <thead>
                 <tr style="background: var(--color-surface-soft);">
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 10.5px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 30%;">DIVISI / BIDANG</th>
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 10.5px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 12%;">KAPASITAS</th>
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 10.5px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 15%;">TERPAKAI</th>
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 10.5px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 10%;">TERSEDIA</th>
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 10.5px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 15%;">STATUS</th>
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 10.5px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 18%;"></th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 30%;">DIVISI / BIDANG</th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 12%;">KAPASITAS</th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 15%;">TERPAKAI</th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 10%;">TERSEDIA</th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 15%;">STATUS</th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 18%;"></th>
                 </tr>
             </thead>
             <tbody>
@@ -67,9 +67,9 @@
                         </td>
                         <td style="padding: 16px;">
                             <?php if ($isAktif): ?>
-                                <span style="display: inline-flex; padding: 4px 10px; background: var(--color-success-soft); color: var(--primary); font-size: 11px; font-weight: 600; border-radius: 4px;">AKTIF</span>
+                                <span style="display: inline-flex; padding: 4px 10px; background: var(--color-success-soft); color: var(--primary); font-size: 12px; font-weight: 600; border-radius: 4px;">AKTIF</span>
                             <?php else: ?>
-                                <span style="display: inline-flex; padding: 4px 10px; background: var(--bg-soft); color: var(--text-secondary); font-size: 11px; font-weight: 600; border-radius: 4px;">NONAKTIF</span>
+                                <span style="display: inline-flex; padding: 4px 10px; background: var(--bg-soft); color: var(--text-secondary); font-size: 12px; font-weight: 600; border-radius: 4px;">NONAKTIF</span>
                             <?php endif; ?>
                         </td>
                         <td style="padding: 16px; text-align: right;">

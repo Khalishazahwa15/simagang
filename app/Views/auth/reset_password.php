@@ -7,7 +7,7 @@
             </div>
             <div style="text-align: left;">
                 <div style="font-family: var(--font-display); font-weight: 700; font-size: 20px; line-height: 24px; color: var(--text-primary);">SIMAGANG</div>
-                <div style="font-weight: 500; font-size: 11px; line-height: 14px; letter-spacing: 0.04em; color: var(--text-secondary); text-transform: uppercase;">Bappeda Lampung</div>
+                <div style="font-weight: 500; font-size: 12px; line-height: 14px; letter-spacing: 0.04em; color: var(--text-secondary); text-transform: uppercase;">Bappeda Lampung</div>
             </div>
         </div>
         

@@ -29,11 +29,11 @@ $officialDocs = ['surat_balasan', 'surat_penerimaan_final', 'surat_tugas', 'sura
                 <table style="width: 100%; border-collapse: collapse; min-width: 700px;">
                     <thead>
                         <tr style="background: var(--bg-soft);">
-                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">DOKUMEN</th>
-                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">VERSI</th>
-                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">TANGGAL</th>
-                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">STATUS</th>
-                            <th style="padding: 12px 16px; text-align: right; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">AKSI</th>
+                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">DOKUMEN</th>
+                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">VERSI</th>
+                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">TANGGAL</th>
+                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">STATUS</th>
+                            <th style="padding: 12px 16px; text-align: right; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">AKSI</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,7 +55,7 @@ $officialDocs = ['surat_balasan', 'surat_penerimaan_final', 'surat_tugas', 'sura
                         <tr style="border-bottom: 1px solid var(--border);">
                             <td style="padding: 13px 16px;">
                                 <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px;"><?= $label ?></div>
-                                <div style="font-family: var(--font-body); font-size: 11.5px; color: var(--text-secondary);"><?= $ext ?></div>
+                                <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);"><?= $ext ?></div>
                             </td>
                             <td style="padding: 13px 16px;">
                                 <span style="font-family: var(--font-body); font-size: 13px; color: var(--text-primary);">v<?= $dok['version'] ?? '1' ?></span>
@@ -114,11 +114,11 @@ $officialDocs = ['surat_balasan', 'surat_penerimaan_final', 'surat_tugas', 'sura
                 <table style="width: 100%; border-collapse: collapse; min-width: 700px;">
                     <thead>
                         <tr style="background: var(--bg-soft);">
-                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">DOKUMEN</th>
-                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">VERSI</th>
-                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">TANGGAL</th>
-                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">STATUS</th>
-                            <th style="padding: 12px 16px; text-align: right; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">AKSI</th>
+                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">DOKUMEN</th>
+                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">VERSI</th>
+                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">TANGGAL</th>
+                            <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">STATUS</th>
+                            <th style="padding: 12px 16px; text-align: right; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">AKSI</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -143,7 +143,7 @@ $officialDocs = ['surat_balasan', 'surat_penerimaan_final', 'surat_tugas', 'sura
                         <tr style="border-bottom: 1px solid var(--border);">
                             <td style="padding: 13px 16px;">
                                 <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px;"><?= $label ?></div>
-                                <div style="font-family: var(--font-body); font-size: 11.5px; color: var(--text-secondary);"><?= $ext ?></div>
+                                <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);"><?= $ext ?></div>
                             </td>
                             <td style="padding: 13px 16px;">
                                 <span style="font-family: var(--font-body); font-size: 13px; color: var(--text-primary);">v<?= $dok['version'] ?? '1' ?></span>

@@ -20,9 +20,7 @@ require_once APP_PATH . '/Core/autoload.php';
 
 require_once APP_PATH . '/Core/Env.php';
 
-// Berkas .env tambahan, dipakai untuk menjalankan pengujian di atas basis data
-// lain tanpa menyentuh .env sehari-hari. Dimuat lebih dulu karena nilai yang
-// masuk pertama yang dipakai.
+// Nilai yang masuk pertama yang dipakai.
 if (getenv('SIMAGANG_ENV')) {
     \App\Core\Env::load(ROOT_PATH . '/' . basename(getenv('SIMAGANG_ENV')));
 }
@@ -36,9 +34,7 @@ putenv('MAIL_NOTIFIKASI=false');
 $_ENV['MAIL_NOTIFIKASI'] = 'false';
 $_SERVER['MAIL_NOTIFIKASI'] = 'false';
 
-// Pemisahan lingkungan uji, ditetapkan sebelum config/database.php membacanya.
-// MySQL memisahkannya dengan basis data tersendiri; PostgreSQL memakai schema
-// tersendiri karena Supabase hanya menyediakan satu basis data.
+// Ditetapkan sebelum config/database.php membacanya.
 $penggerakUji = getenv('DB_DRIVER') ?: 'mysql';
 
 if ($penggerakUji === 'pgsql') {
@@ -69,17 +65,7 @@ if (DB_DRIVER === 'pgsql') {
 
     $server = new PDO(dsn_basis_data(), DB_USER, DB_PASS, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 
-    // Pengujian yang dihentikan di tengah jalan meninggalkan transaksi terbuka
-    // di sisi server. Transaksi itu memegang kunci pada schema uji, sehingga
-    // DROP SCHEMA pada percobaan berikutnya menunggu sampai batas waktu lalu
-    // gagal dengan "canceling statement due to statement timeout" — pesan yang
-    // mengarahkan tuduhan ke basis datanya, bukan ke sesi telantar.
-    //
-    // Lebih buruk lagi, seluruh berkas uji berhenti sebelum sempat mencetak
-    // apa pun, sehingga hasilnya terbaca "0 lulus, 0 gagal" dan mudah dikira
-    // aman padahal tidak ada satu pun pengujian yang berjalan.
-    //
-    // Dengan batas ini, transaksi telantar menutup dirinya sendiri.
+    // Transaksi telantar dari proses yang mati mengunci schema uji.
     $server->exec("SET idle_in_transaction_session_timeout = '30s'");
 
     $server->exec('DROP SCHEMA IF EXISTS "' . $skemaUji . '" CASCADE');
@@ -114,9 +100,7 @@ ob_start();
 require_once ROOT_PATH . '/database/seeder.php';
 ob_end_clean();
 
-// Koneksi yang dipakai pengujian juga perlu batas yang sama seperti koneksi
-// bootstrap di atas: transaksi telantar dari proses yang mati justru berasal
-// dari sini, bukan dari koneksi pembangun schema.
+// Batas yang sama untuk koneksi yang dipakai pengujian.
 if (DB_DRIVER === 'pgsql') {
     \App\Core\Database::getInstance()->getConnection()
         ->exec("SET idle_in_transaction_session_timeout = '30s'");

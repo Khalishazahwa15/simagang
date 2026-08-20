@@ -29,7 +29,7 @@ foreach (\App\Models\MahasiswaProfile::FIELD_WAJIB as $kolom => $label) {
             <a href="<?= BASE_URL ?>/mahasiswa/dashboard" style="color: var(--text-secondary); text-decoration: none; display: flex; align-items: center;">
                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
             </a>
-            <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; color: var(--text-secondary); letter-spacing: 0.88px; text-transform: uppercase;">Pengaturan Akun</div>
+            <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; color: var(--text-secondary); letter-spacing: 0.88px; text-transform: uppercase;">Pengaturan Akun</div>
         </div>
         <h1 style="font-family: var(--font-display); font-size: 24px; font-weight: 600; color: var(--text-primary); margin: 0;">Profil Saya</h1>
     </div>

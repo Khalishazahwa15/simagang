@@ -56,44 +56,44 @@ $dokDesc = 'Berkas terunggah';
 <div class="grid-4 surface-card" style="margin-bottom: 24px">
     <!-- Card 1: Status -->
     <div style="padding: 20px; display: flex; flex-direction: column;">
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">STATUS PENGAJUAN</div>
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">STATUS PENGAJUAN</div>
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 4px; line-height: 1.3; letter-spacing: -0.24px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?= htmlspecialchars($statusLabel) ?>">
             <?= htmlspecialchars($statusLabel) ?>
         </div>
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 11.5px; line-height: 17px; color: var(--text-secondary);">
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">
             <?= htmlspecialchars($statusDesc) ?>
         </div>
     </div>
     
     <!-- Card 2: Bidang Tujuan -->
     <div style="padding: 20px; border-left: 0.666667px solid var(--border); display: flex; flex-direction: column;">
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">BIDANG / DIVISI</div>
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">BIDANG / DIVISI</div>
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 4px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -0.24px;" title="<?= htmlspecialchars($pengajuan['nama_divisi_final'] ?? $pengajuan['nama_divisi_preferensi'] ?? '-') ?>">
             <?= htmlspecialchars($bidang) ?>
         </div>
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 11.5px; line-height: 17px; color: var(--text-secondary);">
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">
             <?= htmlspecialchars($bidangDesc) ?>
         </div>
     </div>
 
     <!-- Card 3: Durasi -->
     <div style="padding: 20px; border-left: 0.666667px solid var(--border); display: flex; flex-direction: column;">
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">DURASI MAGANG</div>
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">DURASI MAGANG</div>
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent-dark); margin-bottom: 4px; line-height: 1.3; letter-spacing: -0.24px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?= htmlspecialchars($durasi) ?>">
             <?= htmlspecialchars($durasi) ?>
         </div>
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 11.5px; line-height: 17px; color: var(--text-secondary);">
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">
             <?= htmlspecialchars($durasiDesc) ?>
         </div>
     </div>
 
     <!-- Card 4: Dokumen -->
     <div style="padding: 20px; border-left: 0.666667px solid var(--border); display: flex; flex-direction: column;">
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 11px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">DOKUMEN</div>
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">DOKUMEN</div>
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; line-height: 1;">
             <?= $dokCount ?>
         </div>
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 11.5px; line-height: 17px; color: var(--text-secondary);">
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">
             <?= htmlspecialchars($dokDesc) ?>
         </div>
     </div>
@@ -137,21 +137,21 @@ $dokDesc = 'Berkas terunggah';
                 </div>
             <?php else: ?>
                 <div style="padding: 16px 20px; border-bottom: 1px solid var(--border);">
-                    <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">PERIODE PELAKSANAAN</div>
+                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">PERIODE PELAKSANAAN</div>
                     <div style="font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text-primary);">
                         <?= date('d M Y', strtotime($pengajuan['tanggal_mulai_rencana'])) ?> &mdash; <?= date('d M Y', strtotime($pengajuan['tanggal_selesai_rencana'])) ?>
                     </div>
                 </div>
                 
                 <div style="padding: 16px 20px; border-bottom: 1px solid var(--border);">
-                    <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">PEMBINA LAPANGAN</div>
+                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">PEMBINA LAPANGAN</div>
                     <div style="font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text-primary);">
                         <?= htmlspecialchars($pengajuan['pembina_lapangan'] ?? 'Belum ditentukan') ?>
                     </div>
                 </div>
 
                 <div style="padding: 16px 20px; border-bottom: 1px solid var(--border);">
-                    <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">DIVISI PENEMPATAN</div>
+                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">DIVISI PENEMPATAN</div>
                     <div style="font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text-primary);">
                         <?= htmlspecialchars($pengajuan['nama_divisi_final'] ?? $pengajuan['nama_divisi_preferensi'] ?? 'Belum ditentukan') ?>
                     </div>
@@ -159,7 +159,7 @@ $dokDesc = 'Berkas terunggah';
 
                 <div style="padding: 16px 20px; display: flex; align-items: center; justify-content: space-between;">
                     <div>
-                        <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">NOMOR PENGAJUAN</div>
+                        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">NOMOR PENGAJUAN</div>
                         <div style="font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--text-primary);">
                             <?= htmlspecialchars($pengajuan['nomor_pengajuan']) ?>
                         </div>

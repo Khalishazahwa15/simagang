@@ -113,7 +113,7 @@ foreach ($divisi as $d) {
                                 </div>
                                 <div>
                                     <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($doc['jenis_dokumen']) ?></div>
-                                    <div style="font-family: var(--font-body); font-size: 11.5px; color: var(--text-secondary);">PDF &middot; Diunggah</div>
+                                    <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">PDF &middot; Diunggah</div>
                                 </div>
                             </div>
                             <div style="display: flex; gap: 8px;">
@@ -144,7 +144,7 @@ foreach ($divisi as $d) {
                                 </div>
                                 <div>
                                     <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars(str_replace('_', ' ', ucwords($doc['jenis_dokumen'], '_'))) ?></div>
-                                    <div style="font-family: var(--font-body); font-size: 11.5px; color: var(--text-secondary);">PDF &middot; Terbit</div>
+                                    <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">PDF &middot; Terbit</div>
                                 </div>
                             </div>
                             <div style="display: flex; gap: 8px;">
@@ -174,8 +174,8 @@ foreach ($divisi as $d) {
                         <div style="width: 1px; flex: 1; background: var(--border); margin-top: 4px;"></div>
                     </div>
                     <div style="flex: 1; padding-bottom: 14px;">
-                        <span class="badge badge-menunggu_verifikasi" style="font-size: 11px; padding: 3px 9px;">Diperiksa</span>
-                        <div style="font-family: var(--font-body); font-size: 11.5px; color: var(--text-secondary); margin-top: 4px;">Sistem &middot; Sedang diproses</div>
+                        <span class="badge badge-menunggu_verifikasi" style="font-size: 12px; padding: 3px 9px;">Diperiksa</span>
+                        <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Sistem &middot; Sedang diproses</div>
                     </div>
                 </div>
                 <div style="display: flex; gap: 10px;">
@@ -183,8 +183,8 @@ foreach ($divisi as $d) {
                         <div style="width: 12px; height: 12px; border-radius: 50%; background: var(--primary); flex-shrink: 0;"></div>
                     </div>
                     <div style="flex: 1;">
-                        <span class="badge badge-draft" style="font-size: 11px; padding: 3px 9px;">Diajukan</span>
-                        <div style="font-family: var(--font-body); font-size: 11.5px; color: var(--text-secondary); margin-top: 4px;"><?= htmlspecialchars($pengajuan['mahasiswa_nama'] ?? 'Mahasiswa') ?> &middot; <?= date('d M Y', strtotime($pengajuan['created_at'])) ?></div>
+                        <span class="badge badge-draft" style="font-size: 12px; padding: 3px 9px;">Diajukan</span>
+                        <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary); margin-top: 4px;"><?= htmlspecialchars($pengajuan['mahasiswa_nama'] ?? 'Mahasiswa') ?> &middot; <?= date('d M Y', strtotime($pengajuan['created_at'])) ?></div>
                     </div>
                 </div>
             </div>
@@ -287,7 +287,7 @@ foreach ($divisi as $d) {
                             <label class="form-label">Bidang/Divisi Final</label>
                             <div class="form-control" style="background: var(--bg-soft); display: flex; align-items: center; justify-content: space-between; gap: 12px;">
                                 <span><?= htmlspecialchars($pengajuan['nama_divisi'] ?: 'Belum ada preferensi') ?></span>
-                                <span style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary);">Terkunci</span>
+                                <span style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary);">Terkunci</span>
                             </div>
                             <div class="form-help">Mengikuti preferensi yang dipilih mahasiswa saat mendaftar. Untuk menempatkan di divisi lain, pilih keputusan <strong>Tawarkan Divisi Alternatif</strong> agar mahasiswa dapat menyetujuinya lebih dulu.</div>
                         </div>

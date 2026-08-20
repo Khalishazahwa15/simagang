@@ -33,12 +33,12 @@
         <table style="width: 100%; border-collapse: collapse; min-width: 860px;">
             <thead>
                 <tr style="background: var(--bg-soft);">
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Mahasiswa</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Institusi & Prodi</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Bidang Penempatan</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Periode Magang</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Status</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);"></th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Mahasiswa</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Institusi & Prodi</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Bidang Penempatan</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Periode Magang</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Status</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);"></th>
                 </tr>
             </thead>
             <tbody>
@@ -65,19 +65,19 @@
                                 </div>
                                 <div>
                                     <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($p['nama']) ?></div>
-                                    <div style="font-family: var(--font-body); font-size: 11.5px; color: var(--text-secondary);"><?= htmlspecialchars($p['nomor_pengajuan']) ?></div>
+                                    <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);"><?= htmlspecialchars($p['nomor_pengajuan']) ?></div>
                                 </div>
                             </div>
                         </td>
                         <td style="padding: 13px 16px;">
                             <div style="font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($p['universitas'] ?? '-') ?></div>
-                            <div style="font-family: var(--font-body); font-size: 11.5px; color: var(--text-secondary);"><?= htmlspecialchars($p['program_studi'] ?? '-') ?></div>
+                            <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);"><?= htmlspecialchars($p['program_studi'] ?? '-') ?></div>
                         </td>
                         <td style="padding: 13px 16px; font-family: var(--font-body); font-size: 13px; color: var(--text-secondary);"><?= htmlspecialchars($p['divisi_nama'] ?? '-') ?></td>
                         <td style="padding: 13px 16px;">
                             <div style="font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary); white-space: nowrap;"><?= $mulai->format('d M') ?> - <?= $selesai->format('d M Y') ?></div>
                             <?php if ($sisaHari > 0): ?>
-                                <div style="font-family: var(--font-body); font-size: 11px; color: var(--accent-dark); font-weight: 600;">Sisa <?= $sisaHari ?> hari</div>
+                                <div style="font-family: var(--font-body); font-size: 12px; color: var(--accent-dark); font-weight: 600;">Sisa <?= $sisaHari ?> hari</div>
                             <?php endif; ?>
                         </td>
                         <td style="padding: 13px 16px;"><span class="badge badge-disetujui"><?= $p['status'] === 'sedang_magang' ? 'Aktif' : 'Diterima' ?></span></td>

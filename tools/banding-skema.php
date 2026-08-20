@@ -1,30 +1,16 @@
 <?php
 /**
- * Membandingkan struktur basis data MySQL dengan PostgreSQL.
+ * Membandingkan struktur MySQL dengan PostgreSQL.
  *
  *   php tools/banding-skema.php
  *
- * Skema aplikasi ini ditulis dua kali: database/schema.sql untuk MySQL dan
- * database/schema.pgsql.sql untuk PostgreSQL. Perubahan yang hanya masuk ke
- * salah satunya tidak akan tertangkap pengujian — pengujian hanya menjalankan
- * satu penggerak dalam satu waktu, sehingga masing-masing tetap lulus di
- * lingkungannya sendiri. Perbedaannya baru terasa setelah dipasang.
- *
- * Alat ini membaca kedua basis data yang benar-benar berjalan, lalu
- * membandingkan daftar tabel, daftar kolom, dan apakah kolomnya boleh kosong.
- *
- * Keluar dengan kode 1 bila ada perbedaan, sehingga bisa dipasang di CI.
+ * Skema ditulis dua kali dan perubahan sepihak tidak tertangkap pengujian.
+ * Keluar dengan kode 1 bila berbeda, agar bisa dipasang di CI.
  */
 
 define('ROOT_PATH', dirname(__DIR__));
 
-/**
- * Baca berkas .env secara mandiri.
- *
- * Tidak memakai App\Core\Env karena alat ini perlu dua konfigurasi sekaligus
- * dalam satu proses, sedangkan Env menyimpannya sebagai variabel lingkungan
- * yang hanya muat satu nilai per kunci.
- */
+/** Dibaca mandiri: alat ini perlu dua konfigurasi sekaligus dalam satu proses. */
 function bacaEnv($namaBerkas) {
     $jalur = ROOT_PATH . '/' . $namaBerkas;
     if (!is_file($jalur)) {
@@ -68,8 +54,7 @@ try {
 
 $schemaPg = $pg['DB_SCHEMA'] ?? 'public';
 
-// Nama tabel dan kolom disamakan ke huruf kecil. MySQL di Windows menyimpannya
-// apa adanya, PostgreSQL melipatnya ke huruf kecil.
+// Nama disamakan ke huruf kecil; kedua penggerak berbeda perlakuan.
 $kolomMy = [];
 $q = $pdoMy->query("SELECT TABLE_NAME, COLUMN_NAME, IS_NULLABLE
                     FROM information_schema.COLUMNS
