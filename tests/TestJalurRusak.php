@@ -520,6 +520,38 @@ foreach ($berkasUji as $uji) {
 }
 @rmdir($dirSementara);
 
+// --- Perbaikan berkas oleh mahasiswa ---
+// Fitur revisi tidak pernah berfungsi sejak commit rilis pertama:
+// MahasiswaController memindahkan status ke 'dalam_verifikasi' sedangkan peta
+// transisi hanya mengizinkan 'diajukan', sehingga setiap unggahan perbaikan
+// berakhir dengan "Transisi status ilegal" — padahal berkasnya sudah terunggah.
+$db->exec("DELETE FROM pengajuan");
+$stmt = $db->prepare("INSERT INTO pengajuan (nomor_pengajuan, user_id, divisi_id_preferensi, tanggal_mulai_rencana, tanggal_selesai_rencana, status)
+                      VALUES ('UJI-REVISI-1', 3, 1, ?, ?, 'revisi')");
+$stmt->execute([$mulaiSah, $selesaiSah]);
+$idRevisi = (int)\App\Core\Sql::lastInsertId($db, 'pengajuan');
+
+$catatanRevisi = 'Mahasiswa telah mengunggah revisi dokumen: cv';
+$revisiDiterima = false;
+try {
+    $statusService->updateStatus($idRevisi, 'revisi', 'dalam_verifikasi', $catatanRevisi);
+    $revisiDiterima = true;
+} catch (\Exception $e) {
+    $revisiDiterima = false;
+}
+periksa($revisiDiterima, 'Perbaikan berkas mengembalikan pengajuan ke pemeriksaan');
+
+$statusSesudah = $db->query("SELECT status FROM pengajuan WHERE id = {$idRevisi}")->fetchColumn();
+periksa($statusSesudah === 'dalam_verifikasi', 'Status tersimpan sebagai dalam_verifikasi setelah perbaikan');
+
+$stmt = $db->prepare("SELECT catatan FROM status_history
+                      WHERE pengajuan_id = ? AND status_baru = 'dalam_verifikasi'
+                      ORDER BY id DESC");
+$stmt->execute([$idRevisi]);
+$catatanTersimpan = (string)$stmt->fetchColumn();
+periksa(strpos($catatanTersimpan, 'revisi dokumen') !== false,
+    'Catatan perbaikan ikut tersimpan di riwayat status');
+
 $db->exec("DELETE FROM pengajuan");
 
 echo "====================================\n";

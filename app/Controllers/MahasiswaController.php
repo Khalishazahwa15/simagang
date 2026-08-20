@@ -353,8 +353,7 @@ class MahasiswaController extends Controller {
                 $dokumenService = new \App\Services\DokumenService();
                 $dokumenService->uploadDokumen($pengajuanId, $pengajuan['nomor_pengajuan'], $jenisDokumen, $_FILES['file_dokumen']);
 
-                // Optionally change status back to diajukan/dalam_verifikasi
-                // The PRD says "Mahasiswa -> mengunggah revisi dokumen (status: kembali ke dalam_verifikasi atau diajukan)"
+                // Berkas yang sudah diperbaiki kembali ke pemeriksaan Sekretariat.
                 $statusService = new \App\Services\StatusService();
                 $statusService->updateStatus($pengajuanId, 'revisi', 'dalam_verifikasi', 'Mahasiswa telah mengunggah revisi dokumen: ' . $jenisDokumen);
 

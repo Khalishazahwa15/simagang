@@ -143,7 +143,7 @@ $stepNames = [
                         <div style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; line-height: 1.5;">
                             <?php
                                 if ($item['status_baru'] === 'diajukan') echo 'Pengajuan berhasil dikirimkan dan masuk antrean pemeriksaan.';
-                                elseif ($item['status_baru'] === 'dalam_verifikasi') echo 'Berkas dinyatakan lengkap. Sekretariat sedang memproses ketersediaan divisi.';
+                                elseif ($item['status_baru'] === 'dalam_verifikasi') echo htmlspecialchars($item['catatan'] ?: 'Berkas dinyatakan lengkap. Sekretariat sedang memproses ketersediaan divisi.');
                                 elseif ($item['status_baru'] === 'revisi') echo htmlspecialchars($item['catatan']);
                                 elseif ($item['status_baru'] === 'diterima') echo 'Anda diterima di ' . htmlspecialchars($pengajuan['nama_divisi_final'] ?? $pengajuan['nama_divisi_preferensi'] ?? 'Bappeda Provinsi Lampung') . '.';
                                 elseif ($item['status_baru'] === 'ditolak') echo htmlspecialchars($item['catatan'] ?? 'Pengajuan ditolak.');
