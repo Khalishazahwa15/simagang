@@ -214,7 +214,8 @@ periksa((int)$keSekretariat >= 1, 'Sekretariat diberi tahu ada berkas baru');
 
 // Sinkronisasi otomatis berjalan tanpa sesi pengguna
 $kolom = $db->query("SELECT IS_NULLABLE FROM information_schema.COLUMNS
-                     WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'status_history'
+                     WHERE TABLE_SCHEMA = " . \App\Core\Sql::currentSchema() . "
+                       AND TABLE_NAME = 'status_history'
                        AND COLUMN_NAME = 'changed_by'")->fetchColumn();
 periksa($kolom === 'YES', 'changed_by boleh kosong untuk tindakan sistem');
 

@@ -78,6 +78,16 @@ class Sql {
     }
 
     /**
+     * Ruang tabel yang sedang aktif, untuk kueri ke information_schema.
+     *
+     * MySQL memisahkan tabel per basis data dan menyebutnya lewat DATABASE(),
+     * PostgreSQL memisahkannya per schema.
+     */
+    public static function currentSchema() {
+        return self::isPgsql() ? 'current_schema()' : 'DATABASE()';
+    }
+
+    /**
      * Id baris yang baru saja dibuat.
      *
      * PostgreSQL memerlukan nama sequence-nya; tanpa itu lastInsertId() tidak
