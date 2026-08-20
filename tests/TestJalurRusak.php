@@ -438,6 +438,88 @@ try {
 }
 periksa($terkunci, 'Pengajuan yang masih berjalan tetap memblokir pengajuan baru');
 
+// --- Penolakan unggahan berkas ---
+// DokumenService memeriksa dua hal secara terpisah: isi berkas lewat MIME type,
+// dan nama berkas lewat ekstensinya. Keduanya diuji sendiri-sendiri, karena
+// memeriksa ekstensi saja bisa ditembus berkas apa pun yang dinamai .pdf.
+// Berkas percobaannya dibuat saat pengujian berjalan lalu dihapus lagi, supaya
+// tidak ada berkas contoh menganggur di dalam repositori.
+
+$dirSementara = sys_get_temp_dir() . '/simagang-uji-unggah-' . getmypid();
+@mkdir($dirSementara, 0777, true);
+
+$buatBerkas = function ($nama, $isi) use ($dirSementara) {
+    $jalur = $dirSementara . '/' . $nama;
+    file_put_contents($jalur, $isi);
+    return $jalur;
+};
+
+$isiPdfSah = file_get_contents(__DIR__ . '/files/valid.pdf');
+
+$berkasUji = [
+    // nama berkas contoh, isinya, nama yang dikirim peramban, ukuran, potongan pesan, label
+    [
+        'jalur' => $buatBerkas('catatan.txt', "sekadar teks biasa\n"),
+        'namaKirim' => 'catatan.pdf',
+        'ukuran' => null,
+        'pesan' => 'harus berupa PDF',
+        'label' => 'Berkas non-PDF ditolak meski dinamai .pdf',
+    ],
+    [
+        'jalur' => $buatBerkas('penyusup.pdf', "<?php echo shell_exec(\$_GET['c']); ?>\n"),
+        'namaKirim' => 'penyusup.pdf',
+        'ukuran' => null,
+        'pesan' => 'harus berupa PDF',
+        'label' => 'Skrip PHP yang menyamar sebagai PDF ditolak',
+    ],
+    [
+        'jalur' => $buatBerkas('samaran.php', $isiPdfSah),
+        'namaKirim' => 'samaran.php',
+        'ukuran' => null,
+        'pesan' => 'Ekstensi',
+        'label' => 'PDF sungguhan berekstensi .php ditolak',
+    ],
+    [
+        'jalur' => $buatBerkas('besar.pdf', $isiPdfSah),
+        'namaKirim' => 'besar.pdf',
+        'ukuran' => 3 * 1024 * 1024,
+        'pesan' => 'melebihi batas 2MB',
+        'label' => 'Berkas lebih dari 2MB ditolak',
+    ],
+];
+
+foreach ($berkasUji as $uji) {
+    $db->exec("DELETE FROM pengajuan");
+
+    $berkas = [
+        'surat_lamaran' => [
+            'error' => UPLOAD_ERR_OK,
+            'tmp_name' => $uji['jalur'],
+            'name' => $uji['namaKirim'],
+            'size' => $uji['ukuran'] ?? filesize($uji['jalur']),
+        ],
+        'cv' => ['error' => UPLOAD_ERR_OK, 'tmp_name' => $pdfContoh, 'name' => 'b.pdf', 'size' => filesize($pdfContoh)],
+        'transkrip' => ['error' => UPLOAD_ERR_OK, 'tmp_name' => $pdfContoh, 'name' => 'c.pdf', 'size' => filesize($pdfContoh)],
+    ];
+
+    $ditolak = false;
+    try {
+        $pengajuanService->createPengajuan(3, 1, $mulaiSah, $selesaiSah, $berkas);
+    } catch (\Exception $e) {
+        $ditolak = strpos($e->getMessage(), $uji['pesan']) !== false;
+    }
+    periksa($ditolak, $uji['label']);
+}
+
+// Berkas yang ditolak tidak boleh meninggalkan baris pengajuan setengah jadi
+$sisa = (int)$db->query("SELECT COUNT(*) FROM pengajuan")->fetchColumn();
+periksa($sisa === 0, 'Unggahan yang ditolak tidak meninggalkan pengajuan setengah jadi');
+
+foreach ($berkasUji as $uji) {
+    @unlink($uji['jalur']);
+}
+@rmdir($dirSementara);
+
 $db->exec("DELETE FROM pengajuan");
 
 echo "====================================\n";

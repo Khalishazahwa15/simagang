@@ -16,9 +16,9 @@ yang diukur, dan apa yang masih perlu diputuskan.
 | | MySQL | PostgreSQL / Supabase |
 |---|---|---|
 | `tests/TestSystemFlow.php` | 16 lulus, 0 gagal | 16 lulus, 0 gagal |
-| `tests/TestJalurRusak.php` | 44 lulus, 0 gagal | 44 lulus, 0 gagal |
+| `tests/TestJalurRusak.php` | 49 lulus, 0 gagal | 49 lulus, 0 gagal |
 | `tests/TestTawaranFlow.php` | 11 lulus, 0 gagal | 11 lulus, 0 gagal |
-| **Total** | **71 lulus, 0 gagal** | **71 lulus, 0 gagal** |
+| **Total** | **76 lulus, 0 gagal** | **76 lulus, 0 gagal** |
 
 Selain pengujian otomatis, alur berikut dijalankan lewat HTTP di atas Supabase
 dan berhasil: pendaftaran akun, pelengkapan profil, pengiriman pengajuan dengan
