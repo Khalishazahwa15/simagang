@@ -520,6 +520,25 @@ foreach ($berkasUji as $uji) {
 }
 @rmdir($dirSementara);
 
+// --- Nomor pengajuan yang ditampilkan harus nomor yang tersimpan ---
+// Tampilan sempat merakit sendiri nomor dari id baris (PGJ-0001), sehingga
+// sistem menyebut satu pengajuan dengan dua nomor berbeda: PGJ-0001 di layar
+// dan PM-20260820-000001 di email, notifikasi, serta ekspor CSV.
+$nomorRakitan = [];
+foreach (glob(__DIR__ . '/../app/Views/*/*.php') as $berkasTampilan) {
+    // landing.php memuat angka contoh statis pada visualnya, bukan data nyata
+    if (basename($berkasTampilan) === 'landing.php') {
+        continue;
+    }
+    $isi = file_get_contents($berkasTampilan);
+    if (preg_match("/PGJ-<\?=\s*str_pad/", $isi)) {
+        $nomorRakitan[] = basename(dirname($berkasTampilan)) . '/' . basename($berkasTampilan);
+    }
+}
+periksa(empty($nomorRakitan),
+    'Tampilan memakai nomor pengajuan yang tersimpan, bukan merakit dari id'
+    . ($nomorRakitan ? ' (' . implode(', ', $nomorRakitan) . ')' : ''));
+
 // --- Perbaikan berkas oleh mahasiswa ---
 // Fitur revisi tidak pernah berfungsi sejak commit rilis pertama:
 // MahasiswaController memindahkan status ke 'dalam_verifikasi' sedangkan peta

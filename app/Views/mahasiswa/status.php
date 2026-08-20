@@ -62,7 +62,7 @@ $stepNames = [
                 Nomor Pengajuan
             </div>
             <div style="font-family: var(--font-mono); font-size: 26px; font-weight: 600; color: var(--primary); line-height: 1.5;">
-                PGJ-<?= str_pad($pengajuan['id'], 4, '0', STR_PAD_LEFT) ?>
+                <?= htmlspecialchars($pengajuan['nomor_pengajuan']) ?>
             </div>
         </div>
         

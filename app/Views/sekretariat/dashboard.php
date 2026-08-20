@@ -82,7 +82,7 @@ function getBadgeLabel($status) {
                     <a href="<?= BASE_URL ?>/sekretariat/pengajuan/detail/<?= $item['id'] ?>" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border); text-decoration: none; transition: background 0.15s;" onmouseover="this.style.background='var(--bg-main)'" onmouseout="this.style.background='transparent'">
                         <div>
                             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                                <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--primary);">PGJ-<?= str_pad($item['id'], 4, '0', STR_PAD_LEFT) ?></div>
+                                <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--primary);"><?= htmlspecialchars($item['nomor_pengajuan']) ?></div>
                                 <div style="padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; <?= getBadgeStyle($item['status']) ?>">
                                     <?= getBadgeLabel($item['status']) ?>
                                 </div>

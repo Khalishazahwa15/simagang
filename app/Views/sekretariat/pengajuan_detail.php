@@ -23,7 +23,7 @@ foreach ($divisi as $d) {
         <div class="d-flex align-center gap-3">
             <h1 class="card-title" style="font-family: var(--font-display); font-size: 28px; font-weight: 400; text-transform: none; letter-spacing: -0.01em; margin: 0;">Verifikasi Pengajuan</h1>
             <div style="width: 1px; height: 24px; background: var(--border);"></div>
-            <span class="text-mono" style="font-size: 16px; color: var(--primary); font-weight: 600;">PGJ-<?= str_pad($pengajuan['id'], 4, '0', STR_PAD_LEFT) ?></span>
+            <span class="text-mono" style="font-size: 16px; color: var(--primary); font-weight: 600;"><?= htmlspecialchars($pengajuan['nomor_pengajuan']) ?></span>
         </div>
         <div class="badge badge-<?= htmlspecialchars($pengajuan['status']) === 'diajukan' ? 'menunggu_verifikasi' : 'disetujui' ?>" style="font-size: 13px; padding: 6px 14px; text-transform: uppercase;">
             <?= htmlspecialchars(str_replace('_', ' ', $pengajuan['status'])) ?>

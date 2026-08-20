@@ -161,7 +161,7 @@ $dokDesc = 'Berkas terunggah';
                     <div>
                         <div style="font-family: var(--font-body); font-size: 11px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">NOMOR PENGAJUAN</div>
                         <div style="font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--text-primary);">
-                            PGJ-<?= str_pad($pengajuan['id'], 4, '0', STR_PAD_LEFT) ?>
+                            <?= htmlspecialchars($pengajuan['nomor_pengajuan']) ?>
                         </div>
                     </div>
                 </div>

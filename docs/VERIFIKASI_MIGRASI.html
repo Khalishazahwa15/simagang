@@ -435,7 +435,7 @@
 
   <div class="putusan">
     <h2>Putusan singkat</h2>
-    <p><b>Secara fungsi sudah siap.</b> 79 pengujian lulus di MySQL maupun di Supabase, 24 rute bersih tanpa satu pun galat, dan struktur kedua basis data selaras persis.</p>
+    <p><b>Secara fungsi sudah siap.</b> 80 pengujian lulus di MySQL maupun di Supabase, 24 rute bersih tanpa satu pun galat, dan struktur kedua basis data selaras persis.</p>
     <p><b>Secara performa, bergantung pada hosting.</b> Pada susunan sementara sekarang — aplikasi di laptop, basis data di Singapura — satu halaman butuh 555–895 ms, dibanding 20–40 ms saat memakai MySQL lokal. Ini jarak jaringan, bukan cacat kode, dan hilang sendiri bila aplikasi dan basis datanya nanti ditempatkan berdekatan.</p>
     <p>Ada <b>empat hal yang harus dibereskan sebelum rilis</b>, semuanya soal konfigurasi dan data, bukan kode. Daftarnya ada di bagian terakhir.</p>
   </div>
@@ -443,7 +443,7 @@
   <section>
     <div class="judul-bagian">
       <h2>Pengujian otomatis</h2>
-      <span class="chip chip-lulus">79 / 79 di kedua penggerak</span>
+      <span class="chip chip-lulus">80 / 80 di kedua penggerak</span>
     </div>
     <p>Ketiga berkas uji dijalankan dua kali: sekali di atas MySQL, sekali di atas Supabase. Angkanya sengaja harus sama — itu buktinya migrasi tidak merusak apa pun dan masih bisa dibatalkan.</p>
     <div class="gulir">
@@ -459,9 +459,9 @@
         </thead>
         <tbody>
           <tr><td>TestSystemFlow.php</td><td class="angka baik">16 / 0</td><td class="angka baik">16 / 0</td><td>alur sistem &amp; otomasi tanggal</td></tr>
-          <tr><td>TestJalurRusak.php</td><td class="angka baik">52 / 0</td><td class="angka baik">52 / 0</td><td>jalur rusak, keamanan, validasi unggahan</td></tr>
+          <tr><td>TestJalurRusak.php</td><td class="angka baik">53 / 0</td><td class="angka baik">53 / 0</td><td>jalur rusak, keamanan, validasi unggahan</td></tr>
           <tr><td>TestTawaranFlow.php</td><td class="angka baik">11 / 0</td><td class="angka baik">11 / 0</td><td>tawaran divisi, IDOR, hak akses</td></tr>
-          <tr><td class="tebal">Total</td><td class="angka tebal baik">79 lulus, 0 gagal</td><td class="angka tebal baik">79 lulus, 0 gagal</td><td></td></tr>
+          <tr><td class="tebal">Total</td><td class="angka tebal baik">80 lulus, 0 gagal</td><td class="angka tebal baik">80 lulus, 0 gagal</td><td></td></tr>
         </tbody>
       </table>
     </div>
