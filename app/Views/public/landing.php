@@ -239,8 +239,22 @@
 
     @media (max-width: 900px) {
         .hero-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
-        .doc-panel { display: none; }
         .trust-grid, .alur-grid { grid-template-columns: 1fr; }
+    }
+
+    /*
+     * Kartu contoh surat sebelumnya disembunyikan sepenuhnya di bawah 900px.
+     * Padahal justru kartu itu yang menunjukkan wujud layanannya, sehingga
+     * pengunjung dari ponsel kehilangan bagian paling menjelaskan. Kini
+     * ditampilkan, dengan ruang dan ukuran yang menyesuaikan layar sempit.
+     */
+    @media (max-width: 600px) {
+        .doc-panel-header { padding: 16px 18px; gap: 12px; }
+        .doc-panel-body { padding: 18px; }
+        .landing-meta-grid { grid-template-columns: 1fr !important; gap: 14px !important; }
+        .timeline-label { font-size: 9.5px; }
+        .timeline-circle { width: 24px; height: 24px; }
+        .timeline-line { top: 12px; }
     }
 </style>
 

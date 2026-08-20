@@ -419,11 +419,28 @@
     cursor: pointer;
 }
 
+/*
+ * Menu ponsel tampil sebagai lapisan mengambang di bawah bilah atas.
+ *
+ * Sebelumnya menu ini ikut mengalir di dalam .navbar-header yang merupakan
+ * flex baris dengan align-items: center. Begitu menu dibuka, ia menjadi item
+ * kedua pada baris yang sama sehingga bilah atas ikut meninggi dan logonya
+ * tertarik turun 102px, sekaligus mendorong seluruh isi halaman.
+ *
+ * Dikeluarkan dari alur agar bilah atasnya tetap setinggi semula: logo,
+ * tombol, dan isi halaman tidak bergeser sedikit pun saat menu dibuka.
+ */
 .mobile-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
     width: 100%;
     border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
     background: var(--bg-card);
     padding: 12px 24px 22px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
 }
 
 .mobile-nav-link {
