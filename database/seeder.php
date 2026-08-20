@@ -1,6 +1,13 @@
 <?php
 require_once dirname(__DIR__) . '/app/Core/Env.php';
 require_once dirname(__DIR__) . '/app/Core/Sql.php';
+
+// Berkas .env tambahan, sama seperti yang dipakai front controller dan
+// pengujian. Tanpa ini seeder selalu menulis ke basis data di .env, sehingga
+// orang yang bermaksud mengosongkan Supabase justru mengosongkan MySQL lokal.
+if (getenv('SIMAGANG_ENV')) {
+    \App\Core\Env::load(dirname(__DIR__) . '/' . basename(getenv('SIMAGANG_ENV')));
+}
 \App\Core\Env::load(dirname(__DIR__) . '/.env');
 require_once dirname(__DIR__) . '/config/database.php';
 
