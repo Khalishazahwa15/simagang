@@ -194,8 +194,8 @@ $badgeColors = [
             </p>
             <div style="display: flex; flex-direction: column; gap: 2px;">
                 <?php foreach ($statusMap as $s): ?>
-                    <div style="display: flex; align-items: center; gap: 16px; padding: 12px 16px; background: var(--bg-soft); border-radius: 8px; border: 1px solid var(--bg-soft);">
-                        <span style="background: <?= $s['bg'] ?>; color: <?= $s['color'] ?>; font-family: var(--font-mono); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 6px; white-space: nowrap; min-width: 210px; display: inline-block; text-align: center;"><?= $s['key'] ?></span>
+                    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 12px 16px; background: var(--bg-soft); border-radius: 8px; border: 1px solid var(--bg-soft);">
+                        <span style="background: <?= $s['bg'] ?>; color: <?= $s['color'] ?>; font-family: var(--font-mono); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 6px; white-space: nowrap; min-width: min(210px, 100%); display: inline-block; text-align: center;"><?= $s['key'] ?></span>
                         <span style="font-family: var(--font-body); font-size: 14px; color: var(--text-secondary);"><?= $s['desc'] ?></span>
                     </div>
                 <?php endforeach; ?>
