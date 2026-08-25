@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="<?= aset('assets/css/layout.css') ?>">
     <link rel="stylesheet" href="<?= aset('assets/css/components.css') ?>">
     <link rel="stylesheet" href="<?= aset('assets/css/responsive.css') ?>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { primary: '#174A7E', 'primary-dark': '#123A63', accent: '#E0B04B' } } }
+        };
+    </script>
 </head>
 <body>
     <div class="auth-container">

@@ -1,55 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-    /* Core palette: SIMAGANG biru + kuning */
-    --color-primary: #0064B0;
-    --color-primary-dark: #002050;
-    --color-primary-ink: #002060;
-    --color-primary-soft: #E0F0F0;
-    --color-primary-pale: #F0F8FF;
-    --color-header-dark: #003070;
+    /* Core palette: Modern Government Digital Service */
+    --color-primary: #174A7E;
+    --color-primary-dark: #123A63;
+    --color-primary-ink: #123A63;
+    --color-primary-soft: #EAF2F9;
+    --color-primary-pale: #F8FAFC;
+    --color-header-dark: #123A63;
 
-    --color-accent: #F5B323;
-    --color-accent-dark: #9D6C0C;
-    --color-accent-soft: #FFF4D6;
-    --color-accent-pale: #FFFAEB;
-    --color-accent-ink: #8A5A00;
-    --color-secondary-soft: #E0F0F0;
-    --color-highlight-soft: #FFF4D6;
+    --color-accent: #E0B04B;
+    --color-accent-dark: #A87919;
+    --color-accent-soft: #FFFBEB;
+    --color-accent-pale: #FFFDF5;
+    --color-accent-ink: #805F18;
+    --color-secondary-soft: #F1F5F9;
+    --color-highlight-soft: #FFFBEB;
 
-    --color-background: #FFFFFF;
+    --color-background: #F8FAFC;
     --color-surface: #FFFFFF;
-    --color-surface-soft: #F0F8FF;
-    --color-surface-tinted: #E0F0F0;
+    --color-surface-soft: #F8FAFC;
+    --color-surface-tinted: #EAF2F9;
 
-    --color-text: #002060;
-    --color-text-secondary: #617187;
-    --color-text-muted: #6B7786;
+    --color-text: #0F172A;
+    --color-text-secondary: #475569;
+    --color-text-muted: #94A3B8;
     --color-text-inverse: #FFFFFF;
-    --color-border: #D8E4F0;
-    --color-border-soft: #E8F0FA;
-    --color-step-inactive: #DCEBFA;
-    --color-step-line: #C9DCF0;
+    --color-border: #E2E8F0;
+    --color-border-soft: #E2E8F0;
+    --color-step-inactive: #CBD5E1;
+    --color-step-line: #CBD5E1;
 
-    --color-success: #0064B0;
-    --color-warning: #F5B323;
-    --color-danger: #B42318;
-    --color-info: #0064B0;
+    --color-success: #10B981;
+    --color-warning: #F59E0B;
+    --color-danger: #EF4444;
+    --color-info: #174A7E;
 
-    --color-success-soft: #E0F0F0;
+    --color-success-soft: #ECFDF5;
 
     /* Varian teks dan garis untuk kotak status. Nilainya diturunkan dari
        warna status di atas, bukan dari palet lain, supaya satu keluarga. */
-    --color-success-ink: #002060;
-    --color-success-border: #D8E4F0;
-    --color-warning-ink: #8A5A00;
-    --color-warning-border: #F5DFA6;
-    --color-danger-ink: #8A1C15;
-    --color-danger-border: #F0B8B2;
-    --color-info-ink: #002060;
-    --color-info-border: #B8D4EE;
+    --color-success-ink: #047857;
+    --color-success-border: #A7F3D0;
+    --color-warning-ink: #B45309;
+    --color-warning-border: #FCD34D;
+    --color-danger-ink: #B91C1C;
+    --color-danger-border: #FCA5A5;
+    --color-info-ink: #174A7E;
+    --color-info-border: #BFDBFE;
     --color-warning-soft: var(--color-highlight-soft);
-    --color-danger-soft: #FDE8E7;
+    --color-danger-soft: #FEF2F2;
     --color-info-soft: var(--color-primary-soft);
 
     /* Backward-compatible aliases used throughout existing views */
@@ -80,7 +80,7 @@
     --status-draft-bg: var(--color-surface-soft);
     --status-draft-text: var(--color-text-secondary);
     --status-diajukan-bg: var(--color-info-soft);
-    --status-diajukan-text: #0064B0;
+    --status-diajukan-text: var(--color-primary);
     --status-menunggu-bg: var(--color-accent-soft);
     --status-menunggu-text: var(--color-accent-ink);
     --status-dalam-verifikasi-bg: var(--color-accent-soft);
@@ -103,7 +103,7 @@
     --status-mengundurkan-diri-text: #91424a;
 
     /* Typography */
-    --font-display: 'Source Serif 4', Georgia, serif;
+    --font-display: 'Inter', system-ui, sans-serif;
     --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
 
@@ -142,8 +142,8 @@
     /* Radius, spacing, shadow */
     --radius-sm: 6px;
     --radius-md: 8px;
-    --radius-lg: 8px;
-    --radius-xl: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
     --radius-full: 999px;
 
     --space-1: 4px;
@@ -165,10 +165,10 @@
     --spacing-lg: var(--space-6);
     --spacing-xl: var(--space-8);
 
-    --shadow-sm: 0 1px 2px rgba(0, 32, 96, 0.04), 0 8px 24px rgba(0, 32, 96, 0.04);
-    --shadow-md: 0 12px 30px rgba(0, 32, 96, 0.08);
-    --shadow-lg: 0 18px 48px rgba(0, 32, 96, 0.12);
-    --ring: 0 0 0 3px rgba(245, 179, 35, 0.28);
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.05);
+    --shadow-lg: 0 12px 30px rgba(15, 23, 42, 0.08);
+    --ring: 0 0 0 3px rgba(23, 74, 126, 0.14);
 }
 
 *, *::before, *::after {

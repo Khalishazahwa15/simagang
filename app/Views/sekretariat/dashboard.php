@@ -34,7 +34,7 @@ function getBadgeLabel($status) {
 }
 ?>
 
-<div style="display: flex; flex-direction: column; gap: 24px; max-width: 1040px; font-family: 'Plus Jakarta Sans', sans-serif;">
+<div style="display: flex; flex-direction: column; gap: 24px; max-width: 1040px; font-family: var(--font-body);">
     
     <!-- 4 Summary Cards -->
     <div class="grid-4 surface-card">
@@ -53,7 +53,7 @@ function getBadgeLabel($status) {
         <!-- Card 3 -->
         <div style="padding: 20px; border-left: 0.666667px solid var(--border); display: flex; flex-direction: column;">
             <div style="font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">SEDANG MAGANG</div>
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; color: var(--accent-dark); line-height: 1; margin-bottom: 4px;"><?= $stats['aktif'] ?></div>
+            <div style="font-family: var(--font-mono); font-size: 32px; font-weight: 700; color: var(--primary); line-height: 1; margin-bottom: 4px;"><?= $stats['aktif'] ?></div>
             <div style="font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">Aktif menjalani magang</div>
         </div>
         <!-- Card 4 -->

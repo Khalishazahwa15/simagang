@@ -29,6 +29,7 @@ $currentPage = $currentPage ?? 'beranda';
             <?php 
                 $links = [
                     'beranda' => ['label' => 'Beranda', 'url' => '/'],
+                    'tentang' => ['label' => 'Tentang', 'url' => '/#tentang'],
                     'alur' => ['label' => 'Alur Pengajuan', 'url' => '/alur'],
                     'persyaratan' => ['label' => 'Persyaratan', 'url' => '/persyaratan'],
                     'faq' => ['label' => 'FAQ', 'url' => '/faq'],
@@ -43,7 +44,7 @@ $currentPage = $currentPage ?? 'beranda';
         <!-- Actions -->
         <div class="navbar-actions">
             <a href="<?= BASE_URL ?>/login" class="btn btn-outline" style="padding: 8px 18px; font-size: 13.5px; border-radius: 8px;">Masuk</a>
-            <a href="<?= BASE_URL ?>/login" class="btn btn-primary" style="padding: 8px 18px; font-size: 13.5px; border-radius: 8px;">Ajukan Magang</a>
+            <a href="<?= BASE_URL ?>/register" class="btn btn-primary" style="padding: 8px 18px; font-size: 13.5px; border-radius: 8px;">Daftar Sekarang</a>
             
             <button class="mobile-menu-btn mobile-only" id="mobile-menu-toggle" aria-label="Menu">
                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-menu"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>

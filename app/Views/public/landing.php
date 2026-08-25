@@ -254,7 +254,7 @@
 </style>
 
 <!-- Hero Section -->
-<section style="background: var(--bg-main); border-bottom: 1px solid var(--border); padding: 72px 32px 80px;">
+<section class="landing-hero" style="background: var(--bg-main); border-bottom: 1px solid var(--border); padding: 72px 32px 80px;">
     <div class="hero-grid" style="max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
         <!-- Left: Editorial content -->
         <div>
@@ -282,8 +282,8 @@
                     Ajukan Magang
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 8px;"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
-                <a href="<?= BASE_URL ?>/login" class="btn btn-outline" style="padding: 14px 28px; font-size: 14px; border-radius: 8px; font-weight: 600;">
-                    Cek Status Pengajuan
+                <a href="#alur" class="btn btn-outline" style="padding: 14px 28px; font-size: 14px; border-radius: 8px; font-weight: 600;">
+                    Lihat Alur
                 </a>
             </div>
         </div>
@@ -416,7 +416,7 @@
 </section>
 
 <!-- Mengapa SIMAGANG -->
-<section class="why-section">
+<section id="tentang" class="why-section">
     <div style="max-width: 1240px; margin: 0 auto;">
         <div style="display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 56px;">
             <div>
@@ -449,7 +449,7 @@
 </section>
 
 <!-- Alur Pengajuan -->
-<section class="alur-section">
+<section id="alur" class="alur-section">
     <div style="max-width: 1240px; margin: 0 auto;">
         <div style="margin-bottom: 56px; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
             <div>

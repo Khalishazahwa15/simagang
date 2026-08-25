@@ -96,6 +96,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
+    .dashboard-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+
     .grid-cols-3,
     .grid-3 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -228,6 +232,10 @@
     .grid-3,
     .grid-4 {
         grid-template-columns: 1fr;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr !important;
     }
 
     [style*="grid-template-columns"] {

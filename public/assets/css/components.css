@@ -87,27 +87,27 @@ button:disabled {
     background: var(--primary);
     color: var(--color-text-inverse);
     border-color: rgba(0, 32, 80, 0.12);
-    box-shadow: 0 8px 18px rgba(0, 100, 176, 0.22);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
     background: var(--primary-dark);
     color: var(--color-text-inverse);
-    box-shadow: 0 10px 22px rgba(0, 32, 80, 0.26);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-danger {
     background: var(--color-danger);
     color: var(--color-text-inverse);
     border-color: var(--color-danger);
-    box-shadow: 0 8px 18px rgba(180, 35, 24, 0.18);
+    box-shadow: var(--shadow-sm);
 }
 
 .btn-danger:hover {
     background: var(--color-danger-ink);
     color: var(--color-text-inverse);
     border-color: var(--color-danger-ink);
-    box-shadow: 0 10px 22px rgba(138, 28, 21, 0.22);
+    box-shadow: var(--shadow-md);
 }
 
 .btn-secondary {
@@ -130,9 +130,9 @@ button:disabled {
 }
 
 .btn-outline:hover {
-    background: var(--accent-pale);
-    border-color: #F5DFA6;
-    color: var(--accent-dark);
+    background: var(--color-primary-soft);
+    border-color: var(--primary);
+    color: var(--primary-dark);
 }
 
 /* Cards */
@@ -299,8 +299,17 @@ input:focus,
 select:focus,
 textarea:focus {
     background: var(--bg-card);
-    border-color: var(--accent);
+    border-color: var(--primary);
     box-shadow: var(--ring);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid rgba(23, 74, 126, 0.24);
+    outline-offset: 2px;
 }
 
 .form-control:disabled,

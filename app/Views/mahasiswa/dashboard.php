@@ -53,11 +53,11 @@ $dokDesc = 'Berkas terunggah';
 
 
 <!-- Metric Cards -->
-<div class="grid-4 surface-card" style="margin-bottom: 24px">
+<div class="grid-4 dashboard-stats" style="margin-bottom: 24px; gap: 16px;">
     <!-- Card 1: Status -->
-    <div style="padding: 20px; display: flex; flex-direction: column;">
+    <div class="surface-card" style="padding: 20px; display: flex; flex-direction: column;">
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">STATUS PENGAJUAN</div>
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 4px; line-height: 1.3; letter-spacing: -0.24px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?= htmlspecialchars($statusLabel) ?>">
+        <div style="font-family: var(--font-body); font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 4px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?= htmlspecialchars($statusLabel) ?>">
             <?= htmlspecialchars($statusLabel) ?>
         </div>
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">
@@ -66,9 +66,9 @@ $dokDesc = 'Berkas terunggah';
     </div>
     
     <!-- Card 2: Bidang Tujuan -->
-    <div style="padding: 20px; border-left: 0.666667px solid var(--border); display: flex; flex-direction: column;">
+    <div class="surface-card" style="padding: 20px; display: flex; flex-direction: column;">
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">BIDANG / DIVISI</div>
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 4px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -0.24px;" title="<?= htmlspecialchars($pengajuan['nama_divisi_final'] ?? $pengajuan['nama_divisi_preferensi'] ?? '-') ?>">
+        <div style="font-family: var(--font-body); font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 4px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?= htmlspecialchars($pengajuan['nama_divisi_final'] ?? $pengajuan['nama_divisi_preferensi'] ?? '-') ?>">
             <?= htmlspecialchars($bidang) ?>
         </div>
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">
@@ -77,9 +77,9 @@ $dokDesc = 'Berkas terunggah';
     </div>
 
     <!-- Card 3: Durasi -->
-    <div style="padding: 20px; border-left: 0.666667px solid var(--border); display: flex; flex-direction: column;">
+    <div class="surface-card" style="padding: 20px; display: flex; flex-direction: column;">
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">DURASI MAGANG</div>
-        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 20px; font-weight: 700; color: var(--accent-dark); margin-bottom: 4px; line-height: 1.3; letter-spacing: -0.24px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?= htmlspecialchars($durasi) ?>">
+        <div style="font-family: var(--font-body); font-size: 20px; font-weight: 700; color: var(--primary); margin-bottom: 4px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="<?= htmlspecialchars($durasi) ?>">
             <?= htmlspecialchars($durasi) ?>
         </div>
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">
@@ -88,9 +88,9 @@ $dokDesc = 'Berkas terunggah';
     </div>
 
     <!-- Card 4: Dokumen -->
-    <div style="padding: 20px; border-left: 0.666667px solid var(--border); display: flex; flex-direction: column;">
+    <div class="surface-card" style="padding: 20px; display: flex; flex-direction: column;">
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.88px; text-transform: uppercase; color: var(--text-secondary); margin-bottom: 8px;">DOKUMEN</div>
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px; line-height: 1;">
+        <div style="font-family: var(--font-mono); font-size: 32px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; line-height: 1;">
             <?= $dokCount ?>
         </div>
         <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 400; font-size: 12px; line-height: 17px; color: var(--text-secondary);">
