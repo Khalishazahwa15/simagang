@@ -32,3 +32,39 @@ Untuk halaman operasional Sekretariat dan Admin yang tidak ada di referensi Figm
 - Tampilan detail verifikasi dokumen harus bergaya card clean, dengan split view (informasi di kiri, dokumen di kanan) tanpa mengubah hierarki warna.
 - Form "Alasan Penolakan" atau "Catatan Revisi" akan menggunakan modal atau inline card yang mengikuti gaya form standar Figma.
 - Laman "Pengunduran Diri" akan menggunakan komponen File Upload yang persis sama gaya/styling-nya dengan halaman unggah dokumen awal Mahasiswa.
+
+## 5. Berkas CSS dan Cara Membangun Ulang
+
+Halaman memuat lima berkas, berurutan:
+
+| Berkas | Isi |
+|---|---|
+| `tokens.css` | Sumber tunggal warna, huruf, jarak, radius, bayangan, z-index |
+| `layout.css` | Kerangka halaman: sidebar, topbar, grid |
+| `components.css` | Kartu, tabel, formulir, lencana status, halaman informasi publik |
+| `responsive.css` | Penyesuaian per lebar layar |
+| `tailwind.css` | Utility Tailwind, dibangun lebih dulu (bukan CDN) |
+
+`tailwind.css` adalah hasil build, **bukan berkas untuk disunting tangan**.
+Warna di dalamnya diturunkan otomatis dari `tokens.css`, jadi mengubah warna
+cukup di `tokens.css` lalu bangun ulang:
+
+```bash
+npx @tailwindcss/cli@4.3.3 -i input.css -o public/assets/css/tailwind.css --minify
+```
+
+`input.css` berisi `@import "tailwindcss"`, `@source` yang menunjuk
+`app/Views`, dan blok `@theme` hasil salinan seluruh token `--color-*` dari
+`tokens.css`. Berkas itu tidak disimpan di repositori karena hanya dipakai
+sesaat saat membangun; proyek ini sengaja tidak memuat `package.json`.
+
+Palet netral (teks, garis, langkah tidak aktif) dan warna teks status mengikuti
+[INA Digital Design System](https://design.inadigital.go.id/). Biru dan emas
+institusi ditetapkan tim sendiri.
+
+### Ambang kontras
+
+`tests/TestJalurRusak.php` memeriksa rasio kontras setiap pasangan warna teks
+terhadap latarnya dan menolak nilai di bawah 4.5 (WCAG AA). Warna aksen hanya
+boleh dipakai untuk latar dan garis, tidak untuk teks. Jalankan tes itu setiap
+kali menyentuh `tokens.css`.
