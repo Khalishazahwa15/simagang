@@ -115,7 +115,7 @@ $badgeColors = [
         <div class="grid gap-4 pb-12 md:grid-cols-3 lg:pb-16">
             <?php
             $overviews = [
-                ['label' => 'Total Tahap', 'value' => '6 Langkah', 'sub' => 'dari daftar hingga selesai'],
+                ['label' => 'Total Tahap', 'value' => count($alurSteps) . ' Langkah', 'sub' => 'dari daftar hingga selesai'],
                 ['label' => 'Estimasi Proses', 'value' => '5–10 Hari', 'sub' => 'hari kerja sejak pengajuan'],
                 ['label' => 'Sistem Buka', 'value' => 'Sepanjang Tahun', 'sub' => 'tidak ada periode pendaftaran tetap'],
             ];

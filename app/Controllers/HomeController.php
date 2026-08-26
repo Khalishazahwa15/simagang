@@ -4,8 +4,11 @@ use App\Core\Controller;
 
 class HomeController extends Controller {
     public function index() {
+        $divisiModel = new \App\Models\Divisi();
+        $divisiAktif = $divisiModel->getAktif();
+
         ob_start();
-        $this->view('public/landing');
+        $this->view('public/landing', ['divisiAktif' => $divisiAktif]);
         $content = ob_get_clean();
         
         $this->view('layouts/public', [

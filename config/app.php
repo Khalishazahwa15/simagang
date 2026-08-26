@@ -9,6 +9,7 @@ $baseUrl = $protocol . '://' . $host . $path;
 
 define('BASE_URL', $baseUrl);
 define('APP_NAME', 'SIMAGANG Bappeda Provinsi Lampung');
+define('APP_VERSION', '1.0.0');
 define('UPLOAD_DIR', ROOT_PATH . '/storage/uploads');
 
 /**
