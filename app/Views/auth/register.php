@@ -255,7 +255,7 @@
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
-        color: var(--accent);
+        color: var(--color-text-inverse);
     }
     .auth-feature-text {
         font-family: var(--font-body);
