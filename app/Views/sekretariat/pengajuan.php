@@ -42,13 +42,13 @@
         <table style="width: 100%; border-collapse: collapse; min-width: 860px;">
             <thead>
                 <tr style="background: var(--bg-soft);">
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">No. Pengajuan</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Mahasiswa</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Perguruan Tinggi</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Divisi Preferensi</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Status</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Tanggal</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);"></th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">No. Pengajuan</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Mahasiswa</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Perguruan Tinggi</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Divisi Preferensi</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Status</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Tanggal</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);"></th>
                 </tr>
             </thead>
             <tbody>
@@ -60,10 +60,10 @@
                 <?php foreach ($pengajuan as $p): ?>
                 <tr style="border-bottom: 1px solid var(--border);">
                     <td style="padding: 13px 16px;">
-                        <span style="font-family: var(--font-mono); font-size: 12.5px; color: var(--primary); font-weight: 600;"><?= htmlspecialchars($p['nomor_pengajuan']) ?></span>
+                        <span style="font-family: var(--font-mono); font-size: 12.5px; color: var(--primary); font-weight: 500;"><?= htmlspecialchars($p['nomor_pengajuan']) ?></span>
                     </td>
                     <td style="padding: 13px 16px;">
-                        <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($p['nama'] ?? 'Mahasiswa') ?></div>
+                        <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary);"><?= htmlspecialchars($p['nama'] ?? 'Mahasiswa') ?></div>
                         <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">NPM. <?= htmlspecialchars($p['nim'] ?? '-') ?> &middot; <?= htmlspecialchars($p['program_studi'] ?? '-') ?></div>
                     </td>
                     <td style="padding: 13px 16px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary);"><?= htmlspecialchars($p['universitas'] ?? '-') ?></td>
@@ -71,7 +71,7 @@
                     <td style="padding: 13px 16px;"><span class="badge badge-<?= htmlspecialchars($p['status']) ?>"><?= ucfirst(str_replace('_', ' ', htmlspecialchars($p['status']))) ?></span></td>
                     <td style="padding: 13px 16px; font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary); white-space: nowrap;"><?= date('d M Y', strtotime($p['created_at'])) ?></td>
                     <td style="padding: 13px 16px;">
-                        <a href="<?= BASE_URL ?>/sekretariat/pengajuan/detail/<?= $p['id'] ?>" style="display: flex; align-items: center; gap: 5px; padding: 6px 14px; background: var(--bg-green-soft); border: 1px solid var(--primary-light); border-radius: 6px; cursor: pointer; font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--primary); white-space: nowrap; text-decoration: none;">
+                        <a href="<?= BASE_URL ?>/sekretariat/pengajuan/detail/<?= $p['id'] ?>" style="display: flex; align-items: center; gap: 5px; padding: 6px 14px; background: var(--bg-green-soft); border: 1px solid var(--primary-light); border-radius: 6px; cursor: pointer; font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--primary); white-space: nowrap; text-decoration: none;">
                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
                             Buka
                         </a>

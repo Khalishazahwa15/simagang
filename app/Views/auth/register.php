@@ -8,7 +8,7 @@
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 48px;">
                 <div style="width: 48px; height: 48px; background-color: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 24px; color: var(--primary-dark); box-shadow: 0 8px 20px rgba(0,0,0,0.18);">S</div>
                 <div>
-                    <div style="font-family: var(--font-body); font-weight: 700; font-size: 20px; color: var(--bg-main); line-height: 1.2;">SIMAGANG</div>
+                    <div style="font-family: var(--font-body); font-weight: 600; font-size: 20px; color: var(--bg-main); line-height: 1.2;">SIMAGANG</div>
                     <div style="font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.65); letter-spacing: 0.1em; text-transform: uppercase;">BAPPEDA LAMPUNG</div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
             <div class="mobile-logo-only" style="display: none; margin-bottom: 32px; align-items: center; gap: 12px;">
                 <div style="width: 40px; height: 40px; background-color: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 20px; color: var(--primary-dark);">S</div>
                 <div>
-                    <div style="font-family: var(--font-body); font-weight: 700; font-size: 18px; color: var(--text-primary); line-height: 1.2;">SIMAGANG</div>
+                    <div style="font-family: var(--font-body); font-weight: 600; font-size: 18px; color: var(--text-primary); line-height: 1.2;">SIMAGANG</div>
                 </div>
             </div>
 
@@ -301,7 +301,7 @@
         color: var(--text-secondary);
         font-family: var(--font-mono);
         font-size: 12px;
-        font-weight: 600;
+        font-weight: 500;
     }
 
     .tahap[aria-current="step"] .tahap-nomor,
@@ -319,7 +319,7 @@
     .tahap-judul {
         font-family: var(--font-body);
         font-size: 12.5px;
-        font-weight: 600;
+        font-weight: 500;
         line-height: 1.3;
     }
 
@@ -345,7 +345,7 @@
     /* Judul panel hanya tampil saat JavaScript tidak berjalan. */
     .tahap-panel-judul {
         font-family: var(--font-body);
-        font-weight: 600;
+        font-weight: 500;
         font-size: var(--text-body-sm);
         color: var(--text-primary);
         padding: 0;

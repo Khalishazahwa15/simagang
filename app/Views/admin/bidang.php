@@ -2,7 +2,7 @@
     
     <!-- Top Action -->
     <div style="display: flex; justify-content: flex-end; margin-bottom: 16px;">
-        <button onclick="document.getElementById('modalTambahDivisi').style.display='block'" style="display: flex; align-items: center; justify-content: center; gap: 7px; padding: 9px 18px; background: var(--primary); color: var(--bg-card); border: none; border-radius: 8px; font-weight: 600; font-size: var(--text-body-sm); line-height: 20px; cursor: pointer; transition: background 0.15s;" onmouseover="this.style.background='var(--primary-dark)'" onmouseout="this.style.background='var(--primary)'">
+        <button onclick="document.getElementById('modalTambahDivisi').style.display='block'" style="display: flex; align-items: center; justify-content: center; gap: 7px; padding: 9px 18px; background: var(--primary); color: var(--bg-card); border: none; border-radius: 8px; font-weight: 500; font-size: var(--text-body-sm); line-height: 20px; cursor: pointer; transition: background 0.15s;" onmouseover="this.style.background='var(--primary-dark)'" onmouseout="this.style.background='var(--primary)'">
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
             Tambah Divisi
         </button>
@@ -14,12 +14,12 @@
         <table style="width: 100%; border-collapse: collapse; min-width: 860px; text-align: left;">
             <thead>
                 <tr style="background: var(--color-surface-soft);">
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 30%;">DIVISI / BIDANG</th>
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 12%;">KAPASITAS</th>
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 15%;">TERPAKAI</th>
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 10%;">TERSEDIA</th>
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 15%;">STATUS</th>
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 18%;"></th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 500; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 30%;">DIVISI / BIDANG</th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 500; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 12%;">KAPASITAS</th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 500; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 15%;">TERPAKAI</th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 500; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 10%;">TERSEDIA</th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 500; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 15%;">STATUS</th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 500; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 18%;"></th>
                 </tr>
             </thead>
             <tbody>
@@ -41,18 +41,18 @@
                     ?>
                     <tr style="border-bottom: 0.666667px solid var(--border); transition: background 0.15s; opacity: <?= $isAktif ? '1' : '0.6' ?>;" onmouseover="this.style.background='rgba(11,79,71,0.02)'" onmouseout="this.style.background='transparent'">
                         <td style="padding: 16px;">
-                            <div style="font-weight: 600; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">
+                            <div style="font-weight: 500; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">
                                 <?= htmlspecialchars($d['nama_divisi']) ?>
                             </div>
                         </td>
                         <td style="padding: 16px;">
-                            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; line-height: 21px; color: var(--text-primary);">
+                            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 14px; line-height: 21px; color: var(--text-primary);">
                                 <?= $kapasitas ?>
                             </div>
                         </td>
                         <td style="padding: 16px;">
                             <div style="display: flex; align-items: center; gap: 10px;">
-                                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; line-height: 21px; color: var(--text-primary); width: 16px;">
+                                <div style="font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 14px; line-height: 21px; color: var(--text-primary); width: 16px;">
                                     <?= $terisi ?>
                                 </div>
                                 <div style="width: 56px; height: 5px; background: var(--border); border-radius: 3px; position: relative;">
@@ -61,15 +61,15 @@
                             </div>
                         </td>
                         <td style="padding: 16px;">
-                            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 600; font-size: 14px; line-height: 21px; color: <?= $tersediaColor ?>;">
+                            <div style="font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 14px; line-height: 21px; color: <?= $tersediaColor ?>;">
                                 <?= $tersedia ?>
                             </div>
                         </td>
                         <td style="padding: 16px;">
                             <?php if ($isAktif): ?>
-                                <span style="display: inline-flex; padding: 4px 10px; background: var(--color-success-soft); color: var(--primary); font-size: 12px; font-weight: 600; border-radius: 4px;">AKTIF</span>
+                                <span style="display: inline-flex; padding: 4px 10px; background: var(--color-success-soft); color: var(--primary); font-size: 12px; font-weight: 500; border-radius: 4px;">AKTIF</span>
                             <?php else: ?>
-                                <span style="display: inline-flex; padding: 4px 10px; background: var(--bg-soft); color: var(--text-secondary); font-size: 12px; font-weight: 600; border-radius: 4px;">NONAKTIF</span>
+                                <span style="display: inline-flex; padding: 4px 10px; background: var(--bg-soft); color: var(--text-secondary); font-size: 12px; font-weight: 500; border-radius: 4px;">NONAKTIF</span>
                             <?php endif; ?>
                         </td>
                         <td style="padding: 16px; text-align: right;">
@@ -150,15 +150,15 @@
             <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?? '' ?>">
             <div style="padding: 24px;">
                 <div style="margin-bottom: 16px;">
-                    <label for="app-views-admin-bidang-nama_divisi" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Nama Divisi / Bidang <span style="color: red;">*</span></label>
+                    <label for="app-views-admin-bidang-nama_divisi" style="display: block; font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 8px;">Nama Divisi / Bidang <span style="color: red;">*</span></label>
                     <input id="app-views-admin-bidang-nama_divisi" type="text" name="nama_divisi" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="app-views-admin-bidang-deskripsi" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Deskripsi (Opsional)</label>
+                    <label for="app-views-admin-bidang-deskripsi" style="display: block; font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 8px;">Deskripsi (Opsional)</label>
                     <textarea id="app-views-admin-bidang-deskripsi" name="deskripsi" rows="3" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;"></textarea>
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="app-views-admin-bidang-kapasitas" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Kapasitas Magang <span style="color: red;">*</span></label>
+                    <label for="app-views-admin-bidang-kapasitas" style="display: block; font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 8px;">Kapasitas Magang <span style="color: red;">*</span></label>
                     <input id="app-views-admin-bidang-kapasitas" type="number" name="kapasitas" min="0" required value="0" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                 </div>
             </div>
@@ -183,15 +183,15 @@
             <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?? '' ?>">
             <div style="padding: 24px;">
                 <div style="margin-bottom: 16px;">
-                    <label for="edit_nama_divisi" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Nama Divisi / Bidang <span style="color: red;">*</span></label>
+                    <label for="edit_nama_divisi" style="display: block; font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 8px;">Nama Divisi / Bidang <span style="color: red;">*</span></label>
                     <input type="text" id="edit_nama_divisi" name="nama_divisi" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="edit_deskripsi" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Deskripsi (Opsional)</label>
+                    <label for="edit_deskripsi" style="display: block; font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 8px;">Deskripsi (Opsional)</label>
                     <textarea id="edit_deskripsi" name="deskripsi" rows="3" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;"></textarea>
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="edit_kapasitas" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Kapasitas Magang <span style="color: red;">*</span></label>
+                    <label for="edit_kapasitas" style="display: block; font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 8px;">Kapasitas Magang <span style="color: red;">*</span></label>
                     <input type="number" id="edit_kapasitas" name="kapasitas" min="0" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                 </div>
             </div>

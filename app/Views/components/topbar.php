@@ -28,18 +28,18 @@ if ($userId) {
             <button onclick="document.getElementById('notif-menu').classList.toggle('show')" style="position: relative; background: none; border: none; cursor: pointer; color: var(--text-secondary); padding: 8px;">
                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
                 <?php if ($unreadCount > 0): ?>
-                    <span style="position: absolute; top: 4px; right: 4px; background: var(--accent); color: var(--primary-dark); font-size: 12px; font-weight: 600; border-radius: 50%; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center;"><?= $unreadCount > 9 ? '9+' : $unreadCount ?></span>
+                    <span style="position: absolute; top: 4px; right: 4px; background: var(--accent); color: var(--primary-dark); font-size: 12px; font-weight: 500; border-radius: 50%; width: 16px; height: 16px; display: flex; align-items: center; justify-content: center;"><?= $unreadCount > 9 ? '9+' : $unreadCount ?></span>
                 <?php endif; ?>
             </button>
 
             <!-- Dropdown Menu -->
             <div id="notif-menu" style="display: none; position: absolute; right: 0; top: 100%; width: 320px; background: var(--bg-card); box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-radius: 8px; border: 1px solid var(--border-light); z-index: var(--z-dropdown); margin-top: 8px;">
                 <div style="padding: 12px 16px; border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-weight: 600; font-size: 14px; color: var(--text-primary);">Notifikasi</span>
+                    <span style="font-weight: 500; font-size: 14px; color: var(--text-primary);">Notifikasi</span>
                     <?php if ($unreadCount > 0): ?>
                         <form action="<?= BASE_URL ?>/notifikasi/tandai-terbaca" method="POST" style="margin:0;">
                             <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?>">
-                            <button type="submit" style="background: none; border: none; color: var(--primary); font-size: 12px; font-weight: 600; cursor: pointer; padding: 0;">Tandai semua dibaca</button>
+                            <button type="submit" style="background: none; border: none; color: var(--primary); font-size: 12px; font-weight: 500; cursor: pointer; padding: 0;">Tandai semua dibaca</button>
                         </form>
                     <?php endif; ?>
                 </div>

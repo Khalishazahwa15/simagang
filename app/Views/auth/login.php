@@ -8,7 +8,7 @@
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 48px;">
                 <div style="width: 48px; height: 48px; background-color: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 24px; color: var(--primary-dark); box-shadow: 0 8px 20px rgba(0,0,0,0.18);">S</div>
                 <div>
-                    <div style="font-family: var(--font-body); font-weight: 700; font-size: 20px; color: var(--bg-main); line-height: 1.2;">SIMAGANG</div>
+                    <div style="font-family: var(--font-body); font-weight: 600; font-size: 20px; color: var(--bg-main); line-height: 1.2;">SIMAGANG</div>
                     <div style="font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.65); letter-spacing: 0.1em; text-transform: uppercase;">BAPPEDA LAMPUNG</div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
             <div class="mobile-logo-only" style="display: none; margin-bottom: 32px; align-items: center; gap: 12px;">
                 <div style="width: 40px; height: 40px; background-color: var(--accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 20px; color: var(--primary-dark);">S</div>
                 <div>
-                    <div style="font-family: var(--font-body); font-weight: 700; font-size: 18px; color: var(--text-primary); line-height: 1.2;">SIMAGANG</div>
+                    <div style="font-family: var(--font-body); font-weight: 600; font-size: 18px; color: var(--text-primary); line-height: 1.2;">SIMAGANG</div>
                 </div>
             </div>
 
@@ -82,7 +82,7 @@
                 <div class="form-group">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <label for="login-password" class="form-label required" style="margin-bottom: 0;">Kata Sandi</label>
-                        <a href="<?= BASE_URL ?>/forgot-password" style="font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--primary);">Lupa kata sandi?</a>
+                        <a href="<?= BASE_URL ?>/forgot-password" style="font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--primary);">Lupa kata sandi?</a>
                     </div>
                     <div style="position: relative;">
                         <input type="password" id="login-password" name="password" class="form-control" placeholder="••••••••" required style="padding-right: 40px;">

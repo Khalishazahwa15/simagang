@@ -1,6 +1,6 @@
 <div class="mb-6">
     <div class="d-flex align-center justify-end">
-        <button onclick="document.getElementById('modalTambahUser').style.display='flex'" style="display: flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--primary); color: var(--bg-main); border: none; border-radius: 8px; cursor: pointer; font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600;">
+        <button onclick="document.getElementById('modalTambahUser').style.display='flex'" style="display: flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--primary); color: var(--bg-main); border: none; border-radius: 8px; cursor: pointer; font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 500;">
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
             Tambah Pengguna
         </button>
@@ -34,12 +34,12 @@
         <table style="width: 100%; border-collapse: collapse; min-width: 860px;">
             <thead>
                 <tr style="background: var(--bg-soft);">
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Nama Lengkap</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Email / Kontak</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Peran (Role)</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Status</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Terakhir Aktif</th>
-                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Aksi</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Nama Lengkap</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Email / Kontak</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Peran (Role)</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Status</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Terakhir Aktif</th>
+                    <th style="padding: 12px 16px; text-align: left; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; white-space: nowrap; border-bottom: 1px solid var(--border);">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -66,7 +66,7 @@
                     ?>
                 <tr style="border-bottom: 1px solid var(--border); transition: background 0.15s; opacity: <?= $isAktif ? '1' : '0.6' ?>;">
                     <td style="padding: 13px 16px;">
-                        <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($u['nama']) ?></div>
+                        <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary);"><?= htmlspecialchars($u['nama']) ?></div>
                         <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary);">ID: <?= $u['id'] ?></div>
                     </td>
                     <td style="padding: 13px 16px;">
@@ -159,15 +159,15 @@
             <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?? '' ?>">
             <div style="padding: 24px;">
                 <div style="margin-bottom: 16px;">
-                    <label for="app-views-admin-users-nama" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Nama Lengkap <span style="color: red;">*</span></label>
+                    <label for="app-views-admin-users-nama" style="display: block; font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 8px;">Nama Lengkap <span style="color: red;">*</span></label>
                     <input id="app-views-admin-users-nama" type="text" name="nama" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="app-views-admin-users-email" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Alamat Email <span style="color: red;">*</span></label>
+                    <label for="app-views-admin-users-email" style="display: block; font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 8px;">Alamat Email <span style="color: red;">*</span></label>
                     <input id="app-views-admin-users-email" type="email" name="email" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="app-views-admin-users-role" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Role Akses <span style="color: red;">*</span></label>
+                    <label for="app-views-admin-users-role" style="display: block; font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 8px;">Role Akses <span style="color: red;">*</span></label>
                     <select id="app-views-admin-users-role" name="role" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                         <option value="">-- Pilih Role --</option>
                         <option value="sekretariat">Sekretariat</option>
@@ -176,7 +176,7 @@
                     </select>
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="app-views-admin-users-password" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Password Default <span style="color: red;">*</span></label>
+                    <label for="app-views-admin-users-password" style="display: block; font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 8px;">Password Default <span style="color: red;">*</span></label>
                     <input id="app-views-admin-users-password" type="password" name="password" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                 </div>
             </div>
@@ -201,15 +201,15 @@
             <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?? '' ?>">
             <div style="padding: 24px;">
                 <div style="margin-bottom: 16px;">
-                    <label for="editNama" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Nama Lengkap <span style="color: red;">*</span></label>
+                    <label for="editNama" style="display: block; font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 8px;">Nama Lengkap <span style="color: red;">*</span></label>
                     <input type="text" name="nama" id="editNama" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="editEmail" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Alamat Email <span style="color: red;">*</span></label>
+                    <label for="editEmail" style="display: block; font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 8px;">Alamat Email <span style="color: red;">*</span></label>
                     <input type="email" name="email" id="editEmail" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="editRole" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Role Akses <span style="color: red;">*</span></label>
+                    <label for="editRole" style="display: block; font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 8px;">Role Akses <span style="color: red;">*</span></label>
                     <select name="role" id="editRole" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                         <option value="sekretariat">Sekretariat</option>
                         <option value="admin">Administrator</option>
@@ -217,7 +217,7 @@
                     </select>
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="app-views-admin-users-password-2" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Password Baru (Kosongkan jika tidak ingin mengubah)</label>
+                    <label for="app-views-admin-users-password-2" style="display: block; font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 8px;">Password Baru (Kosongkan jika tidak ingin mengubah)</label>
                     <input id="app-views-admin-users-password-2" type="password" name="password" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;" placeholder="***">
                 </div>
             </div>

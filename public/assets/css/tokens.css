@@ -237,6 +237,12 @@ textarea {
     font: inherit;
 }
 
+/* Tanpa ini, preflight Tailwind menaikkan penekanan semantik ke 700. */
+b,
+strong {
+    font-weight: 600;
+}
+
 .text-primary { color: var(--primary); }
 .text-muted { color: var(--text-muted); }
 .text-secondary { color: var(--text-secondary); }

@@ -15,15 +15,15 @@
         <div class="card fade-up interactive-card fade-up interactive-card" style="padding: 20px 28px; margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between;">
             <div class="step-indicator active" id="indicator-0" style="flex: 1; display: flex; align-items: center;">
                 <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
-                    <div class="step-circle" style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 6px; font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--primary-dark);">01</div>
-                    <div class="step-label" style="font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--text-primary); text-align: center;">Preferensi Divisi</div>
+                    <div class="step-circle" style="width: 32px; height: 32px; border-radius: 50%; background: var(--accent); border: 2px solid var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 6px; font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--primary-dark);">01</div>
+                    <div class="step-label" style="font-family: var(--font-body); font-size: 12px; font-weight: 500; color: var(--text-primary); text-align: center;">Preferensi Divisi</div>
                 </div>
                 <div class="step-line" style="height: 1px; width: 30px; background: var(--border); margin-bottom: 18px;"></div>
             </div>
             
             <div class="step-indicator" id="indicator-1" style="flex: 1; display: flex; align-items: center;">
                 <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
-                    <div class="step-circle" style="width: 32px; height: 32px; border-radius: 50%; background: transparent; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 6px; font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--text-secondary);">02</div>
+                    <div class="step-circle" style="width: 32px; height: 32px; border-radius: 50%; background: transparent; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 6px; font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--text-secondary);">02</div>
                     <div class="step-label" style="font-family: var(--font-body); font-size: 12px; font-weight: 400; color: var(--text-secondary); text-align: center;">Dokumen Wajib</div>
                 </div>
                 <div class="step-line" style="height: 1px; width: 30px; background: var(--border); margin-bottom: 18px;"></div>
@@ -31,7 +31,7 @@
             
             <div class="step-indicator" id="indicator-2" style="flex: 1; display: flex; align-items: center;">
                 <div style="display: flex; flex-direction: column; align-items: center; flex: 1;">
-                    <div class="step-circle" style="width: 32px; height: 32px; border-radius: 50%; background: transparent; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 6px; font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--text-secondary);">03</div>
+                    <div class="step-circle" style="width: 32px; height: 32px; border-radius: 50%; background: transparent; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; margin-bottom: 6px; font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--text-secondary);">03</div>
                     <div class="step-label" style="font-family: var(--font-body); font-size: 12px; font-weight: 400; color: var(--text-secondary); text-align: center;">Review & Kirim</div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
                     <h2 style="font-family: var(--font-display); font-size: var(--text-h3); font-weight: 400; color: var(--text-primary); margin-bottom: 20px; margin-top: 0;">Tinjau & Kirimkan Pengajuan</h2>
                     
                     <div style="background: var(--bg-soft); border-radius: 8px; padding: 16px 20px; margin-bottom: 14px;">
-                        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 12px;">Pernyataan Validitas</div>
+                        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 12px;">Pernyataan Validitas</div>
                         <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary); line-height: 1.6; margin: 0;">
                             Dengan menekan tombol kirim, saya menyatakan bahwa seluruh data dan dokumen yang saya unggah adalah benar dan dapat dipertanggungjawabkan. Saya bersedia mengikuti seluruh proses seleksi dan aturan magang di Bappeda Provinsi Lampung.
                         </p>
@@ -159,7 +159,7 @@
     <div>
         <div style="display: flex; flex-direction: column; gap: 14px;">
             <div style="background: var(--bg-green-soft); border: 1px solid var(--primary-light); border-radius: 10px; padding: 18px 20px;">
-                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.10em; color: var(--primary); text-transform: uppercase; margin-bottom: 8px;">Dokumen Wajib</div>
+                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.10em; color: var(--primary); text-transform: uppercase; margin-bottom: 8px;">Dokumen Wajib</div>
                 <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px;">
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
                     <span style="font-family: var(--font-body); font-size: 12.5px; color: var(--primary); line-height: 1.4;">Surat Lamaran / Pernyataan</span>
@@ -178,7 +178,7 @@
             </div>
             
             <div class="card fade-up interactive-card fade-up interactive-card" style="padding: 14px 18px; margin-bottom: 0;">
-                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">Catatan Penting</div>
+                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">Catatan Penting</div>
                 <p style="font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; margin: 0;">
                     Pengajuan bersifat <strong>rolling</strong> — tidak ada batas waktu pendaftaran. Preferensi divisi bersifat non-mengikat; penempatan final adalah keputusan Sekretariat Bappeda.
                 </p>

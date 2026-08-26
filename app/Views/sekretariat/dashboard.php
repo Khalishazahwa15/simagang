@@ -74,8 +74,8 @@ function getBadgeLabel($status) {
         <!-- Left Column: Pending List -->
         <div class="surface-card" style="display: flex; flex-direction: column; height: 100%;">
             <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">
-                <div style="font-weight: 600; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">Pengajuan Terbaru</div>
-                <a href="<?= BASE_URL ?>/sekretariat/pengajuan" style="font-weight: 600; font-size: 12.5px; line-height: 19px; color: var(--primary); text-decoration: none;">Lihat Semua &rarr;</a>
+                <div style="font-weight: 500; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">Pengajuan Terbaru</div>
+                <a href="<?= BASE_URL ?>/sekretariat/pengajuan" style="font-weight: 500; font-size: 12.5px; line-height: 19px; color: var(--primary); text-decoration: none;">Lihat Semua &rarr;</a>
             </div>
             
             <div style="padding: 0; flex-grow: 1; display: flex; flex-direction: column;">
@@ -86,12 +86,12 @@ function getBadgeLabel($status) {
                     <a href="<?= BASE_URL ?>/sekretariat/pengajuan/detail/<?= $item['id'] ?>" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border); text-decoration: none; transition: background 0.15s;" onmouseover="this.style.background='var(--bg-main)'" onmouseout="this.style.background='transparent'">
                         <div>
                             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                                <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--primary);"><?= htmlspecialchars($item['nomor_pengajuan']) ?></div>
-                                <div style="padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; <?= getBadgeStyle($item['status']) ?>">
+                                <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--primary);"><?= htmlspecialchars($item['nomor_pengajuan']) ?></div>
+                                <div style="padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 500; letter-spacing: 0.5px; <?= getBadgeStyle($item['status']) ?>">
                                     <?= getBadgeLabel($item['status']) ?>
                                 </div>
                             </div>
-                            <div style="font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 2px;"><?= htmlspecialchars($item['mahasiswa_nama']) ?></div>
+                            <div style="font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 2px;"><?= htmlspecialchars($item['mahasiswa_nama']) ?></div>
                             <div style="font-size: 12px; color: var(--text-secondary);">
                                 <?php
                                     $univ = !empty($item['universitas']) ? $item['universitas'] : 'Profil belum lengkap';
@@ -111,7 +111,7 @@ function getBadgeLabel($status) {
         <div style="display: flex; flex-direction: column; gap: 24px;">
             <div class="surface-card">
                 <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border);">
-                    <div style="font-weight: 600; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">Distribusi Status</div>
+                    <div style="font-weight: 500; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">Distribusi Status</div>
                 </div>
                 <div style="padding: 12px 0; max-height: 300px; overflow-y: auto;">
                     <?php foreach ($distItems as $dItem): ?>
@@ -130,7 +130,7 @@ function getBadgeLabel($status) {
                                 <div style="position: absolute; top: 0; left: 0; height: 100%; background: <?= $dItem['color'] ?>; border-radius: 2px; width: <?= $width ?>;"></div>
                             </div>
                         </div>
-                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600; color: var(--text-primary); width: 24px; text-align: right;">
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; color: var(--text-primary); width: 24px; text-align: right;">
                             <?= $count ?>
                         </div>
                     </div>

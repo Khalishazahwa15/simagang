@@ -169,7 +169,7 @@ $divisiList = $divisiData ?? [];
                     <span class="info-summary-icon" aria-hidden="true"><?= ['01', '02', '03'][$i] ?></span>
                     <div style="flex-shrink: 0; margin-top: 2px;"><?= $item['icon'] ?></div>
                     <div>
-                        <div style="font-family: var(--font-body); font-size: 15px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px;"><?= $item['label'] ?></div>
+                        <div style="font-family: var(--font-body); font-size: 15px; font-weight: 500; color: var(--text-primary); margin-bottom: 2px;"><?= $item['label'] ?></div>
                         <div style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary);"><?= $item['sub'] ?></div>
                     </div>
                 </div>
@@ -210,8 +210,8 @@ $divisiList = $divisiData ?? [];
                             <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px;">
                                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
                                     <span style="font-family: var(--font-mono); font-size: 12px; color: var(--primary); background: var(--bg-green-soft); padding: 3px 8px; border-radius: 5px;"><?= $doc['code'] ?></span>
-                                    <h4 style="font-family: var(--font-body); font-size: 15px; font-weight: 600; color: var(--text-primary); margin: 0;"><?= $doc['title'] ?></h4>
-                                    <span style="margin-left: auto; background: var(--color-danger-soft); color: var(--color-danger-ink); font-family: var(--font-body); font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 99px; letter-spacing: 0.06em;">WAJIB</span>
+                                    <h4 style="font-family: var(--font-body); font-size: 15px; font-weight: 500; color: var(--text-primary); margin: 0;"><?= $doc['title'] ?></h4>
+                                    <span style="margin-left: auto; background: var(--color-danger-soft); color: var(--color-danger-ink); font-family: var(--font-body); font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 99px; letter-spacing: 0.06em;">WAJIB</span>
                                 </div>
                                 <p style="font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 10px; margin-top: 0;"><?= $doc['desc'] ?></p>
                                 <div style="display: flex; gap: 16px; flex-wrap: wrap;">
@@ -245,7 +245,7 @@ $divisiList = $divisiData ?? [];
                                 <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 16px 20px; display: flex; gap: 16px; align-items: flex-start;">
                                     <span style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary); background: var(--bg-soft); padding: 3px 8px; border-radius: 5px; flex-shrink: 0; margin-top: 2px;"><?= $doc['code'] ?></span>
                                     <div>
-                                        <div style="font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;"><?= $doc['title'] ?></div>
+                                        <div style="font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--text-primary); margin-bottom: 4px;"><?= $doc['title'] ?></div>
                                         <div style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); line-height: 1.65; margin-bottom: 6px;"><?= $doc['desc'] ?></div>
                                         <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">
                                             <strong style="color: var(--text-primary);">Format:</strong> <?= $doc['format'] ?> &middot; <strong style="color: var(--text-primary);">Maks:</strong> <?= $doc['maxSize'] ?>
@@ -279,16 +279,16 @@ $divisiList = $divisiData ?? [];
                                     <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 8px;">
                                         <div style="display: flex; align-items: center; gap: 16px;">
                                             <div style="width: 32px; height: 32px; border-radius: 8px; background: var(--bg-green-soft); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--primary); font-weight: 600;"><?= str_pad($i + 1, 2, '0', STR_PAD_LEFT) ?></span>
+                                                <span style="font-family: var(--font-mono); font-size: 12px; color: var(--primary); font-weight: 500;"><?= str_pad($i + 1, 2, '0', STR_PAD_LEFT) ?></span>
                                             </div>
                                             <div>
-                                                <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($div['nama_divisi']) ?></div>
+                                                <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary);"><?= htmlspecialchars($div['nama_divisi']) ?></div>
                                                 <div style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary);"><?= htmlspecialchars($div['deskripsi'] ?? 'Tidak ada deskripsi') ?></div>
                                             </div>
                                         </div>
                                         <?php $sisa = max(0, $div['kapasitas'] - ($div['terisi'] ?? 0)); ?>
                                         <div style="flex-shrink: 0; text-align: right;">
-                                            <span style="display: inline-block; background: <?= $sisa > 0 ? 'var(--accent-soft)' : 'var(--color-danger-soft)' ?>; color: <?= $sisa > 0 ? 'var(--primary-dark)' : 'var(--color-danger-ink)' ?>; padding: 4px 12px; border-radius: 6px; font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.04em;">
+                                            <span style="display: inline-block; background: <?= $sisa > 0 ? 'var(--accent-soft)' : 'var(--color-danger-soft)' ?>; color: <?= $sisa > 0 ? 'var(--primary-dark)' : 'var(--color-danger-ink)' ?>; padding: 4px 12px; border-radius: 6px; font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.04em;">
                                                 <?= $sisa > 0 ? "SISA KUOTA: {$sisa}" : "KUOTA PENUH" ?>
                                             </span>
                                         </div>
@@ -304,15 +304,15 @@ $divisiList = $divisiData ?? [];
         <!-- CTA -->
         <div class="bottom-cta" style="margin-top: 48px;">
             <div class="bottom-cta-copy">
-                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; color: var(--color-accent-soft); text-transform: uppercase; margin-bottom: 8px;">Sudah Siap?</div>
-                <h3 style="font-family: var(--font-display); font-size: var(--text-h3); font-weight: 400; color: var(--bg-main); line-height: 1.2; margin: 0;">Ajukan magang Anda sekarang</h3>
+                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.12em; color: var(--color-accent-soft); text-transform: uppercase; margin-bottom: 8px;">Sudah Siap?</div>
+                <h3 style="font-family: var(--font-display); font-size: var(--text-h3); font-weight: 600; color: var(--bg-main); line-height: 1.2; margin: 0;">Ajukan magang Anda sekarang</h3>
             </div>
             <div class="cta-character" aria-hidden="true"><svg viewBox="0 0 240 170" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 169c4-31 22-48 52-48s48 17 52 48H18Z" fill="#3B6FD6"/><path d="M110 169c3-28 21-45 50-45s48 17 54 45h-104Z" fill="#F0AE45"/><circle cx="70" cy="75" r="22" fill="#C9825B"/><path d="M46 74c2-24 42-32 48-1-12-7-25-8-40 4l-8-3Z" fill="#1F2937"/><path d="M51 97c9 9 27 10 37-1v26H51V97Z" fill="#F3C7A7"/><path d="M43 119c16-12 43-12 59 2l-4 48H35l8-50Z" fill="#3B6FD6"/><path d="m54 122 17 22 19-22" stroke="#E7EEFC" stroke-width="5"/><path d="m100 130 21 22" stroke="#F3C7A7" stroke-width="10" stroke-linecap="round"/><circle cx="167" cy="69" r="21" fill="#9D644A"/><path d="M145 68c1-27 44-31 49 0-10-9-31-12-46 4l-3-4Z" fill="#241C1A"/><path d="M149 90c9 9 27 10 37 0v28h-37V90Z" fill="#E9B99D"/><path d="M137 119c17-12 45-11 61 2l8 48h-78l9-50Z" fill="#F0AE45"/><path d="m150 122 18 20 19-20" stroke="#FFF8E7" stroke-width="5"/><path d="m141 132-18 19" stroke="#E9B99D" stroke-width="10" stroke-linecap="round"/></svg></div>
             <div class="cta-actions">
                 <a href="<?= BASE_URL ?>/alur" class="btn" style="padding: 12px 24px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; color: var(--bg-main); font-weight: 600; text-decoration: none;">
                     Lihat Alur
                 </a>
-                <a href="<?= BASE_URL ?>/register" class="btn" style="padding: 12px 24px; background: var(--accent); border: none; border-radius: 8px; color: var(--primary-dark); font-weight: 700; text-decoration: none;">
+                <a href="<?= BASE_URL ?>/register" class="btn" style="padding: 12px 24px; background: var(--accent); border: none; border-radius: 8px; color: var(--primary-dark); font-weight: 600; text-decoration: none;">
                     Daftar Akun
                 </a>
             </div>

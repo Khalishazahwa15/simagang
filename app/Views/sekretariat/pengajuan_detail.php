@@ -112,7 +112,7 @@ foreach ($divisi as $d) {
                                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
                                 </div>
                                 <div>
-                                    <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($doc['jenis_dokumen']) ?></div>
+                                    <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary);"><?= htmlspecialchars($doc['jenis_dokumen']) ?></div>
                                     <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">PDF &middot; Diunggah</div>
                                 </div>
                             </div>
@@ -143,7 +143,7 @@ foreach ($divisi as $d) {
                                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
                                 </div>
                                 <div>
-                                    <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars(str_replace('_', ' ', ucwords($doc['jenis_dokumen'], '_'))) ?></div>
+                                    <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary);"><?= htmlspecialchars(str_replace('_', ' ', ucwords($doc['jenis_dokumen'], '_'))) ?></div>
                                     <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">PDF &middot; Terbit</div>
                                 </div>
                             </div>
@@ -287,7 +287,7 @@ foreach ($divisi as $d) {
                             <label class="form-label">Bidang/Divisi Final</label>
                             <div class="form-control" style="background: var(--bg-soft); display: flex; align-items: center; justify-content: space-between; gap: 12px;">
                                 <span><?= htmlspecialchars($pengajuan['nama_divisi'] ?: 'Belum ada preferensi') ?></span>
-                                <span style="font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary);">Terkunci</span>
+                                <span style="font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary);">Terkunci</span>
                             </div>
                             <div class="form-help">Mengikuti preferensi yang dipilih mahasiswa saat mendaftar. Untuk menempatkan di divisi lain, pilih keputusan <strong>Tawarkan Divisi Alternatif</strong> agar mahasiswa dapat menyetujuinya lebih dulu.</div>
                         </div>

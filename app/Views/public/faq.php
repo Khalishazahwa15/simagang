@@ -137,7 +137,7 @@ $categories = [
     
     .cat-btn.active {
         background: var(--bg-green-soft);
-        font-weight: 700;
+        font-weight: 600;
         color: var(--primary);
     }
     
@@ -232,7 +232,7 @@ $categories = [
         <div class="faq-layout">
             <!-- Sidebar -->
             <div>
-                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 12px;">Kategori</div>
+                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 12px;">Kategori</div>
                 <?php foreach ($categories as $i => $cat): ?>
                     <button class="cat-btn <?= $i === 0 ? 'active' : '' ?>" onclick="switchCategory('<?= $cat['id'] ?>', this)">
                         <?= $cat['label'] ?>
@@ -243,13 +243,13 @@ $categories = [
                 <!-- Contact card -->
                 <div style="margin-top: 32px; background: var(--bg-soft); border: 1px solid var(--border); border-radius: 12px; padding: 20px 18px;">
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 10px;"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-                    <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Belum menemukan jawaban?</div>
+                    <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary); margin-bottom: 6px;">Belum menemukan jawaban?</div>
                     <p style="font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary); line-height: 1.65; margin-bottom: 14px; margin-top: 0;">
                         Hubungi Sekretariat Bappeda Provinsi Lampung melalui email resmi atau kunjungi kantor pada jam kerja.
                     </p>
-                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 4px;">Email</div>
+                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 4px;">Email</div>
                     <div style="font-family: var(--font-mono); font-size: 12px; color: var(--primary);">bappeda@lampungprov.go.id</div>
-                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-top: 10px; margin-bottom: 4px;">Jam Kerja</div>
+                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-top: 10px; margin-bottom: 4px;">Jam Kerja</div>
                     <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">Senin–Jumat, 08.00–16.00 WIB</div>
                 </div>
             </div>
@@ -258,14 +258,14 @@ $categories = [
             <div>
                 <?php foreach ($categories as $i => $cat): ?>
                     <div id="cat-content-<?= $cat['id'] ?>" class="faq-category-content" style="display: <?= $i === 0 ? 'block' : 'none' ?>;">
-                        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 20px;">
+                        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 20px;">
                             <?= $cat['label'] ?> &middot; <?= count($cat['items']) ?> pertanyaan
                         </div>
                         <?php foreach ($cat['items'] as $idx => $item): ?>
                             <div class="faq-accordion <?= $idx === 0 ? 'active' : '' ?>">
                                 <button class="faq-header" onclick="toggleFaq(this)">
-                                    <span style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-dark); flex-shrink: 0; margin-top: 3px; font-weight: 600;">Q</span>
-                                    <span style="font-family: var(--font-body); font-size: var(--text-button); font-weight: 600; color: var(--text-primary); line-height: 1.5; flex: 1;"><?= $item['q'] ?></span>
+                                    <span style="font-family: var(--font-mono); font-size: 12px; color: var(--accent-dark); flex-shrink: 0; margin-top: 3px; font-weight: 500;">Q</span>
+                                    <span style="font-family: var(--font-body); font-size: var(--text-button); font-weight: 500; color: var(--text-primary); line-height: 1.5; flex: 1;"><?= $item['q'] ?></span>
                                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="faq-chevron"><path d="m6 9 6 6 6-6"/></svg>
                                 </button>
                                 <div class="faq-content">
@@ -283,15 +283,15 @@ $categories = [
     <div style=" margin: 0 auto 80px; padding: 0 40px;">
         <div class="bottom-cta" style="margin: 0;">
             <div class="bottom-cta-copy">
-                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; color: var(--color-accent-soft); text-transform: uppercase; margin-bottom: 8px;">Portal SIMAGANG</div>
-                <h3 style="font-family: var(--font-display); font-size: var(--text-h3); font-weight: 400; color: var(--bg-main); line-height: 1.2; margin: 0;">Ajukan magang Anda secara digital</h3>
+                <div style="font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.12em; color: var(--color-accent-soft); text-transform: uppercase; margin-bottom: 8px;">Portal SIMAGANG</div>
+                <h3 style="font-family: var(--font-display); font-size: var(--text-h3); font-weight: 600; color: var(--bg-main); line-height: 1.2; margin: 0;">Ajukan magang Anda secara digital</h3>
             </div>
             <div class="cta-character" aria-hidden="true"><svg viewBox="0 0 240 170" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 169c4-31 22-48 52-48s48 17 52 48H18Z" fill="#3B6FD6"/><path d="M110 169c3-28 21-45 50-45s48 17 54 45h-104Z" fill="#F0AE45"/><circle cx="70" cy="75" r="22" fill="#C9825B"/><path d="M46 74c2-24 42-32 48-1-12-7-25-8-40 4l-8-3Z" fill="#1F2937"/><path d="M51 97c9 9 27 10 37-1v26H51V97Z" fill="#F3C7A7"/><path d="M43 119c16-12 43-12 59 2l-4 48H35l8-50Z" fill="#3B6FD6"/><path d="m54 122 17 22 19-22" stroke="#E7EEFC" stroke-width="5"/><path d="m100 130 21 22" stroke="#F3C7A7" stroke-width="10" stroke-linecap="round"/><circle cx="167" cy="69" r="21" fill="#9D644A"/><path d="M145 68c1-27 44-31 49 0-10-9-31-12-46 4l-3-4Z" fill="#241C1A"/><path d="M149 90c9 9 27 10 37 0v28h-37V90Z" fill="#E9B99D"/><path d="M137 119c17-12 45-11 61 2l8 48h-78l9-50Z" fill="#F0AE45"/><path d="m150 122 18 20 19-20" stroke="#FFF8E7" stroke-width="5"/><path d="m141 132-18 19" stroke="#E9B99D" stroke-width="10" stroke-linecap="round"/></svg></div>
             <div class="cta-actions">
                 <a href="<?= BASE_URL ?>/alur" class="btn" style="padding: 12px 24px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); border-radius: 8px; color: var(--bg-main); font-weight: 600; text-decoration: none;">
                     Lihat Alur
                 </a>
-                <a href="<?= BASE_URL ?>/register" class="btn" style="padding: 12px 24px; background: var(--accent); border: none; border-radius: 8px; color: var(--primary-dark); font-weight: 700; text-decoration: none;">
+                <a href="<?= BASE_URL ?>/register" class="btn" style="padding: 12px 24px; background: var(--accent); border: none; border-radius: 8px; color: var(--primary-dark); font-weight: 600; text-decoration: none;">
                     Daftar Sekarang
                 </a>
             </div>
