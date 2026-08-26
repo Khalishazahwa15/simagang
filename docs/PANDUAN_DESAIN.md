@@ -95,13 +95,13 @@ dan foto itu gagal dimuat.
 
 | Berkas | Isi | Sumber dan status |
 |---|---|---|
-| `bappeda-logo.png` | Logo Bappeda Lampung, 480x429 | Diberikan tim. Latar putihnya dijadikan transparan dan bingkainya dirapatkan |
-| `bappeda-logo-kecil.png` | Versi 160x143 untuk navbar, sidebar, dan halaman masuk | sama |
+| `bappeda-logo.png` | Logo Bappeda Lampung, 560x391 | Diberikan tim, sudah bertransparansi sejak berkas aslinya; hanya bingkainya yang dirapatkan |
+| `bappeda-logo-kecil.png` | Versi 200x140 untuk navbar, sidebar, dan halaman masuk | sama |
 | `gedung-bappeda.jpg` | Kantor Bappeda Provinsi Lampung, 1200x997 | Foto milik tim. Tidak memerlukan atribusi |
 
-Tulisan "LAMPUNG" pada logo berwarna hitam, sehingga logonya hanya terbaca di
-atas latar terang. Pada panel biru tua halaman masuk dan daftar, logo diletakkan
-di atas alas putih; jangan menempatkannya langsung di atas warna gelap.
+Tulisan "LAMPUNG" pada logo berwarna putih dengan garis luar hitam, sehingga
+terbaca di atas latar terang maupun gelap. Logonya dapat diletakkan langsung
+tanpa alas, termasuk pada panel biru tua halaman masuk dan daftar.
 
 Foto gedung dipotong dari berkas aslinya untuk membuang halaman parkir beserta
 kedua mobil dan pelat nomornya. Rasionya sengaja dibuat 1.20:1, lebih tegak
