@@ -10,9 +10,7 @@ $currentPage = $currentPage ?? 'beranda';
     <div class="mx-auto flex min-h-[72px] w-full max-w-7xl items-center justify-between gap-6 px-6 sm:px-8 lg:px-12">
         <!-- Logo -->
         <a href="<?= BASE_URL ?>/" class="flex items-center gap-3 no-underline">
-            <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-lg font-semibold text-white shadow-sm">
-                <span>S</span>
-            </div>
+            <img src="<?= aset('assets/img/logo-lampung-kecil.png') ?>" alt="Lambang Provinsi Lampung" class="h-10 w-auto shrink-0">
             <div class="text-left">
                 <div class="text-base font-semibold leading-tight text-primary-dark">
                     SIMAGANG

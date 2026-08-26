@@ -46,7 +46,7 @@ if ($role === 'admin') {
     <!-- Logo -->
     <div class="sidebar-header">
         <a href="<?= BASE_URL ?>/" class="sidebar-brand">
-            <div class="brand-logo">S</div>
+            <img src="<?= aset('assets/img/logo-lampung-kecil.png') ?>" alt="Lambang Provinsi Lampung" class="brand-logo">
             <div>
                 <div class="brand-text-primary">SIMAGANG</div>
                 <div class="brand-text-secondary">BAPPEDA LAMPUNG</div>

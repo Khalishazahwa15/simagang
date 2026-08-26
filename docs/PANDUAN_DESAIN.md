@@ -86,3 +86,26 @@ mengikuti `--text-h1`.
 terhadap latarnya dan menolak nilai di bawah 4.5 (WCAG AA). Warna aksen hanya
 boleh dipakai untuk latar dan garis, tidak untuk teks. Jalankan tes itu setiap
 kali menyentuh `tokens.css`.
+
+## 6. Aset Gambar
+
+Seluruh gambar disimpan sendiri di `public/assets/img/`. Tidak ada gambar yang
+ditarik dari host luar; sebelumnya beranda memuat foto dari `images.unsplash.com`
+dan foto itu gagal dimuat.
+
+| Berkas | Isi | Sumber dan status |
+|---|---|---|
+| `logo-lampung.png` | Lambang Provinsi Lampung, 320x460 | Situs resmi Bappeda Provinsi Lampung. Domain publik menurut Pasal 43 UU 28/2014 tentang Hak Cipta, karena merupakan lambang yang diterbitkan pemerintah |
+| `logo-lampung-kecil.png` | Versi 96x138 untuk navbar dan sidebar | sama |
+| `menara-siger.jpg` | Menara Siger di Bakauheni, 1600x717 | Wikimedia Commons, `Port of Bakauheni and Siger Tower.JPG` oleh Sakurai Midori, lisensi CC BY 2.5 |
+
+Foto Menara Siger dipotong dari berkas aslinya untuk membuang papan iklan
+komersial yang ada di bagian bawah bingkai.
+
+**CC BY 2.5 mewajibkan atribusi.** Kredit fotonya tercantum di baris bawah
+footer beranda dan tidak boleh dihapus selama foto itu masih dipakai. Bila foto
+diganti dengan milik Bappeda sendiri, baris kredit itu ikut dihapus.
+
+Keterangan di atas foto diletakkan pada bilah berwarna solid, bukan di atas
+fotonya langsung. Dengan begitu kontrasnya tidak bergantung pada isi gambar:
+diukur 9.12, dan tetap sama bila fotonya diganti.
