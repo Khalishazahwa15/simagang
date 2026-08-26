@@ -97,18 +97,17 @@ dan foto itu gagal dimuat.
 |---|---|---|
 | `bappeda-logo.png` | Logo Bappeda Lampung, 480x429 | Diberikan tim. Latar putihnya dijadikan transparan dan bingkainya dirapatkan |
 | `bappeda-logo-kecil.png` | Versi 160x143 untuk navbar, sidebar, dan halaman masuk | sama |
-| `menara-siger.jpg` | Menara Siger di Bakauheni, 1600x717 | Wikimedia Commons, `Port of Bakauheni and Siger Tower.JPG` oleh Sakurai Midori, lisensi CC BY 2.5 |
+| `gedung-bappeda.jpg` | Kantor Bappeda Provinsi Lampung, 1200x997 | Foto milik tim. Tidak memerlukan atribusi |
 
 Tulisan "LAMPUNG" pada logo berwarna hitam, sehingga logonya hanya terbaca di
 atas latar terang. Pada panel biru tua halaman masuk dan daftar, logo diletakkan
 di atas alas putih; jangan menempatkannya langsung di atas warna gelap.
 
-Foto Menara Siger dipotong dari berkas aslinya untuk membuang papan iklan
-komersial yang ada di bagian bawah bingkai.
-
-**CC BY 2.5 mewajibkan atribusi.** Kredit fotonya tercantum di baris bawah
-footer beranda dan tidak boleh dihapus selama foto itu masih dipakai. Bila foto
-diganti dengan milik Bappeda sendiri, baris kredit itu ikut dihapus.
+Foto gedung dipotong dari berkas aslinya untuk membuang halaman parkir beserta
+kedua mobil dan pelat nomornya. Rasionya sengaja dibuat 1.20:1, lebih tegak
+daripada bingkai aslinya, karena wadahnya memakai `object-cover`: bila fotonya
+lebih lebar dari wadah, yang terpotong adalah sisinya dan papan nama gedung ikut
+terpenggal. Pertahankan rasio itu bila fotonya diganti.
 
 Keterangan di atas foto diletakkan pada bilah berwarna solid, bukan di atas
 fotonya langsung. Dengan begitu kontrasnya tidak bergantung pada isi gambar:
