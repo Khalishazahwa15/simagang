@@ -1,0 +1,14 @@
+# Konfigurasi lokal
+.env*
+!.env.example
+
+# Berkas runtime
+storage/sinkron-terakhir
+logs/
+*.log
+*-debug.log*
+.tmp-*
+
+# Unggahan
+storage/uploads/*
+!storage/uploads/.gitkeep

@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Hasil verifikasi migrasi SIMAGANG ke Supabase, diukur langsung pada sistem yang berjalan.">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body, h1, h2, h3, p, figure, blockquote, dl, dd, pre { margin: 0; }
+  img, svg { max-width: 100%; display: block; }
+  table { border-collapse: collapse; }
+</style>
+<title>Verifikasi Migrasi SIMAGANG</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;700&display=swap">
+
+<style>
+  :root {
+    --ground: #FBFCFB;
+    --surface: #FFFFFF;
+    --surface-sunk: #F2F5F3;
+    --line: #DBE3DE;
+    --line-soft: #E9EEEB;
+    --ink: #12211A;
+    --ink-muted: #5A6B62;
+    --accent: #1D6B4F;
+    --accent-soft: #E4F0EA;
+    --lulus: #2F7D5C;
+    --lulus-soft: #E4F0EA;
+    --perhatian: #96631A;
+    --perhatian-soft: #F7EEDC;
+    --kritis: #A8402F;
+    --kritis-soft: #F8E7E3;
+    --bar-track: #E9EEEB;
+
+    --f-judul: "Archivo", "Segoe UI", system-ui, sans-serif;
+    --f-teks: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --f-data: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0E1512;
+      --surface: #161F1A;
+      --surface-sunk: #1B2621;
+      --line: #2C3A33;
+      --line-soft: #232F29;
+      --ink: #E7EDE9;
+      --ink-muted: #9BAAA2;
+      --accent: #5FBE92;
+      --accent-soft: #1A2E25;
+      --lulus: #5FBE92;
+      --lulus-soft: #172C23;
+      --perhatian: #D9A557;
+      --perhatian-soft: #2E2617;
+      --kritis: #E5836F;
+      --kritis-soft: #32201C;
+      --bar-track: #26332C;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground: #0E1512;
+    --surface: #161F1A;
+    --surface-sunk: #1B2621;
+    --line: #2C3A33;
+    --line-soft: #232F29;
+    --ink: #E7EDE9;
+    --ink-muted: #9BAAA2;
+    --accent: #5FBE92;
+    --accent-soft: #1A2E25;
+    --lulus: #5FBE92;
+    --lulus-soft: #172C23;
+    --perhatian: #D9A557;
+    --perhatian-soft: #2E2617;
+    --kritis: #E5836F;
+    --kritis-soft: #32201C;
+    --bar-track: #26332C;
+  }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--f-teks);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .bungkus {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 4rem 1.5rem 6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+
+  /* ---------- kepala ---------- */
+  .kepala { display: flex; flex-direction: column; gap: 1rem; }
+
+  .eyebrow {
+    font-family: var(--f-judul);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    font-family: var(--f-judul);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 5.5vw, 3.1rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .sari {
+    font-size: 1.15rem;
+    color: var(--ink-muted);
+    max-width: 42ch;
+    margin: 0;
+  }
+
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    font-family: var(--f-data);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+  }
+  .meta b { color: var(--ink); font-weight: 700; }
+
+  /* ---------- putusan ---------- */
+  .putusan {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: 4px;
+    padding: 1.75rem 1.75rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .putusan h2 {
+    font-family: var(--f-judul);
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .putusan p { margin: 0; }
+  .putusan p + p { margin-top: -0.25rem; }
+
+  /* ---------- bagian ---------- */
+  section { display: flex; flex-direction: column; gap: 1.1rem; }
+
+  .judul-bagian {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  h2 {
+    font-family: var(--f-judul);
+    font-size: 1.45rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    margin: 0;
+    text-wrap: balance;
+  }
+
+  h3 {
+    font-family: var(--f-judul);
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0.5rem 0 0;
+  }
+
+  p { margin: 0; max-width: 68ch; }
+
+  .chip {
+    font-family: var(--f-data);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .chip-lulus { background: var(--lulus-soft); color: var(--lulus); }
+  .chip-perhatian { background: var(--perhatian-soft); color: var(--perhatian); }
+  .chip-tindakan { background: var(--kritis-soft); color: var(--kritis); }
+
+  /* ---------- tabel ---------- */
+  .gulir { overflow-x: auto; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--f-data);
+    font-size: 0.82rem;
+    font-variant-numeric: tabular-nums;
+  }
+  caption {
+    text-align: left;
+    font-family: var(--f-judul);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    padding-bottom: 0.6rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.55rem 0.9rem 0.55rem 0;
+    border-bottom: 1px solid var(--line-soft);
+    white-space: nowrap;
+  }
+  th {
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    border-bottom-color: var(--line);
+  }
+  td.angka, th.angka { text-align: right; padding-right: 1.4rem; }
+  tr:last-child td { border-bottom: none; }
+  .tebal { font-weight: 700; color: var(--ink); }
+  .baik { color: var(--lulus); font-weight: 700; }
+  .buruk { color: var(--kritis); font-weight: 700; }
+
+  /* ---------- batang perbandingan ---------- */
+  .batang-baris {
+    display: grid;
+    grid-template-columns: minmax(8rem, 12rem) 1fr auto;
+    align-items: center;
+    gap: 0.9rem;
+    font-family: var(--f-data);
+    font-size: 0.8rem;
+    font-variant-numeric: tabular-nums;
+    padding: 0.3rem 0;
+  }
+  .batang-track {
+    background: var(--bar-track);
+    height: 0.55rem;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .batang-isi { height: 100%; border-radius: 2px; }
+  .batang-mysql { background: var(--lulus); }
+  .batang-pg { background: var(--perhatian); }
+  .batang-nilai { min-width: 5.5rem; text-align: right; }
+
+  .legenda {
+    display: flex;
+    gap: 1.5rem;
+    font-family: var(--f-data);
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    flex-wrap: wrap;
+  }
+  .legenda span { display: inline-flex; align-items: center; gap: 0.4rem; }
+  .kotak { width: 0.7rem; height: 0.7rem; border-radius: 2px; display: inline-block; }
+
+  /* ---------- kartu angka ---------- */
+  .angka-deret {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .angka-kartu {
+    background: var(--surface);
+    padding: 1.1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .angka-besar {
+    font-family: var(--f-data);
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .angka-label {
+    font-family: var(--f-judul);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  /* ---------- kutipan terminal ---------- */
+  pre {
+    background: var(--surface-sunk);
+    border: 1px solid var(--line-soft);
+    border-radius: 4px;
+    padding: 1rem 1.1rem;
+    overflow-x: auto;
+    font-family: var(--f-data);
+    font-size: 0.78rem;
+    line-height: 1.7;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  code {
+    font-family: var(--f-data);
+    font-size: 0.85em;
+    background: var(--surface-sunk);
+    padding: 0.1em 0.35em;
+    border-radius: 3px;
+  }
+  pre code { background: none; padding: 0; font-size: 1em; }
+
+  /* ---------- daftar tindakan ---------- */
+  ol.tindakan {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    counter-reset: langkah;
+  }
+  ol.tindakan > li {
+    background: var(--surface);
+    padding: 1.1rem 1.3rem;
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 0 1rem;
+    counter-increment: langkah;
+  }
+  ol.tindakan > li::before {
+    content: counter(langkah, decimal-leading-zero);
+    font-family: var(--f-data);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    padding-top: 0.15rem;
+  }
+  ol.tindakan .isi { display: flex; flex-direction: column; gap: 0.3rem; }
+  ol.tindakan strong {
+    font-family: var(--f-judul);
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  ol.tindakan p { font-size: 0.95rem; color: var(--ink-muted); }
+
+  ul.polos {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  ul.polos > li {
+    display: grid;
+    grid-template-columns: 1.4rem 1fr;
+    gap: 0.6rem;
+    max-width: 68ch;
+  }
+  ul.polos > li::before {
+    content: "—";
+    color: var(--accent);
+    font-family: var(--f-data);
+  }
+
+  .catatan {
+    font-size: 0.95rem;
+    color: var(--ink-muted);
+    border-left: 2px solid var(--line);
+    padding-left: 1rem;
+    max-width: 66ch;
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+    font-family: var(--f-data);
+    font-size: 0.75rem;
+    color: var(--ink-muted);
+    line-height: 1.8;
+  }
+
+  a { color: var(--accent); }
+  a:focus-visible, li:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  @media (max-width: 34rem) {
+    .batang-baris { grid-template-columns: 1fr auto; }
+    .batang-track { grid-column: 1 / -1; order: 3; }
+  }
+</style>
+</head>
+<body>
+<div class="bungkus">
+
+  <header class="kepala">
+    <div class="eyebrow">SIMAGANG · Bappeda Provinsi Lampung</div>
+    <h1>Verifikasi Migrasi ke Supabase</h1>
+    <p class="sari">Seluruh angka di halaman ini berasal dari sistem yang dijalankan, bukan dari pembacaan kode.</p>
+    <div class="meta">
+      <span>Tanggal <b>20 Agustus 2026</b></span>
+      <span>Cabang <b>migrasi-supabase</b></span>
+      <span>Commit <b>9179b10 · e24b865 · c81fc2b · d942b84</b></span>
+      <span>Basis data <b>PostgreSQL 17.6</b></span>
+    </div>
+  </header>
+
+  <div class="putusan">
+    <h2>Putusan singkat</h2>
+    <p><b>Secara fungsi sudah siap.</b> 80 pengujian lulus di MySQL maupun di Supabase, 24 rute bersih tanpa satu pun galat, dan struktur kedua basis data selaras persis.</p>
+    <p><b>Secara performa, bergantung pada hosting.</b> Pada susunan sementara sekarang — aplikasi di laptop, basis data di Singapura — satu halaman butuh 555–895 ms, dibanding 20–40 ms saat memakai MySQL lokal. Ini jarak jaringan, bukan cacat kode, dan hilang sendiri bila aplikasi dan basis datanya nanti ditempatkan berdekatan.</p>
+    <p>Ada <b>empat hal yang harus dibereskan sebelum rilis</b>, semuanya soal konfigurasi dan data, bukan kode. Daftarnya ada di bagian terakhir.</p>
+  </div>
+
+  <section>
+    <div class="judul-bagian">
+      <h2>Pengujian otomatis</h2>
+      <span class="chip chip-lulus">80 / 80 di kedua penggerak</span>
+    </div>
+    <p>Ketiga berkas uji dijalankan dua kali: sekali di atas MySQL, sekali di atas Supabase. Angkanya sengaja harus sama — itu buktinya migrasi tidak merusak apa pun dan masih bisa dibatalkan.</p>
+    <div class="gulir">
+      <table>
+        <caption>Hasil pengujian per berkas</caption>
+        <thead>
+          <tr>
+            <th>Berkas uji</th>
+            <th class="angka">MySQL</th>
+            <th class="angka">Supabase</th>
+            <th>Cakupan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>TestSystemFlow.php</td><td class="angka baik">16 / 0</td><td class="angka baik">16 / 0</td><td>alur sistem &amp; otomasi tanggal</td></tr>
+          <tr><td>TestJalurRusak.php</td><td class="angka baik">53 / 0</td><td class="angka baik">53 / 0</td><td>jalur rusak, keamanan, validasi unggahan</td></tr>
+          <tr><td>TestTawaranFlow.php</td><td class="angka baik">11 / 0</td><td class="angka baik">11 / 0</td><td>tawaran divisi, IDOR, hak akses</td></tr>
+          <tr><td class="tebal">Total</td><td class="angka tebal baik">80 lulus, 0 gagal</td><td class="angka tebal baik">80 lulus, 0 gagal</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Alur sungguhan lewat HTTP</h3>
+    <p>Di luar pengujian otomatis, satu alur penuh dijalankan di atas Supabase: daftar akun, lengkapi profil, kirim pengajuan dengan tiga berkas, verifikasi Sekretariat, sampai penetapan diterima. Nomor pengajuan terbentuk benar:</p>
+    <pre><code>nomor_pengajuan = PM-20260820-000002
+status          = diterima
+divisi_id_final = 4
+pembina         = Budi Santoso</code></pre>
+    <p class="catatan">Nomor itu dibentuk dari id baris yang baru dibuat. Kalau <code>lastInsertId()</code> tidak disesuaikan dengan PostgreSQL, bagian inilah yang pertama rusak — jadi nomor yang benar sekaligus membuktikan penyesuaiannya bekerja.</p>
+  </section>
+
+  <section>
+    <div class="judul-bagian">
+      <h2>Sapuan seluruh halaman</h2>
+      <span class="chip chip-lulus">24 rute · 0 galat</span>
+    </div>
+    <p>Setiap rute dibuka sebagai peran yang berhak, lalu badan responsnya diperiksa terhadap tiga hal: galat PHP, pesan SQLSTATE, dan waktu mentah PostgreSQL yang bocor ke layar.</p>
+    <div class="angka-deret">
+      <div class="angka-kartu"><span class="angka-besar baik">24</span><span class="angka-label">rute diperiksa</span></div>
+      <div class="angka-kartu"><span class="angka-besar baik">0</span><span class="angka-label">galat PHP</span></div>
+      <div class="angka-kartu"><span class="angka-besar baik">0</span><span class="angka-label">galat SQL</span></div>
+      <div class="angka-kartu"><span class="angka-besar baik">0</span><span class="angka-label">waktu mentah bocor</span></div>
+    </div>
+    <p class="catatan">PostgreSQL mengembalikan waktu sebagai <code>2026-08-20 01:55:17.158044+00</code>, MySQL sebagai <code>2026-08-20 01:55:17</code>. Tampilan yang mencetak mentah akan berubah bentuk — karena itu diperiksa khusus. Tidak ada yang bocor.</p>
+    <h3>Pencarian tetap menemukan hasil</h3>
+    <p>MySQL mengabaikan huruf besar-kecil pada <code>LIKE</code>, PostgreSQL tidak. Tanpa penyesuaian, pencarian mengembalikan kosong <em>tanpa galat apa pun</em> — kegagalan paling berbahaya karena tidak kelihatan. Diuji langsung lewat halaman Kelola Pengguna:</p>
+    <div class="gulir">
+      <table>
+        <caption>Pencarian di Supabase</caption>
+        <thead><tr><th>Kata kunci</th><th>Yang ditemukan</th><th>Hasil</th></tr></thead>
+        <tbody>
+          <tr><td>najwa</td><td>Najwa Ramadhani</td><td class="baik">ketemu</td></tr>
+          <tr><td>NAJWA</td><td>Najwa Ramadhani</td><td class="baik">ketemu</td></tr>
+          <tr><td>UNILA</td><td>najwa@student.unila.ac.id</td><td class="baik">ketemu</td></tr>
+          <tr><td>3</td><td>pencocokan kolom id</td><td class="baik">ketemu</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="judul-bagian">
+      <h2>Keselarasan struktur</h2>
+      <span class="chip chip-lulus">9 tabel · 80 kolom · selaras</span>
+    </div>
+    <p>Skema aplikasi ini kini ditulis dua kali — satu untuk MySQL, satu untuk PostgreSQL. Perubahan yang hanya masuk ke salah satunya <b>tidak akan tertangkap pengujian</b>, karena pengujian hanya menjalankan satu penggerak dalam satu waktu sehingga keduanya tetap lulus di lingkungannya sendiri.</p>
+    <p>Karena itu perbandingannya dijadikan alat tetap di repo, <code>tools/banding-skema.php</code>, yang membaca kedua basis data yang benar-benar berjalan dan keluar dengan kode 1 bila berbeda:</p>
+    <pre><code>MySQL      : simagang_db di 127.0.0.1
+PostgreSQL : schema public di aws-0-ap-southeast-1.pooler.supabase.com
+Diperiksa  : 9 tabel, 80 kolom
+
+SELARAS. Tidak ada perbedaan struktur.</code></pre>
+    <div class="gulir">
+      <table>
+        <caption>Objek basis data yang terbentuk di PostgreSQL</caption>
+        <thead><tr><th>Objek</th><th class="angka">Jumlah</th><th>Catatan</th></tr></thead>
+        <tbody>
+          <tr><td>Indeks buatan</td><td class="angka">9</td><td>sama persis dengan MySQL</td></tr>
+          <tr><td>Foreign key</td><td class="angka">13</td><td>termasuk CASCADE dan SET NULL</td></tr>
+          <tr><td>CHECK constraint</td><td class="angka">4</td><td>pengganti tipe ENUM</td></tr>
+          <tr><td>Trigger updated_at</td><td class="angka">3</td><td>pengganti ON UPDATE CURRENT_TIMESTAMP</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="catatan">Trigger <code>updated_at</code> itu buatan sendiri, jadi ikut diuji: satu baris diubah lewat form admin, <code>updated_at</code> bergerak dari 02:16:28 ke 02:18:56 sementara <code>created_at</code> tidak berubah.</p>
+  </section>
+
+  <section>
+    <div class="judul-bagian">
+      <h2>Performa</h2>
+      <span class="chip chip-perhatian">bergantung pada hosting</span>
+    </div>
+    <p>Ini satu-satunya kemunduran yang terukur, dan penyebabnya jarak — bukan kode. Basis data pindah dari mesin yang sama ke pusat data di Singapura.</p>
+    <div class="legenda">
+      <span><i class="kotak batang-mysql"></i> MySQL lokal</span>
+      <span><i class="kotak batang-pg"></i> Supabase (Singapura)</span>
+    </div>
+    <div>
+      <div class="batang-baris"><span>/admin/dashboard</span><span class="batang-track"><span class="batang-isi batang-mysql" style="width:3.1%"></span></span><span class="batang-nilai">28 ms</span></div>
+      <div class="batang-baris"><span></span><span class="batang-track"><span class="batang-isi batang-pg" style="width:100%"></span></span><span class="batang-nilai">895 ms</span></div>
+      <div class="batang-baris"><span>/admin/bidang</span><span class="batang-track"><span class="batang-isi batang-mysql" style="width:2.2%"></span></span><span class="batang-nilai">20 ms</span></div>
+      <div class="batang-baris"><span></span><span class="batang-track"><span class="batang-isi batang-pg" style="width:86.3%"></span></span><span class="batang-nilai">772 ms</span></div>
+      <div class="batang-baris"><span>/admin/audit-log</span><span class="batang-track"><span class="batang-isi batang-mysql" style="width:4.5%"></span></span><span class="batang-nilai">40 ms</span></div>
+      <div class="batang-baris"><span></span><span class="batang-track"><span class="batang-isi batang-pg" style="width:63.7%"></span></span><span class="batang-nilai">570 ms</span></div>
+      <div class="batang-baris"><span>/admin/users</span><span class="batang-track"><span class="batang-isi batang-mysql" style="width:2.3%"></span></span><span class="batang-nilai">21 ms</span></div>
+      <div class="batang-baris"><span></span><span class="batang-track"><span class="batang-isi batang-pg" style="width:62.0%"></span></span><span class="batang-nilai">555 ms</span></div>
+    </div>
+    <h3>Dari mana waktunya habis</h3>
+    <p>Waktu satu halaman kira-kira <b>307 ms untuk membuka koneksi, ditambah 80 ms untuk setiap kueri</b>. Halaman aplikasi ini memakai 3 sampai 8 kueri.</p>
+    <div class="gulir">
+      <table>
+        <caption>Biaya dasar per operasi</caption>
+        <thead><tr><th>Operasi</th><th class="angka">MySQL lokal</th><th class="angka">Supabase</th></tr></thead>
+        <tbody>
+          <tr><td>Buka koneksi baru</td><td class="angka">1,5 ms</td><td class="angka">307 ms</td></tr>
+          <tr><td>Satu kueri</td><td class="angka">0,3 ms</td><td class="angka">80 ms</td></tr>
+          <tr><td>Perjalanan jaringan (RTT)</td><td class="angka">—</td><td class="angka">27 ms</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>RTT jaringannya hanya 27 ms, tetapi satu kueri makan 80 ms — sekitar tiga kali perjalanan. Penyebabnya prepared statement sungguhan, yang memisahkan tahap penyiapan dan pelaksanaan. Diukur berdampingan:</p>
+    <pre><code>prepared statement sungguhan  : 81,6 ms per kueri
+prepare ditiru di sisi PHP    : 27,1 ms per kueri</code></pre>
+    <p class="catatan">Setelan itu <b>sengaja belum diubah</b>. Kodenya menyalakan prepared statement sungguhan sebagai tindakan keamanan terhadap injeksi SQL, jadi mengubahnya perlu keputusan sadar, bukan diselipkan sebagai optimasi.</p>
+    <h3>Yang sebaiknya dilakukan</h3>
+    <ul class="polos">
+      <li><b>Tempatkan aplikasi dan basis data berdekatan.</b> Ini menghapus hampir seluruh selisihnya sekaligus, tanpa mengubah kode apa pun. Karena hosting akan diurus tim Bappeda, cukup sampaikan syarat ini kepada mereka.</li>
+      <li><b>Koneksi persisten</b> memangkas ongkos 307 ms per permintaan. Sudah diukur: halaman terberat turun dari 895 ms ke 768 ms. Perlu diperhatikan batas jumlah koneksi di paket Supabase.</li>
+      <li><b>Kurangi jumlah kueri per halaman.</b> Setiap kueri yang hilang menghemat sekitar 80 ms selama basis datanya masih berjauhan.</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="judul-bagian">
+      <h2>Tampilan di layar ponsel</h2>
+      <span class="chip chip-lulus">20 dari 21 halaman pas</span>
+    </div>
+    <p>Seluruh halaman dimuat dalam bingkai selebar 382 px, lalu lebar isinya dibandingkan dengan lebar layar. Isi yang lebih lebar berarti halaman bisa digeser mendatar.</p>
+    <div class="gulir">
+      <table>
+        <caption>Halaman yang lebih lebar dari layarnya</caption>
+        <thead><tr><th>Halaman</th><th class="angka">Sebelum</th><th class="angka">Sesudah</th><th>Keterangan</th></tr></thead>
+        <tbody>
+          <tr><td>/alur</td><td class="angka buruk">383 px</td><td class="angka baik">374 px</td><td>diperbaiki</td></tr>
+          <tr><td>/ (beranda)</td><td class="angka buruk">550 px</td><td class="angka buruk">550 px</td><td>dikecualikan atas keputusan tim</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Pada <code>/alur</code>, lencana status dipaksa selebar 210 px di dalam baris yang sejajar, sehingga di layar sempit sisa ruang untuk keterangannya tinggal sekitar 36 px dan teks terpanjang mendorong halaman melebar. Lebar minimumnya kini mengikuti ruang yang benar-benar tersedia. Tampilan desktop diperiksa ulang dan tidak berubah — lencananya tetap 210 px.</p>
+    <p class="catatan">Beranda publik sengaja tidak disentuh: tim memutuskan mengembalikannya ke desain lama dan menyerahkan penggarapan tampilannya ke anggota tim lain. Angka 550 px dicantumkan agar keputusan itu diambil dengan sadar, bukan karena terlupa.</p>
+  </section>
+
+  <section>
+    <div class="judul-bagian">
+      <h2>Email dan kuota divisi</h2>
+      <span class="chip chip-lulus">terverifikasi</span>
+    </div>
+    <h3>Pengiriman email</h3>
+    <p>SMTP Bappeda diuji dengan mengirim email sungguhan dari kotak surat resmi SIMAGANG, dan satu akun peserta dibuat lalu diterima sehingga notifikasi perubahan statusnya ikut terkirim.</p>
+    <p class="catatan">Log galat yang kosong tidak dijadikan bukti begitu saja. Satu kegagalan dipaksa lebih dulu dengan alamat SMTP palsu, dan tercatat sebagai <code>EMAIL GAGAL</code> di <code>storage/logs/error.log</code> — barulah log yang kosong pada pengujian sungguhan berarti sesuatu.</p>
+    <h3>Sisa kuota divisi</h3>
+    <p>Sisa kuota dihitung dari jumlah pengajuan berstatus diterima atau sedang magang pada divisi final, bukan dengan mengurangi angka kapasitasnya. Dengan begitu kapasitas aslinya tidak hilang saat peserta selesai magang. Diukur pada divisi berkapasitas 2:</p>
+    <pre><code>Sebelum diterima : Pemerintahan dan Sosial Budaya (Sisa Kuota: 2)
+Sesudah diterima : Pemerintahan dan Sosial Budaya (Sisa Kuota: 1)</code></pre>
+  </section>
+
+  <section>
+    <div class="judul-bagian">
+      <h2>Sebelum dirilis</h2>
+      <span class="chip chip-tindakan">4 tindakan</span>
+    </div>
+    <p>Tidak ada satu pun yang menyangkut kode. Semuanya konfigurasi dan data, dan semuanya cepat.</p>
+    <ol class="tindakan">
+      <li>
+        <div class="isi">
+          <strong>Ubah APP_ENV menjadi production</strong>
+          <p><code>.env</code> di mesin pengembangan masih <code>development</code>, dan pada mode itu galat PHP tercetak ke halaman — sudah dibuktikan dengan galat palsu. Pada mode <code>production</code>, halamannya bersih dan galatnya masuk ke <code>storage/logs/error.log</code>, juga sudah dibuktikan.</p>
+        </div>
+      </li>
+      <li>
+        <div class="isi">
+          <strong>Bersihkan data uji di Supabase</strong>
+          <p>Schema <code>public</code> masih memuat akun dan pengajuan hasil pengujian alur. Belum dihapus supaya masih bisa diperiksa sendiri lebih dulu.</p>
+        </div>
+      </li>
+      <li>
+        <div class="isi">
+          <strong>Isi alamat email akun internal dengan kotak surat sungguhan</strong>
+          <p>Akun bawaan memakai alamat di <code>bappeda.lampung.go.id</code> yang kemungkinan belum ada. Bila dibiarkan, notifikasi dan tautan reset kata sandi akan memantul.</p>
+        </div>
+      </li>
+      <li>
+        <div class="isi">
+          <strong>Sampaikan syarat teknis ke tim hosting Bappeda</strong>
+          <p>Server wajib menyediakan ekstensi PHP <code>pdo_pgsql</code>. Koneksi Supabase wajib memakai Session pooler port 5432 — Transaction pooler port 6543 akan merusak aplikasi ini. Modul Apache <code>mod_deflate</code> dan <code>mod_expires</code> perlu dinyalakan agar aturan kompresi di <code>.htaccess</code> berefek. Dan yang paling menentukan kecepatan: tempatkan aplikasi sedekat mungkin dengan basis datanya.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <div class="judul-bagian">
+      <h2>Masih menggantung</h2>
+      <span class="chip chip-perhatian">keputusan produk</span>
+    </div>
+    <p>Dua hal berikut bukan pekerjaan teknis dan tidak menghalangi rilis, tetapi sebaiknya diputuskan supaya tidak berulang muncul sebagai temuan audit:</p>
+    <ul class="polos">
+      <li><b>BR-005 — alur tawaran divisi.</b> PRD menyatakan tidak ada persetujuan balik mahasiswa, sedangkan sistem justru mewajibkannya. Tim sudah memutuskan alurnya dipertahankan, tetapi PRD-nya belum diperbarui.</li>
+      <li><b>BR-014 — kewenangan Admin.</b> PRD menyebut Admin sebagai peran teknis, sedangkan tim memutuskan Admin berperan sebagai super admin yang boleh memutuskan penerimaan. Yang perlu disesuaikan dokumennya, bukan kodenya.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Disusun 20 Agustus 2026 · seluruh angka diukur langsung pada sistem yang berjalan<br>
+    Rincian teknis lengkap ada di repositori: <code>docs/MIGRASI_SUPABASE.md</code> dan <code>docs/KETERLACAKAN_PRD.md</code>
+  </footer>
+
+</div>
+</body>
+</html>

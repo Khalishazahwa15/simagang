@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600;8..60,700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+    /* Core palette: Modern Government Digital Service.
+       Biru cerah tapi tetap nyaman di mata (bukan neon), dipadukan
+       dengan gold hangat yang cerah juga. */
+    --color-primary: #3B6FD6;
+    --color-primary-dark: #24487E;
+    --color-primary-ink: #24487E;
+    --color-primary-soft: #E7EEFC;
+    --color-primary-pale: #F4F8FE;
+    --color-header-dark: #24487E;
+
+    --color-accent: #F0AE45;
+    --color-accent-dark: #C4842A;
+    --color-accent-soft: #FDF1DC;
+    --color-accent-pale: #FEFAF0;
+    --color-accent-ink: #8C5F1D;
+    --color-secondary-soft: #F1F5F9;
+    --color-highlight-soft: #FDF1DC;
+
+    --color-background: #F8FAFC;
+    --color-surface: #FFFFFF;
+    --color-surface-soft: #F8FAFC;
+    --color-surface-tinted: #E7EEFC;
+
+    --color-text: #0F172A;
+    --color-text-secondary: #475569;
+    --color-text-muted: #94A3B8;
+    --color-text-inverse: #FFFFFF;
+    --color-border: #E2E8F0;
+    --color-border-soft: #E2E8F0;
+    --color-step-inactive: #CBD5E1;
+    --color-step-line: #CBD5E1;
+
+    --color-success: #10B981;
+    --color-warning: #F59E0B;
+    --color-danger: #EF4444;
+    --color-info: #3B6FD6;
+
+    --color-success-soft: #ECFDF5;
+
+    /* Varian teks dan garis untuk kotak status. Nilainya diturunkan dari
+       warna status di atas, bukan dari palet lain, supaya satu keluarga. */
+    --color-success-ink: #047857;
+    --color-success-border: #A7F3D0;
+    --color-warning-ink: #B45309;
+    --color-warning-border: #FCD34D;
+    --color-danger-ink: #B91C1C;
+    --color-danger-border: #FCA5A5;
+    --color-info-ink: #3B6FD6;
+    --color-info-border: #B9D3FF;
+    --color-warning-soft: var(--color-highlight-soft);
+    --color-danger-soft: #FEF2F2;
+    --color-info-soft: var(--color-primary-soft);
+
+    /* Backward-compatible aliases used throughout existing views */
+    --primary: var(--color-primary);
+    --primary-dark: var(--color-primary-dark);
+    --primary-light: var(--color-primary-soft);
+    --primary-ink: var(--color-primary-ink);
+    --accent: var(--color-accent);
+    --accent-light: var(--color-accent-soft);
+    --accent-soft: var(--color-accent-soft);
+    --accent-pale: var(--color-accent-pale);
+    --bg-main: var(--color-background);
+    --bg-soft: var(--color-surface-soft);
+    --bg-card: var(--color-surface);
+    --bg-green-soft: var(--color-primary-soft);
+    --bg-soft-dark: var(--color-step-inactive);
+    --text-primary: var(--color-text);
+    --text-secondary: var(--color-text-secondary);
+    --text-muted: var(--color-text-muted);
+    --border: var(--color-border);
+    --border-light: var(--color-border-soft);
+    --success: var(--color-success);
+    --warning: var(--color-warning);
+    --danger: var(--color-danger);
+    --info: var(--color-info);
+
+    /* Status mapping */
+    --status-draft-bg: var(--color-surface-soft);
+    --status-draft-text: var(--color-text-secondary);
+    --status-diajukan-bg: var(--color-info-soft);
+    --status-diajukan-text: var(--color-primary);
+    --status-menunggu-bg: var(--color-accent-soft);
+    --status-menunggu-text: var(--color-accent-ink);
+    --status-dalam-verifikasi-bg: var(--color-accent-soft);
+    --status-dalam-verifikasi-text: var(--color-accent-ink);
+    --status-revisi-bg: var(--color-warning-soft);
+    --status-revisi-text: var(--color-accent-ink);
+    --status-diteruskan-bg: var(--color-accent-soft);
+    --status-diteruskan-text: var(--color-accent-ink);
+    --status-disetujui-bg: var(--color-success-soft);
+    --status-disetujui-text: var(--color-primary-dark);
+    --status-diterima-bg: var(--color-success-soft);
+    --status-diterima-text: var(--color-primary-dark);
+    --status-ditolak-bg: var(--color-danger-soft);
+    --status-ditolak-text: #91424a;
+    --status-sedang-magang-bg: var(--color-primary-soft);
+    --status-sedang-magang-text: var(--color-primary-dark);
+    --status-selesai-bg: #F0F8FF;
+    --status-selesai-text: #64748B;
+    --status-mengundurkan-diri-bg: var(--color-danger-soft);
+    --status-mengundurkan-diri-text: #91424a;
+
+    /* Typography */
+    --font-display: 'Inter', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+
+    /* Skala huruf. --text-input tidak boleh turun di bawah 16px (zoom iOS).
+       --text-micro adalah batas bawah untuk seluruh teks. */
+    --text-display: clamp(42px, 5vw, 62px);
+    --text-h1: clamp(34px, 4vw, 48px);
+    --text-h2: clamp(28px, 3vw, 38px);
+    --text-h3: 24px;
+    --text-h4: 19px;
+    --text-body-lg: 17px;
+    --text-body: 16px;
+    --text-body-sm: 14px;
+    --text-caption: 12.5px;
+    --text-label: 12.5px;
+    --text-button: 15px;
+    --text-input: 16px;
+    --text-micro: 12px;
+
+    --leading-tight: 1.15;
+    --leading-heading: 1.24;
+    --leading-body: 1.68;
+
+    /* Legacy size aliases */
+    --font-xs: var(--text-caption);
+    --font-sm: var(--text-body-sm);
+    --font-md: var(--text-button);
+    --font-base: var(--text-body);
+    --font-lg: var(--text-body-lg);
+    --font-xl: var(--text-h4);
+    --font-2xl: var(--text-h3);
+    --font-3xl: var(--text-h2);
+    --font-4xl: var(--text-h1);
+    --font-5xl: var(--text-display);
+
+    /* Radius, spacing, shadow */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-full: 999px;
+
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+    --space-20: 80px;
+    --space-24: 96px;
+
+    --spacing-xs: var(--space-2);
+    --spacing-sm: var(--space-3);
+    --spacing-md: var(--space-4);
+    --spacing-lg: var(--space-6);
+    --spacing-xl: var(--space-8);
+
+    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.05);
+    --shadow-lg: 0 12px 30px rgba(15, 23, 42, 0.08);
+    --ring: 0 0 0 3px rgba(23, 74, 126, 0.14);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--leading-body);
+    background: var(--color-background);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin-top: 0;
+}
+
+h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+}
+
+h1 {
+    font-size: var(--text-h1);
+    line-height: var(--leading-tight);
+    font-weight: 600;
+}
+
+h2 {
+    font-size: var(--text-h2);
+    line-height: var(--leading-heading);
+    font-weight: 600;
+}
+
+h3 {
+    font-size: var(--text-h3);
+    line-height: var(--leading-heading);
+    font-weight: 600;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
+}
+
+a:hover {
+    color: var(--primary-dark);
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+.text-primary { color: var(--primary); }
+.text-muted { color: var(--text-muted); }
+.text-secondary { color: var(--text-secondary); }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-step-line); border-radius: 999px; border: 2px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-thumb:hover { background: #B8D4EE; border: 2px solid transparent; background-clip: content-box; }
+
+.gold-rule { border: none; border-top: 1px solid var(--accent); }
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+::selection {
+    background: var(--accent-soft);
+    color: var(--text-primary);
+}
+
+/* Urutan lapisan tampilan. Selalu pakai variabel ini, jangan angka lepas,
+   agar tidak ada komponen yang saling menimpa tanpa disadari. */
+:root {
+    --z-content: 1;
+    --z-sidebar: 100;
+    --z-header: 200;
+    --z-dropdown: 300;
+    --z-modal: 1000;
+}

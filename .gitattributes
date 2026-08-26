@@ -1,0 +1,17 @@
+# Normalisasi akhir baris.
+#
+# Tim bekerja di Windows sedangkan server memakai Linux. Tanpa aturan ini,
+# berkas yang sama bisa tercatat berubah seluruhnya hanya karena akhir barisnya
+# berbeda, sehingga diff-nya menjadi mustahil dibaca.
+#
+# Di dalam repositori seluruh berkas teks disimpan dengan akhir baris LF; saat
+# diambil ke komputer, Git menyesuaikannya dengan kebiasaan sistem masing-masing.
+* text=auto
+
+# Berkas biner: jangan diutak-atik akhir barisnya.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.ico binary
+*.woff binary
+*.woff2 binary
