@@ -9,13 +9,7 @@
     <link rel="stylesheet" href="<?= aset('assets/css/layout.css') ?>">
     <link rel="stylesheet" href="<?= aset('assets/css/components.css') ?>">
     <link rel="stylesheet" href="<?= aset('assets/css/responsive.css') ?>">
-    <link rel="stylesheet" href="<?= aset('assets/css/tailwind-fallback.css') ?>">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: { extend: { colors: { primary: '#3B6FD6', 'primary-dark': '#24487E', accent: '#F0AE45' } } }
-        };
-    </script>
+    <link rel="stylesheet" href="<?= aset('assets/css/tailwind.css') ?>">
 </head>
 <body class="public-layout">
     <?php include APP_PATH . '/Views/components/navbar.php'; ?>
