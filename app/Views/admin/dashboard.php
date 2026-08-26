@@ -86,7 +86,7 @@ function getBadgeLabel($status) {
             
             <div style="padding: 0; flex-grow: 1; display: flex; flex-direction: column;">
                 <?php if (empty($pengajuan_terbaru)): ?>
-                    <div style="padding: 32px 24px; text-align: center; color: var(--text-secondary); font-size: var(--text-body-sm);">Belum ada pengajuan yang perlu ditindaklanjuti.</div>
+                    <div class="empty-state"><span class="empty-state-icon"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M22 12h-6l-2 3h-4l-2-3H2"/><path stroke-linecap="round" stroke-linejoin="round" d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11Z"/></svg></span><span>Belum ada pengajuan yang perlu ditindaklanjuti.</span></div>
                 <?php else: ?>
                     <?php foreach ($pengajuan_terbaru as $item): ?>
                     <a href="<?= BASE_URL ?>/sekretariat/pengajuan/detail/<?= $item['id'] ?>" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border); text-decoration: none; transition: background 0.15s;" onmouseover="this.style.background='var(--bg-main)'" onmouseout="this.style.background='transparent'">
@@ -128,7 +128,7 @@ function getBadgeLabel($status) {
                 
                 <div style="padding: 0; max-height: 220px; overflow-y: auto;">
                     <?php if (empty($list_divisi)): ?>
-                        <div style="padding: 40px 24px; text-align: center; color: var(--text-secondary); font-size: var(--text-body-sm);">Belum ada data divisi.</div>
+                        <div class="empty-state"><span class="empty-state-icon"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M22 12h-6l-2 3h-4l-2-3H2"/><path stroke-linecap="round" stroke-linejoin="round" d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11Z"/></svg></span><span>Belum ada data divisi.</span></div>
                     <?php else: ?>
                         <?php foreach ($list_divisi as $index => $div): 
                             $isFull = $div['terisi'] >= $div['kapasitas'];
@@ -176,7 +176,7 @@ function getBadgeLabel($status) {
                 
                 <div style="padding: 0; max-height: 200px; overflow-y: auto;">
                     <?php if (empty($list_internal)): ?>
-                        <div style="padding: 30px 24px; text-align: center; color: var(--text-secondary); font-size: var(--text-body-sm);">Belum ada pengguna internal terdaftar.</div>
+                        <div class="empty-state"><span class="empty-state-icon"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M22 12h-6l-2 3h-4l-2-3H2"/><path stroke-linecap="round" stroke-linejoin="round" d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11Z"/></svg></span><span>Belum ada pengguna internal terdaftar.</span></div>
                     <?php else: ?>
                         <?php foreach (array_slice($list_internal, 0, 5) as $index => $user): 
                             $isAdmin = $user['role'] === 'admin';
