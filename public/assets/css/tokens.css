@@ -35,9 +35,9 @@
     --color-success: #10B981;
     --color-warning: #F59E0B;
     --color-danger: #EF4444;
-    --color-info: #3B6FD6;
+    --color-info: #2A5BB8;
 
-    --color-success-soft: #ECFDF5;
+    --color-success-soft: #F0FEF8;
 
     /* Varian teks dan garis untuk kotak status. Nilainya diturunkan dari
        warna status di atas, bukan dari palet lain, supaya satu keluarga. */
@@ -67,7 +67,7 @@
     --bg-main: var(--color-background);
     --bg-soft: var(--color-surface-soft);
     --bg-card: var(--color-surface);
-    --bg-green-soft: var(--color-primary-soft);
+    --bg-green-soft: #F7FAFF;
     --bg-soft-dark: var(--color-step-inactive);
     --text-primary: var(--color-text);
     --text-secondary: var(--color-text-secondary);
