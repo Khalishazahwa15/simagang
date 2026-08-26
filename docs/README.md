@@ -14,10 +14,11 @@ sekarang.
 | Memahami tabel, relasi, dan alasan rancangannya | [RANCANGAN_BASIS_DATA.md](RANCANGAN_BASIS_DATA.md) |
 | Mengubah tampilan tanpa merusak arah visualnya | [PANDUAN_DESAIN.md](PANDUAN_DESAIN.md) |
 | Menjalankan sistem di atas PostgreSQL atau Supabase | [MIGRASI_SUPABASE.md](MIGRASI_SUPABASE.md) |
-| Melihat hasil pengujian migrasi beserta angkanya | [VERIFIKASI_MIGRASI.html](VERIFIKASI_MIGRASI.html) |
+| Melihat hasil pengujian migrasi per 20 Agustus 2026 | [VERIFIKASI_MIGRASI.html](VERIFIKASI_MIGRASI.html) |
 
-`VERIFIKASI_MIGRASI.html` dibuka langsung di peramban, tidak perlu server.
-Berkas itu berdiri sendiri sehingga bisa dikirim apa adanya ke pihak lain.
+`VERIFIKASI_MIGRASI.html` adalah potret hasil pengujian pada tanggal itu,
+bukan status terkini; angkanya tidak ikut berubah saat pengujian bertambah.
+Berkas itu berdiri sendiri dan dibuka langsung di peramban, tanpa server.
 
 ## Urutan yang disarankan untuk anggota baru
 

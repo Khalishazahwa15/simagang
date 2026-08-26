@@ -1,17 +1,12 @@
 -- Perubahan struktur untuk instalasi yang sudah terlanjur ada.
 --
--- schema.sql memakai CREATE TABLE IF NOT EXISTS, jadi basis data lama tidak
--- ikut berubah saat menarik perubahan dari Git. Jalankan berkas ini sekali:
---
---   mysql -u root simagang_db < database/UPGRADE.sql
---
--- atau lewat phpMyAdmin: pilih database simagang_db -> tab Import.
+-- Tidak perlu dijalankan sendiri. `php database/pasang.php` sudah menerapkan
+-- berkas ini setelah skema, baik pada instalasi baru maupun instalasi lama.
 --
 -- Seluruh perintah di sini aman dijalankan berulang. Setiap perubahan
 -- diperiksa dulu ke information_schema, sehingga tidak ada galat "Duplicate
 -- column" yang membuat sisa berkas berhenti di tengah jalan.
 --
--- Instalasi baru tidak perlu menjalankan berkas ini; schema.sql sudah lengkap.
 
 USE simagang_db;
 

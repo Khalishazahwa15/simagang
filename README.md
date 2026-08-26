@@ -90,18 +90,17 @@ lengkapnya ada di [docs/MIGRASI_SUPABASE.md](docs/MIGRASI_SUPABASE.md).
 
 `.env` tidak ikut masuk Git, jadi setiap orang membuatnya sendiri.
 
-### 3. Impor skema basis data
+### 3. Siapkan basis data
 
 ```bash
-mysql -u root < database/schema.sql
+php database/pasang.php
 ```
 
-Atau lewat phpMyAdmin: tab **Import** → pilih `database/schema.sql` → Go.
-
-Untuk PostgreSQL, pakai `database/schema.pgsql.sql`. Berkas itu tidak membuat
-basis data sendiri karena Supabase sudah menyediakannya.
-
-Berkas itu sudah memuat perintah `CREATE DATABASE simagang_db`, jadi databasenya tidak perlu dibuat manual. Namanya harus sama dengan `DB_NAME` di `.env`.
+Satu perintah untuk semuanya: membuat basis data bila belum ada, memasang
+seluruh tabel, lalu menerapkan perubahan struktur untuk instalasi lama. Aman
+dijalankan berulang; tabel yang sudah ada tidak disentuh. Nama basis datanya
+mengikuti `DB_NAME` di `.env`, dan MySQL maupun PostgreSQL ditangani perintah
+yang sama.
 
 ### 4. Isi data contoh
 
@@ -109,7 +108,10 @@ Berkas itu sudah memuat perintah `CREATE DATABASE simagang_db`, jadi databasenya
 php database/seeder.php
 ```
 
-> **Perhatian:** seeder meng-`TRUNCATE` seluruh tabel sebelum mengisi ulang. Jangan pernah menjalankannya di lingkungan berisi data nyata, dan jangan mengaksesnya lewat browser.
+Opsional, untuk mendapatkan akun uji di bawah.
+
+> **Perhatian:** seeder mengosongkan seluruh tabel sebelum mengisi ulang. Jangan
+> menjalankannya pada data sungguhan, dan jangan mengaksesnya lewat browser.
 
 ### 5. Jalankan
 
@@ -124,18 +126,13 @@ Buka alamat tersebut, lalu masuk dengan salah satu akun di bawah.
 
 ## Menarik Perubahan ke Instalasi Lama
 
-`schema.sql` memakai `CREATE TABLE IF NOT EXISTS`, sehingga basis data yang sudah ada **tidak ikut berubah** saat Anda `git pull`. Jalankan berkas pemutakhiran satu kali:
-
 ```bash
 git pull
-mysql -u root simagang_db < database/UPGRADE.sql
+php database/pasang.php
 ```
 
-Berkas itu aman dijalankan berulang. Setiap perubahan diperiksa dulu ke `information_schema`, jadi bagian yang sudah pernah dieksekusi dilewati begitu saja tanpa galat. Bila berhasil, baris terakhir keluarannya berbunyi `UPGRADE.sql selesai dijalankan.` — kalau baris itu tidak muncul, berarti ada yang gagal dan perlu diperiksa.
-
-Bisa juga lewat phpMyAdmin: pilih database `simagang_db` → tab **Import** → pilih berkasnya.
-
-Melewatkan langkah ini membuat halaman login galat, karena tabel `login_attempts` belum ada.
+Perintahnya sama dengan pemasangan baru. Struktur yang belum ada akan
+ditambahkan, yang sudah ada dibiarkan, dan datanya tidak disentuh.
 
 Setelah itu tekan `Ctrl+F5` di browser untuk memuat ulang CSS yang ter-cache.
 
@@ -244,11 +241,11 @@ app/
   Services/      Aturan bisnis: pengajuan, status, dokumen, email, notifikasi
   Views/         Berkas tampilan, dikelompokkan per peran
 config/          routes.php, database.php, app.php
-database/        schema.sql (MySQL), schema.pgsql.sql (PostgreSQL),
-                 UPGRADE.sql, seeder.php
+database/        pasang.php (pemasang), seeder.php (data contoh),
+                 schema.sql, schema.pgsql.sql, UPGRADE.sql
 docs/            Dokumentasi. Mulai dari docs/README.md
 lib/PHPMailer/   PHPMailer 7.1.1 (LGPL-2.1), dipasang manual tanpa Composer
-public/          Direktori web-facing: index.php dan aset
+public/          Direktori web-facing: index.php, CSS, dan gambar
 storage/         Dibuat otomatis saat dipakai
   uploads/         Dokumen mahasiswa
   logs/            error.log dan mail.log
@@ -269,6 +266,14 @@ dan perubahan yang hanya masuk ke salah satunya tidak tertangkap pengujian —
 pengujian hanya menjalankan satu penggerak dalam satu waktu, sehingga keduanya
 tetap lulus di lingkungannya sendiri.
 
+### Berkas CSS
+
+`public/assets/css/tailwind.css` adalah **hasil build**, bukan berkas untuk
+disunting tangan. Warna dan hurufnya diturunkan dari `tokens.css`, jadi
+perubahan tampilan cukup dilakukan di sana. Cara membangunnya ulang ada di
+[docs/PANDUAN_DESAIN.md](docs/PANDUAN_DESAIN.md) bagian 5. Menjalankan sistem
+tidak memerlukan langkah ini.
+
 ## Dokumentasi
 
 Seluruhnya ada di [docs/](docs/README.md):
@@ -280,8 +285,8 @@ Seluruhnya ada di [docs/](docs/README.md):
 | [KETERLACAKAN_PRD.md](docs/KETERLACAKAN_PRD.md) | Status pengerjaan tiap butir PRD |
 | [RANCANGAN_BASIS_DATA.md](docs/RANCANGAN_BASIS_DATA.md) | Tabel, relasi, dan alasan rancangannya |
 | [PANDUAN_DESAIN.md](docs/PANDUAN_DESAIN.md) | Arah visual antarmuka |
-| [MIGRASI_SUPABASE.md](docs/MIGRASI_SUPABASE.md) | Cara menjalankannya di atas PostgreSQL |
-| [VERIFIKASI_MIGRASI.html](docs/VERIFIKASI_MIGRASI.html) | Hasil pengujian migrasi beserta angkanya |
+| [MIGRASI_SUPABASE.md](docs/MIGRASI_SUPABASE.md) | Cara menjalankannya di atas PostgreSQL/Supabase |
+| [VERIFIKASI_MIGRASI.html](docs/VERIFIKASI_MIGRASI.html) | Potret hasil pengujian migrasi per 20 Agustus 2026 |
 
 ---
 
@@ -319,10 +324,9 @@ Rincian tabel dan relasinya ada di [docs/RANCANGAN_BASIS_DATA.md](docs/RANCANGAN
 
 | Gejala | Sebab dan solusi |
 |---|---|
-| Halaman login galat setelah `git pull` | Tabel `login_attempts` belum ada. Jalankan `database/UPGRADE.sql`. |
-| Profil mahasiswa gagal disimpan | Kolom profil belum lengkap. Jalankan `database/UPGRADE.sql`. |
+| Galat tabel atau kolom tidak ditemukan setelah `git pull` | Struktur basis data belum dimutakhirkan. Jalankan `php database/pasang.php`. |
 | Tampilan berantakan setelah `git pull` | CSS lama ter-cache. Tekan `Ctrl+F5`. |
-| `Unknown database 'simagang_db'` | `schema.sql` belum diimpor, atau `DB_NAME` di `.env` berbeda. |
+| `Unknown database ...` | Basis datanya belum dibuat. Jalankan `php database/pasang.php`. |
 | `could not find driver` | Ekstensi penggerak belum aktif. Periksa dengan `php -r "echo implode(', ', PDO::getAvailableDrivers());"`. |
 | Pencarian selalu kosong di PostgreSQL | Ada kueri `LIKE` yang belum lewat `App\Core\Sql::searchText()`. Gagal tanpa pesan galat. |
 | Kueri gagal acak saat banyak pengguna | Koneksi Supabase memakai Transaction pooler (port 6543). Pindah ke Session pooler (port 5432). |

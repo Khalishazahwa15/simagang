@@ -1,47 +1,21 @@
-# MIGRASI KE SUPABASE — CATATAN HASIL
+# MENJALANKAN DI ATAS POSTGRESQL / SUPABASE
 
-Dokumen ini semula berisi rencana. Sejak 20 Agustus 2026 migrasinya sudah
-dikerjakan, jadi isinya diganti menjadi catatan hasil: apa yang berubah, apa
-yang diukur, dan apa yang masih perlu diputuskan.
-
-- Cabang: **`migrasi-supabase`**
-- Commit: `9179b10` (lapisan dua penggerak), `e24b865` (perbaikan
-  `information_schema`)
-- Basis data: PostgreSQL 17.6 di Supabase, wilayah `ap-southeast-1`
-
----
-
-## Ringkasan hasil
-
-| | MySQL | PostgreSQL / Supabase |
-|---|---|---|
-| `tests/TestSystemFlow.php` | 16 lulus, 0 gagal | 16 lulus, 0 gagal |
-| `tests/TestJalurRusak.php` | 53 lulus, 0 gagal | 53 lulus, 0 gagal |
-| `tests/TestTawaranFlow.php` | 11 lulus, 0 gagal | 11 lulus, 0 gagal |
-| **Total** | **80 lulus, 0 gagal** | **80 lulus, 0 gagal** |
-
-Selain pengujian otomatis, alur berikut dijalankan lewat HTTP di atas Supabase
-dan berhasil: pendaftaran akun, pelengkapan profil, pengiriman pengajuan dengan
-tiga berkas, verifikasi Sekretariat, sampai penetapan diterima. Nomor pengajuan
-terbentuk benar (`PM-20260820-000002`), yang membuktikan `lastInsertId()`
-dengan nama sequence bekerja.
-
-**Kode masih berjalan penuh di MySQL.** Penggeraknya dipilih lewat `DB_DRIVER`,
-jadi migrasi ini dapat dibatalkan tanpa kehilangan apa pun.
+Sistem ini berjalan di MySQL maupun PostgreSQL. Penggeraknya dipilih lewat
+`DB_DRIVER` di `.env`, tanpa mengubah kode. Dokumen ini berisi hal-hal yang
+hanya berlaku untuk PostgreSQL/Supabase.
 
 ---
 
 ## Cara menjalankan
 
-Kredensial Supabase disimpan di `.env.supabase` (diabaikan Git). Berkas itu
-dipilih lewat variabel lingkungan `SIMAGANG_ENV`, bukan dengan menimpa `.env`:
+Simpan kredensial Supabase di `.env.supabase` (diabaikan Git), lalu pilih
+berkas itu lewat `SIMAGANG_ENV` — jangan menimpa `.env`, agar bisa
+bergantian tanpa menyunting apa pun:
 
 ```bash
-# Pengujian di atas Supabase
-SIMAGANG_ENV=.env.supabase php tests/TestJalurRusak.php
-
-# Pengujian di atas MySQL (tanpa variabel apa pun)
-php tests/TestJalurRusak.php
+SIMAGANG_ENV=.env.supabase php database/pasang.php     # pasang struktur
+SIMAGANG_ENV=.env.supabase php tests/TestJalurRusak.php # uji di Supabase
+php tests/TestJalurRusak.php                            # uji di MySQL
 ```
 
 Isi `.env.supabase`:
@@ -54,164 +28,85 @@ DB_NAME=postgres
 DB_USER=postgres.<ref-proyek>
 DB_PASS=<kata sandi basis data>
 DB_SSLMODE=require
+DB_SCHEMA=public
 ```
 
-### Wajib Session pooler, bukan Transaction pooler
+---
 
-Supabase menyediakan tiga bentuk koneksi. Yang boleh dipakai hanya **Session
-pooler (port 5432)** atau Direct connection.
+## Wajib Session pooler, bukan Transaction pooler
+
+Supabase menyediakan tiga bentuk koneksi. Yang boleh dipakai hanya
+**Session pooler (port 5432)** atau Direct connection.
 
 **Transaction pooler (port 6543) akan merusak aplikasi ini.** Mode transaksi
 pgbouncer tidak mendukung prepared statement sungguhan, sedangkan
 `app/Core/Database.php` menyetel `PDO::ATTR_EMULATE_PREPARES = false` demi
-keamanan dari injeksi SQL. Koneksi awalnya tetap berhasil, sehingga kesalahan
-ini tidak kelihatan saat diuji sekilas; kegagalannya baru muncul acak saat
+keamanan dari injeksi SQL.
+
+Yang membuatnya berbahaya: koneksi awalnya tetap berhasil, jadi kesalahan ini
+tidak kelihatan saat dicoba sekilas. Kegagalannya baru muncul acak ketika
 beberapa permintaan berjalan bersamaan.
 
-### Prasyarat lingkungan
+---
 
-`pdo_pgsql` dan `pgsql` sudah diaktifkan di `php.ini` milik `php-8.3.26-nts`
-pada 20 Agustus 2026 (cadangan: `php.ini.bak-20260820`). Verifikasi:
+## Prasyarat
+
+Ekstensi `pdo_pgsql` harus aktif. Ia tidak menyala secara bawaan di Laragon
+maupun XAMPP:
 
 ```bash
 php -r "echo implode(', ', PDO::getAvailableDrivers());"
 # harus memuat: mysql, pgsql
 ```
 
-Untuk Apache, `php.ini` yang sama dipakai tetapi perlu restart agar terbaca.
-Hosting produksi juga harus menyediakan `pdo_pgsql`.
+Bila belum ada, hapus tanda `;` pada baris `extension=pdo_pgsql` di `php.ini`,
+lalu mulai ulang web server. Hosting produksi juga harus menyediakannya.
 
 ---
 
-## Yang berubah di kode
+## Aturan menulis kueri lintas penggerak
 
-19 berkas, 463 baris ditambah, 60 baris dihapus.
-
-### `app/Core/Sql.php` (baru)
-
-Seluruh perbedaan dialek dikumpulkan di satu berkas, bukan disebar sebagai
-percabangan di controller. **Tambahkan perbedaan baru di sini, jangan menulis
-percabangan penggerak di tempat lain.**
+Seluruh perbedaan dialek dikumpulkan di `app/Core/Sql.php`. **Tambahkan
+perbedaan baru di sana, jangan menulis percabangan penggerak di controller
+atau model.**
 
 | Metode | Menangani |
 |---|---|
 | `searchText()` | `LIKE` menjadi `ILIKE` |
-| `searchNumber()` | `CAST(... AS CHAR)` menjadi `CAST(... AS TEXT)` |
-| `nowPlusHours()` | `DATE_ADD` menjadi `NOW() + INTERVAL` |
-| `nowMinusMinutesParam()`, `plusMinutesParam()` | aritmetika tanggal berparameter |
+| `searchNumber()` | pencarian teks pada kolom angka |
+| `nowPlusHours()`, `plusMinutesParam()`, `nowMinusMinutesParam()` | aritmetika tanggal |
 | `secondsFromNow()` | `TIMESTAMPDIFF` menjadi `EXTRACT(EPOCH FROM ...)` |
 | `currentSchema()` | `DATABASE()` menjadi `current_schema()` |
 | `lastInsertId()` | menambahkan nama sequence |
-| `truncate()` | `FOREIGN_KEY_CHECKS` menjadi `RESTART IDENTITY CASCADE` |
+| `truncate()` | pengosongan tabel beserta reset urutan |
 
-### `config/database.php`
+Dua hal berikut lolos dari pemeriksaan teks kueri karena sintaksisnya sah di
+kedua penggerak, jadi harus diingat saat menulis kueri baru:
 
-Merakit DSN untuk kedua penggerak lewat `dsn_basis_data()`, dan menyetel schema
-aktif lewat `terapkan_schema()`.
+- **Bandingkan boolean dengan `TRUE`/`FALSE`, bukan `1`/`0`.** MySQL
+  memperlakukan `BOOLEAN` sebagai `TINYINT(1)` sehingga `= 1` sah di sana,
+  sementara PostgreSQL menolaknya.
+- **Jangan pakai `LIKE` pada kolom integer.** PostgreSQL menolaknya; lewatkan
+  melalui `Sql::searchNumber()`.
 
-### `database/schema.pgsql.sql` (baru)
-
-Terjemahan skema, 9 tabel:
-
-| Bentuk MySQL | Menjadi |
-|---|---|
-| `AUTO_INCREMENT` | `GENERATED BY DEFAULT AS IDENTITY` |
-| `ENUM(...)` | `CHECK (kolom IN (...))` |
-| `INDEX` di dalam `CREATE TABLE` | `CREATE INDEX` terpisah |
-| `ON UPDATE CURRENT_TIMESTAMP` | trigger `set_updated_at()` |
-| `DATETIME` / `TIMESTAMP` | `TIMESTAMPTZ` |
-| `ENGINE=InnoDB`, `utf8mb4` | dihapus |
-
-`ENUM` sengaja menjadi `CHECK`, bukan `CREATE TYPE`, agar status baru dapat
-ditambahkan tanpa `ALTER TYPE ... ADD VALUE` yang tidak bisa dibatalkan di
-dalam transaksi. Daftar nilai `pengajuan.status` wajib tetap cocok dengan
-`StatusService::$allowedTransitions`; `tests/TestJalurRusak.php` memeriksanya.
-
-Penomoran id memakai `GENERATED BY DEFAULT`, bukan `ALWAYS`, karena
-`tests/TestTawaranFlow.php` menyisipkan id secara eksplisit.
-
-### `tests/bootstrap.php`
-
-Pengujian PostgreSQL dipisahkan lewat **schema** `simagang_test`, bukan basis
-data terpisah, karena Supabase hanya menyediakan satu basis data. Schema-nya
-dibuang dan dibangun ulang setiap kali pengujian dijalankan.
+Gejala keduanya bisa senyap: pencarian yang selalu mengembalikan kosong di
+PostgreSQL biasanya berasal dari salah satu hal di atas.
 
 ---
 
-## Tiga penghalang yang tidak terdeteksi pemindaian awal
+## Yang perlu diperhatikan
 
-Rencana sebelumnya mencatat 97 titik sentuh dari pemindaian teks kueri. Tiga
-hal berikut lolos karena tidak punya penanda khas MySQL yang bisa dicari.
-
-### 1. Perbandingan boolean dengan angka — 6 tempat
-
-```sql
-WHERE is_current = 1   -- PostgreSQL: operator does not exist: boolean = integer
-```
-
-MySQL tidak punya tipe boolean sungguhan; `BOOLEAN` di sana adalah
-`TINYINT(1)`, sehingga `= 1` sah. Sintaksisnya sah di kedua penggerak, yang
-berbeda adalah tipenya — dan tipe tidak terlihat dari teks kueri.
-
-Terdampak: `app/Models/Dokumen.php` (versi dokumen terkini),
-`app/Services/NotificationService.php` (lonceng notifikasi),
-`app/Controllers/SekretariatController.php` (Arsip Dokumen).
-
-Ditulis ulang menjadi `= TRUE` / `= FALSE`, yang diterima kedua penggerak.
-
-### 2. `LIKE` pada kolom integer — 1 tempat
-
-Pencarian Kelola Pengguna membandingkan `id LIKE ?`. PostgreSQL menolak `LIKE`
-pada kolom integer. Barisnya sebenarnya ikut terhitung dalam 14 `LIKE ?`, tetapi
-diperlakukan sebagai pencarian teks biasa — tipe kolomnya tidak diperiksa.
-
-### 3. `DB_PORT` tidak pernah dipakai
-
-DSN dirakit tanpa port sejak awal, padahal `DB_PORT` ada di `.env`. Tidak pernah
-ketahuan karena MySQL memakai 3306, port bawaan PDO. Terhadap Supabase di 5432
-koneksinya langsung gagal, dengan pesan galat yang menyesatkan seolah host atau
-kredensial yang salah.
-
-Pelajarannya: pemindaian menemukan yang **tertulis**, bukan yang **hilang**,
-dan tidak melihat tipe data. Ketiganya baru muncul saat kodenya benar-benar
-dijalankan di atas PostgreSQL.
-
----
-
-## Keputusan yang diambil
-
-Rencana sebelumnya menyisakan tiga keputusan. Ketiganya sudah diputuskan.
-
-**1. Autentikasi — tetap memakai tabel `users` sendiri.** Supabase dipakai
-sebagai basis data biasa. `AuthService`, `LoginThrottleService`, dan alur reset
-kata sandi tidak berubah, sehingga seluruh pengujian lama tetap berlaku.
-
-**2. Dokumen — tetap di disk server.** `DokumenService` beserta pemeriksaan
-kepemilikan berkas yang sudah teruji anti-IDOR tidak perlu ditulis ulang.
-
-**3. Row Level Security — tidak menghalangi.** Aplikasi menyambung langsung
-sebagai pengguna basis data lewat PDO, bukan lewat PostgREST, sehingga RLS tidak
-ikut campur. Ini berlaku selama akses hanya lewat aplikasi. **Bila kelak ada
-klien yang mengakses lewat API Supabase, keputusan ini harus ditinjau ulang.**
-
----
-
-## Hal yang ikut membaik
-
-**Zona waktu menjadi seragam.** MySQL lokal berjalan di WIB sedangkan PHP di
-UTC, selisih 7 jam, yang pernah membuat setiap token reset kata sandi
-kedaluwarsa tepat saat dibuat. Supabase berjalan di UTC, sama dengan PHP.
-
----
-
-## Yang masih perlu perhatian
-
-- **Skema ada dua berkas.** `database/schema.sql` (MySQL) dan
+- **Skema ditulis di dua berkas.** `database/schema.sql` (MySQL) dan
   `database/schema.pgsql.sql` (PostgreSQL) harus diubah bersamaan. Perubahan
   yang hanya masuk ke salah satunya akan lolos pengujian di satu penggerak dan
-  gagal di penggerak lain.
-- **`database/UPGRADE.sql` khusus MySQL.** Berkas itu jalur perbaikan untuk
-  pemasangan lama; seluruh kolomnya sudah termuat di `schema.pgsql.sql`,
-  sehingga pemasangan Supabase yang baru tidak memerlukannya.
-- **Data uji masih ada di schema `public` Supabase.** Akun dan pengajuan hasil
-  pengujian alur perlu dibersihkan sebelum rilis.
+  gagal di penggerak lain. Jalankan `php tools/banding-skema.php` untuk
+  memeriksanya; perintah itu keluar dengan kode 1 bila keduanya berbeda.
+- **Row Level Security tidak ikut campur** selama akses hanya lewat aplikasi,
+  karena PDO menyambung langsung sebagai pengguna basis data, bukan lewat
+  PostgREST. **Bila kelak ada klien yang mengakses lewat API Supabase,
+  keputusan ini harus ditinjau ulang.**
+- **Autentikasi dan penyimpanan dokumen tidak memakai layanan Supabase.**
+  Akun tetap di tabel `users` sendiri dan berkas tetap di disk server, sehingga
+  seluruh pemeriksaan kepemilikan berkas yang sudah teruji tetap berlaku.
+- **Bersihkan data uji** dari schema `public` Supabase sebelum dipakai
+  sungguhan.
