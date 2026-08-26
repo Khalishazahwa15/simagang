@@ -62,6 +62,24 @@ Palet netral (teks, garis, langkah tidak aktif) dan warna teks status mengikuti
 [INA Digital Design System](https://design.inadigital.go.id/). Biru dan emas
 institusi ditetapkan tim sendiri.
 
+### Tiga tingkat ketebalan huruf
+
+| Bobot | Dipakai untuk |
+|---|---|
+| 400 | Badan teks, isi tabel, keterangan |
+| 500 | Label, kepala tabel, tautan navigasi, tombol |
+| 600 | Judul dan nama instansi |
+
+Bobot 700 dan 800 tidak dipakai. Judul cukup dibedakan lewat 600 dan ukuran;
+menaikkannya lebih jauh membuat halaman terasa berat dan justru menghapus
+perbedaan antara judul dan isi.
+
+`tailwind.css` mengimpor preflight ke dalam `@layer base` supaya kalah dari CSS
+proyek yang tidak berlapis, sementara utility sengaja dibiarkan tanpa lapisan
+agar tetap menang atas aturan elemen. Tanpa pengaturan itu preflight menimpa
+seluruh aturan dasar `tokens.css`, dan `h1` polos akan dirender 16px alih-alih
+mengikuti `--text-h1`.
+
 ### Ambang kontras
 
 `tests/TestJalurRusak.php` memeriksa rasio kontras setiap pasangan warna teks
