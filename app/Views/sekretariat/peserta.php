@@ -4,10 +4,10 @@
     <div class="d-flex align-center" style="margin-bottom: 20px; flex-wrap: wrap; gap: 12px; width: 100%;">
         <div style="position: relative; flex: 1 1 200px; min-width: 0;">
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input type="text" name="q" value="<?= htmlspecialchars($q ?? '') ?>" placeholder="Cari nama, institusi, atau bidang..." style="width: 100%; padding: 9px 14px 9px 36px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none;">
+            <input type="text" name="q" value="<?= htmlspecialchars($q ?? '') ?>" placeholder="Cari nama, institusi, atau bidang..." style="width: 100%; padding: 9px 14px 9px 36px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary); outline: none;">
         </div>
         
-        <select name="divisi" style="flex: 1 1 150px; min-width: 0; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary); outline: none; cursor: pointer;">
+        <select name="divisi" style="flex: 1 1 150px; min-width: 0; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); outline: none; cursor: pointer;">
             <option value="">Semua Divisi</option>
             <?php foreach ($divisiList as $d): ?>
                 <option value="<?= $d['id'] ?>" <?= ($_GET['divisi'] ?? '') == $d['id'] ? 'selected' : '' ?>>
@@ -16,7 +16,7 @@
             <?php endforeach; ?>
         </select>
         
-        <select name="status" style="flex: 1 1 150px; min-width: 0; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none; cursor: pointer;">
+        <select name="status" style="flex: 1 1 150px; min-width: 0; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary); outline: none; cursor: pointer;">
             <option value="">Semua Status</option>
             <option value="sedang_magang" <?= ($_GET['status'] ?? '') == 'sedang_magang' ? 'selected' : '' ?>>Aktif (Sedang Magang)</option>
             <option value="selesai" <?= ($_GET['status'] ?? '') == 'selesai' ? 'selected' : '' ?>>Selesai (Alumni)</option>
@@ -64,16 +64,16 @@
                                     <?= strtoupper(substr($p['nama'], 0, 1)) ?>
                                 </div>
                                 <div>
-                                    <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($p['nama']) ?></div>
+                                    <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($p['nama']) ?></div>
                                     <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);"><?= htmlspecialchars($p['nomor_pengajuan']) ?></div>
                                 </div>
                             </div>
                         </td>
                         <td style="padding: 13px 16px;">
-                            <div style="font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($p['universitas'] ?? '-') ?></div>
+                            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($p['universitas'] ?? '-') ?></div>
                             <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);"><?= htmlspecialchars($p['program_studi'] ?? '-') ?></div>
                         </td>
-                        <td style="padding: 13px 16px; font-family: var(--font-body); font-size: 13px; color: var(--text-secondary);"><?= htmlspecialchars($p['divisi_nama'] ?? '-') ?></td>
+                        <td style="padding: 13px 16px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary);"><?= htmlspecialchars($p['divisi_nama'] ?? '-') ?></td>
                         <td style="padding: 13px 16px;">
                             <div style="font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary); white-space: nowrap;"><?= $mulai->format('d M') ?> - <?= $selesai->format('d M Y') ?></div>
                             <?php if ($sisaHari > 0): ?>

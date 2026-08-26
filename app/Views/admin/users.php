@@ -1,6 +1,6 @@
 <div class="mb-6">
     <div class="d-flex align-center justify-end">
-        <button onclick="document.getElementById('modalTambahUser').style.display='flex'" style="display: flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--primary); color: var(--bg-main); border: none; border-radius: 8px; cursor: pointer; font-family: var(--font-body); font-size: 13.5px; font-weight: 600;">
+        <button onclick="document.getElementById('modalTambahUser').style.display='flex'" style="display: flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--primary); color: var(--bg-main); border: none; border-radius: 8px; cursor: pointer; font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600;">
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
             Tambah Pengguna
         </button>
@@ -11,15 +11,15 @@
     <div class="d-flex align-center" style="margin-bottom: 20px; flex-wrap: wrap; gap: 12px; width: 100%;">
         <div style="position: relative; flex: 1 1 200px; min-width: 0;">
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input type="text" name="q" placeholder="Cari nama, email, atau NPM..." value="<?= htmlspecialchars($_GET['q'] ?? '') ?>" style="width: 100%; padding: 9px 14px 9px 36px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none;">
+            <input type="text" name="q" placeholder="Cari nama, email, atau NPM..." value="<?= htmlspecialchars($_GET['q'] ?? '') ?>" style="width: 100%; padding: 9px 14px 9px 36px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary); outline: none;">
         </div>
-        <select name="role" style="flex: 1 1 150px; min-width: 0; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none; cursor: pointer;">
+        <select name="role" style="flex: 1 1 150px; min-width: 0; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary); outline: none; cursor: pointer;">
             <option value="">Semua Peran</option>
             <option value="admin" <?= ($_GET['role'] ?? '') == 'admin' ? 'selected' : '' ?>>Administrator</option>
             <option value="sekretariat" <?= ($_GET['role'] ?? '') == 'sekretariat' ? 'selected' : '' ?>>Sekretariat</option>
             <option value="mahasiswa" <?= ($_GET['role'] ?? '') == 'mahasiswa' ? 'selected' : '' ?>>Mahasiswa</option>
         </select>
-        <select name="status" style="flex: 1 1 150px; min-width: 0; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary); outline: none; cursor: pointer;">
+        <select name="status" style="flex: 1 1 150px; min-width: 0; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); outline: none; cursor: pointer;">
             <option value="">Semua Status</option>
             <option value="aktif" <?= ($_GET['status'] ?? '') == 'aktif' ? 'selected' : '' ?>>Aktif</option>
             <option value="nonaktif" <?= ($_GET['status'] ?? '') == 'nonaktif' ? 'selected' : '' ?>>Nonaktif</option>
@@ -45,7 +45,7 @@
             <tbody>
                 <?php if (empty($users)): ?>
                 <tr>
-                    <td colspan="6" style="padding: 40px; text-align: center; color: var(--text-secondary); font-size: 13.5px;">Belum ada data pengguna.</td>
+                    <td colspan="6" style="padding: 40px; text-align: center; color: var(--text-secondary); font-size: var(--text-body-sm);">Belum ada data pengguna.</td>
                 </tr>
                 <?php else: ?>
                     <?php foreach ($users as $u): 
@@ -66,11 +66,11 @@
                     ?>
                 <tr style="border-bottom: 1px solid var(--border); transition: background 0.15s; opacity: <?= $isAktif ? '1' : '0.6' ?>;">
                     <td style="padding: 13px 16px;">
-                        <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($u['nama']) ?></div>
+                        <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($u['nama']) ?></div>
                         <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary);">ID: <?= $u['id'] ?></div>
                     </td>
                     <td style="padding: 13px 16px;">
-                        <div style="font-family: var(--font-body); font-size: 13px; font-weight: 500; color: var(--text-primary);"><?= htmlspecialchars($u['email']) ?></div>
+                        <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 500; color: var(--text-primary);"><?= htmlspecialchars($u['email']) ?></div>
                     </td>
                     <td style="padding: 13px 16px;"><span class="badge" style="<?= $rStyle ?>"><?= $rLabel ?></span></td>
                     <td style="padding: 13px 16px;">
@@ -159,15 +159,15 @@
             <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?? '' ?>">
             <div style="padding: 24px;">
                 <div style="margin-bottom: 16px;">
-                    <label for="app-views-admin-users-nama" style="display: block; font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Nama Lengkap <span style="color: red;">*</span></label>
+                    <label for="app-views-admin-users-nama" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Nama Lengkap <span style="color: red;">*</span></label>
                     <input id="app-views-admin-users-nama" type="text" name="nama" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="app-views-admin-users-email" style="display: block; font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Alamat Email <span style="color: red;">*</span></label>
+                    <label for="app-views-admin-users-email" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Alamat Email <span style="color: red;">*</span></label>
                     <input id="app-views-admin-users-email" type="email" name="email" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="app-views-admin-users-role" style="display: block; font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Role Akses <span style="color: red;">*</span></label>
+                    <label for="app-views-admin-users-role" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Role Akses <span style="color: red;">*</span></label>
                     <select id="app-views-admin-users-role" name="role" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                         <option value="">-- Pilih Role --</option>
                         <option value="sekretariat">Sekretariat</option>
@@ -176,7 +176,7 @@
                     </select>
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="app-views-admin-users-password" style="display: block; font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Password Default <span style="color: red;">*</span></label>
+                    <label for="app-views-admin-users-password" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Password Default <span style="color: red;">*</span></label>
                     <input id="app-views-admin-users-password" type="password" name="password" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                 </div>
             </div>
@@ -201,15 +201,15 @@
             <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?? '' ?>">
             <div style="padding: 24px;">
                 <div style="margin-bottom: 16px;">
-                    <label for="editNama" style="display: block; font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Nama Lengkap <span style="color: red;">*</span></label>
+                    <label for="editNama" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Nama Lengkap <span style="color: red;">*</span></label>
                     <input type="text" name="nama" id="editNama" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="editEmail" style="display: block; font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Alamat Email <span style="color: red;">*</span></label>
+                    <label for="editEmail" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Alamat Email <span style="color: red;">*</span></label>
                     <input type="email" name="email" id="editEmail" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="editRole" style="display: block; font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Role Akses <span style="color: red;">*</span></label>
+                    <label for="editRole" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Role Akses <span style="color: red;">*</span></label>
                     <select name="role" id="editRole" required style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;">
                         <option value="sekretariat">Sekretariat</option>
                         <option value="admin">Administrator</option>
@@ -217,7 +217,7 @@
                     </select>
                 </div>
                 <div style="margin-bottom: 16px;">
-                    <label for="app-views-admin-users-password-2" style="display: block; font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Password Baru (Kosongkan jika tidak ingin mengubah)</label>
+                    <label for="app-views-admin-users-password-2" style="display: block; font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 8px;">Password Baru (Kosongkan jika tidak ingin mengubah)</label>
                     <input id="app-views-admin-users-password-2" type="password" name="password" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-family: var(--font-body); font-size: 14px;" placeholder="***">
                 </div>
             </div>

@@ -61,13 +61,13 @@ $stepNames = [
             <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; color: var(--text-secondary); letter-spacing: 1.1px; text-transform: uppercase; margin-bottom: 8px;">
                 Nomor Pengajuan
             </div>
-            <div style="font-family: var(--font-mono); font-size: 26px; font-weight: 600; color: var(--primary); line-height: 1.5;">
+            <div style="font-family: var(--font-mono); font-size: var(--text-h3); font-weight: 600; color: var(--primary); line-height: 1.5;">
                 <?= htmlspecialchars($pengajuan['nomor_pengajuan']) ?>
             </div>
         </div>
         
         <!-- STATUS BADGE -->
-        <div style="padding: 6px 16px; border-radius: 4px; font-family: var(--font-body); font-size: 13px; font-weight: 700; letter-spacing: 0.65px; text-transform: uppercase; <?= getStatusBadgeStyle($pengajuan['status']) ?>">
+        <div style="padding: 6px 16px; border-radius: 4px; font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.65px; text-transform: uppercase; <?= getStatusBadgeStyle($pengajuan['status']) ?>">
             <?= getStatusBadgeLabel($pengajuan['status']) ?>
         </div>
     </div>
@@ -112,11 +112,11 @@ $stepNames = [
     <!-- RIWAYAT AKTIVITAS -->
     <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px;">
         <div style="padding: 16px 24px; border-bottom: 1px solid var(--border);">
-            <div style="font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--text-primary);">Riwayat Aktivitas</div>
+            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 700; color: var(--text-primary);">Riwayat Aktivitas</div>
         </div>
         <div style="padding: 0;">
             <?php if (empty($riwayat)): ?>
-                <div style="padding: 24px; font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); text-align: center;">Belum ada riwayat aktivitas.</div>
+                <div style="padding: 24px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); text-align: center;">Belum ada riwayat aktivitas.</div>
             <?php else: ?>
                 <?php foreach (array_reverse($riwayat) as $index => $item): ?>
                 <div style="display: flex; gap: 16px; padding: 14px 24px; border-bottom: <?= $index < count($riwayat) - 1 ? '1px solid var(--border)' : 'none' ?>; align-items: flex-start;">
@@ -128,7 +128,7 @@ $stepNames = [
                     </div>
                     
                     <div>
-                        <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px;">
+                        <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 2px;">
                             <?php
                                 if ($item['status_baru'] === 'diajukan') echo 'Pengajuan Dikirimkan';
                                 elseif ($item['status_baru'] === 'dalam_verifikasi') echo 'Berkas Sedang Diperiksa';
@@ -140,7 +140,7 @@ $stepNames = [
                                 else echo 'Status Diperbarui';
                             ?>
                         </div>
-                        <div style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; line-height: 1.5;">
+                        <div style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); margin-bottom: 4px; line-height: 1.5;">
                             <?php
                                 if ($item['status_baru'] === 'diajukan') echo 'Pengajuan berhasil dikirimkan dan masuk antrean pemeriksaan.';
                                 elseif ($item['status_baru'] === 'dalam_verifikasi') echo htmlspecialchars($item['catatan'] ?: 'Berkas dinyatakan lengkap. Sekretariat sedang memproses ketersediaan divisi.');
@@ -162,7 +162,7 @@ $stepNames = [
     <?php if ($pengajuan['status'] === 'revisi'): ?>
     <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; margin-top: 8px;">
         <div style="padding: 16px 24px; border-bottom: 1px solid var(--border); background: rgba(217,165,29,0.05);">
-            <div style="font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--text-primary);">Formulir Perbaikan Dokumen</div>
+            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 700; color: var(--text-primary);">Formulir Perbaikan Dokumen</div>
         </div>
         <div style="padding: 24px;">
             <form action="<?= BASE_URL ?>/mahasiswa/pengajuan/revisi" method="POST" enctype="multipart/form-data">
@@ -197,7 +197,7 @@ $stepNames = [
     <?php if ($pengajuan['status'] === 'menunggu_konfirmasi_tawaran'): ?>
     <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; margin-top: 8px;">
         <div style="padding: 16px 24px; border-bottom: 1px solid var(--border); background: rgba(37, 99, 235, 0.05);">
-            <div style="font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--primary);">Tawaran Divisi Alternatif</div>
+            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 700; color: var(--primary);">Tawaran Divisi Alternatif</div>
         </div>
         <div style="padding: 24px;">
             <p style="font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
@@ -225,7 +225,7 @@ $stepNames = [
     <?php if ($pengajuan['status'] === 'sedang_magang'): ?>
     <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; margin-top: 8px;">
         <div style="padding: 16px 24px; border-bottom: 1px solid var(--border); background: rgba(37, 99, 235, 0.05);">
-            <div style="font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--primary);">Unggah Laporan Akhir Magang</div>
+            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 700; color: var(--primary);">Unggah Laporan Akhir Magang</div>
         </div>
         <div style="padding: 24px;">
             <p style="font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
@@ -266,7 +266,7 @@ $stepNames = [
                 <div style="font-family: var(--font-body); font-weight: 700; font-size: 14px; color: var(--text-primary); margin-bottom: 4px;">
                     Pengajuan ini sudah selesai diproses
                 </div>
-                <div style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); line-height: 1.6;">
+                <div style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); line-height: 1.6;">
                     Riwayat di atas tetap tersimpan. Anda dapat membuat pengajuan magang baru kapan saja.
                 </div>
             </div>

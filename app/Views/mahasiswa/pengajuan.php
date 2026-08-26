@@ -43,8 +43,8 @@
                 
                 <!-- Step 0: Preferensi Divisi -->
                 <div id="step-0" class="form-step">
-                    <h2 style="font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--text-primary); margin-bottom: 8px; margin-top: 0;">Preferensi Divisi / Bidang</h2>
-                    <p style="font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6;">
+                    <h2 style="font-family: var(--font-display); font-size: var(--text-h3); font-weight: 400; color: var(--text-primary); margin-bottom: 8px; margin-top: 0;">Preferensi Divisi / Bidang</h2>
+                    <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); margin-bottom: 24px; line-height: 1.6;">
                         Pilih divisi yang sesuai dengan minat dan program studi Anda. Preferensi ini <strong>tidak mengikat</strong> — penempatan final adalah keputusan Sekretariat Bappeda berdasarkan kebutuhan dan kapasitas divisi.
                     </p>
                     
@@ -72,8 +72,8 @@
                 </div>
 
                 <div id="step-1" class="form-step" style="display: none;">
-                    <h2 style="font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--text-primary); margin-bottom: 8px; margin-top: 0;">Unggah Dokumen</h2>
-                    <p style="font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary); margin-bottom: 24px;">
+                    <h2 style="font-family: var(--font-display); font-size: var(--text-h3); font-weight: 400; color: var(--text-primary); margin-bottom: 8px; margin-top: 0;">Unggah Dokumen</h2>
+                    <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); margin-bottom: 24px;">
                         Pastikan seluruh dokumen berformat PDF dan tidak melebihi batas ukuran 2MB.
                     </p>
                     
@@ -81,7 +81,7 @@
                         <label class="form-label required">Surat Lamaran / Pernyataan</label>
                         <label style="display: block; border: 1px dashed var(--border); border-radius: var(--radius-lg); padding: 24px; text-align: center; background: var(--bg-soft); cursor: pointer; transition: all 0.2s ease;">
                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
-                            <div class="text-value" style="font-size: 13px; margin-bottom: 4px;">Klik untuk mengunggah file</div>
+                            <div class="text-value" style="font-size: var(--text-body-sm); margin-bottom: 4px;">Klik untuk mengunggah file</div>
                             <div class="text-muted" style="font-size: 12px; font-family: var(--font-body);">Format PDF, Maksimal 2MB</div>
                             <input type="file" name="surat_lamaran" accept="application/pdf" style="opacity: 0; position: absolute; z-index: -1;" required>
                         </label>
@@ -91,7 +91,7 @@
                         <label class="form-label required">Curriculum Vitae (CV)</label>
                         <label style="display: block; border: 1px dashed var(--border); border-radius: var(--radius-lg); padding: 24px; text-align: center; background: var(--bg-soft); cursor: pointer; transition: all 0.2s ease;">
                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
-                            <div class="text-value" style="font-size: 13px; margin-bottom: 4px;">Klik untuk mengunggah file</div>
+                            <div class="text-value" style="font-size: var(--text-body-sm); margin-bottom: 4px;">Klik untuk mengunggah file</div>
                             <div class="text-muted" style="font-size: 12px; font-family: var(--font-body);">Format PDF, Maksimal 2MB</div>
                             <input type="file" name="cv" accept="application/pdf" style="opacity: 0; position: absolute; z-index: -1;" required>
                         </label>
@@ -101,7 +101,7 @@
                         <label class="form-label required">Transkrip Nilai</label>
                         <label style="display: block; border: 1px dashed var(--border); border-radius: var(--radius-lg); padding: 24px; text-align: center; background: var(--bg-soft); cursor: pointer; transition: all 0.2s ease;">
                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
-                            <div class="text-value" style="font-size: 13px; margin-bottom: 4px;">Klik untuk mengunggah file</div>
+                            <div class="text-value" style="font-size: var(--text-body-sm); margin-bottom: 4px;">Klik untuk mengunggah file</div>
                             <div class="text-muted" style="font-size: 12px; font-family: var(--font-body);">Format PDF, Maksimal 2MB</div>
                             <input type="file" name="transkrip" accept="application/pdf" style="opacity: 0; position: absolute; z-index: -1;" required>
                         </label>
@@ -111,7 +111,7 @@
                         <label class="form-label">Dokumen Tambahan (Opsional)</label>
                         <label style="display: block; border: 1px dashed var(--border); border-radius: var(--radius-lg); padding: 24px; text-align: center; background: var(--bg-soft); cursor: pointer; transition: all 0.2s ease;">
                             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
-                            <div class="text-value" style="font-size: 13px; margin-bottom: 4px;">Klik untuk mengunggah file</div>
+                            <div class="text-value" style="font-size: var(--text-body-sm); margin-bottom: 4px;">Klik untuk mengunggah file</div>
                             <div class="text-muted" style="font-size: 12px; font-family: var(--font-body);">Format PDF, Maksimal 2MB, misal: Portofolio</div>
                             <input type="file" name="tambahan" accept="application/pdf" style="opacity: 0; position: absolute; z-index: -1;">
                         </label>
@@ -120,18 +120,18 @@
 
                 <!-- Step 2: Review & Kirim -->
                 <div id="step-2" class="form-step" style="display: none;">
-                    <h2 style="font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--text-primary); margin-bottom: 20px; margin-top: 0;">Tinjau & Kirimkan Pengajuan</h2>
+                    <h2 style="font-family: var(--font-display); font-size: var(--text-h3); font-weight: 400; color: var(--text-primary); margin-bottom: 20px; margin-top: 0;">Tinjau & Kirimkan Pengajuan</h2>
                     
                     <div style="background: var(--bg-soft); border-radius: 8px; padding: 16px 20px; margin-bottom: 14px;">
                         <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 12px;">Pernyataan Validitas</div>
-                        <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-primary); line-height: 1.6; margin: 0;">
+                        <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary); line-height: 1.6; margin: 0;">
                             Dengan menekan tombol kirim, saya menyatakan bahwa seluruh data dan dokumen yang saya unggah adalah benar dan dapat dipertanggungjawabkan. Saya bersedia mengikuti seluruh proses seleksi dan aturan magang di Bappeda Provinsi Lampung.
                         </p>
                     </div>
 
                     <div style="background: var(--accent-soft); border: 1px solid rgba(217, 165, 29, 0.25); border-radius: 8px; padding: 14px 16px; display: flex; gap: 10px; margin-bottom: 24px;">
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="16" y2="12"/><line x1="12" x2="12.01" y1="8" y2="8"/></svg>
-                        <p style="font-family: var(--font-body); font-size: 13px; color: var(--color-warning-ink); line-height: 1.55; margin: 0;">
+                        <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--color-warning-ink); line-height: 1.55; margin: 0;">
                             Pastikan seluruh dokumen sudah benar sebelum mengirimkan. Pengajuan yang sudah dikirim akan masuk antrean pemeriksaan Sekretariat.
                         </p>
                     </div>

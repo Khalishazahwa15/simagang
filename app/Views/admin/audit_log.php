@@ -4,10 +4,10 @@
     <div class="d-flex align-center" style="margin-bottom: 20px; flex-wrap: wrap; gap: 12px; width: 100%;">
         <div style="position: relative; flex: 1 1 200px; min-width: 0;">
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input type="text" name="q" placeholder="Cari pengguna, aktivitas, atau detail..." value="<?= htmlspecialchars($_GET['q'] ?? '') ?>" style="width: 100%; padding: 9px 14px 9px 36px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none;">
+            <input type="text" name="q" placeholder="Cari pengguna, aktivitas, atau detail..." value="<?= htmlspecialchars($_GET['q'] ?? '') ?>" style="width: 100%; padding: 9px 14px 9px 36px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary); outline: none;">
         </div>
         
-        <select name="action" style="flex: 1 1 150px; min-width: 0; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none; cursor: pointer;">
+        <select name="action" style="flex: 1 1 150px; min-width: 0; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary); outline: none; cursor: pointer;">
             <option value="">Semua Aksi</option>
             <option value="update_status" <?= ($actionFilter ?? '') === 'update_status' ? 'selected' : '' ?>>Update Status</option>
             <option value="CREATE_DIVISI" <?= ($actionFilter ?? '') === 'CREATE_DIVISI' ? 'selected' : '' ?>>Buat Divisi</option>
@@ -46,16 +46,16 @@
                         <td style="padding: 13px 16px; font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary); white-space: nowrap;">
                             <?= date('d M Y H:i:s', strtotime($log['created_at'])) ?>
                         </td>
-                        <td style="padding: 13px 16px; font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-primary);">
+                        <td style="padding: 13px 16px; font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);">
                             <?= htmlspecialchars($log['user_name'] ?? 'System') ?>
                         </td>
                         <td style="padding: 13px 16px;">
                             <span class="badge" style="background: var(--bg-soft); border: 1px solid var(--border); color: var(--text-primary);"><?= htmlspecialchars($log['action']) ?></span>
                         </td>
-                        <td style="padding: 13px 16px; font-family: var(--font-body); font-size: 13px; color: var(--text-secondary);">
+                        <td style="padding: 13px 16px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary);">
                             <?= htmlspecialchars($log['entity']) ?> (ID: <?= htmlspecialchars($log['entity_id']) ?>)
                         </td>
-                        <td style="padding: 13px 16px; font-family: var(--font-body); font-size: 13px; color: var(--text-secondary);">
+                        <td style="padding: 13px 16px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary);">
                             <?= htmlspecialchars($log['details']) ?>
                         </td>
                     </tr>

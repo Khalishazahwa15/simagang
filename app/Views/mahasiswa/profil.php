@@ -15,7 +15,7 @@ foreach (\App\Models\MahasiswaProfile::FIELD_WAJIB as $kolom => $label) {
         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-warning-ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
         <div style="flex: 1;">
             <div style="font-family: var(--font-body); font-weight: 700; font-size: 14px; color: var(--color-warning-ink); margin-bottom: 4px;">Profil belum lengkap</div>
-            <div style="font-family: var(--font-body); font-size: 13px; color: var(--color-warning-ink); line-height: 1.6;">
+            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--color-warning-ink); line-height: 1.6;">
                 Data berikut belum terisi: <strong><?= htmlspecialchars(implode(', ', $profilKurang)) ?></strong>.
                 Isi kolom tersebut di formulir di bawah, lalu simpan.
             </div>

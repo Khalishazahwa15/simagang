@@ -18,7 +18,7 @@
     <!-- Alert -->
     <?php if ($flash = \App\Core\Session::getFlash('error')): ?>
         <div style="margin-bottom: 24px; padding: 12px 16px; background: var(--color-danger-soft); border-left: 4px solid var(--color-danger); border-radius: 4px;">
-            <p style="margin: 0; font-size: 13px; color: var(--color-danger-ink);"><?= htmlspecialchars($flash) ?></p>
+            <p style="margin: 0; font-size: var(--text-body-sm); color: var(--color-danger-ink);"><?= htmlspecialchars($flash) ?></p>
         </div>
     <?php endif; ?>
 
@@ -27,7 +27,7 @@
         <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?? '' ?>">
         
         <div class="form-group" style="margin-bottom: 20px;">
-            <label for="app-views-auth-reset-password-password" class="form-label" style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 13px; color: var(--text-primary);">Password Baru</label>
+            <label for="app-views-auth-reset-password-password" class="form-label" style="display: block; margin-bottom: 8px; font-weight: 600; font-size: var(--text-body-sm); color: var(--text-primary);">Password Baru</label>
             <div style="position: relative;">
                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                 <input id="app-views-auth-reset-password-password" type="password" name="password" class="form-control" style="width: 100%; height: 48px; padding: 0 16px 0 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; font-size: 14px; color: var(--text-primary); box-sizing: border-box; outline: none; transition: all 0.2s;" placeholder="••••••••" required minlength="8">
@@ -36,14 +36,14 @@
         </div>
 
         <div class="form-group" style="margin-bottom: 32px;">
-            <label for="app-views-auth-reset-password-confirm_password" class="form-label" style="display: block; margin-bottom: 8px; font-weight: 600; font-size: 13px; color: var(--text-primary);">Konfirmasi Password Baru</label>
+            <label for="app-views-auth-reset-password-confirm_password" class="form-label" style="display: block; margin-bottom: 8px; font-weight: 600; font-size: var(--text-body-sm); color: var(--text-primary);">Konfirmasi Password Baru</label>
             <div style="position: relative;">
                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                 <input id="app-views-auth-reset-password-confirm_password" type="password" name="confirm_password" class="form-control" style="width: 100%; height: 48px; padding: 0 16px 0 44px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; font-size: 14px; color: var(--text-primary); box-sizing: border-box; outline: none; transition: all 0.2s;" placeholder="••••••••" required>
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="width: 100%; height: 48px; display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--primary); color: var(--bg-card); border: none; border-radius: 8px; font-weight: 600; font-size: 14.5px; cursor: pointer; transition: background 0.2s;">
+        <button type="submit" class="btn btn-primary" style="width: 100%; height: 48px; display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--primary); color: var(--bg-card); border: none; border-radius: 8px; font-weight: 600; font-size: var(--text-body-sm); cursor: pointer; transition: background 0.2s;">
             Simpan Password Baru
         </button>
     </form>

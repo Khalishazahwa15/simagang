@@ -14,10 +14,10 @@
                 </div>
             </div>
 
-            <h1 style="font-family: var(--font-display); font-size: 40px; color: var(--bg-main); line-height: 1.18; margin-bottom: 20px;">
+            <h1 style="font-family: var(--font-display); font-size: var(--text-h2); color: var(--bg-main); line-height: 1.18; margin-bottom: 20px;">
                 Bergabunglah untuk memulai<br>pengalaman magang terbaik.
             </h1>
-            <p style="font-family: var(--font-body); font-size: 15.5px; color: rgba(255,255,255,0.72); line-height: 1.65; max-width: 440px; margin-bottom: 8px;">
+            <p style="font-family: var(--font-body); font-size: var(--text-button); color: rgba(255,255,255,0.72); line-height: 1.65; max-width: 440px; margin-bottom: 8px;">
                 Daftarkan akun dengan menggunakan email resmi instansi atau universitas Anda agar dapat mengajukan permohonan magang.
             </p>
 
@@ -191,7 +191,7 @@
                 </fieldset>
             </form>
 
-            <div style="margin-top: 28px; text-align: center; font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary);">
+            <div style="margin-top: 28px; text-align: center; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary);">
                 Sudah memiliki akun? <a href="<?= BASE_URL ?>/login" style="font-weight: 600; color: var(--primary);">Masuk di sini</a>
             </div>
         </div>
@@ -356,7 +356,7 @@
     .tahap-panel-judul {
         font-family: var(--font-body);
         font-weight: 700;
-        font-size: 13px;
+        font-size: var(--text-body-sm);
         color: var(--text-primary);
         padding: 0;
         margin-bottom: 4px;

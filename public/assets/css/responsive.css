@@ -189,7 +189,7 @@
     }
 
     .admin-header-title {
-        font-size: 26px;
+        font-size: var(--text-h3);
     }
 
     .sidebar-header {
@@ -263,7 +263,7 @@
     }
 
     table {
-        font-size: 13px;
+        font-size: var(--text-body-sm);
     }
 
     .btn-lg {

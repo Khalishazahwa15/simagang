@@ -20,7 +20,7 @@ $officialDocs = ['surat_balasan', 'surat_penerimaan_final', 'surat_tugas', 'sura
     <div>
         <div style="margin-bottom: 16px;">
             <h3 style="font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--text-primary); margin: 0 0 4px 0;">Dokumen Pengajuan Saya</h3>
-            <p style="font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary); margin: 0;">Versi lama disimpan sebagai histori — tidak dihapus saat diperbarui.</p>
+            <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); margin: 0;">Versi lama disimpan sebagai histori — tidak dihapus saat diperbarui.</p>
         </div>
         
         <div style="background: var(--bg-main); border: 1px solid var(--border); border-radius: 10px; overflow: hidden;">
@@ -54,11 +54,11 @@ $officialDocs = ['surat_balasan', 'surat_penerimaan_final', 'surat_tugas', 'sura
                         ?>
                         <tr style="border-bottom: 1px solid var(--border);">
                             <td style="padding: 13px 16px;">
-                                <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px;"><?= $label ?></div>
+                                <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 2px;"><?= $label ?></div>
                                 <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);"><?= $ext ?></div>
                             </td>
                             <td style="padding: 13px 16px;">
-                                <span style="font-family: var(--font-body); font-size: 13px; color: var(--text-primary);">v<?= $dok['version'] ?? '1' ?></span>
+                                <span style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary);">v<?= $dok['version'] ?? '1' ?></span>
                             </td>
                             <td style="padding: 13px 16px;">
                                 <span style="font-family: var(--font-body); font-size: 12.5px; color: var(--text-primary);"><?= $dateStr ?></span>
@@ -88,7 +88,7 @@ $officialDocs = ['surat_balasan', 'surat_penerimaan_final', 'surat_tugas', 'sura
             </div>
             <?php else: ?>
             <div style="padding: 48px 24px; text-align: center;">
-                <p style="font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary);">Belum ada dokumen yang diunggah.</p>
+                <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary);">Belum ada dokumen yang diunggah.</p>
             </div>
             <?php endif; ?>
         </div>
@@ -98,7 +98,7 @@ $officialDocs = ['surat_balasan', 'surat_penerimaan_final', 'surat_tugas', 'sura
     <div>
         <div style="margin-bottom: 16px;">
             <h3 style="font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--text-primary); margin: 0 0 4px 0;">Dokumen Resmi dari Bappeda</h3>
-            <p style="font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary); margin: 0;">Diterbitkan dan diunggah oleh Sekretariat setelah selesai proses administrasi.</p>
+            <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); margin: 0;">Diterbitkan dan diunggah oleh Sekretariat setelah selesai proses administrasi.</p>
         </div>
         
         <div style="background: var(--bg-main); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column;">
@@ -142,11 +142,11 @@ $officialDocs = ['surat_balasan', 'surat_penerimaan_final', 'surat_tugas', 'sura
                         ?>
                         <tr style="border-bottom: 1px solid var(--border);">
                             <td style="padding: 13px 16px;">
-                                <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px;"><?= $label ?></div>
+                                <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 2px;"><?= $label ?></div>
                                 <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);"><?= $ext ?></div>
                             </td>
                             <td style="padding: 13px 16px;">
-                                <span style="font-family: var(--font-body); font-size: 13px; color: var(--text-primary);">v<?= $dok['version'] ?? '1' ?></span>
+                                <span style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary);">v<?= $dok['version'] ?? '1' ?></span>
                             </td>
                             <td style="padding: 13px 16px;">
                                 <span style="font-family: var(--font-body); font-size: 12.5px; color: var(--text-primary);"><?= $dateStr ?></span>
@@ -171,7 +171,7 @@ $officialDocs = ['surat_balasan', 'surat_penerimaan_final', 'surat_tugas', 'sura
             </div>
             <?php else: ?>
             <div style="padding: 48px 24px; text-align: center;">
-                <p style="font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary);">Belum ada dokumen resmi yang diterbitkan.</p>
+                <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary);">Belum ada dokumen resmi yang diterbitkan.</p>
             </div>
             <?php endif; ?>
 

@@ -4,7 +4,7 @@
     <div class="d-flex align-center" style="margin-bottom: 20px; flex-wrap: wrap; gap: 12px; width: 100%;">
         <div style="position: relative; flex: 1 1 200px; min-width: 0;">
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input type="text" name="q" value="<?= htmlspecialchars($q ?? '') ?>" placeholder="Cari nama mahasiswa atau nomor pengajuan..." style="width: 100%; padding: 9px 14px 9px 36px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none;">
+            <input type="text" name="q" value="<?= htmlspecialchars($q ?? '') ?>" placeholder="Cari nama mahasiswa atau nomor pengajuan..." style="width: 100%; padding: 9px 14px 9px 36px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary); outline: none;">
         </div>
         <button type="submit" class="btn btn-primary" style="padding: 9px 16px;">Cari</button>
     </div>
@@ -28,18 +28,18 @@
                 <tr>
                     <td colspan="5" style="padding: 32px; text-align: center;">
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--border)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto 12px; display: block;"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
-                        <div style="font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary);">Tidak ada laporan akhir yang ditemukan.</div>
+                        <div style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary);">Tidak ada laporan akhir yang ditemukan.</div>
                     </td>
                 </tr>
                 <?php else: ?>
                     <?php foreach ($dokumenList as $d): ?>
                     <tr style="border-bottom: 1px solid var(--border);">
                         <td style="padding: 13px 16px;">
-                            <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($d['mahasiswa_nama']) ?></div>
+                            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($d['mahasiswa_nama']) ?></div>
                         </td>
-                        <td style="padding: 13px 16px; font-family: var(--font-body); font-size: 13px; color: var(--text-secondary);"><?= htmlspecialchars($d['nomor_pengajuan']) ?></td>
+                        <td style="padding: 13px 16px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary);"><?= htmlspecialchars($d['nomor_pengajuan']) ?></td>
                         <td style="padding: 13px 16px;">
-                            <div style="font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($d['original_filename']) ?></div>
+                            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($d['original_filename']) ?></div>
                         </td>
                         <td style="padding: 13px 16px; font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary); white-space: nowrap;"><?= date('d M Y', strtotime($d['created_at'])) ?></td>
                         <td style="padding: 13px 16px;">

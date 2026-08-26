@@ -45,11 +45,11 @@ if ($userId) {
                 </div>
                 <div style="max-height: 300px; overflow-y: auto;">
                     <?php if (empty($notifications)): ?>
-                        <div style="padding: 24px; text-align: center; color: var(--text-secondary); font-size: 13px;">Belum ada notifikasi.</div>
+                        <div style="padding: 24px; text-align: center; color: var(--text-secondary); font-size: var(--text-body-sm);">Belum ada notifikasi.</div>
                     <?php else: ?>
                         <?php foreach ($notifications as $n): ?>
                             <div style="padding: 12px 16px; border-bottom: 1px solid var(--bg-soft); <?= !$n['is_read'] ? 'background-color: var(--bg-soft);' : '' ?>">
-                                <div style="font-size: 13px; color: var(--text-primary); line-height: 1.4; margin-bottom: 4px;">
+                                <div style="font-size: var(--text-body-sm); color: var(--text-primary); line-height: 1.4; margin-bottom: 4px;">
                                     <?= htmlspecialchars($n['pesan']) ?>
                                 </div>
                                 <div style="font-size: 12px; color: var(--text-secondary);">

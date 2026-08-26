@@ -124,7 +124,7 @@ $badgeColors = [
                     <span class="info-summary-icon" aria-hidden="true"><?= ['01', '02', '03'][$i] ?></span>
                     <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;"><?= $item['label'] ?></div>
                     <div style="font-family: var(--font-display); font-size: 28px; color: var(--primary); letter-spacing: -0.01em; margin-bottom: 4px;"><?= $item['value'] ?></div>
-                    <div style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary);"><?= $item['sub'] ?></div>
+                    <div style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary);"><?= $item['sub'] ?></div>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -141,7 +141,7 @@ $badgeColors = [
                         <!-- Left: number + connector -->
                         <div style="display: flex; flex-direction: column; align-items: center; padding-top: 4px;">
                             <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                                <span style="font-family: var(--font-mono); font-size: 13px; color: var(--color-text-inverse); letter-spacing: 0.05em;"><?= $step['num'] ?></span>
+                                <span style="font-family: var(--font-mono); font-size: var(--text-body-sm); color: var(--color-text-inverse); letter-spacing: 0.05em;"><?= $step['num'] ?></span>
                             </div>
                             <?php if (!$isLast): ?>
                                 <div style="width: 2px; flex: 1; background: linear-gradient(to bottom, var(--primary), var(--border)); min-height: 40px; margin-top: 4px;"></div>
@@ -151,7 +151,7 @@ $badgeColors = [
                         <!-- Right: content -->
                         <div style="padding-left: 24px; padding-bottom: <?= $isLast ? '0' : '48px' ?>;">
                             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 6px;">
-                                <h3 style="font-family: var(--font-display); font-size: 22px; font-weight: 400; color: var(--text-primary); letter-spacing: -0.01em; margin: 0;"><?= $step['title'] ?></h3>
+                                <h3 style="font-family: var(--font-display); font-size: var(--text-h3); font-weight: 400; color: var(--text-primary); letter-spacing: -0.01em; margin: 0;"><?= $step['title'] ?></h3>
                                 <span style="background: <?= $badge['bg'] ?>; color: <?= $badge['text'] ?>; font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; padding: 3px 10px; border-radius: 99px; text-transform: uppercase;"><?= $step['badge'] ?></span>
                             </div>
                             <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 10px;"><?= $step['subtitle'] ?> &middot; <?= $step['duration'] ?></div>
@@ -177,7 +177,7 @@ $badgeColors = [
         <div class="bottom-cta">
             <div class="bottom-cta-copy">
                 <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--accent-dark); text-transform: uppercase; margin-bottom: 8px;">Siap Mengajukan?</div>
-                <h3 style="font-family: var(--font-display); font-size: 26px; font-weight: 400; color: var(--bg-main); line-height: 1.2; margin: 0;">Mulai proses pengajuan Anda sekarang</h3>
+                <h3 style="font-family: var(--font-display); font-size: var(--text-h3); font-weight: 400; color: var(--bg-main); line-height: 1.2; margin: 0;">Mulai proses pengajuan Anda sekarang</h3>
             </div>
             <div class="cta-character" aria-hidden="true"><svg viewBox="0 0 240 170" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 169c4-31 22-48 52-48s48 17 52 48H18Z" fill="#3B6FD6"/><path d="M110 169c3-28 21-45 50-45s48 17 54 45h-104Z" fill="#F0AE45"/><circle cx="70" cy="75" r="22" fill="#C9825B"/><path d="M46 74c2-24 42-32 48-1-12-7-25-8-40 4l-8-3Z" fill="#1F2937"/><path d="M51 97c9 9 27 10 37-1v26H51V97Z" fill="#F3C7A7"/><path d="M43 119c16-12 43-12 59 2l-4 48H35l8-50Z" fill="#3B6FD6"/><path d="m54 122 17 22 19-22" stroke="#E7EEFC" stroke-width="5"/><path d="m100 130 21 22" stroke="#F3C7A7" stroke-width="10" stroke-linecap="round"/><circle cx="167" cy="69" r="21" fill="#9D644A"/><path d="M145 68c1-27 44-31 49 0-10-9-31-12-46 4l-3-4Z" fill="#241C1A"/><path d="M149 90c9 9 27 10 37 0v28h-37V90Z" fill="#E9B99D"/><path d="M137 119c17-12 45-11 61 2l8 48h-78l9-50Z" fill="#F0AE45"/><path d="m150 122 18 20 19-20" stroke="#FFF8E7" stroke-width="5"/><path d="m141 132-18 19" stroke="#E9B99D" stroke-width="10" stroke-linecap="round"/></svg></div>
             <div class="cta-actions">

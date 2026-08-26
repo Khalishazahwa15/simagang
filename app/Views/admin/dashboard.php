@@ -41,7 +41,7 @@ function getBadgeLabel($status) {
         <div style="font-weight: 700; font-size: 12px; line-height: 18px; letter-spacing: 0.96px; text-transform: uppercase; color: var(--color-warning-ink); margin-bottom: 4px;">
             Ruang Lingkup Admin Sistem
         </div>
-        <div style="font-weight: 400; font-size: 13px; line-height: 1.6; color: var(--color-warning-ink);">
+        <div style="font-weight: 400; font-size: var(--text-body-sm); line-height: 1.6; color: var(--color-warning-ink);">
             Anda memiliki akses penuh untuk mengelola operasional magang sekaligus administrasi sistem (divisi dan pengguna).
         </div>
     </div>
@@ -80,13 +80,13 @@ function getBadgeLabel($status) {
         <!-- Left Column: Pending List (from Sekretariat) -->
         <div class="surface-card" style="display: flex; flex-direction: column; height: 100%;">
             <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">
-                <div style="font-weight: 700; font-size: 13px; line-height: 20px; color: var(--text-primary);">Pengajuan Terbaru</div>
+                <div style="font-weight: 700; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">Pengajuan Terbaru</div>
                 <a href="<?= BASE_URL ?>/sekretariat/pengajuan" style="font-weight: 600; font-size: 12.5px; line-height: 19px; color: var(--primary); text-decoration: none;">Lihat Semua &rarr;</a>
             </div>
             
             <div style="padding: 0; flex-grow: 1; display: flex; flex-direction: column;">
                 <?php if (empty($pengajuan_terbaru)): ?>
-                    <div style="padding: 32px 24px; text-align: center; color: var(--text-secondary); font-size: 13px;">Belum ada pengajuan yang perlu ditindaklanjuti.</div>
+                    <div style="padding: 32px 24px; text-align: center; color: var(--text-secondary); font-size: var(--text-body-sm);">Belum ada pengajuan yang perlu ditindaklanjuti.</div>
                 <?php else: ?>
                     <?php foreach ($pengajuan_terbaru as $item): ?>
                     <a href="<?= BASE_URL ?>/sekretariat/pengajuan/detail/<?= $item['id'] ?>" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border); text-decoration: none; transition: background 0.15s;" onmouseover="this.style.background='var(--bg-main)'" onmouseout="this.style.background='transparent'">
@@ -97,7 +97,7 @@ function getBadgeLabel($status) {
                                     <?= getBadgeLabel($item['status']) ?>
                                 </div>
                             </div>
-                            <div style="font-size: 13.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 2px;"><?= htmlspecialchars($item['mahasiswa_nama']) ?></div>
+                            <div style="font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 2px;"><?= htmlspecialchars($item['mahasiswa_nama']) ?></div>
                             <div style="font-size: 12px; color: var(--text-secondary);">
                                 <?php
                                     $univ = !empty($item['universitas']) ? $item['universitas'] : 'Profil belum lengkap';
@@ -118,7 +118,7 @@ function getBadgeLabel($status) {
             <!-- Status Divisi -->
             <div class="surface-card">
                 <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border);">
-                    <div style="font-weight: 700; font-size: 13px; line-height: 20px; color: var(--text-primary);">
+                    <div style="font-weight: 700; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">
                         Status Divisi
                     </div>
                     <a href="<?= BASE_URL ?>/admin/bidang" style="font-weight: 600; font-size: 12.5px; line-height: 19px; color: var(--primary); text-decoration: none;">
@@ -128,7 +128,7 @@ function getBadgeLabel($status) {
                 
                 <div style="padding: 0; max-height: 220px; overflow-y: auto;">
                     <?php if (empty($list_divisi)): ?>
-                        <div style="padding: 40px 24px; text-align: center; color: var(--text-secondary); font-size: 13px;">Belum ada data divisi.</div>
+                        <div style="padding: 40px 24px; text-align: center; color: var(--text-secondary); font-size: var(--text-body-sm);">Belum ada data divisi.</div>
                     <?php else: ?>
                         <?php foreach ($list_divisi as $index => $div): 
                             $isFull = $div['terisi'] >= $div['kapasitas'];
@@ -166,7 +166,7 @@ function getBadgeLabel($status) {
             <!-- Pengguna Internal -->
             <div class="surface-card">
                 <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border);">
-                    <div style="font-weight: 700; font-size: 13px; line-height: 20px; color: var(--text-primary);">
+                    <div style="font-weight: 700; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">
                         Tim Internal
                     </div>
                     <a href="<?= BASE_URL ?>/admin/users" style="font-weight: 600; font-size: 12.5px; line-height: 19px; color: var(--primary); text-decoration: none;">
@@ -176,7 +176,7 @@ function getBadgeLabel($status) {
                 
                 <div style="padding: 0; max-height: 200px; overflow-y: auto;">
                     <?php if (empty($list_internal)): ?>
-                        <div style="padding: 30px 24px; text-align: center; color: var(--text-secondary); font-size: 13px;">Belum ada pengguna internal terdaftar.</div>
+                        <div style="padding: 30px 24px; text-align: center; color: var(--text-secondary); font-size: var(--text-body-sm);">Belum ada pengguna internal terdaftar.</div>
                     <?php else: ?>
                         <?php foreach (array_slice($list_internal, 0, 5) as $index => $user): 
                             $isAdmin = $user['role'] === 'admin';
@@ -191,11 +191,11 @@ function getBadgeLabel($status) {
                         ?>
                         <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; gap: 12px; <?= $index < min(5, count($list_internal)) - 1 ? 'border-bottom: 0.666667px solid var(--border);' : '' ?>">
                             <div style="display: flex; align-items: center; gap: 10px; overflow: hidden;">
-                                <div style="width: 32px; height: 32px; border-radius: 16px; background: <?= $avatarBg ?>; color: <?= $avatarText ?>; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 13px; flex-shrink: 0;">
+                                <div style="width: 32px; height: 32px; border-radius: 16px; background: <?= $avatarBg ?>; color: <?= $avatarText ?>; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: var(--text-body-sm); flex-shrink: 0;">
                                     <?= $initial ?>
                                 </div>
                                 <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                                    <div style="font-weight: 600; font-size: 13px; line-height: 18px; color: var(--text-primary); margin-bottom: 2px;">
+                                    <div style="font-weight: 600; font-size: var(--text-body-sm); line-height: 18px; color: var(--text-primary); margin-bottom: 2px;">
                                         <?= htmlspecialchars($user['nama']) ?>
                                     </div>
                                     <div style="font-weight: 400; font-size: 12px; line-height: 15px; color: var(--text-secondary);">

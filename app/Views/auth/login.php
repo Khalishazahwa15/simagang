@@ -14,10 +14,10 @@
                 </div>
             </div>
 
-            <h1 style="font-family: var(--font-display); font-size: 40px; color: var(--bg-main); line-height: 1.18; margin-bottom: 20px;">
+            <h1 style="font-family: var(--font-display); font-size: var(--text-h2); color: var(--bg-main); line-height: 1.18; margin-bottom: 20px;">
                 Mulai perjalanan karir<br>profesional Anda bersama kami.
             </h1>
-            <p style="font-family: var(--font-body); font-size: 15.5px; color: rgba(255,255,255,0.72); line-height: 1.65; max-width: 440px; margin-bottom: 8px;">
+            <p style="font-family: var(--font-body); font-size: var(--text-button); color: rgba(255,255,255,0.72); line-height: 1.65; max-width: 440px; margin-bottom: 8px;">
                 Sistem Informasi Pengelolaan Magang Mahasiswa Bappeda Provinsi Lampung. Ajukan, pantau, dan kelola administrasi magang secara digital.
             </p>
 
@@ -96,7 +96,7 @@
                 <button type="submit" class="btn btn-primary btn-lg" style="width: 100%; margin-top: 12px;">Masuk</button>
             </form>
             
-            <div style="margin-top: 32px; text-align: center; font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary);">
+            <div style="margin-top: 32px; text-align: center; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary);">
                 Belum punya akun? <a href="<?= BASE_URL ?>/register" style="font-weight: 600; color: var(--primary);">Daftar sekarang</a>
             </div>
         </div>

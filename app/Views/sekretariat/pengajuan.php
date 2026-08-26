@@ -1,15 +1,15 @@
 <div class="mb-6">
-    <p class="text-muted" style="font-family: var(--font-body); font-size: 13.5px; margin: 0;"><?= isset($totalRows) ? $totalRows : '0' ?> total pengajuan ditemukan</p>
+    <p class="text-muted" style="font-family: var(--font-body); font-size: var(--text-body-sm); margin: 0;"><?= isset($totalRows) ? $totalRows : '0' ?> total pengajuan ditemukan</p>
 </div>
 
 <form method="GET" action="<?= BASE_URL ?>/sekretariat/pengajuan">
     <div class="d-flex align-center" style="margin-bottom: 20px; flex-wrap: wrap; gap: 12px; width: 100%;">
         <div style="position: relative; flex: 1 1 200px; min-width: 0;">
             <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary);"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-            <input type="text" name="q" placeholder="Cari nama / nomor pengajuan..." value="<?= htmlspecialchars($_GET['q'] ?? '') ?>" style="width: 100%; padding: 9px 14px 9px 36px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none;">
+            <input type="text" name="q" placeholder="Cari nama / nomor pengajuan..." value="<?= htmlspecialchars($_GET['q'] ?? '') ?>" style="width: 100%; padding: 9px 14px 9px 36px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary); outline: none;">
         </div>
         
-        <select name="divisi" style="flex: 1 1 150px; min-width: 0; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-secondary); outline: none; cursor: pointer;">
+        <select name="divisi" style="flex: 1 1 150px; min-width: 0; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); outline: none; cursor: pointer;">
             <option value="">Semua Divisi</option>
             <?php foreach ($divisiList as $d): ?>
                 <option value="<?= $d['id'] ?>" <?= ($_GET['divisi'] ?? '') == $d['id'] ? 'selected' : '' ?>>
@@ -18,7 +18,7 @@
             <?php endforeach; ?>
         </select>
         
-        <select name="status" style="flex: 1 1 150px; min-width: 0; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 13.5px; color: var(--text-primary); outline: none; cursor: pointer;">
+        <select name="status" style="flex: 1 1 150px; min-width: 0; padding: 9px 14px; background: var(--bg-main); border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-primary); outline: none; cursor: pointer;">
             <option value="">Semua Status</option>
             <option value="diajukan" <?= ($_GET['status'] ?? '') == 'diajukan' ? 'selected' : '' ?>>Diajukan</option>
             <option value="dalam_verifikasi" <?= ($_GET['status'] ?? '') == 'dalam_verifikasi' ? 'selected' : '' ?>>Dalam Verifikasi</option>
@@ -54,7 +54,7 @@
             <tbody>
                 <?php if (empty($pengajuan)): ?>
                 <tr>
-                    <td colspan="7" style="padding: 24px; text-align: center; color: var(--text-secondary); font-family: var(--font-body); font-size: 13.5px;">Tidak ada data pengajuan.</td>
+                    <td colspan="7" style="padding: 24px; text-align: center; color: var(--text-secondary); font-family: var(--font-body); font-size: var(--text-body-sm);">Tidak ada data pengajuan.</td>
                 </tr>
                 <?php else: ?>
                 <?php foreach ($pengajuan as $p): ?>
@@ -63,11 +63,11 @@
                         <span style="font-family: var(--font-mono); font-size: 12.5px; color: var(--primary); font-weight: 600;"><?= htmlspecialchars($p['nomor_pengajuan']) ?></span>
                     </td>
                     <td style="padding: 13px 16px;">
-                        <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($p['nama'] ?? 'Mahasiswa') ?></div>
+                        <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($p['nama'] ?? 'Mahasiswa') ?></div>
                         <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">NPM. <?= htmlspecialchars($p['nim'] ?? '-') ?> &middot; <?= htmlspecialchars($p['program_studi'] ?? '-') ?></div>
                     </td>
-                    <td style="padding: 13px 16px; font-family: var(--font-body); font-size: 13px; color: var(--text-secondary);"><?= htmlspecialchars($p['universitas'] ?? '-') ?></td>
-                    <td style="padding: 13px 16px; font-family: var(--font-body); font-size: 13px; color: var(--text-secondary);"><?= htmlspecialchars($p['nama_divisi_preferensi'] ?? '-') ?></td>
+                    <td style="padding: 13px 16px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary);"><?= htmlspecialchars($p['universitas'] ?? '-') ?></td>
+                    <td style="padding: 13px 16px; font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary);"><?= htmlspecialchars($p['nama_divisi_preferensi'] ?? '-') ?></td>
                     <td style="padding: 13px 16px;"><span class="badge badge-<?= htmlspecialchars($p['status']) ?>"><?= ucfirst(str_replace('_', ' ', htmlspecialchars($p['status']))) ?></span></td>
                     <td style="padding: 13px 16px; font-family: var(--font-body); font-size: 12.5px; color: var(--text-secondary); white-space: nowrap;"><?= date('d M Y', strtotime($p['created_at'])) ?></td>
                     <td style="padding: 13px 16px;">

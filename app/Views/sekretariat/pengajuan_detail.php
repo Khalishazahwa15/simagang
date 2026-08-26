@@ -25,7 +25,7 @@ foreach ($divisi as $d) {
             <div style="width: 1px; height: 24px; background: var(--border);"></div>
             <span class="text-mono" style="font-size: 16px; color: var(--primary); font-weight: 600;"><?= htmlspecialchars($pengajuan['nomor_pengajuan']) ?></span>
         </div>
-        <div class="badge badge-<?= htmlspecialchars($pengajuan['status']) === 'diajukan' ? 'menunggu_verifikasi' : 'disetujui' ?>" style="font-size: 13px; padding: 6px 14px; text-transform: uppercase;">
+        <div class="badge badge-<?= htmlspecialchars($pengajuan['status']) === 'diajukan' ? 'menunggu_verifikasi' : 'disetujui' ?>" style="font-size: var(--text-body-sm); padding: 6px 14px; text-transform: uppercase;">
             <?= htmlspecialchars(str_replace('_', ' ', $pengajuan['status'])) ?>
         </div>
     </div>
@@ -103,7 +103,7 @@ foreach ($divisi as $d) {
                     ?>
                     
                     <?php if (empty($dokMahasiswa)): ?>
-                        <div class="text-muted" style="font-size: 13.5px;">Belum ada dokumen mahasiswa yang diunggah.</div>
+                        <div class="text-muted" style="font-size: var(--text-body-sm);">Belum ada dokumen mahasiswa yang diunggah.</div>
                     <?php else: ?>
                         <?php foreach ($dokMahasiswa as $doc): ?>
                         <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border);">
@@ -112,7 +112,7 @@ foreach ($divisi as $d) {
                                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
                                 </div>
                                 <div>
-                                    <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($doc['jenis_dokumen']) ?></div>
+                                    <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars($doc['jenis_dokumen']) ?></div>
                                     <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">PDF &middot; Diunggah</div>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@ foreach ($divisi as $d) {
                 <div class="text-overline">DOKUMEN RESMI BAPPEDA</div>
                 <div class="d-flex flex-column gap-2 mt-2">
                     <?php if (empty($dokBappeda)): ?>
-                        <div class="text-muted" style="font-size: 13.5px;">Belum ada dokumen resmi dari Bappeda.</div>
+                        <div class="text-muted" style="font-size: var(--text-body-sm);">Belum ada dokumen resmi dari Bappeda.</div>
                     <?php else: ?>
                         <?php foreach ($dokBappeda as $doc): ?>
                         <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border);">
@@ -143,7 +143,7 @@ foreach ($divisi as $d) {
                                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
                                 </div>
                                 <div>
-                                    <div style="font-family: var(--font-body); font-size: 13.5px; font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars(str_replace('_', ' ', ucwords($doc['jenis_dokumen'], '_'))) ?></div>
+                                    <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);"><?= htmlspecialchars(str_replace('_', ' ', ucwords($doc['jenis_dokumen'], '_'))) ?></div>
                                     <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">PDF &middot; Terbit</div>
                                 </div>
                             </div>
@@ -199,7 +199,7 @@ foreach ($divisi as $d) {
                 <h3 class="card-title">Finalisasi Penempatan</h3>
             </div>
             <div class="card-body">
-                <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-top: 0; margin-bottom: 16px;">
+                <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); line-height: 1.6; margin-top: 0; margin-bottom: 16px;">
                     Mahasiswa telah <strong>menyetujui</strong> tawaran divisi
                     <strong><?= htmlspecialchars($namaDivisiTawaran ?: 'yang ditawarkan') ?></strong>.
                     Tekan tombol di bawah untuk menetapkannya sebagai penempatan final &mdash;
@@ -220,7 +220,7 @@ foreach ($divisi as $d) {
                 <h3 class="card-title">Mulai Verifikasi</h3>
             </div>
             <div class="card-body">
-                <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-top: 0; margin-bottom: 16px;">Berkas ini belum ditandai sedang diperiksa. Membuka halaman tidak mengubah statusnya. Tekan tombol di bawah untuk memindahkan status ke <strong>Dalam Verifikasi</strong>.</p>
+                <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); line-height: 1.6; margin-top: 0; margin-bottom: 16px;">Berkas ini belum ditandai sedang diperiksa. Membuka halaman tidak mengubah statusnya. Tekan tombol di bawah untuk memindahkan status ke <strong>Dalam Verifikasi</strong>.</p>
                 <form action="<?= BASE_URL ?>/sekretariat/pengajuan/detail/<?= $pengajuan['id'] ?>" method="POST">
                     <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?? '' ?>">
                     <input type="hidden" name="action" value="mulai_verifikasi">
@@ -236,7 +236,7 @@ foreach ($divisi as $d) {
                 <h3 class="card-title">Menunggu Jawaban Mahasiswa</h3>
             </div>
             <div class="card-body">
-                <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+                <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); line-height: 1.6; margin: 0;">
                     Divisi <strong><?= htmlspecialchars($pengajuan['nama_divisi_tawaran'] ?: 'alternatif') ?></strong>
                     sudah ditawarkan kepada mahasiswa. Keputusan tidak dapat diubah sampai yang bersangkutan
                     menerima atau menolak tawaran tersebut.
@@ -251,7 +251,7 @@ foreach ($divisi as $d) {
                 <h3 class="card-title">Menunggu Perbaikan Berkas</h3>
             </div>
             <div class="card-body">
-                <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+                <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); line-height: 1.6; margin: 0;">
                     Pengajuan sudah dikembalikan kepada mahasiswa untuk diperbaiki. Panel keputusan akan
                     muncul kembali setelah berkas yang diperbaiki diajukan ulang dan diperiksa.
                 </p>
@@ -269,7 +269,7 @@ foreach ($divisi as $d) {
                     <input type="hidden" name="csrf_token" value="<?= \App\Core\Session::get('csrf_token') ?? '' ?>">
                     <input type="hidden" name="pengajuan_id" value="<?= htmlspecialchars($pengajuan['id']) ?>">
                     
-                    <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-top: 0; margin-bottom: 16px;">Tentukan hasil pemeriksaan kelengkapan berkas dan alokasi penempatan.</p>
+                    <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); line-height: 1.6; margin-top: 0; margin-bottom: 16px;">Tentukan hasil pemeriksaan kelengkapan berkas dan alokasi penempatan.</p>
                     
                     <div class="form-group">
                         <label for="verifikasiStatus" class="form-label required">Keputusan</label>
@@ -372,7 +372,7 @@ foreach ($divisi as $d) {
                 <div style="text-align: center; padding: 20px;">
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
                     <h3 style="font-family: var(--font-display); font-size: 18px; color: var(--text-primary); margin-bottom: 8px;">Pengajuan Telah Diproses</h3>
-                    <p style="font-size: 13.5px; color: var(--text-secondary);">Status saat ini: <?= htmlspecialchars(str_replace('_', ' ', strtoupper($pengajuan['status']))) ?></p>
+                    <p style="font-size: var(--text-body-sm); color: var(--text-secondary);">Status saat ini: <?= htmlspecialchars(str_replace('_', ' ', strtoupper($pengajuan['status']))) ?></p>
                 </div>
             </div>
         </div>
@@ -421,7 +421,7 @@ foreach ($divisi as $d) {
                     <button type="submit" class="btn btn-primary" style="width: 100%; background: var(--primary); color: white;" onclick="return confirm('Tandai mahasiswa ini telah menyelesaikan magang?')">Tandai Magang Selesai</button>
                 </form>
                 <?php elseif ($pengajuan['status'] === 'selesai'): ?>
-                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--color-success-soft); border: 1px solid var(--color-success-border); border-radius: 8px; color: var(--color-success-ink); font-size: 13.5px;">
+                <div style="display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--color-success-soft); border: 1px solid var(--color-success-border); border-radius: 8px; color: var(--color-success-ink); font-size: var(--text-body-sm);">
                     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     <span>Magang sudah ditandai selesai. Anda tetap bisa mengunggah dokumen tambahan (sertifikat, laporan penilaian, dll) di atas kapan saja.</span>
                 </div>
@@ -441,7 +441,7 @@ foreach ($divisi as $d) {
                 <h3 class="card-title" style="color: var(--color-danger);">Verifikasi Pengunduran Diri</h3>
             </div>
             <div class="card-body">
-                <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Mahasiswa ini telah mengajukan pengunduran diri. Silakan periksa surat pengunduran diri yang dilampirkan.</p>
+                <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); margin-bottom: 12px;">Mahasiswa ini telah mengajukan pengunduran diri. Silakan periksa surat pengunduran diri yang dilampirkan.</p>
                 <a href="<?= BASE_URL ?>/sekretariat/dokumen/download/<?= $suratMundur['id'] ?>" target="_blank" class="btn btn-outline" style="width: 100%; margin-bottom: 16px; justify-content: center; border-color: var(--color-danger-border); color: var(--color-danger);">Unduh Surat Pengunduran Diri</a>
                 
                 <form action="<?= BASE_URL ?>/sekretariat/pengajuan/detail/<?= $pengajuan['id'] ?>/verifikasi-mundur" method="POST">

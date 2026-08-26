@@ -42,11 +42,11 @@ $dokDesc = 'Berkas terunggah';
     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-warning-ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
     <div style="flex: 1;">
         <div style="font-family: var(--font-body); font-weight: 700; font-size: 14px; color: var(--color-warning-ink); margin-bottom: 4px;">Lengkapi profil dulu sebelum mengajukan magang</div>
-        <div style="font-family: var(--font-body); font-size: 13px; color: var(--color-warning-ink); line-height: 1.6;">
+        <div style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--color-warning-ink); line-height: 1.6;">
             Data berikut belum terisi: <strong><?= htmlspecialchars(implode(', ', $profilKurang)) ?></strong>.
             Formulir pengajuan magang baru bisa dibuka setelah semuanya lengkap.
         </div>
-        <a href="<?= BASE_URL ?>/mahasiswa/profil" style="display: inline-block; margin-top: 12px; padding: 8px 16px; background: var(--color-warning-ink); color: var(--color-warning-soft); text-decoration: none; border-radius: 6px; font-family: var(--font-body); font-size: 13px; font-weight: 600;">Lengkapi Profil</a>
+        <a href="<?= BASE_URL ?>/mahasiswa/profil" style="display: inline-block; margin-top: 12px; padding: 8px 16px; background: var(--color-warning-ink); color: var(--color-warning-soft); text-decoration: none; border-radius: 6px; font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600;">Lengkapi Profil</a>
     </div>
 </div>
 <?php endif; ?>
@@ -109,7 +109,7 @@ $dokDesc = 'Berkas terunggah';
     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-warning-ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
     <div>
         <div style="font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--color-warning-ink); margin-bottom: 4px;">Terdapat Permintaan Revisi</div>
-        <div style="font-family: var(--font-body); font-size: 13px; color: var(--color-warning-ink);">Mohon segera perbaiki dokumen atau data Anda sesuai dengan catatan yang diberikan pada halaman Status Pengajuan.</div>
+        <div style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--color-warning-ink);">Mohon segera perbaiki dokumen atau data Anda sesuai dengan catatan yang diberikan pada halaman Status Pengajuan.</div>
     </div>
 </div>
 <?php elseif ($pengajuan && in_array($pengajuan['status'], ['diterima', 'sedang_magang'])): ?>
@@ -117,7 +117,7 @@ $dokDesc = 'Berkas terunggah';
     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
     <div>
         <div style="font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--primary-dark); margin-bottom: 4px;">Selamat! Anda telah diterima.</div>
-        <div style="font-family: var(--font-body); font-size: 13px; color: var(--primary-dark);">Silakan cek menu Dokumen untuk mengunduh Surat Penerimaan Final. Pastikan Anda hadir pada tanggal mulai magang.</div>
+        <div style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--primary-dark);">Silakan cek menu Dokumen untuk mengunduh Surat Penerimaan Final. Pastikan Anda hadir pada tanggal mulai magang.</div>
     </div>
 </div>
 <?php endif; ?>
@@ -128,7 +128,7 @@ $dokDesc = 'Berkas terunggah';
     <div class="surface-card" style="display: flex; flex-direction: column; height: 100%;">
         <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">
             <div>
-                <div style="font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px;">Informasi Magang</div>
+                <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 700; color: var(--text-primary); margin-bottom: 2px;">Informasi Magang</div>
                 <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">Detail penempatan dan periode</div>
             </div>
             <a href="<?= BASE_URL ?>/mahasiswa/pengajuan" style="font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--primary); text-decoration: none;">Kelola &rarr;</a>
@@ -136,7 +136,7 @@ $dokDesc = 'Berkas terunggah';
         <div style="padding: 0; flex-grow: 1; display: flex; flex-direction: column; overflow: hidden; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
             <?php if (!$pengajuan): ?>
                 <div style="padding: 48px 24px; text-align: center;">
-                    <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); margin-bottom: 16px;">Anda belum memiliki pengajuan magang aktif.</p>
+                    <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); margin-bottom: 16px;">Anda belum memiliki pengajuan magang aktif.</p>
                     <a href="<?= BASE_URL ?>/mahasiswa/pengajuan" class="btn btn-primary" style="padding: 8px 16px;">Mulai Pengajuan Baru</a>
                 </div>
             <?php else: ?>
@@ -177,7 +177,7 @@ $dokDesc = 'Berkas terunggah';
     <div class="surface-card" style="display: flex; flex-direction: column; height: 100%;">
         <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">
             <div>
-                <div style="font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--text-primary); margin-bottom: 2px;">Aktivitas Terbaru</div>
+                <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 700; color: var(--text-primary); margin-bottom: 2px;">Aktivitas Terbaru</div>
                 <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">Riwayat progres Anda</div>
             </div>
             <a href="<?= BASE_URL ?>/mahasiswa/status" style="font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--primary); text-decoration: none;">Lihat Semua &rarr;</a>
@@ -185,7 +185,7 @@ $dokDesc = 'Berkas terunggah';
         <div style="padding: 0; flex-grow: 1; display: flex; flex-direction: column; overflow: hidden; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
             <?php if (empty($riwayat)): ?>
                 <div style="padding: 32px 24px; text-align: center;">
-                    <p style="font-family: var(--font-body); font-size: 13px; color: var(--text-secondary); margin: 0;">Belum ada aktivitas tercatat.</p>
+                    <p style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); margin: 0;">Belum ada aktivitas tercatat.</p>
                 </div>
             <?php else: ?>
                 <?php 
@@ -198,7 +198,7 @@ $dokDesc = 'Berkas terunggah';
                     </div>
                     
                     <div>
-                        <div style="font-family: var(--font-body); font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">
+                        <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 4px;">
                             <?php
                                 if ($item['status_baru'] === 'diajukan') echo 'Pengajuan Dikirimkan';
                                 elseif ($item['status_baru'] === 'dalam_verifikasi') echo 'Berkas Sedang Diperiksa';

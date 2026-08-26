@@ -6,7 +6,7 @@
     <section class="relative border-b border-slate-200 bg-slate-50">
         <div class="mx-auto grid min-h-[560px] max-w-7xl items-center gap-10 px-6 py-14 sm:px-8 lg:grid-cols-2 lg:px-12 lg:py-16">
             <div class="relative z-10 max-w-xl">
-                <div class="mb-6 inline-flex items-center rounded-full border border-accent-soft bg-accent-soft px-3 py-1 text-[11px] font-bold uppercase tracking-[0.12em] text-accent-ink">Sistem Informasi Magang</div>
+                <div class="mb-6 inline-flex items-center rounded-full border border-accent-soft bg-accent-soft px-3 py-1 text-xs font-bold uppercase tracking-[0.12em] text-accent-ink">Sistem Informasi Magang</div>
                 <h1 class="mb-6 text-4xl font-bold leading-[1.08] tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">Mulai perjalanan<br><span class="text-primary">magangmu</span><br>dengan lebih mudah.</h1>
                 <p class="mb-8 max-w-md text-base leading-7 text-slate-600">SIMAGANG membantu mahasiswa melakukan pengajuan magang di Bappeda Provinsi Lampung secara lebih mudah, transparan, dan terstruktur.</p>
                 <div class="flex flex-wrap gap-3">
