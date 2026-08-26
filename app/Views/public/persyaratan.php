@@ -107,7 +107,7 @@ $divisiList = $divisiData ?? [];
     }
     
     .accordion-header.active .accordion-icon {
-        color: var(--primary);
+        color: var(--color-primary-dark);
         transform: rotate(45deg);
     }
     

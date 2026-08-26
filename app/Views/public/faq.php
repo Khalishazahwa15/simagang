@@ -144,15 +144,15 @@ $categories = [
     .cat-count {
         float: right;
         font-family: var(--font-mono);
-        font-size: 12px;
-        color: var(--text-muted);
+        font-size: var(--text-micro);
+        color: var(--color-text-secondary);
         background: var(--border);
         border-radius: 99px;
         padding: 1px 7px;
     }
     
     .cat-btn.active .cat-count {
-        color: var(--primary);
+        color: var(--color-primary-dark);
         background: var(--bg-main);
     }
     

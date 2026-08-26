@@ -822,7 +822,7 @@ summary:focus-visible,
 }
 
 .public-faq-page .cat-btn.active .cat-count {
-    color: var(--primary);
+    color: var(--color-primary-dark);
 }
 
 @media (max-width: 768px) {

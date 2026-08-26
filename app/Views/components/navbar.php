@@ -17,7 +17,7 @@ $currentPage = $currentPage ?? 'beranda';
                 <div class="text-base font-bold leading-tight text-primary-dark">
                     SIMAGANG
                 </div>
-                <div class="text-xs leading-tight text-slate-400">
+                <div class="text-xs leading-tight text-slate-600">
                     BAPPEDA PROVINSI LAMPUNG
                 </div>
             </div>
