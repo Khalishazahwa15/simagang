@@ -219,13 +219,14 @@ h3 {
     font-weight: 600;
 }
 
-a {
+/* :where() menolkan spesifisitas agar kelas utility selalu menang. */
+:where(a) {
     color: var(--primary);
     text-decoration: none;
     transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
 }
 
-a:hover {
+:where(a:hover) {
     color: var(--primary-dark);
 }
 

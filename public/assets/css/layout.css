@@ -548,7 +548,7 @@
     gap: var(--space-6);
     padding: 28px 32px 24px 24px;
     border-radius: var(--radius-xl);
-    background: var(--primary);
+    background: var(--color-primary-dark);
     border: 1px solid rgba(255, 250, 242, 0.1);
     box-shadow: var(--shadow-md);
 }
