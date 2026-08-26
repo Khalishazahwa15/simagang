@@ -1,13 +1,7 @@
 <?php
 /**
- * Pendaftaran autoloader.
- *
- * Dipakai bersama oleh front controller dan seluruh skrip baris perintah
- * (seeder, pengujian, perkakas). Sebelumnya autoloader PHPMailer hanya
- * terdaftar di public/index.php, sehingga skrip CLI yang mencoba mengirim
- * email berhenti dengan "Class PHPMailer not found".
- *
- * ROOT_PATH dan APP_PATH harus sudah terdefinisi sebelum berkas ini dimuat.
+ * Autoloader bersama front controller dan skrip CLI (seeder, tes, perkakas).
+ * ROOT_PATH dan APP_PATH harus terdefinisi sebelum berkas ini dimuat.
  */
 
 spl_autoload_register(function ($class) {

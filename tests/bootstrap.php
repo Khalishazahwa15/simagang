@@ -1,15 +1,8 @@
 <?php
 /**
- * Penyiapan lingkungan pengujian.
- *
- * Seluruh berkas tes memuat berkas ini lebih dulu. Tujuannya satu: pengujian
- * tidak boleh menyentuh basis data yang dipakai sehari-hari. Sebelumnya tes
- * menulis langsung ke simagang_db sehingga meninggalkan pengguna dan log audit
- * palsu setiap kali dijalankan.
- *
- * Basis data uji dibuat ulang dari nol setiap kali dijalankan, memakai
- * database/schema.sql yang sama dengan produksi, lalu diisi seeder.
- * Nama basis datanya dapat diganti lewat variabel lingkungan SIMAGANG_TEST_DB.
+ * Penyiapan lingkungan pengujian; dimuat lebih dulu oleh seluruh berkas tes.
+ * Basis data uji terpisah dan dibangun ulang tiap kali dari database/schema.sql,
+ * lalu diisi seeder. Namanya dapat diganti lewat SIMAGANG_TEST_DB.
  */
 
 define('ROOT_PATH', dirname(__DIR__));

@@ -365,10 +365,6 @@ class SekretariatController extends Controller {
     }
 
     /**
-     * Penyaring periode dan divisi yang dipakai bersama oleh halaman Laporan
-     * dan ekspor CSV, agar angka di layar selalu sama dengan isi berkas.
-     */
-    /**
      * Tulis satu baris CSV setelah menetralkan sel yang bisa ditafsirkan
      * Excel sebagai rumus. Nama mahasiswa berisi "=cmd|..." misalnya, akan
      * dieksekusi saat berkasnya dibuka bila tidak dinetralkan lebih dulu.
@@ -385,6 +381,10 @@ class SekretariatController extends Controller {
         fputcsv($output, $aman);
     }
 
+    /**
+     * Penyaring periode dan divisi yang dipakai bersama oleh halaman Laporan
+     * dan ekspor CSV, agar angka di layar selalu sama dengan isi berkas.
+     */
     private function filterLaporan() {
         $dari = trim($_GET['dari'] ?? '');
         $sampai = trim($_GET['sampai'] ?? '');

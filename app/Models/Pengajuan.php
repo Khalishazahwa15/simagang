@@ -51,11 +51,7 @@ class Pengajuan extends Model {
         return $stmt->execute([$nomorPengajuan, $id]);
     }
 
-    /**
-     * Jumlah pengajuan per status dalam satu kueri.
-     * Dasbor sebelumnya menjalankan satu COUNT terpisah untuk tiap status,
-     * padahal seluruh angkanya ada di hasil GROUP BY yang sama.
-     */
+    /** Jumlah pengajuan per status dalam satu kueri GROUP BY. */
     public function hitungPerStatus() {
         $stmt = $this->db->query("SELECT status, COUNT(*) AS jumlah FROM {$this->table} GROUP BY status");
 

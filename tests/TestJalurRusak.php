@@ -440,9 +440,7 @@ $berkasPalsu2 = [
 $mulaiSah = (new DateTime('today'))->modify('+30 days')->format('Y-m-d');
 $selesaiSah = (new DateTime('today'))->modify('+120 days')->format('Y-m-d');
 
-// Setiap status akhir harus melepas kunci; sebelumnya hanya ditolak dan
-// selesai yang dikenali, sehingga mahasiswa yang menolak tawaran divisi
-// terkunci selamanya.
+// Setiap status akhir harus melepas kunci pengajuan.
 foreach ($diharapkan as $st) {
     $db->exec("DELETE FROM pengajuan");
     $stmt = $db->prepare("INSERT INTO pengajuan (nomor_pengajuan, user_id, divisi_id_preferensi, tanggal_mulai_rencana, tanggal_selesai_rencana, status)

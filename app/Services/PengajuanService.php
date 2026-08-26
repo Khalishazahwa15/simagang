@@ -106,9 +106,7 @@ class PengajuanService {
         $existing = $this->pengajuanModel->findByUserId($userId);
         if (!empty($existing)) {
             $latest = $existing[0];
-            // Daftar sebelumnya hanya memuat 'ditolak' dan 'selesai', sehingga
-            // mahasiswa yang menolak tawaran divisi atau mengundurkan diri
-            // terkunci selamanya. Keduanya status akhir, bukan pengajuan aktif.
+            // Semua status final melepas kunci, bukan hanya ditolak dan selesai.
             if (!in_array($latest['status'], $this->statusService->statusFinal())) {
                 throw new \Exception("Anda masih memiliki pengajuan yang sedang diproses. Pengajuan baru dapat dibuat setelah pengajuan tersebut selesai, ditolak, atau dibatalkan.");
             }

@@ -6,6 +6,7 @@ use App\Core\Logger;
 
 
 
+/** Menyelaraskan status pengajuan menurut tanggal. Tanpa cron; dipanggil saat App boot. */
 class SyncStatusService {
     private $db;
     private $statusService;
@@ -15,11 +16,6 @@ class SyncStatusService {
         $this->statusService = new StatusService();
     }
 
-    /**
-     * Sinkronisasi status pengajuan secara otomatis berdasarkan tanggal.
-     * Karena tidak ada cron job, fungsi ini akan dipanggil secara "lazy" 
-     * setiap kali aplikasi diakses, yaitu saat App melakukan boot.
-     */
     // Jeda minimum antar pemindaian. Tanggal berubah sekali sehari, jadi
     // memindai lebih sering dari ini tidak menghasilkan apa pun.
     const JEDA_MENIT = 10;
