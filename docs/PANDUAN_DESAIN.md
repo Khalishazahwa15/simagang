@@ -95,9 +95,13 @@ dan foto itu gagal dimuat.
 
 | Berkas | Isi | Sumber dan status |
 |---|---|---|
-| `logo-lampung.png` | Lambang Provinsi Lampung, 320x460 | Situs resmi Bappeda Provinsi Lampung. Domain publik menurut Pasal 43 UU 28/2014 tentang Hak Cipta, karena merupakan lambang yang diterbitkan pemerintah |
-| `logo-lampung-kecil.png` | Versi 96x138 untuk navbar dan sidebar | sama |
+| `bappeda-logo.png` | Logo Bappeda Lampung, 480x429 | Diberikan tim. Latar putihnya dijadikan transparan dan bingkainya dirapatkan |
+| `bappeda-logo-kecil.png` | Versi 160x143 untuk navbar, sidebar, dan halaman masuk | sama |
 | `menara-siger.jpg` | Menara Siger di Bakauheni, 1600x717 | Wikimedia Commons, `Port of Bakauheni and Siger Tower.JPG` oleh Sakurai Midori, lisensi CC BY 2.5 |
+
+Tulisan "LAMPUNG" pada logo berwarna hitam, sehingga logonya hanya terbaca di
+atas latar terang. Pada panel biru tua halaman masuk dan daftar, logo diletakkan
+di atas alas putih; jangan menempatkannya langsung di atas warna gelap.
 
 Foto Menara Siger dipotong dari berkas aslinya untuk membuang papan iklan
 komersial yang ada di bagian bawah bingkai.

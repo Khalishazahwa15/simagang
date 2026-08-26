@@ -6,7 +6,7 @@
 
         <div style="position: relative; z-index: 1;">
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 48px;">
-                <img src="<?= aset('assets/img/logo-lampung-kecil.png') ?>" alt="Lambang Provinsi Lampung" style="height: 48px; width: auto;">
+                <div style="display: inline-flex; align-items: center; justify-content: center; padding: 6px 10px; background: var(--color-surface); border-radius: 8px;"><img src="<?= aset('assets/img/bappeda-logo-kecil.png') ?>" alt="Logo Bappeda Provinsi Lampung" style="height: 36px; width: auto; display: block;"></div>
                 <div>
                     <div style="font-family: var(--font-body); font-weight: 600; font-size: 20px; color: var(--bg-main); line-height: 1.2;">SIMAGANG</div>
                     <div style="font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.65); letter-spacing: 0.1em; text-transform: uppercase;">BAPPEDA LAMPUNG</div>
@@ -47,7 +47,7 @@
     <div style="flex: 1; display: flex; align-items: center; justify-content: center; background-color: var(--bg-main); padding: 32px;">
         <div style="width: 100%; max-width: 400px;">
             <div class="mobile-logo-only" style="display: none; margin-bottom: 32px; align-items: center; gap: 12px;">
-                <img src="<?= aset('assets/img/logo-lampung-kecil.png') ?>" alt="Lambang Provinsi Lampung" style="height: 40px; width: auto;">
+                <div style="display: inline-flex; align-items: center; justify-content: center; padding: 6px 10px; background: var(--color-surface); border-radius: 8px;"><img src="<?= aset('assets/img/bappeda-logo-kecil.png') ?>" alt="Logo Bappeda Provinsi Lampung" style="height: 30px; width: auto; display: block;"></div>
                 <div>
                     <div style="font-family: var(--font-body); font-weight: 600; font-size: 18px; color: var(--text-primary); line-height: 1.2;">SIMAGANG</div>
                 </div>

@@ -47,7 +47,7 @@
 /* Lambang punya warna sendiri, jadi tanpa latar maupun bingkai. */
 .brand-logo {
     width: auto;
-    height: 36px;
+    height: 42px;
     flex-shrink: 0;
     object-fit: contain;
 }
