@@ -31,7 +31,7 @@ $tautanEkspor = function ($preset) use ($filterAktif) {
     return BASE_URL . '/sekretariat/laporan/export?' . http_build_query(array_merge(['filter' => $preset], $filterAktif));
 };
 ?>
-<div style="font-family: 'Plus Jakarta Sans', sans-serif; max-width: 1040px; display: flex; flex-direction: column; gap: 20px;">
+<div style="font-family: var(--font-body); max-width: 1040px; display: flex; flex-direction: column; gap: 20px;">
 
     <form method="GET" action="<?= BASE_URL ?>/sekretariat/laporan">
         <div class="d-flex align-center" style="flex-wrap: wrap; gap: 12px; width: 100%;">

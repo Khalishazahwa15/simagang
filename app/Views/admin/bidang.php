@@ -1,4 +1,4 @@
-<div style="font-family: 'Plus Jakarta Sans', sans-serif; max-width: 1040px;">
+<div style="font-family: var(--font-body); max-width: 1040px;">
     
     <!-- Top Action -->
     <div style="display: flex; justify-content: flex-end; margin-bottom: 16px;">
