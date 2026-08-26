@@ -249,6 +249,8 @@ $categories = [
                     </p>
                     <div style="font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 4px;">Email</div>
                     <div style="font-family: var(--font-mono); font-size: 12px; color: var(--primary);">bappeda@lampungprov.go.id</div>
+                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-top: 10px; margin-bottom: 4px;">Telepon</div>
+                    <div style="font-family: var(--font-mono); font-size: 12px; color: var(--primary);">(0721) 485458</div>
                     <div style="font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; color: var(--text-secondary); text-transform: uppercase; margin-top: 10px; margin-bottom: 4px;">Jam Kerja</div>
                     <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">Senin–Jumat, 08.00–16.00 WIB</div>
                 </div>
