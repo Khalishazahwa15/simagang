@@ -287,7 +287,7 @@ foreach ($divisi as $d) {
                             <label class="form-label">Bidang/Divisi Final</label>
                             <div class="form-control" style="background: var(--bg-soft); display: flex; align-items: center; justify-content: space-between; gap: 12px;">
                                 <span><?= htmlspecialchars($pengajuan['nama_divisi'] ?: 'Belum ada preferensi') ?></span>
-                                <span style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary);">Terkunci</span>
+                                <span style="font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-secondary);">Terkunci</span>
                             </div>
                             <div class="form-help">Mengikuti preferensi yang dipilih mahasiswa saat mendaftar. Untuk menempatkan di divisi lain, pilih keputusan <strong>Tawarkan Divisi Alternatif</strong> agar mahasiswa dapat menyetujuinya lebih dulu.</div>
                         </div>

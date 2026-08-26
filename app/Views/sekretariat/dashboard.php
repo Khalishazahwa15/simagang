@@ -34,7 +34,7 @@ function getBadgeLabel($status) {
 }
 ?>
 
-<div style="display: flex; flex-direction: column; gap: 24px; max-width: 1040px; font-family: var(--font-body);">
+<div style="display: flex; flex-direction: column; gap: 24px; font-family: var(--font-body);">
     
     <!-- 4 Summary Cards -->
     <div class="grid-4 dashboard-stats">
@@ -74,7 +74,7 @@ function getBadgeLabel($status) {
         <!-- Left Column: Pending List -->
         <div class="surface-card" style="display: flex; flex-direction: column; height: 100%;">
             <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">
-                <div style="font-weight: 700; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">Pengajuan Terbaru</div>
+                <div style="font-weight: 600; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">Pengajuan Terbaru</div>
                 <a href="<?= BASE_URL ?>/sekretariat/pengajuan" style="font-weight: 600; font-size: 12.5px; line-height: 19px; color: var(--primary); text-decoration: none;">Lihat Semua &rarr;</a>
             </div>
             
@@ -87,7 +87,7 @@ function getBadgeLabel($status) {
                         <div>
                             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
                                 <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--primary);"><?= htmlspecialchars($item['nomor_pengajuan']) ?></div>
-                                <div style="padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; <?= getBadgeStyle($item['status']) ?>">
+                                <div style="padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; <?= getBadgeStyle($item['status']) ?>">
                                     <?= getBadgeLabel($item['status']) ?>
                                 </div>
                             </div>
@@ -111,7 +111,7 @@ function getBadgeLabel($status) {
         <div style="display: flex; flex-direction: column; gap: 24px;">
             <div class="surface-card">
                 <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border);">
-                    <div style="font-weight: 700; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">Distribusi Status</div>
+                    <div style="font-weight: 600; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">Distribusi Status</div>
                 </div>
                 <div style="padding: 12px 0; max-height: 300px; overflow-y: auto;">
                     <?php foreach ($distItems as $dItem): ?>

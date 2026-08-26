@@ -1,4 +1,4 @@
-<div style="font-family: var(--font-body); max-width: 1040px;">
+<div style="font-family: var(--font-body);">
     
     <!-- Top Action -->
     <div style="display: flex; justify-content: flex-end; margin-bottom: 16px;">
@@ -14,12 +14,12 @@
         <table style="width: 100%; border-collapse: collapse; min-width: 860px; text-align: left;">
             <thead>
                 <tr style="background: var(--color-surface-soft);">
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 30%;">DIVISI / BIDANG</th>
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 12%;">KAPASITAS</th>
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 15%;">TERPAKAI</th>
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 10%;">TERSEDIA</th>
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 15%;">STATUS</th>
-                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 700; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 18%;"></th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 30%;">DIVISI / BIDANG</th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 12%;">KAPASITAS</th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 15%;">TERPAKAI</th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 10%;">TERSEDIA</th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 15%;">STATUS</th>
+                    <th style="padding: 12px 16px; border-bottom: 0.666667px solid var(--border); font-weight: 600; font-size: 12px; line-height: 16px; letter-spacing: 0.84px; text-transform: uppercase; color: var(--text-secondary); width: 18%;"></th>
                 </tr>
             </thead>
             <tbody>

@@ -45,7 +45,7 @@ $stepNames = [
 ];
 ?>
 
-<div style="display: flex; flex-direction: column; gap: 24px; max-width: 968px;">
+<div style="display: flex; flex-direction: column; gap: 24px;">
     
     <?php if (!$pengajuan): ?>
     <div style="background: var(--bg-soft); border: 1px dashed var(--border); border-radius: 10px; padding: 64px 32px; text-align: center;">
@@ -58,7 +58,7 @@ $stepNames = [
     <!-- NOMOR PENGAJUAN -->
     <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 24px; display: flex; justify-content: space-between; align-items: flex-start;">
         <div>
-            <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; color: var(--text-secondary); letter-spacing: 1.1px; text-transform: uppercase; margin-bottom: 8px;">
+            <div style="font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--text-secondary); letter-spacing: 1.1px; text-transform: uppercase; margin-bottom: 8px;">
                 Nomor Pengajuan
             </div>
             <div style="font-family: var(--font-mono); font-size: var(--text-h3); font-weight: 600; color: var(--primary); line-height: 1.5;">
@@ -67,14 +67,14 @@ $stepNames = [
         </div>
         
         <!-- STATUS BADGE -->
-        <div style="padding: 6px 16px; border-radius: 4px; font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 700; letter-spacing: 0.65px; text-transform: uppercase; <?= getStatusBadgeStyle($pengajuan['status']) ?>">
+        <div style="padding: 6px 16px; border-radius: 4px; font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; letter-spacing: 0.65px; text-transform: uppercase; <?= getStatusBadgeStyle($pengajuan['status']) ?>">
             <?= getStatusBadgeLabel($pengajuan['status']) ?>
         </div>
     </div>
 
     <!-- TAHAPAN PROSES -->
     <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; padding: 24px;">
-        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; color: var(--text-secondary); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 20px;">
+        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--text-secondary); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 20px;">
             Tahapan Proses
         </div>
         
@@ -112,7 +112,7 @@ $stepNames = [
     <!-- RIWAYAT AKTIVITAS -->
     <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px;">
         <div style="padding: 16px 24px; border-bottom: 1px solid var(--border);">
-            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 700; color: var(--text-primary);">Riwayat Aktivitas</div>
+            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);">Riwayat Aktivitas</div>
         </div>
         <div style="padding: 0;">
             <?php if (empty($riwayat)): ?>
@@ -162,7 +162,7 @@ $stepNames = [
     <?php if ($pengajuan['status'] === 'revisi'): ?>
     <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; margin-top: 8px;">
         <div style="padding: 16px 24px; border-bottom: 1px solid var(--border); background: rgba(217,165,29,0.05);">
-            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 700; color: var(--text-primary);">Formulir Perbaikan Dokumen</div>
+            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary);">Formulir Perbaikan Dokumen</div>
         </div>
         <div style="padding: 24px;">
             <form action="<?= BASE_URL ?>/mahasiswa/pengajuan/revisi" method="POST" enctype="multipart/form-data">
@@ -197,7 +197,7 @@ $stepNames = [
     <?php if ($pengajuan['status'] === 'menunggu_konfirmasi_tawaran'): ?>
     <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; margin-top: 8px;">
         <div style="padding: 16px 24px; border-bottom: 1px solid var(--border); background: rgba(37, 99, 235, 0.05);">
-            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 700; color: var(--primary);">Tawaran Divisi Alternatif</div>
+            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--primary);">Tawaran Divisi Alternatif</div>
         </div>
         <div style="padding: 24px;">
             <p style="font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
@@ -225,7 +225,7 @@ $stepNames = [
     <?php if ($pengajuan['status'] === 'sedang_magang'): ?>
     <div style="background: var(--bg-soft); border: 1px solid var(--border); border-radius: 10px; margin-top: 8px;">
         <div style="padding: 16px 24px; border-bottom: 1px solid var(--border); background: rgba(37, 99, 235, 0.05);">
-            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 700; color: var(--primary);">Unggah Laporan Akhir Magang</div>
+            <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--primary);">Unggah Laporan Akhir Magang</div>
         </div>
         <div style="padding: 24px;">
             <p style="font-family: var(--font-body); font-size: 14px; color: var(--text-secondary); margin-bottom: 20px;">
@@ -263,7 +263,7 @@ $stepNames = [
     <div class="card fade-up" style="margin: 0;">
         <div class="card-body" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
             <div>
-                <div style="font-family: var(--font-body); font-weight: 700; font-size: 14px; color: var(--text-primary); margin-bottom: 4px;">
+                <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--text-primary); margin-bottom: 4px;">
                     Pengajuan ini sudah selesai diproses
                 </div>
                 <div style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--text-secondary); line-height: 1.6;">

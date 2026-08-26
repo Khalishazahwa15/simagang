@@ -41,7 +41,7 @@ $dokDesc = 'Berkas terunggah';
 <div style="background: var(--color-warning-soft); border: 1px solid var(--color-warning-border); border-radius: 10px; padding: 16px 20px; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 14px;">
     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-warning-ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0; margin-top:2px"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
     <div style="flex: 1;">
-        <div style="font-family: var(--font-body); font-weight: 700; font-size: 14px; color: var(--color-warning-ink); margin-bottom: 4px;">Lengkapi profil dulu sebelum mengajukan magang</div>
+        <div style="font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--color-warning-ink); margin-bottom: 4px;">Lengkapi profil dulu sebelum mengajukan magang</div>
         <div style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--color-warning-ink); line-height: 1.6;">
             Data berikut belum terisi: <strong><?= htmlspecialchars(implode(', ', $profilKurang)) ?></strong>.
             Formulir pengajuan magang baru bisa dibuka setelah semuanya lengkap.
@@ -108,7 +108,7 @@ $dokDesc = 'Berkas terunggah';
 <div style="background: var(--color-warning-soft); border: 1px solid var(--color-warning-border); border-radius: 10px; padding: 16px 24px; margin-bottom: 24px; display: flex; gap: 16px; align-items: flex-start;">
     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--color-warning-ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>
     <div>
-        <div style="font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--color-warning-ink); margin-bottom: 4px;">Terdapat Permintaan Revisi</div>
+        <div style="font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--color-warning-ink); margin-bottom: 4px;">Terdapat Permintaan Revisi</div>
         <div style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--color-warning-ink);">Mohon segera perbaiki dokumen atau data Anda sesuai dengan catatan yang diberikan pada halaman Status Pengajuan.</div>
     </div>
 </div>
@@ -116,7 +116,7 @@ $dokDesc = 'Berkas terunggah';
 <div style="background: var(--bg-green-soft); border: 1px solid var(--border); border-radius: 10px; padding: 16px 24px; margin-bottom: 24px; display: flex; gap: 16px; align-items: flex-start;">
     <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary-dark)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
     <div>
-        <div style="font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--primary-dark); margin-bottom: 4px;">Selamat! Anda telah diterima.</div>
+        <div style="font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--primary-dark); margin-bottom: 4px;">Selamat! Anda telah diterima.</div>
         <div style="font-family: var(--font-body); font-size: var(--text-body-sm); color: var(--primary-dark);">Silakan cek menu Dokumen untuk mengunduh Surat Penerimaan Final. Pastikan Anda hadir pada tanggal mulai magang.</div>
     </div>
 </div>
@@ -128,7 +128,7 @@ $dokDesc = 'Berkas terunggah';
     <div class="surface-card" style="display: flex; flex-direction: column; height: 100%;">
         <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">
             <div>
-                <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 700; color: var(--text-primary); margin-bottom: 2px;">Informasi Magang</div>
+                <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 2px;">Informasi Magang</div>
                 <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">Detail penempatan dan periode</div>
             </div>
             <a href="<?= BASE_URL ?>/mahasiswa/pengajuan" style="font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--primary); text-decoration: none;">Kelola &rarr;</a>
@@ -141,21 +141,21 @@ $dokDesc = 'Berkas terunggah';
                 </div>
             <?php else: ?>
                 <div style="padding: 16px 20px; border-bottom: 1px solid var(--border);">
-                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">PERIODE PELAKSANAAN</div>
+                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">PERIODE PELAKSANAAN</div>
                     <div style="font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text-primary);">
                         <?= date('d M Y', strtotime($pengajuan['tanggal_mulai_rencana'])) ?> &mdash; <?= date('d M Y', strtotime($pengajuan['tanggal_selesai_rencana'])) ?>
                     </div>
                 </div>
                 
                 <div style="padding: 16px 20px; border-bottom: 1px solid var(--border);">
-                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">PEMBINA LAPANGAN</div>
+                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">PEMBINA LAPANGAN</div>
                     <div style="font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text-primary);">
                         <?= htmlspecialchars($pengajuan['pembina_lapangan'] ?? 'Belum ditentukan') ?>
                     </div>
                 </div>
 
                 <div style="padding: 16px 20px; border-bottom: 1px solid var(--border);">
-                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">DIVISI PENEMPATAN</div>
+                    <div style="font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">DIVISI PENEMPATAN</div>
                     <div style="font-family: var(--font-body); font-size: 14px; font-weight: 600; color: var(--text-primary);">
                         <?= htmlspecialchars($pengajuan['nama_divisi_final'] ?? $pengajuan['nama_divisi_preferensi'] ?? 'Belum ditentukan') ?>
                     </div>
@@ -163,7 +163,7 @@ $dokDesc = 'Berkas terunggah';
 
                 <div style="padding: 16px 20px; display: flex; align-items: center; justify-content: space-between;">
                     <div>
-                        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 700; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">NOMOR PENGAJUAN</div>
+                        <div style="font-family: var(--font-body); font-size: 12px; font-weight: 600; letter-spacing: 0.10em; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px;">NOMOR PENGAJUAN</div>
                         <div style="font-family: var(--font-mono); font-size: 14px; font-weight: 600; color: var(--text-primary);">
                             <?= htmlspecialchars($pengajuan['nomor_pengajuan']) ?>
                         </div>
@@ -177,7 +177,7 @@ $dokDesc = 'Berkas terunggah';
     <div class="surface-card" style="display: flex; flex-direction: column; height: 100%;">
         <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">
             <div>
-                <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 700; color: var(--text-primary); margin-bottom: 2px;">Aktivitas Terbaru</div>
+                <div style="font-family: var(--font-body); font-size: var(--text-body-sm); font-weight: 600; color: var(--text-primary); margin-bottom: 2px;">Aktivitas Terbaru</div>
                 <div style="font-family: var(--font-body); font-size: 12px; color: var(--text-secondary);">Riwayat progres Anda</div>
             </div>
             <a href="<?= BASE_URL ?>/mahasiswa/status" style="font-family: var(--font-body); font-size: 12px; font-weight: 600; color: var(--primary); text-decoration: none;">Lihat Semua &rarr;</a>

@@ -34,11 +34,11 @@ function getBadgeLabel($status) {
 }
 ?>
 
-<div style="display: flex; flex-direction: column; gap: 24px; max-width: 1040px; font-family: var(--font-body);">
+<div style="display: flex; flex-direction: column; gap: 24px; font-family: var(--font-body);">
     
     <!-- Info Banner -->
     <div style="background: var(--accent-light); border-width: 0.666667px 0.666667px 0.666667px 4px; border-style: solid; border-color: var(--accent); border-radius: 8px; padding: 14px 18px;">
-        <div style="font-weight: 700; font-size: 12px; line-height: 18px; letter-spacing: 0.96px; text-transform: uppercase; color: var(--color-warning-ink); margin-bottom: 4px;">
+        <div style="font-weight: 600; font-size: 12px; line-height: 18px; letter-spacing: 0.96px; text-transform: uppercase; color: var(--color-warning-ink); margin-bottom: 4px;">
             Ruang Lingkup Admin Sistem
         </div>
         <div style="font-weight: 400; font-size: var(--text-body-sm); line-height: 1.6; color: var(--color-warning-ink);">
@@ -80,7 +80,7 @@ function getBadgeLabel($status) {
         <!-- Left Column: Pending List (from Sekretariat) -->
         <div class="surface-card" style="display: flex; flex-direction: column; height: 100%;">
             <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 0.666667px solid var(--border); padding: 16px 20px;">
-                <div style="font-weight: 700; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">Pengajuan Terbaru</div>
+                <div style="font-weight: 600; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">Pengajuan Terbaru</div>
                 <a href="<?= BASE_URL ?>/sekretariat/pengajuan" style="font-weight: 600; font-size: 12.5px; line-height: 19px; color: var(--primary); text-decoration: none;">Lihat Semua &rarr;</a>
             </div>
             
@@ -93,7 +93,7 @@ function getBadgeLabel($status) {
                         <div>
                             <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
                                 <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--primary);"><?= htmlspecialchars($item['nomor_pengajuan']) ?></div>
-                                <div style="padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; <?= getBadgeStyle($item['status']) ?>">
+                                <div style="padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; <?= getBadgeStyle($item['status']) ?>">
                                     <?= getBadgeLabel($item['status']) ?>
                                 </div>
                             </div>
@@ -118,7 +118,7 @@ function getBadgeLabel($status) {
             <!-- Status Divisi -->
             <div class="surface-card">
                 <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border);">
-                    <div style="font-weight: 700; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">
+                    <div style="font-weight: 600; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">
                         Status Divisi
                     </div>
                     <a href="<?= BASE_URL ?>/admin/bidang" style="font-weight: 600; font-size: 12.5px; line-height: 19px; color: var(--primary); text-decoration: none;">
@@ -145,7 +145,7 @@ function getBadgeLabel($status) {
                                 <div style="font-weight: 500; font-size: 12.5px; line-height: 18px; color: var(--text-primary);">
                                     <?= htmlspecialchars($div['nama_divisi']) ?>
                                 </div>
-                                <div style="background: <?= $badgeBg ?>; border-radius: 4px; padding: 2px 6px; font-weight: 700; font-size: 12px; line-height: 14px; letter-spacing: 0.5px; text-transform: uppercase; color: <?= $badgeText ?>;">
+                                <div style="background: <?= $badgeBg ?>; border-radius: 4px; padding: 2px 6px; font-weight: 600; font-size: 12px; line-height: 14px; letter-spacing: 0.5px; text-transform: uppercase; color: <?= $badgeText ?>;">
                                     <?= $badgeLabel ?>
                                 </div>
                             </div>
@@ -166,7 +166,7 @@ function getBadgeLabel($status) {
             <!-- Pengguna Internal -->
             <div class="surface-card">
                 <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; border-bottom: 0.666667px solid var(--border);">
-                    <div style="font-weight: 700; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">
+                    <div style="font-weight: 600; font-size: var(--text-body-sm); line-height: 20px; color: var(--text-primary);">
                         Tim Internal
                     </div>
                     <a href="<?= BASE_URL ?>/admin/users" style="font-weight: 600; font-size: 12.5px; line-height: 19px; color: var(--primary); text-decoration: none;">
@@ -191,7 +191,7 @@ function getBadgeLabel($status) {
                         ?>
                         <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; gap: 12px; <?= $index < min(5, count($list_internal)) - 1 ? 'border-bottom: 0.666667px solid var(--border);' : '' ?>">
                             <div style="display: flex; align-items: center; gap: 10px; overflow: hidden;">
-                                <div style="width: 32px; height: 32px; border-radius: 16px; background: <?= $avatarBg ?>; color: <?= $avatarText ?>; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: var(--text-body-sm); flex-shrink: 0;">
+                                <div style="width: 32px; height: 32px; border-radius: 16px; background: <?= $avatarBg ?>; color: <?= $avatarText ?>; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: var(--text-body-sm); flex-shrink: 0;">
                                     <?= $initial ?>
                                 </div>
                                 <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
@@ -203,7 +203,7 @@ function getBadgeLabel($status) {
                                     </div>
                                 </div>
                             </div>
-                            <div style="background: <?= $badgeBg ?>; border-radius: 4px; padding: 2px 6px; font-weight: 700; font-size: 12px; line-height: 14px; letter-spacing: 0.5px; text-transform: uppercase; color: <?= $badgeText ?>; flex-shrink: 0;">
+                            <div style="background: <?= $badgeBg ?>; border-radius: 4px; padding: 2px 6px; font-weight: 600; font-size: 12px; line-height: 14px; letter-spacing: 0.5px; text-transform: uppercase; color: <?= $badgeText ?>; flex-shrink: 0;">
                                 <?= $badgeLabel ?>
                             </div>
                         </div>
